@@ -3,7 +3,13 @@ export const ENVMODE = Object.freeze({
   LOCAL: 'local',
 });
 
-export const USER_ROLE = Object.freeze({
-  ADMIN: 'admin',
-  USER: 'user',
+export const PAGENAMES = Object.freeze({
+  LOGIN: '로그인',
+  CHAT: '채팅',
+});
+
+export const ROUTES = Object.freeze({
+  HOME: '/',
+  LOGIN: '/login',
+  CHAT: '/chat',
 });

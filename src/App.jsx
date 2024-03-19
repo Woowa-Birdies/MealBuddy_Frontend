@@ -1,5 +1,7 @@
 import Base from '@/components/layouts/Base';
 import { SYSTEM_MODE } from '@/constants/Constants';
+import { ROUTES } from '@/enums/CommonEnum';
+import Chat from '@/pages/Chat';
 import Home from '@/pages/Home';
 import Login from '@/pages/Login';
 import { useEffect } from 'react';
@@ -14,8 +16,9 @@ const App = () => {
     <BrowserRouter>
       <Base>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
+          <Route path={ROUTES.HOME} element={<Home />} />
+          <Route path={ROUTES.LOGIN} element={<Login />} />
+          <Route path={ROUTES.CHAT} element={<Chat />} />
         </Routes>
       </Base>
     </BrowserRouter>
