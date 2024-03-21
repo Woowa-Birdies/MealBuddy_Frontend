@@ -3,11 +3,13 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import path from 'path';
 import checker from 'vite-plugin-checker';
+import svgrPlugin from 'vite-plugin-svgr';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   plugins: [
     react(),
+    svgrPlugin(),
     ...(mode !== 'production' // 운영버전에서는 체킹하지 않는다.
       ? [
           checker({
@@ -20,6 +22,16 @@ export default defineConfig(({ mode }) => ({
   ],
   resolve: {
     alias: {
+      '@components': path.resolve(__dirname, 'src/components'),
+      '@page': path.resolve(__dirname, 'src/page'),
+      '@assets': path.resolve(__dirname, 'src/assets'),
+      '@utils': path.resolve(__dirname, 'src/utils'),
+      '@store': path.resolve(__dirname, 'src/store'),
+      '@api': path.resolve(__dirname, 'src/api'),
+      '@hooks': path.resolve(__dirname, 'src/hooks'),
+      '@constants': path.resolve(__dirname, 'src/constants'),
+      '@route': path.resolve(__dirname, 'src/route'),
+      '@enums': path.resolve(__dirname, 'src/enums'),
       '@': path.resolve(__dirname, './src'),
     },
   },

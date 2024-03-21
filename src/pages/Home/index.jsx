@@ -1,29 +1,25 @@
-import useSampleData from '@/hooks/query/useSampleData';
-import useSampleStore from '@/store/useSampleStore';
-import { useEffect } from 'react';
-import styled from 'styled-components';
+import { ROUTES } from '@enums/CommonEnum';
+import useLoginStore from '@store/useLoginStore';
+import { Button } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
-  useSampleData('userId'); // 5초마다 zustand store의 state를 변경한다.
-  const samples = useSampleStore((state) => state.samples); // zustand store의 state를 참조한다.
+  const nav = useNavigate();
+  const { isLogin } = useLoginStore();
+  const setIsLogin = useLoginStore((state) => state.setIsLogin);
 
-  useEffect(() => {
-    console.log('samples', samples);
-  }, [samples]);
-
-  if (!samples.length) return <div>데이터가 없습니다.</div>;
-
+  const handleLogin = () => {
+    setIsLogin(false);
+    nav(ROUTES.LOGIN);
+  };
   return (
     <div>
-      {samples.map((item) => (
-        <StyledHome key={item.id}>{item.title}</StyledHome>
-      ))}
+      홈페이지
+      <Button type="primary" onClick={handleLogin}>
+        {isLogin ? '로그아웃' : '로그인하러가기'}
+      </Button>
     </div>
   );
 };
 
 export default Home;
-
-const StyledHome = styled.div`
-  height: 60px;
-`;

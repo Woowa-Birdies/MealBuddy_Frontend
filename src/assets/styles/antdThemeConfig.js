@@ -8,13 +8,8 @@ const antdThemeConfig = {
   },
   algorithm: [antdTheme.defaultAlgorithm],
   components: {
-    Button: {
-      primaryShadow: 'none',
-      fontFamily: 'Pretendard',
-    },
-    Typography: {
-      fontFamily: 'Pretendard',
-    },
+    Button: {},
+    Typography: {},
   },
 };
 

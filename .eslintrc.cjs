@@ -27,14 +27,27 @@ module.exports = {
     },
     'import/resolver': {
       alias: {
-        map: [['@', './src']],
-        extensions: ['.js', '.jsx', '.json'],
+        map: [
+          ['@components', './src/components'],
+          ['@page', './src/page'],
+          ['@assets', './src/assets'],
+          ['@utils', './src/utils'],
+          ['@store', './src/store'],
+          ['@api', './src/api'],
+          ['@hooks', './src/hooks'],
+          ['@constants', './src/constants'],
+          ['@route', './src/route'],
+          ['@enums', './src/enums'],
+          ['@', './src'],
+        ],
+        extensions: ['.js', '.jsx', '.json', '.svg'],
       },
     },
   },
   plugins: ['react', 'prettier'],
   ignorePatterns: ['.eslintrc.cjs', 'public', 'dist', '.prettierrc', '*.html', 'jsconfig.json'],
   rules: {
+    'import/no-unresolved': ['error', { ignore: ['\\.svg\\?react$'] }],
     'prettier/prettier': [
       'error',
       {

@@ -16,6 +16,16 @@
     /* Base URL and Path Aliases */
     "baseUrl": ".",
     "paths": {
+      "@components/*": ["src/components/*"],
+      "@page/*": ["src/page/*"],
+      "@assets/*": ["src/assets/*"],
+      "@utils/*": ["src/utils/*"],
+      "@store/*": ["src/store/*"],
+      "@api/*": ["src/api/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@constants/*": ["src/constants/*"],
+      "@route/*": ["src/route/*"],
+      "@enums/*": ["src/enums/*"],
       "@/*": ["src/*"]
     }
   },

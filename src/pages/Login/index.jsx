@@ -1,16 +1,23 @@
-import { PAGENAMES, ROUTES } from '@/enums/CommonEnum';
-import usePageTitle from '@/hooks/usePageTitle';
 import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '@enums/CommonEnum';
+import useLoginStore from '@store/useLoginStore';
 
 const Login = () => {
-  usePageTitle(PAGENAMES.LOGIN);
   const nav = useNavigate();
+  // zustand store의 setIsLogin 함수 가지고옴
+  const setIsLogin = useLoginStore((state) => state.setIsLogin);
+
+  const handleLogin = () => {
+    setIsLogin(true);
+    nav(ROUTES.HOME);
+  };
 
   return (
     <div>
-      <Button type="primary" onClick={() => nav(ROUTES.HOME)}>
-        로그인
+      로그인페이지
+      <Button type="primary" onClick={handleLogin}>
+        로그인하기
       </Button>
     </div>
   );

@@ -1,13 +1,21 @@
+import { PAGENAMES, ROUTES } from '@enums/CommonEnum';
 import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
-const usePageTitle = (pageKey) => {
+const useUpdatePageTitle = () => {
+  const location = useLocation();
+
   useEffect(() => {
     const originalTitle = document.title;
-    document.title = `${pageKey} - ${originalTitle}`;
+    const currentPageKey = Object.keys(ROUTES).find((key) => ROUTES[key] === location.pathname);
+    const currentPageName = PAGENAMES[currentPageKey];
+    if (currentPageName) {
+      document.title = `${currentPageName} - ${originalTitle}`;
+    }
     return () => {
       document.title = originalTitle;
     };
-  }, [pageKey]);
+  }, [location]);
 };
 
-export default usePageTitle;
+export default useUpdatePageTitle;
