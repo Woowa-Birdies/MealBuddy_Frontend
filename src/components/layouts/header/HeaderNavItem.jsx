@@ -7,17 +7,26 @@ const HeaderNavItem = () => {
   const { menus } = useNavStore();
 
   return (
-    <MenuList>
-      {menus.map((menu) => (
-        <MenuLink key={menu.path} to={menu.path}>
-          <Typography title={menu.title} size="small" />
-        </MenuLink>
-      ))}
-    </MenuList>
+    <HeaderGlobalNav>
+      <MenuList>
+        {menus.map((menu) => (
+          <MenuLink key={menu.path} to={menu.path}>
+            <Typography title={menu.title} size="small" />
+          </MenuLink>
+        ))}
+      </MenuList>
+    </HeaderGlobalNav>
   );
 };
 
 export default HeaderNavItem;
+
+const HeaderGlobalNav = styled.ul`
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  height: 88px;
+`;
 
 const MenuList = styled.li`
   display: flex;

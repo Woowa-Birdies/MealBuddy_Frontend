@@ -5,9 +5,7 @@ const HeaderNav = () => {
   return (
     <Wrapper>
       <HeaderGlobal>
-        <HeaderGlobalNav>
-          <HeaderNavItem />
-        </HeaderGlobalNav>
+        <HeaderNavItem />
       </HeaderGlobal>
     </Wrapper>
   );
@@ -42,11 +40,4 @@ const HeaderGlobal = styled.nav`
   strong {
     font-weight: 400;
   }
-`;
-
-const HeaderGlobalNav = styled.ul`
-  display: flex;
-  -webkit-box-pack: center;
-  justify-content: center;
-  height: 88px;
 `;
