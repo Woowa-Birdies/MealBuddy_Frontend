@@ -7,6 +7,7 @@ export const ENVMODE = Object.freeze({
 export const PAGENAMES = Object.freeze({
   HOME: '홈',
   LOGIN: '로그인',
+  SIGNUP: '회원가입',
   SAMPLE1: '샘플1',
   SAMPLE2: '샘플2',
   AAA: 'aaa',

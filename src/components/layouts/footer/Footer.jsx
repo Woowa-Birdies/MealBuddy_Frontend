@@ -7,8 +7,11 @@ const Footer = () => {
 export default Footer;
 
 const StyledFooter = styled.footer`
-  width: 100vw;
-  height: 446px;
+  display: block;
   border-top: 1px solid;
   background-color: ${({ theme }) => theme.color.contentSub};
+  padding-top: 60px;
+  padding-right: 24px;
+  padding-bottom: 85px;
+  padding-left: 24px;
 `;

@@ -6,6 +6,7 @@ const theme = {
     contentSecondary: '#6B6B6B',
     contentTertiary: '#A6A6A6',
     contentSub: '#252525',
+    contentSubHover: '#333333',
     contentWhite: '#FFFFFF',
     darkgray: '#999999',
     whiteSmoke: '#EFEFEF',

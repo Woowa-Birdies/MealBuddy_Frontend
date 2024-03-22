@@ -6,12 +6,14 @@ import Login from '@/pages/Login';
 import Sample1 from '@/pages/Sample1';
 import Sample2 from '@/pages/Sample2';
 import PageTitleUpdater from '@hooks/component/PageTitleUpdater';
+import { validateKeys } from '@utils/CommonUtil';
 import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 const App = () => {
   useEffect(() => {
     console.log('현재 모드', SYSTEM_MODE);
+    validateKeys();
   }, []);
   return (
     <BrowserRouter>

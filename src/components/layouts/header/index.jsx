@@ -26,11 +26,13 @@ const Header = () => {
 export default Header;
 
 const Wrapper = styled.header`
+  height: 88px;
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 100;
   width: 100%;
-  height: 88px;
+  display: block;
   border: ${({ theme, $isLogin }) => ($isLogin ? 'none' : theme.border.borderTransparent)};
   background-color: ${({ theme, $isLogin }) =>
     $isLogin ? theme.color.whiteSmoke : theme.color.contentWhite};

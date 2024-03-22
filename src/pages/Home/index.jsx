@@ -1,23 +1,19 @@
-import { ROUTES } from '@enums/CommonEnum';
-import useLoginStore from '@store/useLoginStore';
-import { Button } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import Typography from '@components/ui/Typography/Typography';
 
 const Home = () => {
-  const nav = useNavigate();
-  const { isLogin } = useLoginStore();
-  const setIsLogin = useLoginStore((state) => state.setIsLogin);
+  const generateKey = (prefix, index) => `${prefix}-${new Date().getTime()}-${index}`;
 
-  const handleLogin = () => {
-    setIsLogin(false);
-    nav(ROUTES.LOGIN);
-  };
   return (
     <div>
       홈페이지
-      <Button type="primary" onClick={handleLogin}>
-        {isLogin ? '로그아웃' : '로그인하러가기'}
-      </Button>
+      {Array.from({ length: 100 }).map((_, index) => (
+        <div
+          key={generateKey('typography', index)}
+          style={{ display: 'flex', flexDirection: 'column' }}
+        >
+          <Typography title="홈입니다홈입니다홈입니다홈입니다홈입니다홈입니다홈입니다" />
+        </div>
+      ))}
     </div>
   );
 };

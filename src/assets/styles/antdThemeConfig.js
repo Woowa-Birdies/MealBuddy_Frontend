@@ -5,6 +5,7 @@ const antdThemeConfig = {
   // SeedToken
   token: {
     fontFamily: 'Pretendard',
+    colorPrimary: '#FF544A',
   },
   algorithm: [antdTheme.defaultAlgorithm],
   components: {

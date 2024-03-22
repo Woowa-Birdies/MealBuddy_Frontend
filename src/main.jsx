@@ -11,7 +11,7 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/ko'; // 한국어 locale 패키지 import
 import antdThemeConfig from '@/assets/styles/antdThemeConfig';
 import GlobalStyle from '@/assets/styles/GlobalStyle';
-import theme from '@/assets/styles/theme';
+import theme from '@assets/styles/Theme';
 
 dayjs.locale('ko'); // 기본 locale을 한국어로 설정
 

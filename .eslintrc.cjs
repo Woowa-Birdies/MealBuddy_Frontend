@@ -48,6 +48,7 @@ module.exports = {
   ignorePatterns: ['.eslintrc.cjs', 'public', 'dist', '.prettierrc', '*.html', 'jsconfig.json'],
   rules: {
     'import/no-unresolved': ['error', { ignore: ['\\.svg\\?react$'] }],
+    'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     'prettier/prettier': [
       'error',
       {

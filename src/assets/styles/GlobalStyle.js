@@ -42,23 +42,38 @@ const GlobalStyle = createGlobalStyle`
     border: 0 solid;  
   }
 
+  html {
+    line-height: 1.4;
+    word-break: keep-all;
+    -ms-scroll-chaining: none;
+    overscroll-behavior: none;
+    letter-spacing: -.02em;
+    tab-size: 4;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    min-width: 280px;
+    padding: env(safe-area-inset-top,20px) env(safe-area-inset-right,20px) env(safe-area-inset-bottom,20px) env(safe-area-inset-left,20px);
+  }
+
   html, body {
-    width: 100vw;
-    height: 100vh;
     font-size: 12px;
     font-family: ${({ theme }) => theme.fontFamily.default};
+  }
+
+  article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section {
+    display: block;
   }
 
   body, fieldset, ol, ul {
     margin: 0;
     padding: 0;
   }
-
   #root {
     width: 100vw;
     height: 100vh;
     margin: auto;
-    overflow: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -86,26 +101,19 @@ const GlobalStyle = createGlobalStyle`
   /* --------------------------------------------------------------- *
   *  Scrollbar
   * --------------------------------------------------------------- */
-  ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+  body ::-webkit-scrollbar{
+    width: 5px;
+    height: 5px;
   }
 
-  ::-webkit-scrollbar-thumb {
-    border: 1px solid transparent;
-    border-radius: 5px;
-    background-color: ${({ theme }) => theme.color.darkgray};
-    background-clip: content-box;
+  body ::-webkit-scrollbar-thumb {
+    border-radius: 2.5px;
+    background-color: rgba(0,0,0,.15);
   }
 
-  ::-webkit-scrollbar-thumb:hover {
-    background-color:  ${({ theme }) => theme.color.darkgray};
-    background-clip: border-box;
-  }
-
-  ::-webkit-scrollbar-track {
-    background-color:${({ theme }) => theme.color.whitesmoke};
-  }
+  body ::-webkit-scrollbar-track {
+    background-color: transparent;
+}
 
   /* ************************************************ 반응형 576px************************************************ */
   @media ${({ theme }) => theme.deviceSize.sm} {
@@ -113,7 +121,6 @@ const GlobalStyle = createGlobalStyle`
       width: 100vw;
       height: 100vh;
       margin: auto;
-      overflow: hidden;
       border: none;
     }
   }
