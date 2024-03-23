@@ -1,19 +1,21 @@
 import { Link } from 'react-router-dom';
 import { ROUTES } from '@enums/CommonEnum';
-import MainLogo from '@assets/images/svg/logo.svg?react';
 import styled from 'styled-components';
 import SvgComponent from '@components/ui/Logo/SvgComponent';
+import MainLogo from '@assets/images/svg/logo.svg?react';
 
-const FooterLogo = () => {
+const LoginLogo = () => {
   return (
     <StyledDiv>
       <Link to={ROUTES.HOME}>
-        <SvgComponent src={MainLogo} width={152.6} height={34} />
+        <SvgComponent src={MainLogo} width={309.69} height={69} />
       </Link>
     </StyledDiv>
   );
 };
 
-export default FooterLogo;
+export default LoginLogo;
 
-const StyledDiv = styled.div``;
+const StyledDiv = styled.div`
+  margin: auto;
+`;

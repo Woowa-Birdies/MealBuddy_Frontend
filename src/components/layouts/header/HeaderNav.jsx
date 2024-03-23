@@ -12,7 +12,7 @@ const HeaderNav = () => {
       <HeaderGlobal>
         <HeaderNavItem />
         <ButtonContainer>
-          <HeaderButton type="sub" title="회원가입" />
+          <HeaderButton type="sub" title="회원가입" onClick={() => nav(ROUTES.SIGNUP)} />
           <HeaderButton type="primary" title="로그인" onClick={() => nav(ROUTES.LOGIN)} />
         </ButtonContainer>
       </HeaderGlobal>

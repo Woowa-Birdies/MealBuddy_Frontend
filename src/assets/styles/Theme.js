@@ -10,6 +10,10 @@ const theme = {
     contentWhite: '#FFFFFF',
     darkgray: '#999999',
     whiteSmoke: '#EFEFEF',
+    goldenYellow: '#FEE500',
+    goldenYellowHover: '#fff129',
+    malachite: '#03C75A',
+    malachiteHover: '#26d46e',
   },
   border: {
     borderOpaque: '1px solid #898989',

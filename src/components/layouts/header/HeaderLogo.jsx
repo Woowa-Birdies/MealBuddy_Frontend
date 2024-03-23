@@ -1,12 +1,14 @@
 import { Link } from 'react-router-dom';
 import { ROUTES } from '@enums/CommonEnum';
-import LogoImage from '@assets/images/svg/logo.svg?react';
+import MainLogo from '@assets/images/svg/logo.svg?react';
+
+import SvgComponent from '@components/ui/Logo/SvgComponent';
 
 const HeaderLogo = () => {
   return (
     <h1>
       <Link to={ROUTES.HOME}>
-        <LogoImage width="170.55" height="38" />
+        <SvgComponent src={MainLogo} width={170.55} height={38} />
       </Link>
     </h1>
   );

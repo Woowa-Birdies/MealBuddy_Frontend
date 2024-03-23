@@ -30,11 +30,15 @@ Label.propTypes = {
   size: PropTypes.oneOf(['small', 'medium', 'large', 'xl', 'xxl']),
   color: PropTypes.oneOf(['contentPrimary', 'contentSecondary', 'contentTertiary', 'contentWhite']),
   type: PropTypes.oneOf(['default', 'link']),
-  to: (props) => {
-    if (props.type === 'link') {
-      return new Error(`\`type\`이 'link'일 때 'to' prop은 필수입니다.`);
+  to: (props, propName, componentName) => {
+    if (
+      props.type === 'link' &&
+      (props[propName] === undefined || typeof props[propName] !== 'string')
+    ) {
+      return new Error(
+        `\`${componentName}\`에서 \`type\`이 'link'일 때 \`${propName}\` prop은 필수이며, 그 값은 \`${props[propName]}\`입니다.`,
+      );
     }
-
     return null;
   },
 };
