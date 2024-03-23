@@ -23,7 +23,6 @@ const HeaderNav = () => {
 export default HeaderNav;
 
 const Wrapper = styled.div`
-  justify-content: flex-end;
   display: flex;
   align-items: flex-start;
   flex: 1;
@@ -46,6 +45,8 @@ const HeaderGlobal = styled.nav`
   -webkit-box-flex: 1;
   flex: 1;
   align-items: center;
+  gap: 20px;
+  padding-left: 442px;
 
   strong {
     font-weight: 400;

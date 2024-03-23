@@ -1,4 +1,4 @@
-import Footer from '@/components/layouts/footer/Footer';
+import Footer from '@components/layouts/footer';
 import Header from '@components/layouts/header';
 import styled from 'styled-components';
 

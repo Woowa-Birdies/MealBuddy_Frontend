@@ -1,22 +1,18 @@
 import useLoginStore from '@/store/useLoginStore';
-import { Link } from 'react-router-dom';
-import { ROUTES } from '@enums/CommonEnum';
-import LogoImage from '@assets/images/svg/logo.svg?react';
 import HeaderNav from '@components/layouts/header/HeaderNav';
 import styled from 'styled-components';
+import useHideHeader from '@hooks/useHideHeader';
+import HeaderLogo from '@components/layouts/header/HeaderLogo';
 
 const Header = () => {
   // zustand store의 isLogin 값 가지고옴
   const isLogin = useLoginStore((state) => state.isLogin);
+  const hidden = useHideHeader();
 
   return (
-    <Wrapper $isLogin={isLogin}>
+    <Wrapper $isLogin={isLogin} $hidden={hidden}>
       <HeaderInner>
-        <h1>
-          <Link to={ROUTES.HOME}>
-            <LogoImage />
-          </Link>
-        </h1>
+        <HeaderLogo />
         <HeaderNav />
       </HeaderInner>
     </Wrapper>
@@ -36,7 +32,9 @@ const Wrapper = styled.header`
   border: ${({ theme, $isLogin }) => ($isLogin ? 'none' : theme.border.borderTransparent)};
   background-color: ${({ theme, $isLogin }) =>
     $isLogin ? theme.color.whiteSmoke : theme.color.contentWhite};
-  //transform: translateY(-100%);
+  // 기존 스타일링 코드와 함께
+  transform: ${({ $hidden }) => ($hidden ? 'translateY(-100%)' : 'translateY(0)')};
+  transition: transform 0.3s ease;
 
   h1 {
     z-index: 1;
@@ -65,5 +63,5 @@ const HeaderInner = styled.div`
   display: flex;
   align-items: flex-start;
   margin: 0 auto;
-  padding: 0 50px;
+  padding: 0 321px;
 `;

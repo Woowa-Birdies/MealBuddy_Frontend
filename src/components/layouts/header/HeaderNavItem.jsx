@@ -32,9 +32,7 @@ const MenuList = styled.li`
   display: flex;
   -webkit-box-align: center;
   align-items: center;
+  gap: 52px;
 `;
 
-const MenuLink = styled(Link)`
-  display: inline-block;
-  padding: 0 26px;
-`;
+const MenuLink = styled(Link)``;
