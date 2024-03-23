@@ -11,7 +11,7 @@ const HeaderNavItem = () => {
       <MenuList>
         {menus.map((menu) => (
           <MenuLink key={menu.path} to={menu.path}>
-            <Typography title={menu.title} size="small" />
+            <Typography content={menu.title} size="small" />
           </MenuLink>
         ))}
       </MenuList>

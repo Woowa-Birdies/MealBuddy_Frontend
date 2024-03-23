@@ -19,6 +19,7 @@ export const PAGENAMES = Object.freeze({
 export const ROUTES = Object.freeze({
   HOME: '/',
   LOGIN: '/login',
+  SIGNUP: '/signup',
   SAMPLE1: '/sample1',
   SAMPLE2: '/sample2',
   AAA: '/aaa',

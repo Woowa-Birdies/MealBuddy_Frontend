@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const Typography = ({ content = '', size, color, type, to }) => {
+const Paragraphy = ({ content = '', size, color, type, to }) => {
   const renderContent = () => {
     if (type === 'link') {
       return <Link to={to}>{content}</Link>;
@@ -11,20 +11,20 @@ const Typography = ({ content = '', size, color, type, to }) => {
     return content;
   };
   return (
-    <StyledSpan $size={size} $color={color}>
+    <StyledParagraphy $size={size} $color={color}>
       {renderContent()}
-    </StyledSpan>
+    </StyledParagraphy>
   );
 };
 
-Typography.defaultProps = {
+Paragraphy.defaultProps = {
   size: 'small',
   color: 'contentPrimary',
   type: 'default',
   to: ROUTES.HOME,
 };
 
-Typography.propTypes = {
+Paragraphy.propTypes = {
   content: PropTypes.string.isRequired,
   size: PropTypes.oneOf(['small', 'medium', 'large', 'xl']),
   color: PropTypes.oneOf(['contentPrimary', 'contentSecondary', 'contentTertiary', 'contentWhite']),
@@ -38,11 +38,11 @@ Typography.propTypes = {
   },
 };
 
-export default Typography;
+export default Paragraphy;
 
-const StyledSpan = styled.span`
-  font-size: ${({ theme, $size }) => theme.headings[$size].fontSize};
-  font-weight: ${({ theme, $size }) => theme.headings[$size].fontWeight};
-  line-height: ${({ theme, $size }) => theme.headings[$size].lineHeight};
+const StyledParagraphy = styled.p`
+  font-size: ${({ theme, $size }) => theme.paragraphy[$size].fontSize};
+  font-weight: ${({ theme, $size }) => theme.paragraphy[$size].fontWeight};
+  line-height: ${({ theme, $size }) => theme.paragraphy[$size].lineHeight};
   color: ${({ theme, $color }) => theme.color[$color]};
 `;

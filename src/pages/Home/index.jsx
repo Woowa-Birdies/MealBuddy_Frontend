@@ -11,7 +11,7 @@ const Home = () => {
           key={generateKey('typography', index)}
           style={{ display: 'flex', flexDirection: 'column' }}
         >
-          <Typography title="홈입니다홈입니다홈입니다홈입니다홈입니다홈입니다홈입니다" />
+          <Typography content="홈입니다홈입니다홈입니다홈입니다홈입니다홈입니다홈입니다" />
         </div>
       ))}
     </div>

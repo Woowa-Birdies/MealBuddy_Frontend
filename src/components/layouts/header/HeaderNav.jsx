@@ -8,7 +8,7 @@ const HeaderNav = () => {
   const nav = useNavigate();
 
   return (
-    <Wrapper>
+    <StyledDiv>
       <HeaderGlobal>
         <HeaderNavItem />
         <ButtonContainer>
@@ -16,13 +16,13 @@ const HeaderNav = () => {
           <HeaderButton type="primary" title="로그인" onClick={() => nav(ROUTES.LOGIN)} />
         </ButtonContainer>
       </HeaderGlobal>
-    </Wrapper>
+    </StyledDiv>
   );
 };
 
 export default HeaderNav;
 
-const Wrapper = styled.div`
+const StyledDiv = styled.div`
   display: flex;
   align-items: flex-start;
   flex: 1;
