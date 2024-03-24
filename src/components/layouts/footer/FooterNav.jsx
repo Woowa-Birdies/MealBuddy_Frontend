@@ -14,7 +14,6 @@ const FooterNav = () => {
       to: item.to,
     };
 
-    console.log('commonProps', commonProps);
     switch (type) {
       case 'label':
         return <Label color="contentWhite" {...commonProps} />;

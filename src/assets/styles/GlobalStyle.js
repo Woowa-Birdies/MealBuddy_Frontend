@@ -100,6 +100,7 @@ const GlobalStyle = createGlobalStyle`
     list-style: none;
   }
 
+
   /* --------------------------------------------------------------- *
   *  Scrollbar
   * --------------------------------------------------------------- */
@@ -115,7 +116,7 @@ const GlobalStyle = createGlobalStyle`
 
   ::-webkit-scrollbar-track {
     background-color: transparent;
-}
+  }
 
   /* ************************************************ 반응형 576px************************************************ */
   @media ${({ theme }) => theme.deviceSize.sm} {

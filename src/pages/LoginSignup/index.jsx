@@ -3,14 +3,20 @@ import LoginLogo from '@/pages/LoginSignup/LoginLogo';
 import LoginButtonContainer from '@/pages/LoginSignup/LoginButtonContainer';
 import LoginButton from '@components/ui/Button/LoginButton';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '@enums/CommonEnum';
 
 const Login = ({ type }) => {
+  const nav = useNavigate();
+
   return (
     <LoginWrapper>
       <LoginInner>
         <LoginLogo />
         <LoginButtonContainer type={type} />
-        {type === 'login' && <LoginButton type="primary" title="회원가입 하기" />}
+        {type === 'login' && (
+          <LoginButton type="primary" title="회원가입 하기" onClick={() => nav(ROUTES.SIGNUP)} />
+        )}
       </LoginInner>
     </LoginWrapper>
   );

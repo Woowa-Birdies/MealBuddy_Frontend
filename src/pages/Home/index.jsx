@@ -6,6 +6,7 @@ const Home = () => {
   return (
     <div>
       홈페이지
+      {/* 테스트용 */}
       {Array.from({ length: 100 }).map((_, index) => (
         <div
           key={generateKey('typography', index)}
@@ -14,6 +15,7 @@ const Home = () => {
           <Typography content="홈입니다홈입니다홈입니다홈입니다홈입니다홈입니다홈입니다" />
         </div>
       ))}
+      {/* 테스트용 */}
     </div>
   );
 };

@@ -9,6 +9,7 @@ const useNavStore = create(() => ({
     { path: ROUTES.BBB, title: '냠냠토크' },
     { path: ROUTES.CCC, title: '냠관리' },
     { path: ROUTES.DDD, title: '냠메이트 모집하기' },
+    { path: ROUTES.SAMPLE2, title: '샘플2' },
   ],
 }));
 

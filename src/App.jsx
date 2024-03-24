@@ -5,6 +5,7 @@ import Home from '@/pages/Home';
 import LoginSignup from '@/pages/LoginSignup';
 import Sample1 from '@/pages/Sample1';
 import Sample2 from '@/pages/Sample2';
+import LoadingModal from '@components/ui/Spin/LoadingModal';
 import PageTitleUpdater from '@hooks/component/PageTitleUpdater';
 import ScrollToTop from '@hooks/component/ScrollToTop';
 import { validateKeys } from '@utils/CommonUtil';
@@ -19,6 +20,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <Base>
+        <LoadingModal />
         <ScrollToTop />
         <PageTitleUpdater />
         <Routes>

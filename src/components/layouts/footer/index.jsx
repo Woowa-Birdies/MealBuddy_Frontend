@@ -29,4 +29,5 @@ const StyledFooter = styled.footer`
   padding-left: 320px;
   padding-right: 24px;
   padding-bottom: 69px;
+  height: 446px;
 `;

@@ -11,6 +11,9 @@ const antdThemeConfig = {
   components: {
     Button: {},
     Typography: {},
+    Spin: {
+      dotSize: 28,
+    },
   },
 };
 
