@@ -14,6 +14,8 @@ export const PAGENAMES = Object.freeze({
   BBB: 'bbb',
   CCC: 'ccc',
   DDD: 'ddd',
+  MYPAGE: '마이페이지',
+  USERPAGE: '유저페이지',
 });
 
 export const ROUTES = Object.freeze({
@@ -26,4 +28,6 @@ export const ROUTES = Object.freeze({
   BBB: '/bbb',
   CCC: '/ccc',
   DDD: '/ddd',
+  MYPAGE: '/mypage',
+  USERPAGE: '/userpage',
 });
