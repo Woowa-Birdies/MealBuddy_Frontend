@@ -31,6 +31,7 @@ const App = () => {
           <Route path={ROUTES.SAMPLE1} element={<Sample1 />} />
           <Route path={ROUTES.SAMPLE2} element={<Sample2 />} />
           <Route path={ROUTES.RECRUIT} element={<Recruit />} />
+          <Route path={ROUTES.MYPAGE} element={<div />} />
         </Routes>
       </Base>
     </BrowserRouter>

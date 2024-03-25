@@ -6,7 +6,7 @@ import HeaderNav from '@components/layouts/header/HeaderNav';
 
 const Header = () => {
   // zustand store의 isLogin 값 가지고옴
-  const isLogin = useLoginStore((state) => state.isLogin);
+  const { isLogin } = useLoginStore();
   const hidden = useHideHeader();
 
   return (
