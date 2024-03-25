@@ -3,30 +3,31 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const Typography = ({ content = '', size, color, type, to }) => {
+const Label = ({ content = '', size, color, type, to }) => {
   const renderContent = () => {
     if (type === 'link') {
       return <Link to={to}>{content}</Link>;
     }
     return content;
   };
+
   return (
-    <StyledSpan $size={size} $color={color}>
+    <StyledLabel $size={size} $color={color}>
       {renderContent()}
-    </StyledSpan>
+    </StyledLabel>
   );
 };
 
-Typography.defaultProps = {
+Label.defaultProps = {
   size: 'small',
   color: 'contentPrimary',
   type: 'default',
   to: ROUTES.HOME,
 };
 
-Typography.propTypes = {
+Label.propTypes = {
   content: PropTypes.string.isRequired,
-  size: PropTypes.oneOf(['small', 'medium', 'large', 'xl']),
+  size: PropTypes.oneOf(['small', 'medium', 'large', 'xl', 'xxl']),
   color: PropTypes.oneOf(['contentPrimary', 'contentSecondary', 'contentTertiary', 'contentWhite']),
   type: PropTypes.oneOf(['default', 'link']),
   to: (props, propName, componentName) => {
@@ -42,11 +43,11 @@ Typography.propTypes = {
   },
 };
 
-export default Typography;
+export default Label;
 
-const StyledSpan = styled.span`
-  font-size: ${({ theme, $size }) => theme.headings[$size].fontSize};
-  font-weight: ${({ theme, $size }) => theme.headings[$size].fontWeight};
-  line-height: ${({ theme, $size }) => theme.headings[$size].lineHeight};
+const StyledLabel = styled.label`
+  font-size: ${({ theme, $size }) => theme.labels[$size].fontSize};
+  font-weight: ${({ theme, $size }) => theme.labels[$size].fontWeight};
+  line-height: ${({ theme, $size }) => theme.labels[$size].lineHeight};
   color: ${({ theme, $color }) => theme.color[$color]};
 `;

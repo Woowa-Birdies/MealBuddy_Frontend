@@ -10,6 +10,10 @@ const theme = {
     contentWhite: '#FFFFFF',
     darkgray: '#999999',
     whiteSmoke: '#EFEFEF',
+    goldenYellow: '#FEE500',
+    goldenYellowHover: '#fff129',
+    malachite: '#03C75A',
+    malachiteHover: '#26d46e',
   },
   border: {
     borderOpaque: '1px solid #898989',
@@ -43,6 +47,55 @@ const theme = {
       fontSize: '50.52px',
       fontWeight: 700,
       lineHeight: '70.72px',
+    },
+  },
+  labels: {
+    small: {
+      fontSize: '12px',
+      fontWeight: 600,
+      lineHeight: '18px',
+    },
+    medium: {
+      fontSize: '16px',
+      fontWeight: 600,
+      lineHeight: '24px',
+    },
+    large: {
+      fontSize: '21.33px',
+      fontWeight: 600,
+      lineHeight: '31.99px',
+    },
+    xl: {
+      fontSize: '28.43px',
+      fontWeight: 600,
+      lineHeight: '45.65px',
+    },
+    xxl: {
+      fontSize: '37.9px',
+      fontWeight: 600,
+      lineHeight: '56.85px',
+    },
+  },
+  paragraphy: {
+    small: {
+      fontSize: '12px',
+      fontWeight: 400,
+      lineHeight: '19.2px',
+    },
+    medium: {
+      fontSize: '16px',
+      fontWeight: 400,
+      lineHeight: '25.6px',
+    },
+    large: {
+      fontSize: '21.33px',
+      fontWeight: 400,
+      lineHeight: '34.12px',
+    },
+    xl: {
+      fontSize: '28.43px',
+      fontWeight: 400,
+      lineHeight: '45.49px',
     },
   },
   deviceSize: {

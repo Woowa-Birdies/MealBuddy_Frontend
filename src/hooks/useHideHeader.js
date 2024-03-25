@@ -7,7 +7,7 @@ const useHideHeader = () => {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      setHidden(currentScrollY > lastScrollY); // 300이상 스크롤해야 가려짐
+      setHidden(currentScrollY > lastScrollY && currentScrollY > 100); // 300이상 스크롤해야 가려짐
       setLastScrollY(currentScrollY);
     };
 

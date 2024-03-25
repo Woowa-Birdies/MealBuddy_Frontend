@@ -44,5 +44,9 @@ const StyledButton = styled(Button)`
   width: 102px;
   height: 40px;
   border-radius: 39.07px;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 23.87px;
+  letter-spacing: 0.04px;
   ${({ $type }) => $type === 'sub' && subStyle}
 `;

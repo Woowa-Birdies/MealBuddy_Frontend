@@ -13,16 +13,17 @@ export const PAGENAMES = Object.freeze({
   AAA: 'aaa',
   BBB: 'bbb',
   CCC: 'ccc',
-  Recruit: 'recruit',
+  RECRUIT: 'recruit',
 });
 
 export const ROUTES = Object.freeze({
   HOME: '/',
   LOGIN: '/login',
+  SIGNUP: '/signup',
   SAMPLE1: '/sample1',
   SAMPLE2: '/sample2',
   AAA: '/aaa',
   BBB: '/bbb',
   CCC: '/ccc',
-  Recruit: '/recruit',
+  RECRUIT: '/recruit',
 });

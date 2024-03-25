@@ -8,21 +8,21 @@ const HeaderNav = () => {
   const nav = useNavigate();
 
   return (
-    <Wrapper>
+    <StyledDiv>
       <HeaderGlobal>
         <HeaderNavItem />
         <ButtonContainer>
-          <HeaderButton type="sub" title="회원가입" />
+          <HeaderButton type="sub" title="회원가입" onClick={() => nav(ROUTES.SIGNUP)} />
           <HeaderButton type="primary" title="로그인" onClick={() => nav(ROUTES.LOGIN)} />
         </ButtonContainer>
       </HeaderGlobal>
-    </Wrapper>
+    </StyledDiv>
   );
 };
 
 export default HeaderNav;
 
-const Wrapper = styled.div`
+const StyledDiv = styled.div`
   display: flex;
   align-items: flex-start;
   flex: 1;

@@ -1,8 +1,8 @@
 import useLoginStore from '@/store/useLoginStore';
-import HeaderNav from '@components/layouts/header/HeaderNav';
 import styled from 'styled-components';
 import useHideHeader from '@hooks/useHideHeader';
 import HeaderLogo from '@components/layouts/header/HeaderLogo';
+import HeaderNav from '@components/layouts/header/HeaderNav';
 
 const Header = () => {
   // zustand store의 isLogin 값 가지고옴
@@ -10,18 +10,18 @@ const Header = () => {
   const hidden = useHideHeader();
 
   return (
-    <Wrapper $isLogin={isLogin} $hidden={hidden}>
+    <StyledHeader $isLogin={isLogin} $hidden={hidden}>
       <HeaderInner>
         <HeaderLogo />
         <HeaderNav />
       </HeaderInner>
-    </Wrapper>
+    </StyledHeader>
   );
 };
 
 export default Header;
 
-const Wrapper = styled.header`
+const StyledHeader = styled.header`
   height: 88px;
   position: fixed;
   top: 0;
@@ -48,7 +48,6 @@ const Wrapper = styled.header`
 
     a {
       display: block;
-      height: 38px;
     }
 
     svg {

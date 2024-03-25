@@ -17,4 +17,6 @@ export default Base;
 const StyledMain = styled.main`
   margin-top: 0;
   padding-top: 88px;
+  width: 100%;
+  height: auto;
 `;

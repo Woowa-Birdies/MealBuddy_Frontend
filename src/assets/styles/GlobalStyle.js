@@ -55,6 +55,8 @@ const GlobalStyle = createGlobalStyle`
   body {
     min-width: 280px;
     padding: env(safe-area-inset-top,20px) env(safe-area-inset-right,20px) env(safe-area-inset-bottom,20px) env(safe-area-inset-left,20px);
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 
   html, body {
@@ -98,22 +100,23 @@ const GlobalStyle = createGlobalStyle`
     list-style: none;
   }
 
+
   /* --------------------------------------------------------------- *
   *  Scrollbar
   * --------------------------------------------------------------- */
-  body ::-webkit-scrollbar{
-    width: 5px;
-    height: 5px;
+  ::-webkit-scrollbar{
+    width: 12px;
+    height: 12px;
   }
 
-  body ::-webkit-scrollbar-thumb {
-    border-radius: 2.5px;
-    background-color: rgba(0,0,0,.15);
+  ::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: #acacb1;
   }
 
-  body ::-webkit-scrollbar-track {
+  ::-webkit-scrollbar-track {
     background-color: transparent;
-}
+  }
 
   /* ************************************************ 반응형 576px************************************************ */
   @media ${({ theme }) => theme.deviceSize.sm} {

@@ -6,14 +6,16 @@ const Home = () => {
   return (
     <div>
       홈페이지
+      {/* 테스트용 */}
       {Array.from({ length: 100 }).map((_, index) => (
         <div
           key={generateKey('typography', index)}
           style={{ display: 'flex', flexDirection: 'column' }}
         >
-          <Typography title="홈입니다홈입니다홈입니다홈입니다홈입니다홈입니다홈입니다" />
+          <Typography content="홈입니다홈입니다홈입니다홈입니다홈입니다홈입니다홈입니다" />
         </div>
       ))}
+      {/* 테스트용 */}
     </div>
   );
 };

@@ -15,7 +15,7 @@ export const isArrayEmpty = (...arrays) => {
 
 export const validateKeys = () => {
   if (SYSTEM_MODE === ENVMODE.PROD) {
-    return undefined;
+    return null;
   }
 
   // ROUTES에서 PAGENAMES으로의 키 확인
