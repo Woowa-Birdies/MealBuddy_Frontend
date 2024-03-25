@@ -1,20 +1,14 @@
 import styled from 'styled-components';
 import HeaderNavItem from '@components/layouts/header/HeaderNavItem';
-import HeaderButton from '@components/ui/Button/HeaderButton';
-import { useNavigate } from 'react-router-dom';
-import { ROUTES } from '@enums/CommonEnum';
+
+import HeaderButtonContainer from '@components/layouts/header/HeaderButtonContainer';
 
 const HeaderNav = () => {
-  const nav = useNavigate();
-
   return (
     <StyledDiv>
       <HeaderGlobal>
         <HeaderNavItem />
-        <ButtonContainer>
-          <HeaderButton type="sub" title="회원가입" onClick={() => nav(ROUTES.SIGNUP)} />
-          <HeaderButton type="primary" title="로그인" onClick={() => nav(ROUTES.LOGIN)} />
-        </ButtonContainer>
+        <HeaderButtonContainer />
       </HeaderGlobal>
     </StyledDiv>
   );
@@ -51,10 +45,4 @@ const HeaderGlobal = styled.nav`
   strong {
     font-weight: 400;
   }
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 4px;
 `;

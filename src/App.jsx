@@ -6,6 +6,8 @@ import LoginSignup from '@/pages/LoginSignup';
 import Sample1 from '@/pages/Sample1';
 import Sample2 from '@/pages/Sample2';
 import UserProfile from '@/pages/UserProfile';
+import LoadingModal from '@components/ui/Spin/LoadingModal';
+import Recruit from '@/pages/Recruit';
 import PageTitleUpdater from '@hooks/component/PageTitleUpdater';
 import ScrollToTop from '@hooks/component/ScrollToTop';
 import { validateKeys } from '@utils/CommonUtil';
@@ -20,6 +22,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <Base>
+        <LoadingModal />
         <ScrollToTop />
         <PageTitleUpdater />
         <Routes>
@@ -30,6 +33,7 @@ const App = () => {
           <Route path={ROUTES.SAMPLE2} element={<Sample2 />} />
           <Route path={ROUTES.MYPAGE} element={<UserProfile type="mypage" />} />
           <Route path={ROUTES.USERPAGE} element={<UserProfile type="userpage" />} />
+          <Route path={ROUTES.RECRUIT} element={<Recruit />} />
         </Routes>
       </Base>
     </BrowserRouter>
