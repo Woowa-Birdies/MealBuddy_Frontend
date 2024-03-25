@@ -6,6 +6,7 @@ import LoginSignup from '@/pages/LoginSignup';
 import Sample1 from '@/pages/Sample1';
 import Sample2 from '@/pages/Sample2';
 import LoadingModal from '@components/ui/Spin/LoadingModal';
+import Recruit from '@/pages/Recruit';
 import PageTitleUpdater from '@hooks/component/PageTitleUpdater';
 import ScrollToTop from '@hooks/component/ScrollToTop';
 import { validateKeys } from '@utils/CommonUtil';
@@ -29,6 +30,8 @@ const App = () => {
           <Route path={ROUTES.SIGNUP} element={<LoginSignup type="signup" />} />
           <Route path={ROUTES.SAMPLE1} element={<Sample1 />} />
           <Route path={ROUTES.SAMPLE2} element={<Sample2 />} />
+          <Route path={ROUTES.RECRUIT} element={<Recruit />} />
+          <Route path={ROUTES.MYPAGE} element={<div />} />
         </Routes>
       </Base>
     </BrowserRouter>

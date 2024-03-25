@@ -13,7 +13,8 @@ export const PAGENAMES = Object.freeze({
   AAA: 'aaa',
   BBB: 'bbb',
   CCC: 'ccc',
-  DDD: 'ddd',
+  RECRUIT: '냠메이트 모집',
+  MYPAGE: '마이 페이지',
 });
 
 export const ROUTES = Object.freeze({
@@ -25,5 +26,6 @@ export const ROUTES = Object.freeze({
   AAA: '/aaa',
   BBB: '/bbb',
   CCC: '/ccc',
-  DDD: '/ddd',
+  RECRUIT: '/recruit',
+  MYPAGE: '/mypage',
 });
