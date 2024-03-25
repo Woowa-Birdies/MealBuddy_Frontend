@@ -13,7 +13,7 @@ export const PAGENAMES = Object.freeze({
   AAA: 'aaa',
   BBB: 'bbb',
   CCC: 'ccc',
-  DDD: 'ddd',
+  Recruit: 'recruit',
 });
 
 export const ROUTES = Object.freeze({
@@ -24,5 +24,5 @@ export const ROUTES = Object.freeze({
   AAA: '/aaa',
   BBB: '/bbb',
   CCC: '/ccc',
-  DDD: '/ddd',
+  Recruit: '/recruit',
 });
