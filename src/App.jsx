@@ -8,6 +8,8 @@ import Sample2 from '@/pages/Sample2';
 import UserProfile from '@/pages/UserProfile';
 import LoadingModal from '@components/ui/Spin/LoadingModal';
 import Recruit from '@/pages/Recruit';
+import EditProfile from '@/pages/ProfileEdit';
+import Report from '@/pages/UserReport';
 import PageTitleUpdater from '@hooks/component/PageTitleUpdater';
 import ScrollToTop from '@hooks/component/ScrollToTop';
 import { validateKeys } from '@utils/CommonUtil';
@@ -34,6 +36,8 @@ const App = () => {
           <Route path={ROUTES.MYPAGE} element={<UserProfile type="mypage" />} />
           <Route path={ROUTES.USERPAGE} element={<UserProfile type="userpage" />} />
           <Route path={ROUTES.RECRUIT} element={<Recruit />} />
+          <Route path={ROUTES.EDITPROFILE} element={<EditProfile />} />
+          <Route path={ROUTES.REPORT} element={<Report />} />
         </Routes>
       </Base>
     </BrowserRouter>

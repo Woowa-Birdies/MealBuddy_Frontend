@@ -1,3 +1,4 @@
+import { ROUTES } from '@enums/CommonEnum';
 import Typography from '@components/ui/Typography/Typography';
 import Paragraphy from '@components/ui/Paragraphy/Paragraphy';
 import styled from 'styled-components';
@@ -15,8 +16,10 @@ const UserInfo = ({ type }) => {
           <Paragraphy content="#유저 개인 코드" size="large" color="contentTertiary" />
         </TopInner>
         <ProfileButton
+          type="link"
           title={type === 'mypage' ? '프로필 수정' : '신고하기'}
           color={type === 'mypage' ? 'secondary' : 'contentPrimary'}
+          to={type === 'mypage' ? ROUTES.EDITPROFILE : ROUTES.REPORT}
         />
       </InfoTop>
       <InfoBottom>

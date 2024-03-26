@@ -4,7 +4,7 @@ import ProfileTitle from '@/pages/UserProfile/ProfileTitle';
 import UserInfo from '@/pages/UserProfile/UserInfo';
 import Paragraphy from '@components/ui/Paragraphy/Paragraphy';
 import UserHistory from '@/pages/UserProfile/UserHistory';
-// import UserReview from '@/pages/UserProfile/UserReview';
+import UserReview from '@/pages/UserProfile/UserReview';
 
 const UserProfile = ({ type }) => {
   return (
@@ -12,8 +12,8 @@ const UserProfile = ({ type }) => {
       <ProfileInner>
         <ProfileTitle type={type} />
         <UserInfo type={type} />
-        <UserHistory />
-        {/* <UserReview /> */}
+        <UserHistory type={type} />
+        <UserReview type={type} />
       </ProfileInner>
       <ProfileBottom>
         {type === 'mypage' ? (
@@ -47,4 +47,5 @@ const ProfileInner = styled.div`
 
 const ProfileBottom = styled.div`
   align-self: flex-end;
+  margin-bottom: 200px;
 `;

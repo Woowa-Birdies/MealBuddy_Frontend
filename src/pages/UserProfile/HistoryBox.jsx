@@ -7,7 +7,6 @@ const HistoryBox = ({ title, items }) => {
   return (
     <BoxWrapper>
       <Typography content={title} size="large" />
-      <Paragraphy size="large" />
       <ItemList>
         {items.map((itemContent) => (
           <Paragraphy key={itemContent} content={itemContent} size="large" />
@@ -36,7 +35,7 @@ const BoxWrapper = styled.div`
 `;
 
 const ItemList = styled.ul`
-  /* Your styles for the list, e.g., */
-  list-style: none;
+  list-style: disc;
   padding: 0;
+  margin-top: 24px;
 `;

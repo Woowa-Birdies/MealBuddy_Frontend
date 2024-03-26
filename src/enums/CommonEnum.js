@@ -17,6 +17,8 @@ export const PAGENAMES = Object.freeze({
   MYPAGE: '마이페이지',
   USERPAGE: '유저페이지',
   RECRUIT: 'recruit',
+  REPORT: '신고하기',
+  EDITPROFILE: '프로필 수정',
 });
 
 export const ROUTES = Object.freeze({
@@ -32,4 +34,6 @@ export const ROUTES = Object.freeze({
   MYPAGE: '/mypage',
   USERPAGE: '/userpage',
   RECRUIT: '/recruit',
+  REPORT: '/report',
+  EDITPROFILE: '/editprofile',
 });

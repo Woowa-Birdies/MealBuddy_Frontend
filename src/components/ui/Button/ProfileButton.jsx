@@ -4,7 +4,6 @@ import { Button } from 'antd';
 import PropTypes from 'prop-types';
 
 const ProfileButton = ({ title, type, onClick, to, color }) => {
-  // 'link' 타입일 경우 Link 컴포넌트를 사용하도록 수정
   const ButtonComponent =
     type === 'link' && to ? (
       <Link to={to}>
@@ -32,7 +31,7 @@ ProfileButton.propTypes = {
   type: PropTypes.string,
   backgroundColor: PropTypes.oneOf(['secondary', 'contentPrimary']),
   onClick: PropTypes.func,
-  to: PropTypes.string, // 'to' prop에 대한 PropTypes 정의 추가
+  to: PropTypes.string,
 };
 
 export default ProfileButton;
