@@ -13,7 +13,7 @@ export const PAGENAMES = Object.freeze({
   AAA: 'aaa',
   BBB: 'bbb',
   CCC: 'ccc',
-  RECRUIT: '냠메이트 모집',
+  RECRUIT: 'recruit',
   MYPAGE: '마이 페이지',
 });
 
