@@ -13,7 +13,8 @@ export const PAGENAMES = Object.freeze({
   AAA: 'aaa',
   BBB: 'bbb',
   CCC: 'ccc',
-  RECRUIT: 'recruit',
+  RECRUIT: '모집글 작성 페이지',
+  RECRUITPOST: '모집글 페이지',
   MYPAGE: '마이 페이지',
 });
 
@@ -27,5 +28,6 @@ export const ROUTES = Object.freeze({
   BBB: '/bbb',
   CCC: '/ccc',
   RECRUIT: '/recruit',
+  RECRUITPOST: '/recruitpost',
   MYPAGE: '/mypage',
 });
