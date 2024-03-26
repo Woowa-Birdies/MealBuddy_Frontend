@@ -42,7 +42,7 @@ const StyledButton = styled.button`
     isClicked ? theme.color.secondary : theme.border.borderTransparent};
   color: ${({ theme, isClicked }) =>
     isClicked ? theme.color.contentWhite : theme.color.contentSub};
-
+  cursor: pointer;
   &:hover {
     background: ${({ theme }) => theme.color.secondary};
     color: ${({ theme }) => theme.color.contentWhite};
