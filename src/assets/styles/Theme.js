@@ -9,6 +9,7 @@ const theme = {
     contentSubHover: '#333333',
     contentWhite: '#FFFFFF',
     darkgray: '#999999',
+    lightgray: '#F8F8F8',
     whiteSmoke: '#EFEFEF',
     goldenYellow: '#FEE500',
     goldenYellowHover: '#fff129',
