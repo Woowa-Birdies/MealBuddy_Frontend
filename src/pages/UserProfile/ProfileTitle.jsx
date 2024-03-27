@@ -13,7 +13,7 @@ export default ProfileTitle;
 
 const TitleWrapper = styled.div`
   width: 100%;
-  margin: 167px 0px;
+  margin: 160px 0px;
   display: flex;
   flex-direction: column;
   align-items: center;
