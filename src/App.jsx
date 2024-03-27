@@ -16,6 +16,7 @@ import ScrollToTop from '@hooks/component/ScrollToTop';
 import { validateKeys } from '@utils/CommonUtil';
 import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import UserVerification from '@/pages/UserVerification';
 
 const App = () => {
   useEffect(() => {
@@ -40,6 +41,7 @@ const App = () => {
           <Route path={ROUTES.RECRUITPOST} element={<RecruitPost />} />
           <Route path={ROUTES.EDITPROFILE} element={<EditProfile />} />
           <Route path={ROUTES.REPORT} element={<Report />} />
+          <Route path={ROUTES.VERIFICATION} element={<UserVerification />} />
         </Routes>
       </Base>
     </BrowserRouter>

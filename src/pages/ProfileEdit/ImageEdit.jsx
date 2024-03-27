@@ -28,7 +28,10 @@ const ImageEdit = ({ existingImageUrl, onImageSelected }) => {
   );
 };
 
-const ProfileImageWrapper = styled.div``;
+const ProfileImageWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
 
 const ProfileImage = styled.img`
   width: 266px;
@@ -41,10 +44,10 @@ const ProfileImage = styled.img`
 
 const UploadButton = styled.label`
   cursor: pointer;
-  position: relative;
   display: inline-block;
   position: relative;
   right: 80px;
+  align-self: flex-end;
 `;
 
 const HiddenFileInput = styled.input`

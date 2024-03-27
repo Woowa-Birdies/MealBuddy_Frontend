@@ -19,6 +19,7 @@ export const PAGENAMES = Object.freeze({
   USERPAGE: '유저 페이지',
   REPORT: '신고하기',
   EDITPROFILE: '프로필 수정',
+  VERIFICATION: '휴대전화 인증',
 });
 
 export const ROUTES = Object.freeze({
@@ -36,4 +37,5 @@ export const ROUTES = Object.freeze({
   USERPAGE: '/userpage',
   REPORT: '/report',
   EDITPROFILE: '/editprofile',
+  VERIFICATION: '/verification',
 });
