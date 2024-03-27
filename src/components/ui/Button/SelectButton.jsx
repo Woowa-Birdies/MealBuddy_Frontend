@@ -27,28 +27,119 @@ SelectButton.defaultProps = {
 SelectButton.propTypes = {
   title: PropTypes.string.isRequired,
   onClick: PropTypes.func,
-  type: PropTypes.oneOf(['recruit', 'tag']),
+  type: PropTypes.oneOf(['recruit', 'tag', 'ghost', 'manner']),
 };
 
 export default SelectButton;
 
 const StyledButton = styled.button`
-  width: ${({ title }) => title.length * 10 + 60}px;
-  height: 40px;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 150%;
-  border-radius: 20px;
-  background: ${({ theme, isClicked, type }) =>
-    isClicked || type === 'tag' ? theme.color.secondary : theme.border.borderTransparent};
-  color: ${({ theme, isClicked, type }) =>
-    isClicked || type === 'tag' ? theme.color.contentWhite : theme.color.contentSub};
-  cursor: pointer;
+  padding: 0 15px;
+  width: ${({ type }) => {
+    if (type === 'ghost') {
+      return '819px';
+    }
+    if (type === 'manner') {
+      return '376px';
+    }
+    return 'auto';
+  }};
+
+  height: ${({ type }) => {
+    if (type === 'ghost') {
+      return '96px';
+    }
+    if (type === 'manner') {
+      return '82px';
+    }
+    return '40px';
+  }};
+
+  font-size: ${({ type }) => {
+    if (type === 'ghost') {
+      return '28.43px';
+    }
+    if (type === 'manner') {
+      return '21.328px';
+    }
+    return '16px';
+  }};
+
+  font-weight: ${({ type }) => {
+    if (type === 'ghost') {
+      return '700';
+    }
+    if (type === 'manner') {
+      return '400';
+    }
+    return '600';
+  }};
+
+  line-height: ${({ type }) => {
+    if (type === 'ghost') {
+      return '140%';
+    }
+    if (type === 'manner') {
+      return '160%';
+    }
+    return '150%';
+  }};
+
+  border: ${({ type }) => {
+    if (type === 'manner') {
+      return '1px solid #898989';
+    }
+    return '20px';
+  }};
+
+  border-radius: ${({ type }) => {
+    if (type === 'ghost' || type === 'manner') {
+      return '10px';
+    }
+    return '20px';
+  }};
+
+  background: ${({ theme, isClicked, type }) => {
+    if (type === 'recruit') {
+      return isClicked ? theme.color.secondary : theme.border.borderTransparent;
+    }
+    if (type === 'ghost') {
+      return isClicked ? theme.color.contentPrimary : theme.color.secondary;
+    }
+    if (type === 'manner') {
+      return isClicked ? theme.color.darkgray : theme.color.lightgray;
+    }
+    return theme.color.secondary;
+  }};
+
+  color: ${({ theme, isClicked, type }) => {
+    if (type === 'recruit') {
+      return isClicked ? theme.color.contentWhite : theme.border.content;
+    }
+    if (type === 'ghost') {
+      return theme.color.contentWhite;
+    }
+    if (type === 'manner') {
+      return isClicked ? theme.color.contentWhite : theme.color.content;
+    }
+    return theme.color.contentWhite;
+  }};
+  cursor: ${({ type }) => {
+    if (type === 'tag') {
+      return 'default';
+    }
+    return 'pointer';
+  }};
+
   &:hover {
-    background: ${({ theme, type }) =>
-      type === 'tag' ? theme.color.secondary : theme.color.secondary};
-    color: ${({ theme, type }) =>
-      type === 'tag' ? theme.color.contentWhite : theme.color.contentWhite};
+    background: ${({ theme, type }) => {
+      if (type === 'ghost') {
+        return theme.color.contentPrimary;
+      }
+      if (type === 'manner') {
+        return theme.color.darkgray;
+      }
+      return theme.color.secondary;
+    }};
+    color: ${({ theme }) => theme.color.contentWhite};
   }
 `;
