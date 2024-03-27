@@ -8,6 +8,7 @@ import Sample2 from '@/pages/Sample2';
 import UserProfile from '@/pages/UserProfile';
 import LoadingModal from '@components/ui/Spin/LoadingModal';
 import Recruit from '@/pages/Recruit';
+import RecruitPost from '@/pages/RecruitPost';
 import EditProfile from '@/pages/ProfileEdit';
 import Report from '@/pages/UserReport';
 import PageTitleUpdater from '@hooks/component/PageTitleUpdater';
@@ -36,6 +37,7 @@ const App = () => {
           <Route path={ROUTES.MYPAGE} element={<UserProfile type="mypage" />} />
           <Route path={ROUTES.USERPAGE} element={<UserProfile type="userpage" />} />
           <Route path={ROUTES.RECRUIT} element={<Recruit />} />
+          <Route path={ROUTES.RECRUITPOST} element={<RecruitPost />} />
           <Route path={ROUTES.EDITPROFILE} element={<EditProfile />} />
           <Route path={ROUTES.REPORT} element={<Report />} />
         </Routes>
