@@ -30,9 +30,9 @@ const theme = {
   },
   headings: {
     small: {
-      fontSize: '12px',
+      fontSize: '16px',
       fontWeight: 700,
-      lineHeight: '16.8px',
+      lineHeight: '22.4px',
     },
     medium: {
       fontSize: '21.3225px',
