@@ -23,6 +23,7 @@ const App = () => {
     console.log('현재 모드', SYSTEM_MODE);
     validateKeys();
   }, []);
+
   return (
     <BrowserRouter>
       <Base>

@@ -30,73 +30,73 @@ const theme = {
   },
   headings: {
     small: {
-      fontSize: '21.33px',
+      fontSize: '16px',
       fontWeight: 700,
-      lineHeight: '29.86px',
+      lineHeight: '22.4px',
     },
     medium: {
-      fontSize: '28.43px',
+      fontSize: '21.3225px',
       fontWeight: 700,
-      lineHeight: '39.8px',
+      lineHeight: '29.85px',
     },
     large: {
-      fontSize: '37.9px',
+      fontSize: '28.425px',
       fontWeight: 700,
-      lineHeight: '53.06px',
+      lineHeight: '39.795px',
     },
     xl: {
-      fontSize: '50.52px',
+      fontSize: '37.89px',
       fontWeight: 700,
-      lineHeight: '70.72px',
+      lineHeight: '53.04px',
     },
   },
   labels: {
     small: {
+      fontSize: '9px',
+      fontWeight: 600,
+      lineHeight: '13.5px',
+    },
+    medium: {
       fontSize: '12px',
       fontWeight: 600,
       lineHeight: '18px',
     },
-    medium: {
+    large: {
       fontSize: '16px',
       fontWeight: 600,
-      lineHeight: '24px',
-    },
-    large: {
-      fontSize: '21.33px',
-      fontWeight: 600,
-      lineHeight: '31.99px',
+      lineHeight: '23.9925px',
     },
     xl: {
-      fontSize: '28.43px',
+      fontSize: '21.3225px',
       fontWeight: 600,
-      lineHeight: '45.65px',
+      lineHeight: '34.2375px',
     },
     xxl: {
-      fontSize: '37.9px',
+      fontSize: '28.425px',
       fontWeight: 600,
-      lineHeight: '56.85px',
+      lineHeight: '42.6375px',
     },
   },
   paragraphy: {
     small: {
+      fontSize: '9px',
+      fontWeight: 400,
+      lineHeight: '14.4px',
+    },
+    medium: {
       fontSize: '12px',
       fontWeight: 400,
       lineHeight: '19.2px',
     },
-    medium: {
+    large: {
       fontSize: '16px',
       fontWeight: 400,
-      lineHeight: '25.6px',
-    },
-    large: {
-      fontSize: '21.33px',
-      fontWeight: 400,
-      lineHeight: '34.12px',
+      lineHeight: '25.59px',
     },
     xl: {
-      fontSize: '28.43px',
+      fontSize: '21.3225px',
       fontWeight: 400,
-      lineHeight: '45.49px',
+      lineHeight: '34.1175px',
     },
   },
   deviceSize: {
