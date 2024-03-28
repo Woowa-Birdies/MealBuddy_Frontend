@@ -36,30 +36,30 @@ const StyledButton = styled.button`
   padding: 0 15px;
   width: ${({ type }) => {
     if (type === 'ghost') {
-      return '819px';
+      return `${819 * 0.75}px`;
     }
     if (type === 'manner') {
-      return '376px';
+      return `${376 * 0.75}px`;
     }
     return 'auto';
   }};
 
   height: ${({ type }) => {
     if (type === 'ghost') {
-      return '96px';
+      return `${96 * 0.75}px`;
     }
     if (type === 'manner') {
-      return '82px';
+      return `${82 * 0.75}px`;
     }
     return '40px';
   }};
 
-  font-size: ${({ type }) => {
+  font-size: ${({ type, theme }) => {
     if (type === 'ghost') {
-      return '28.43px';
+      return `${theme.headings.medium.fontSize}`;
     }
     if (type === 'manner') {
-      return '21.328px';
+      return `${theme.headings.small.fontSize}`;
     }
     return '16px';
   }};

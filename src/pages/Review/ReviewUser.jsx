@@ -36,13 +36,14 @@ const Container = styled.div`
 
 const ReviewUserContainer = styled.div`
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   gap: 85px;
+  margin: 0 100px 0 0;
 `;
 
 const UserContainer = styled.div`
-  // width: 70%;
+  width: 70%;
   display: flex;
   justify-content: space-between;
   align-items: center;

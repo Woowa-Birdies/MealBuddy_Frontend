@@ -17,9 +17,9 @@ CompletedButton.propTypes = {
 export default CompletedButton;
 
 const StyledButton = styled.button`
-  width: 500px;
-  height: 80px;
-  font-size: 28.43px;
+  width: ${500 * 0.75}px;
+  height: ${80 * 0.75}px;
+  font-size: ${({ theme }) => theme.headings.medium.fontSize};
   font-style: normal;
   font-weight: 700;
   line-height: 140%;
@@ -30,6 +30,5 @@ const StyledButton = styled.button`
 
   // &:hover {
   //   background: ${({ theme }) => theme.color.secondary};
-  //   color: ${({ theme }) => theme.color.contentWhite};
   // }
 `;
