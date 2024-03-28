@@ -17,6 +17,7 @@ export const PAGENAMES = Object.freeze({
   RECRUITPOST: '모집글 페이지',
   MYPAGE: '마이 페이지',
   USERPAGE: '유저 페이지',
+  REVIEW: '후기 페이지',
   REPORT: '신고하기',
   EDITPROFILE: '프로필 수정',
 });
@@ -34,6 +35,7 @@ export const ROUTES = Object.freeze({
   RECRUITPOST: '/recruitpost',
   MYPAGE: '/mypage',
   USERPAGE: '/userpage',
+  REVIEW: '/review',
   REPORT: '/report',
   EDITPROFILE: '/editprofile',
 });

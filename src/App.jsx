@@ -10,6 +10,7 @@ import LoadingModal from '@components/ui/Spin/LoadingModal';
 import Recruit from '@/pages/Recruit';
 import RecruitPost from '@/pages/RecruitPost';
 import EditProfile from '@/pages/ProfileEdit';
+import Review from '@/pages/Review';
 import Report from '@/pages/UserReport';
 import PageTitleUpdater from '@hooks/component/PageTitleUpdater';
 import ScrollToTop from '@hooks/component/ScrollToTop';
@@ -39,6 +40,7 @@ const App = () => {
           <Route path={ROUTES.RECRUIT} element={<Recruit />} />
           <Route path={ROUTES.RECRUITPOST} element={<RecruitPost />} />
           <Route path={ROUTES.EDITPROFILE} element={<EditProfile />} />
+          <Route path={ROUTES.REVIEW} element={<Review />} />
           <Route path={ROUTES.REPORT} element={<Report />} />
         </Routes>
       </Base>
