@@ -3,6 +3,7 @@ import SelectButton from '@components/ui/Button/SelectButton';
 import CompletedButton from '@components/ui/Button/CompletedButton';
 import Typography from '@components/ui/Typography/Typography';
 import useReviewStore from '@/store/useReviewStore';
+import ReviewUser from '@/pages/Review/ReviewUser';
 
 const ReviewForm = () => {
   const setShowReviewForm = useReviewStore((state) => state.setShowReviewForm);
@@ -38,6 +39,7 @@ const ReviewForm = () => {
 
   return (
     <Container>
+      <ReviewUser />
       <SelectButton type="ghost" title="참여하지 않은 메이트라면 이곳을 클릭해주세요" />
       <ReviewListContainer>
         <MannerContainer>

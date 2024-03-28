@@ -31,6 +31,7 @@ const ReviewUser = () => {
 export default ReviewUser;
 
 const Container = styled.div`
+  width: 100%;
   height: 180px;
 `;
 
