@@ -8,8 +8,8 @@ const HistoryBox = ({ title, items }) => {
     <BoxWrapper>
       <Typography content={title} size="large" />
       <ItemList>
-        {items.map((itemContent) => (
-          <Paragraphy key={itemContent} content={itemContent} size="large" />
+        {items.map((item) => (
+          <Paragraphy key={item.id} content={item.text} size="large" />
         ))}
       </ItemList>
     </BoxWrapper>
@@ -18,7 +18,12 @@ const HistoryBox = ({ title, items }) => {
 
 HistoryBox.propTypes = {
   title: PropTypes.string.isRequired,
-  items: PropTypes.arrayOf(PropTypes.string).isRequired,
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      text: PropTypes.string,
+    }),
+  ).isRequired,
 };
 
 export default HistoryBox;

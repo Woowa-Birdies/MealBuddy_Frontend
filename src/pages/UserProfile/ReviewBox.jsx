@@ -12,7 +12,7 @@ const ReviewBox = ({ title, items }) => {
         {items.map((item) => (
           <ListItem key={item.id}>
             <MannerIcon src={icon} />
-            <Paragraphy size="large" content={item.score} />
+            <Paragraphy size="large" content={String(item.score)} />
             <MannerTitle>
               <Paragraphy size="large" content={item.text} />
             </MannerTitle>
