@@ -39,8 +39,8 @@ const HeaderGlobal = styled.nav`
   -webkit-box-flex: 1;
   flex: 1;
   align-items: center;
-  gap: 20px;
-  padding-left: 442px;
+  gap: 80px;
+  padding-left: 200px;
 
   strong {
     font-weight: 400;

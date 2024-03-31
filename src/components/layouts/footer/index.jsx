@@ -25,9 +25,9 @@ export default Footer;
 const StyledFooter = styled.footer`
   display: block;
   background-color: ${({ theme }) => theme.color.contentSub};
-  padding-top: 69px;
-  padding-left: 320px;
-  padding-right: 24px;
-  padding-bottom: 69px;
-  height: 446px;
+  padding-top: 51.75px;
+  padding-left: 240px;
+  padding-right: 18px;
+  padding-bottom: 51.75px;
+  height: 334.5px;
 `;

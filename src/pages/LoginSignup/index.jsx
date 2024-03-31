@@ -33,10 +33,10 @@ const LoginWrapper = styled.div`
 `;
 
 const LoginInner = styled.div`
-  width: 500px;
+  width: 375px;
   height: auto;
   display: flex;
   flex-direction: column;
-  padding: 121px 0;
+  padding: 90.75px 0;
   margin: auto;
 `;
