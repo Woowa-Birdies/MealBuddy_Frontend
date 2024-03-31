@@ -1,3 +1,4 @@
+import sampleApi from '@api/biz/sampleApi';
 import { ROUTES } from '@enums/CommonEnum';
 import useLoadingStore from '@store/useLoadingStore';
 import useLoginStore from '@store/useLoginStore';
@@ -21,6 +22,11 @@ const Sample2 = () => {
     nav(ROUTES.HOME);
   };
 
+  const handleHealthCheck = async () => {
+    const res = await sampleApi.getHealthCheck();
+    console.log('res', res);
+  };
+
   return (
     <div>
       <Button type="primary" onClick={handleLoading}>
@@ -31,6 +37,9 @@ const Sample2 = () => {
       </Button>
       <Button type="primary" onClick={handleLogout}>
         로그아웃
+      </Button>
+      <Button type="primary" onClick={handleHealthCheck}>
+        헬스체크
       </Button>
     </div>
   );

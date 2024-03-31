@@ -22,7 +22,7 @@ const Header = () => {
 export default Header;
 
 const StyledHeader = styled.header`
-  height: 88px;
+  height: 66px;
   position: fixed;
   top: 0;
   left: 0;
@@ -44,7 +44,7 @@ const StyledHeader = styled.header`
     align-items: center;
     -webkit-box-flex: 0;
     flex: none;
-    height: 88px;
+    height: 66px;
 
     a {
       display: block;
@@ -62,5 +62,5 @@ const HeaderInner = styled.div`
   display: flex;
   align-items: flex-start;
   margin: 0 auto;
-  padding: 0 321px;
+  padding: 0 240.75px;
 `;

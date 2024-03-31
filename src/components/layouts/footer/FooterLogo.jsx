@@ -8,7 +8,7 @@ const FooterLogo = () => {
   return (
     <StyledDiv>
       <Link to={ROUTES.HOME}>
-        <SvgComponent src={MainLogo} width={152.6} height={34} />
+        <SvgComponent src={MainLogo} width={114.45} height={25.5} />
       </Link>
     </StyledDiv>
   );
