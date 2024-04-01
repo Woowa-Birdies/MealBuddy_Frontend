@@ -52,6 +52,6 @@ LoginButtonContainer.propTypes = {
 const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 32px;
-  margin: 104px 0 130px 0;
+  gap: 24px;
+  margin: 78px 0 97.5px 0;
 `;

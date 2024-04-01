@@ -29,5 +29,5 @@ export default HeaderButtonContainer;
 const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 4px;
+  gap: 6px;
 `;

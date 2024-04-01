@@ -25,5 +25,5 @@ const Sample1 = () => {
 export default Sample1;
 
 const StyledHome = styled.div`
-  height: 88px;
+  height: 66px;
 `;

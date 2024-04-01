@@ -38,7 +38,7 @@ const KakaoStyle = css`
   color: ${({ theme }) => theme.color.contentPrimary};
   .ant-btn-icon {
     position: absolute;
-    left: 30px;
+    left: 22.5px;
   }
 
   &:hover {
@@ -55,7 +55,7 @@ const NaverStyle = css`
   color: ${({ theme }) => theme.color.contentWhite};
   .ant-btn-icon {
     position: absolute;
-    left: 34px;
+    left: 25.5px;
   }
 
   &:hover {
@@ -72,7 +72,7 @@ const GoogleStyle = css`
   color: ${({ theme }) => theme.color.contentPrimary};
   .ant-btn-icon {
     position: absolute;
-    left: 29px;
+    left: 21.75px;
   }
   &:hover {
     background: ${({ theme }) => theme.color.contentWhite} !important;
@@ -95,9 +95,9 @@ const selectButtonStyle = ({ $type }) => {
 };
 
 const StyledButton = styled(Button)`
-  width: 500px;
-  height: 80px;
-  border-radius: 4px;
+  width: 375px;
+  height: 60px;
+  border-radius: 3px;
   font-size: ${({ theme }) => theme.headings.medium.fontSize};
   font-weight: ${({ theme }) => theme.headings.medium.fontWeight};
   line-height: ${({ theme }) => theme.headings.medium.lineHeight};
