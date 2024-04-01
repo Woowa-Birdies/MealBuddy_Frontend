@@ -26,8 +26,8 @@ const ActivityContent = ({ information }) => {
           <Thumnail />
           <InnerBox>
             <TopSection>
-              <Paragraphy content="동네" size="large" color="contentTertiary" />
-              <Typography content="남은 모집 시간 00 ~ 00" size="medium" color="primary" />
+              <Paragraphy content="동네" size="medium" color="contentTertiary" />
+              <Typography content="남은 모집 시간 00 ~ 00" size="small" color="primary" />
             </TopSection>
             <Label content={item.title} size="xl" />
             <TagSection>
@@ -114,7 +114,7 @@ const BtnSection = styled.div`
 `;
 const Thumnail = styled.div`
   width: 16.15vw;
-  /* height: 16.15vw; */
+  height: 16.15vw;
   background-color: gray;
 `;
 

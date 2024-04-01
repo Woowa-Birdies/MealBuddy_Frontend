@@ -18,7 +18,3 @@ const TitleWrapper = styled.div`
   flex-direction: column;
   align-items: center;
 `;
-
-// const CustomTabs = styled(Tabs)`
-// margin-right: 45px;
-// `;

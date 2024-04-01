@@ -21,9 +21,9 @@ TagButton.propTypes = {
 export default TagButton;
 
 const StyledButton = styled.button`
-  width: ${({ title }) => title.length * 10 + 60}px;
-  height: 40px;
-  font-size: 16px;
+  display: inline-block;
+  padding: 0.4167vw 0.8333vw;
+  font-size: 0.833vw;
   font-style: normal;
   font-weight: 600;
   line-height: 150%;

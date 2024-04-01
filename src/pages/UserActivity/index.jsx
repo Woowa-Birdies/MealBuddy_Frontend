@@ -7,7 +7,7 @@ import ActivityTab from '@/pages/UserActivity/ActivityTab';
 const MyTabs = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const tab = searchParams.get('tab') || '1'; // URL에서 'tab' 쿼리 파라미터를 가져옴, 기본값은 '1'
+  const tab = searchParams.get('tab') || '1'; // URL에서 'tab' 쿼리 파라미터를 가져옴, 기본값은 '1' -> 추후 연결
   const information = [
     {
       id: 0,
@@ -70,17 +70,17 @@ const MyTabs = () => {
     {
       label: '모집중',
       key: '1',
-      children: <ActivityTab information={information} />, // 여기서 YourComponentForTab1은 해당 탭의 내용을 렌더링하는 컴포넌트입니다.
+      children: <ActivityTab information={information} />,
     },
     {
       label: '모집 완료',
       key: '2',
-      children: <ActivityTab information={information} />, // YourComponentForTab2 컴포넌트로 대체합니다.
+      children: <ActivityTab information={information} />,
     },
     {
       label: '신청한 내역',
       key: '3',
-      children: <ActivityTab information={information} />, // YourComponentForTab2 컴포넌트로 대체합니다.
+      children: <ActivityTab information={information} />,
     },
   ];
   return (
@@ -133,7 +133,6 @@ const CustomTabs = styled(Tabs)`
     color: #4caf4f;
   }
 
-  /* 이 부분은 antd의 탭 디자인에 따라 필요할 수 있습니다. */
   .ant-tabs-ink-bar {
     background-color: #4caf4f;
   }
