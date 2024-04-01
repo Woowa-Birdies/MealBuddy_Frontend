@@ -17,14 +17,14 @@ EditButton.propTypes = {
 export default EditButton;
 
 const StyledButton = styled.button`
-  width: 380px;
-  height: 80px;
+  width: ${380 * 0.75}px;
+  height: ${80 * 0.75}px;
   display: flex;
   padding: 24px 153px;
   justify-content: center;
   align-items: center;
   gap: 10px;
-  font-size: 21.328px;
+  font-size: ${({ theme }) => theme.headings.small.fontSize};
   font-style: normal;
   font-weight: 600;
   line-height: 150%;
@@ -33,8 +33,8 @@ const StyledButton = styled.button`
   color: ${({ theme }) => theme.color.contentSecondary};
   cursor: pointer;
 
-  // &:hover {
-  //   background: ${({ theme }) => theme.color.secondary};
-  //   color: ${({ theme }) => theme.color.contentWhite};
-  // }
+  &:hover {
+    background: ${({ theme }) => theme.color.darkgray};
+    color: ${({ theme }) => theme.color.contentWhite};
+  }
 `;
