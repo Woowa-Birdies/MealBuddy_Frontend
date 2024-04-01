@@ -15,6 +15,8 @@ const theme = {
     goldenYellowHover: '#fff129',
     malachite: '#03C75A',
     malachiteHover: '#26d46e',
+    Gray200: '#E5E5E5',
+    borderOpaque: '#898989',
   },
   border: {
     borderOpaque: '1px solid #898989',
