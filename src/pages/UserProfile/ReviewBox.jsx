@@ -57,8 +57,8 @@ const ListItem = styled.li`
 `;
 
 const MannerTitle = styled.div`
-  padding: 24px 80px;
-  width: 376px;
+  padding: 1.25vw 4.2vw;
+  width: 19.6vw;
   display: flex;
   flex-direction: column;
   justify-content: center;

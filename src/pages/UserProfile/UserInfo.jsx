@@ -46,12 +46,12 @@ const TopInner = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 32px;
+  gap: 2vw;
 `;
 const InfoBottom = styled.div``;
 const ProfileImg = styled.img`
-  width: 156.439px;
-  height: 156.439px;
+  width: 8.17vw;
+  height: 8.17vw;
   border-radius: 50%;
   object-fit: cover;
   object-position: center;
