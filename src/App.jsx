@@ -17,12 +17,15 @@ import ScrollToTop from '@hooks/component/ScrollToTop';
 import { validateKeys } from '@utils/CommonUtil';
 import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import UserVerification from '@/pages/UserVerification';
+import UserActivity from '@/pages/UserActivity';
 
 const App = () => {
   useEffect(() => {
     console.log('현재 모드', SYSTEM_MODE);
     validateKeys();
   }, []);
+
   return (
     <BrowserRouter>
       <Base>
@@ -42,6 +45,8 @@ const App = () => {
           <Route path={ROUTES.EDITPROFILE} element={<EditProfile />} />
           <Route path={ROUTES.REVIEW} element={<Review />} />
           <Route path={ROUTES.REPORT} element={<Report />} />
+          <Route path={ROUTES.VERIFICATION} element={<UserVerification />} />
+          <Route path={ROUTES.USERACTIVITY} element={<UserActivity />} />
         </Routes>
       </Base>
     </BrowserRouter>

@@ -1,19 +1,19 @@
 import Typography from '@components/ui/Typography/Typography';
 import styled from 'styled-components';
 
-const ProfileTitle = ({ type }) => {
+const ActivityTitle = () => {
   return (
     <TitleWrapper>
-      <Typography content={type === 'mypage' ? '마이페이지' : '프로필 보기'} size="large" />
+      <Typography content="냠관리" size="large" />
     </TitleWrapper>
   );
 };
 
-export default ProfileTitle;
+export default ActivityTitle;
 
 const TitleWrapper = styled.div`
   width: 100%;
-  margin: 9vw 0px;
+  margin: 5vw 0px 0px 0px;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -20,6 +20,8 @@ export const PAGENAMES = Object.freeze({
   REVIEW: '후기 페이지',
   REPORT: '신고하기',
   EDITPROFILE: '프로필 수정',
+  VERIFICATION: '휴대전화 인증',
+  USERACTIVITY: '냠 관리',
 });
 
 export const ROUTES = Object.freeze({
@@ -38,4 +40,6 @@ export const ROUTES = Object.freeze({
   REVIEW: '/review',
   REPORT: '/report',
   EDITPROFILE: '/editprofile',
+  VERIFICATION: '/verification',
+  USERACTIVITY: '/myactivity',
 });

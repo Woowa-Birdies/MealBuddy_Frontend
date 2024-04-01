@@ -12,7 +12,7 @@ const ReviewBox = ({ title, items }) => {
         {items.map((item) => (
           <ListItem key={item.id}>
             <MannerIcon src={icon} />
-            <Paragraphy size="large" content={item.score} />
+            <Paragraphy size="large" content={String(item.score)} />
             <MannerTitle>
               <Paragraphy size="large" content={item.text} />
             </MannerTitle>
@@ -57,8 +57,8 @@ const ListItem = styled.li`
 `;
 
 const MannerTitle = styled.div`
-  padding: 24px 80px;
-  width: 376px;
+  padding: 1.25vw 4.2vw;
+  width: 19.6vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
