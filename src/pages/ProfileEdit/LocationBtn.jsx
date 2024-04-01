@@ -18,11 +18,12 @@ const BoxWrapper = styled.div`
   flex-direction: row;
   height: 80px;
   border-radius: 20px;
-  padding: 23px 27px;
+  padding: 1.2vw 1.45vw;
   border: 1px solid rgba(137, 137, 137, 0.3);
   gap: 16px;
   align-items: center;
   width: 100%;
+  justify-content: space-between;
 `;
 
 const ClearBtn = styled.img`

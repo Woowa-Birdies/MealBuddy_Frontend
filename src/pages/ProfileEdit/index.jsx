@@ -74,7 +74,7 @@ export default ProfileEdit;
 
 const EditWrapper = styled.div`
   width: 100%;
-  padding: 0px 320px;
+  padding: 0px 28vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -83,7 +83,7 @@ const EditWrapper = styled.div`
 
 const TitleWrapper = styled.div`
   width: 100%;
-  margin: 160px 0px;
+  margin: 9vw 0px;
   display: flex;
   flex-direction: column;
   align-items: center;

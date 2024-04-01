@@ -31,11 +31,12 @@ const ImageEdit = ({ existingImageUrl, onImageSelected }) => {
 const ProfileImageWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  width: 100%;
 `;
 
 const ProfileImage = styled.img`
-  width: 266px;
-  height: 266px;
+  width: 14vw;
+  height: 14vw;
   border-radius: 50%;
   object-fit: cover;
   object-position: center;
@@ -46,14 +47,17 @@ const UploadButton = styled.label`
   cursor: pointer;
   display: inline-block;
   position: relative;
-  right: 80px;
+  right: 4vw;
   align-self: flex-end;
+  width: 4.64vw;
 `;
 
 const HiddenFileInput = styled.input`
   display: none;
 `;
 
-const CameraIcon = styled.img``;
+const CameraIcon = styled.img`
+  width: 100%;
+`;
 
 export default ImageEdit;

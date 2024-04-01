@@ -41,11 +41,13 @@ const NameEdit = () => {
 
 export default NameEdit;
 
-const NameBoxWrapper = styled.div``;
+const NameBoxWrapper = styled.div`
+  width: 100%;
+`;
 const InputWrapper = styled.div`
   position: static;
   height: 53px;
-  width: 476px;
+  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -59,7 +61,7 @@ const Input = styled.input`
   border-bottom: 1px solid ${(props) => (props.isFocused ? 'black' : '#ccc')}; /* 조건부 스타일 */
   outline: none;
   font-family: Pretendard;
-  font-size: 37.897px;
+  font-size: 2vw;
   font-style: normal;
   font-weight: 700;
 

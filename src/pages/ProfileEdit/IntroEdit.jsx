@@ -4,7 +4,7 @@ import Typography from '@components/ui/Typography/Typography';
 import deleteIcon from '@/assets/images/svg/CloseBtn.svg';
 
 const IntroEdit = () => {
-  const { register, setValue } = useForm({
+  const { setValue } = useForm({
     defaultValues: {
       intro: '이곳에 자기소개를 작성해주세요...', // 기본값 설정
     },
@@ -17,7 +17,7 @@ const IntroEdit = () => {
     <IntroBoxWrapper>
       <Typography content="자기소개" size="medium" />
       <InputWrapper>
-        <Textarea id="intro" {...register('intro')} />
+        <Textarea id="intro" placeholder="이곳에 자기소개를 작성해주세요.." />
         <ClearBtn onClick={handleDelete} src={deleteIcon} />
       </InputWrapper>
     </IntroBoxWrapper>
