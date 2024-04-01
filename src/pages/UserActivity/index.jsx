@@ -94,6 +94,7 @@ const MyTabs = () => {
 export default MyTabs;
 const PageWrapper = styled.div`
   padding: 0px 16.71vw;
+  margin-bottom: 12.24vw;
 `;
 
 const CustomTabs = styled(Tabs)`
