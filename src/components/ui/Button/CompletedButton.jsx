@@ -17,13 +17,13 @@ CompletedButton.propTypes = {
 export default CompletedButton;
 
 const StyledButton = styled.button`
-  width: ${500 * 0.75}px;
-  height: ${80 * 0.75}px;
+  width: 26.04vw;
+  height: 4.17vw;
   font-size: ${({ theme }) => theme.headings.medium.fontSize};
   font-style: normal;
   font-weight: 700;
   line-height: 140%;
-  border-radius: 12px;
+  border-radius: 0.625vw;
   background: ${({ theme }) => theme.color.primary};
   color: ${({ theme }) => theme.color.contentWhite};
   cursor: pointer;

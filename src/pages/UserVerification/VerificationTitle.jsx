@@ -17,5 +17,5 @@ const BoxWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin-bottom: 30vh;
+  margin-bottom: 10.16vw;
 `;

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-const SelectButton = ({ title, type, onClick }) => {
+const SelectButton = ({ title, type, onClick, disabled }) => {
   const [isClicked, setIsClicked] = useState(false);
 
   const handleClick = () => {
@@ -13,7 +13,13 @@ const SelectButton = ({ title, type, onClick }) => {
   };
 
   return (
-    <StyledButton onClick={handleClick} isClicked={isClicked} type={type} title={title}>
+    <StyledButton
+      onClick={!disabled ? handleClick : undefined}
+      isClicked={isClicked}
+      type={type}
+      title={title}
+      disabled={disabled}
+    >
       {title}
     </StyledButton>
   );
@@ -27,13 +33,37 @@ SelectButton.defaultProps = {
 SelectButton.propTypes = {
   title: PropTypes.string.isRequired,
   onClick: PropTypes.func,
-  type: PropTypes.oneOf(['recruit', 'tag', 'ghost', 'manner']),
+  type: PropTypes.oneOf(['recruit', 'tag', 'ghost', 'manner', 'request', 'response']),
 };
 
 export default SelectButton;
 
 const StyledButton = styled.button`
-  padding: 0 15px;
+  opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
+  bottom: ${({ type }) => {
+    if (type === 'request' || type === 'response') {
+      return '0.5vw';
+    }
+    return 'auto';
+  }};
+  right: ${({ type }) => {
+    if (type === 'request' || type === 'response') {
+      return '0px';
+    }
+    return 'auto';
+  }};
+  position: ${({ type }) => {
+    if (type === 'request' || type === 'response') {
+      return 'absolute';
+    }
+    return 'static';
+  }};
+  padding: ${({ type }) => {
+    if (type === 'request' || type === 'response') {
+      return `0.42vw 1.04vw`;
+    }
+    return '0 15px';
+  }};
   width: ${({ type }) => {
     if (type === 'ghost') {
       return `${819 * 0.75}px`;
@@ -51,6 +81,9 @@ const StyledButton = styled.button`
     if (type === 'manner') {
       return `${82 * 0.75}px`;
     }
+    if (type === 'request' || type === 'response') {
+      return `auto`;
+    }
     return '40px';
   }};
 
@@ -61,7 +94,7 @@ const StyledButton = styled.button`
     if (type === 'manner') {
       return `${theme.headings.small.fontSize}`;
     }
-    return '16px';
+    return '0.83vw';
   }};
 
   font-weight: ${({ type }) => {
@@ -88,12 +121,18 @@ const StyledButton = styled.button`
     if (type === 'manner') {
       return '1px solid #898989';
     }
+    if (type === 'request') {
+      return '1px solid #898989';
+    }
     return '20px';
   }};
 
   border-radius: ${({ type }) => {
     if (type === 'ghost' || type === 'manner') {
       return '10px';
+    }
+    if (type === 'request' || type === 'response') {
+      return '1.56vw';
     }
     return '20px';
   }};
@@ -108,6 +147,9 @@ const StyledButton = styled.button`
     if (type === 'manner') {
       return isClicked ? theme.color.darkgray : theme.color.lightgray;
     }
+    if (type === 'request') {
+      return theme.color.contentWhite;
+    }
     return theme.color.secondary;
   }};
 
@@ -121,13 +163,16 @@ const StyledButton = styled.button`
     if (type === 'manner') {
       return isClicked ? theme.color.contentWhite : theme.color.content;
     }
+    if (type === 'request') {
+      return theme.color.contentPrimary;
+    }
     return theme.color.contentWhite;
   }};
-  cursor: ${({ type }) => {
+  cursor: ${({ type, disabled }) => {
     if (type === 'tag') {
       return 'default';
     }
-    return 'pointer';
+    return disabled ? 'not-allowed' : 'pointer';
   }};
 
   &:hover {
@@ -138,8 +183,25 @@ const StyledButton = styled.button`
       if (type === 'manner') {
         return theme.color.darkgray;
       }
+      if (type === 'response') {
+        return theme.color.contentWhite;
+      }
       return theme.color.secondary;
     }};
-    color: ${({ theme }) => theme.color.contentWhite};
+    color: ${({ theme, type }) => {
+      if (type === 'response') {
+        return theme.color.contentPrimary;
+      }
+      return theme.color.contentWhite;
+    }};
+    border: ${({ type }) => {
+      if (type === 'request') {
+        return `1px solid transparent`;
+      }
+      if (type === 'response') {
+        return `1px solid #898989`;
+      }
+      return 'auto';
+    }};
   }
 `;

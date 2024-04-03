@@ -37,7 +37,7 @@ const StyledButton = styled.button`
   font-style: normal;
   font-weight: 600;
   line-height: 150%; /* 31.992px */
-  border-radius: 12px;
+  border-radius: 0.625vw;
   background: ${({ theme, $color }) => theme.color[$color]};
   color: ${({ theme }) => theme.color.contentWhite};
   cursor: pointer;
