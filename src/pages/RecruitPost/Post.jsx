@@ -1,18 +1,21 @@
 import styled from 'styled-components';
 import StatusButton from '@components/ui/Button/StatusButton';
 import SelectButton from '@components/ui/Button/SelectButton';
+import useRecruitStore from '@store/useRecruitStore';
 
 const Post = () => {
+  const { recruitPost } = useRecruitStore();
+
   return (
     <Container>
       <StatusButton title="모집중" />
       <TagContainer>
-        <SelectButton title="유형" type="tag" />
-        <SelectButton title="연령" type="tag" />
-        <SelectButton title="성별" type="tag" />
+        <SelectButton title={recruitPost.foodType} type="tag" />
+        <SelectButton title={recruitPost.ageRange} type="tag" />
+        <SelectButton title={recruitPost.gender} type="tag" />
       </TagContainer>
       <Map>지도입니다.</Map>
-      <Content>본문 내용입니다.</Content>
+      <Detail>{recruitPost.detail}</Detail>
     </Container>
   );
 };
@@ -37,7 +40,7 @@ const Map = styled.div`
   justify-content: center;
 `;
 
-const Content = styled.div`
+const Detail = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
