@@ -2,11 +2,14 @@ import styled from 'styled-components';
 import CompletedButton from '@components/ui/Button/CompletedButton';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '@enums/CommonEnum';
+import useRecruitStore from '@store/useRecruitStore';
 
 const RecruitCompletedButton = () => {
   const nav = useNavigate();
+  const { recruitPost } = useRecruitStore();
+
   const handleClick = () => {
-    console.log('등록');
+    console.log(recruitPost);
     nav(ROUTES.RECRUITPOST);
   };
 

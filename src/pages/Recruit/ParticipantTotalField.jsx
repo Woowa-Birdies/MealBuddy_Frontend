@@ -1,26 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import minus from '@/assets/images/svg/minus.svg';
 import plus from '@/assets/images/svg/plus.svg';
+import useRecruitStore from '@store/useRecruitStore';
 
 const ParticipantTotalField = () => {
-  const [participants, setParticipants] = useState(0);
+  const { recruitPost, setRecruitPost } = useRecruitStore();
 
   const incrementParticipants = () => {
-    setParticipants(participants + 1);
+    setRecruitPost({ ...recruitPost, participantTotal: recruitPost.participantTotal + 1 });
   };
 
   const decrementParticipants = () => {
-    if (participants > 0) {
-      setParticipants(participants - 1);
+    if (recruitPost.participantTotal > 0) {
+      setRecruitPost({ ...recruitPost, participantTotal: recruitPost.participantTotal - 1 });
     }
   };
 
   return (
     <Container>
-      <Button src={minus} onClick={decrementParticipants} />
-      <Total>{participants}</Total>
-      <Button src={plus} onClick={incrementParticipants} />
+      <Button src={minus} onClick={decrementParticipants} alt="감소" />
+      <Total>{recruitPost.participantTotal}</Total>
+      <Button src={plus} onClick={incrementParticipants} alt="증가" />
       <span style={{ marginLeft: '7px', fontSize: '16px' }}>명</span>
     </Container>
   );

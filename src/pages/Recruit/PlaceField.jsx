@@ -1,25 +1,14 @@
-import React, { useState } from 'react';
 import { Input } from 'antd';
+import useRecruitStore from '@store/useRecruitStore';
 
 const PlaceField = () => {
-  const [selectedPlace, setSelectedPlace] = useState('');
-
-  const handleInputBlur = (e) => {
-    setSelectedPlace(e.target.value);
-  };
-
-  const handleEnterPress = () => {
-    console.log(selectedPlace);
+  const { recruitPost, setRecruitPost } = useRecruitStore();
+  const handlePlaceChange = (e) => {
+    setRecruitPost({ ...recruitPost, place: e.target.value });
   };
 
   return (
-    <Input
-      placeholder="장소를 입력하세요"
-      style={{ width: '50%' }}
-      value={selectedPlace}
-      onBlur={handleInputBlur}
-      onPressEnter={handleEnterPress}
-    />
+    <Input placeholder="장소를 입력하세요" style={{ width: '50%' }} onBlur={handlePlaceChange} />
   );
 };
 
