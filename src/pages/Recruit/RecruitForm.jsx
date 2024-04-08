@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import useRecruitStore from '@store/useRecruitStore';
 import styled from 'styled-components';
 // import dayjs from 'dayjs';
@@ -11,9 +12,19 @@ import ContentsField from '@/pages/Recruit/ContentsField';
 
 const RecruitForm = () => {
   const { setRecruitPost, recruitPost } = useRecruitStore();
+  const [selectedFoodType, setSelectedFoodType] = useState('');
+  const [selectedGender, setSelectedGender] = useState('');
+  const [selectedAge, setSelectedAge] = useState('');
 
   // 선택된 데이터를 전역 상태에 저장하는 함수
   const handleSelect = (field, value) => {
+    if (field === 'foodTypeTag') {
+      setSelectedFoodType(value);
+    } else if (field === 'genderTag') {
+      setSelectedGender(value);
+    } else if (field === 'ageTag') {
+      setSelectedAge(value);
+    }
     setRecruitPost({ ...recruitPost, [field]: value });
   };
 
@@ -27,6 +38,7 @@ const RecruitForm = () => {
               key={item}
               title={item}
               onClick={() => handleSelect('foodTypeTag', item)}
+              selected={selectedFoodType === item}
             />
           ))}
         </ButtonList>
@@ -51,7 +63,12 @@ const RecruitForm = () => {
         <Typography content="성별" />
         <ButtonList>
           {['남자만', '여자만', '남녀무관'].map((item) => (
-            <SelectButton key={item} title={item} onClick={() => handleSelect('genderTag', item)} />
+            <SelectButton
+              key={item}
+              title={item}
+              onClick={() => handleSelect('genderTag', item)}
+              selected={selectedGender === item}
+            />
           ))}
         </ButtonList>
       </Field>
@@ -59,7 +76,12 @@ const RecruitForm = () => {
         <Typography content="메이트 연령대" />
         <ButtonList>
           {['제한없음', '20대', '30대', '40대', '50대'].map((item) => (
-            <SelectButton key={item} title={item} onClick={() => handleSelect('ageTag', item)} />
+            <SelectButton
+              key={item}
+              title={item}
+              onClick={() => handleSelect('ageTag', item)}
+              selected={selectedAge === item}
+            />
           ))}
         </ButtonList>
       </Field>
