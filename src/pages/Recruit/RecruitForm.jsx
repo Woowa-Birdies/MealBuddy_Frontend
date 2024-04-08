@@ -7,7 +7,7 @@ import PlaceField from '@/pages/Recruit/PlaceField';
 import MeetAtField from '@/pages/Recruit/MeetAtField';
 import CloseAtField from '@/pages/Recruit/CloseAtField';
 import ParticipantTotalField from '@/pages/Recruit/ParticipantTotalField';
-import DetailField from '@/pages/Recruit/DetailField';
+import ContentsField from '@/pages/Recruit/ContentsField';
 
 const RecruitForm = () => {
   const { setRecruitPost, recruitPost } = useRecruitStore();
@@ -23,7 +23,11 @@ const RecruitForm = () => {
         <Typography content="냠냠유형" />
         <ButtonList>
           {['식사', '간식', '커피', '술'].map((item) => (
-            <SelectButton key={item} title={item} onClick={() => handleSelect('foodType', item)} />
+            <SelectButton
+              key={item}
+              title={item}
+              onClick={() => handleSelect('foodTypeTag', item)}
+            />
           ))}
         </ButtonList>
       </Field>
@@ -32,7 +36,7 @@ const RecruitForm = () => {
         <PlaceField />
       </Field>
       <Field>
-        <Typography content="모임 날짜와 시간" />
+        <Typography content="모임 날짜" />
         <MeetAtField />
       </Field>
       <Field>
@@ -47,21 +51,21 @@ const RecruitForm = () => {
         <Typography content="성별" />
         <ButtonList>
           {['남자만', '여자만', '남녀무관'].map((item) => (
-            <SelectButton key={item} title={item} onClick={() => handleSelect('gender', item)} />
+            <SelectButton key={item} title={item} onClick={() => handleSelect('genderTag', item)} />
           ))}
         </ButtonList>
       </Field>
       <Field>
         <Typography content="메이트 연령대" />
         <ButtonList>
-          {['20대', '30대', '40대', '50대 이상'].map((item) => (
-            <SelectButton key={item} title={item} onClick={() => handleSelect('ageRange', item)} />
+          {['제한없음', '20대', '30대', '40대', '50대'].map((item) => (
+            <SelectButton key={item} title={item} onClick={() => handleSelect('ageTag', item)} />
           ))}
         </ButtonList>
       </Field>
       <Field>
         <Typography content="내용" />
-        <DetailField />
+        <ContentsField />
       </Field>
     </Form>
   );

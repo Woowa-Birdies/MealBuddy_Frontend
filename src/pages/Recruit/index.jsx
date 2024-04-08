@@ -11,17 +11,17 @@ const Recruit = () => {
   useEffect(() => {
     // /recruit 페이지가 마운트될 때 recruitPost 상태를 초기화
     setRecruitPost({
-      foodType: '',
       place: '',
+      latitude: 0,
+      longitude: 0,
       address: '',
       participantTotal: 1,
-      gender: '',
-      ageRange: '',
-      postStatus: '모집중',
+      contents: null,
+      foodTypeTag: '',
+      ageTag: '',
+      genderTag: '',
       meetAt: '',
       closeAt: '',
-      createAt: '',
-      detail: [],
     });
   }, [setRecruitPost]);
 

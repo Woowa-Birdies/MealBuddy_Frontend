@@ -3,10 +3,10 @@ import useRecruitStore from '@store/useRecruitStore';
 
 const { TextArea } = Input;
 
-const DetailField = () => {
+const ContentsField = () => {
   const { recruitPost, setRecruitPost } = useRecruitStore();
   const handleDetailChange = (e) => {
-    setRecruitPost({ ...recruitPost, detail: e.target.value });
+    setRecruitPost({ ...recruitPost, contents: e.target.value });
   };
 
   return (
@@ -18,4 +18,4 @@ const DetailField = () => {
   );
 };
 
-export default DetailField;
+export default ContentsField;
