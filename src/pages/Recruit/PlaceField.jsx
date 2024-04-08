@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AutoComplete } from 'antd';
 import useRecruitStore from '@store/useRecruitStore';
 
@@ -8,47 +8,46 @@ const PlaceField = () => {
   const [options, setOptions] = useState([]);
   const city = '강릉';
 
-  const searchPlaces = (value) => {
-    if (!value.trim()) {
-      setOptions([]);
-      console.log('키워드를 입력해주세요!');
-      return;
-    }
+  useEffect(() => {
+    // 디바운싱을 위한 타이머 설정
+    const timer = setTimeout(() => {
+      if (inputValue.trim()) {
+        const ps = new window.kakao.maps.services.Places();
+        ps.keywordSearch(`${city} ${inputValue}`, (data, status) => {
+          if (status === window.kakao.maps.services.Status.OK) {
+            const newOptions = data
+              .filter(
+                (place) =>
+                  (place.category_group_code === 'FD6' || place.category_group_code === 'CE7') &&
+                  place.place_name.includes(inputValue),
+              )
+              .slice(0, 6)
+              .map((place) => ({
+                value: place.place_name,
+                label: `${place.place_name} (${place.road_address_name || place.address_name})`,
+              }));
 
-    setOptions([]); // 이전 검색 결과를 초기화
-    const ps = new window.kakao.maps.services.Places();
-
-    ps.keywordSearch(`${city} ${value}`, (data, status) => {
-      if (status === window.kakao.maps.services.Status.OK) {
-        // 사용자가 입력한 텍스트를 포함하고, '식당' 또는 '카페' 카테고리에 속하는 장소만 필터링
-        const newOptions = data
-          .filter(
-            (place) =>
-              (place.category_group_code === 'FD6' || place.category_group_code === 'CE7') &&
-              place.place_name.includes(value),
-          )
-          .slice(0, 6) // 최대 6개까지만 표시
-          .map((place) => ({
-            value: place.place_name,
-            label: `${place.place_name} (${place.road_address_name || place.address_name})`,
-          }));
-
-        setOptions(newOptions);
+            setOptions(newOptions);
+          } else {
+            console.log('검색 결과가 없거나 오류가 발생했습니다.');
+          }
+        });
       } else {
-        console.log('검색 결과가 없거나 오류가 발생했습니다.');
+        setOptions([]);
       }
-    });
-  };
+    }, 500);
+
+    // 컴포넌트 언마운트 또는 inputValue 변경 시 타이머 클린업
+    return () => clearTimeout(timer);
+  }, [inputValue, city]);
 
   const onSelect = (value) => {
-    console.log(value);
-    setInputValue(value); // 선택된 장소 이름으로 입력값 업데이트
-    setRecruitPost({ ...recruitPost, place: value }); // 선택된 장소로 상태 업데이트
+    setInputValue(value);
+    setRecruitPost({ ...recruitPost, place: value });
   };
 
   const handleSearch = (value) => {
-    setInputValue(value); // 입력값 업데이트
-    searchPlaces(value); // 검색 실행
+    setInputValue(value);
   };
 
   return (
