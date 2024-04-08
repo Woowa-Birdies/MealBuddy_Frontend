@@ -1,25 +1,39 @@
 import React, { useState } from 'react';
 import { DatePicker, TimePicker, Space } from 'antd';
 import dayjs from 'dayjs';
+import useRecruitStore from '@store/useRecruitStore';
 
 const dateFormat = 'YYYY년 MM월 DD일';
 const timeFormat = 'A hh:mm';
-const apiDateFormat = 'YYYY-MM-DD';
+
+// localdatetime
+function formatToLocalDateTime(dateTime) {
+  const TIME_ZONE = 9 * 60 * 60 * 1000; // 9시간
+  const date = new Date(dateTime);
+  const localDateTime = new Date(date.getTime() + TIME_ZONE).toISOString();
+
+  return localDateTime;
+}
 
 const MeetAtField = () => {
-  // eslint-disable-next-line no-unused-vars
+  const { recruitPost, setRecruitPost } = useRecruitStore();
   const [selectedDate, setSelectedDate] = useState(dayjs());
-  // eslint-disable-next-line no-unused-vars
   const [selectedTime, setSelectedTime] = useState(dayjs());
 
   const handleDateChange = (date) => {
-    setSelectedDate(date);
-    console.log(dayjs(date).format(apiDateFormat));
+    const combinedDateTime = dayjs(date).hour(selectedTime.hour()).minute(selectedTime.minute());
+    setSelectedDate(combinedDateTime);
+    if (selectedTime) {
+      setRecruitPost({ ...recruitPost, meetAt: formatToLocalDateTime(combinedDateTime) });
+    }
   };
 
   const handleTimeChange = (time) => {
-    setSelectedTime(time);
-    console.log(dayjs(time).format(timeFormat));
+    const combinedDateTime = selectedDate.hour(dayjs(time).hour()).minute(dayjs(time).minute());
+    setSelectedTime(combinedDateTime);
+    if (selectedDate) {
+      setRecruitPost({ ...recruitPost, meetAt: formatToLocalDateTime(combinedDateTime) });
+    }
   };
 
   // 오늘 이전의 날짜는 비활성화
@@ -27,14 +41,14 @@ const MeetAtField = () => {
     return current && current < dayjs().startOf('day');
   };
 
-  const dateRender = (current) => {
-    const date = current.date();
-    return (
-      <div className="ant-picker-cell-inner">
-        <span>{date}</span>
-      </div>
-    );
-  };
+  // const dateRender = (current) => {
+  //   const date = current.date();
+  //   return (
+  //     <div className="ant-picker-cell-inner">
+  //       <span>{date}</span>
+  //     </div>
+  //   );
+  // };
 
   return (
     <Space direction="horizontal" size={12}>
@@ -42,9 +56,9 @@ const MeetAtField = () => {
         format={dateFormat}
         onChange={handleDateChange}
         disabledDate={disabledDate}
-        dateRender={dateRender}
+        // dateRender={dateRender}
       />
-      <TimePicker format={timeFormat} onChange={handleTimeChange} minuteStep={5} showNow={false} />
+      <TimePicker format={timeFormat} onChange={handleTimeChange} use12Hours minuteStep={5} />
     </Space>
   );
 };

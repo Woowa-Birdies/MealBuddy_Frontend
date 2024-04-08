@@ -2,23 +2,20 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-const SelectButton = ({ title, type, onClick, disabled }) => {
+const SelectButton = ({ title, type, onClick, selected }) => {
   const [isClicked, setIsClicked] = useState(false);
-
   const handleClick = () => {
     setIsClicked(!isClicked);
-    if (onClick) {
-      onClick();
-    }
+    onClick(title);
   };
 
   return (
     <StyledButton
-      onClick={!disabled ? handleClick : undefined}
+      onClick={handleClick}
       isClicked={isClicked}
       type={type}
       title={title}
-      disabled={disabled}
+      selected={selected}
     >
       {title}
     </StyledButton>
@@ -39,7 +36,6 @@ SelectButton.propTypes = {
 export default SelectButton;
 
 const StyledButton = styled.button`
-  opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
   bottom: ${({ type }) => {
     if (type === 'request' || type === 'response') {
       return '0.5vw';
@@ -137,9 +133,9 @@ const StyledButton = styled.button`
     return '20px';
   }};
 
-  background: ${({ theme, isClicked, type }) => {
+  background: ${({ theme, isClicked, selected, type }) => {
     if (type === 'recruit') {
-      return isClicked ? theme.color.secondary : theme.border.borderTransparent;
+      return selected ? theme.color.secondary : theme.border.borderTransparent;
     }
     if (type === 'ghost') {
       return isClicked ? theme.color.contentPrimary : theme.color.secondary;
@@ -153,9 +149,9 @@ const StyledButton = styled.button`
     return theme.color.secondary;
   }};
 
-  color: ${({ theme, isClicked, type }) => {
+  color: ${({ theme, isClicked, selected, type }) => {
     if (type === 'recruit') {
-      return isClicked ? theme.color.contentWhite : theme.border.content;
+      return selected ? theme.color.contentWhite : theme.border.content;
     }
     if (type === 'ghost') {
       return theme.color.contentWhite;
@@ -168,11 +164,11 @@ const StyledButton = styled.button`
     }
     return theme.color.contentWhite;
   }};
-  cursor: ${({ type, disabled }) => {
+  cursor: ${({ type }) => {
     if (type === 'tag') {
       return 'default';
     }
-    return disabled ? 'not-allowed' : 'pointer';
+    return 'pointer';
   }};
 
   &:hover {
