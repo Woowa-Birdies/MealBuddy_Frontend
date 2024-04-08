@@ -10,9 +10,9 @@ const Post = () => {
     <Container>
       <StatusButton title="모집중" />
       <TagContainer>
-        <SelectButton title={recruitPost.foodType} type="tag" />
-        <SelectButton title={recruitPost.ageRange} type="tag" />
-        <SelectButton title={recruitPost.gender} type="tag" />
+        {recruitPost.foodType !== '' && <SelectButton title={recruitPost.foodType} type="tag" />}
+        {recruitPost.ageRange !== '' && <SelectButton title={recruitPost.ageRange} type="tag" />}
+        {recruitPost.gender !== '' && <SelectButton title={recruitPost.gender} type="tag" />}
       </TagContainer>
       <Map>지도입니다.</Map>
       <Detail>{recruitPost.detail}</Detail>
