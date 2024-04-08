@@ -31,7 +31,7 @@ const PageTitle = styled.div`
 const ChatWrapper = styled.div`
   width: 100%;
   margin-top: 60px;
-  height: 950px;
+  min-height: 950px;
   display: flex;
   flex-direction: row;
 `;
