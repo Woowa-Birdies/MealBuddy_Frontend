@@ -4,33 +4,38 @@ import dayjs from 'dayjs';
 import useRecruitStore from '@store/useRecruitStore';
 
 const dateFormat = 'YYYY년 MM월 DD일';
-const dateStoreFormat = 'YYYY-MM-DD';
 const timeFormat = 'A hh:mm';
+
+// localdatetime
+function formatToLocalDateTime(dateTime) {
+  const TIME_ZONE = 9 * 60 * 60 * 1000; // 9시간
+  const date = new Date(dateTime);
+  const localDateTime = new Date(date.getTime() + TIME_ZONE).toISOString();
+
+  return localDateTime;
+}
 
 const CloseAtField = () => {
   const { recruitPost, setRecruitPost } = useRecruitStore();
+  const [selectedDate, setSelectedDate] = useState(dayjs());
+  const [selectedTime, setSelectedTime] = useState(dayjs());
 
   // 날짜 부분만 추출하여 meetAtDate 설정
   const meetAtDate = recruitPost?.meetAt ? dayjs(recruitPost.meetAt.split(' ')[0]) : null;
 
-  const [selectedDate, setSelectedDate] = useState(dayjs());
-  const [selectedTime, setSelectedTime] = useState(dayjs());
-
   const handleDateChange = (date) => {
+    const combinedDateTime = dayjs(date).hour(selectedTime.hour()).minute(selectedTime.minute());
     setSelectedDate(date);
     if (selectedTime) {
-      const formattedDate = date.format(dateStoreFormat);
-      const formattedTime = selectedTime.format(timeFormat);
-      setRecruitPost({ ...recruitPost, closeAt: `${formattedDate} ${formattedTime}` });
+      setRecruitPost({ ...recruitPost, closeAt: formatToLocalDateTime(combinedDateTime) });
     }
   };
 
   const handleTimeChange = (time) => {
+    const combinedDateTime = selectedDate.hour(dayjs(time).hour()).minute(dayjs(time).minute());
     setSelectedTime(time);
     if (selectedDate) {
-      const formattedDate = selectedDate.format(dateStoreFormat);
-      const formattedTime = time.format(timeFormat);
-      setRecruitPost({ ...recruitPost, closeAt: `${formattedDate} ${formattedTime}` });
+      setRecruitPost({ ...recruitPost, closeAt: formatToLocalDateTime(combinedDateTime) });
     }
   };
 

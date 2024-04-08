@@ -4,8 +4,16 @@ import dayjs from 'dayjs';
 import useRecruitStore from '@store/useRecruitStore';
 
 const dateFormat = 'YYYY년 MM월 DD일';
-const dateStoreFormat = 'YYYY-MM-DD';
 const timeFormat = 'A hh:mm';
+
+// localdatetime
+function formatToLocalDateTime(dateTime) {
+  const TIME_ZONE = 9 * 60 * 60 * 1000; // 9시간
+  const date = new Date(dateTime);
+  const localDateTime = new Date(date.getTime() + TIME_ZONE).toISOString();
+
+  return localDateTime;
+}
 
 const MeetAtField = () => {
   const { recruitPost, setRecruitPost } = useRecruitStore();
@@ -13,20 +21,18 @@ const MeetAtField = () => {
   const [selectedTime, setSelectedTime] = useState(dayjs());
 
   const handleDateChange = (date) => {
-    setSelectedDate(dayjs(date));
+    const combinedDateTime = dayjs(date).hour(selectedTime.hour()).minute(selectedTime.minute());
+    setSelectedDate(combinedDateTime);
     if (selectedTime) {
-      const formattedDate = date.format(dateStoreFormat);
-      const formattedTime = selectedTime.format(timeFormat);
-      setRecruitPost({ ...recruitPost, meetAt: `${formattedDate} ${formattedTime}` });
+      setRecruitPost({ ...recruitPost, meetAt: formatToLocalDateTime(combinedDateTime) });
     }
   };
 
   const handleTimeChange = (time) => {
-    setSelectedTime(dayjs(time));
+    const combinedDateTime = selectedDate.hour(dayjs(time).hour()).minute(dayjs(time).minute());
+    setSelectedTime(combinedDateTime);
     if (selectedDate) {
-      const formattedDate = selectedDate.format(dateStoreFormat);
-      const formattedTime = time.format(timeFormat);
-      setRecruitPost({ ...recruitPost, meetAt: `${formattedDate} ${formattedTime}` });
+      setRecruitPost({ ...recruitPost, meetAt: formatToLocalDateTime(combinedDateTime) });
     }
   };
 
