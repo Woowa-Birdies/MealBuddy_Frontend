@@ -24,7 +24,8 @@ const PlaceField = () => {
               .slice(0, 6)
               .map((place) => ({
                 value: place.place_name,
-                label: `${place.place_name} (${place.road_address_name || place.address_name})`,
+                label: `${place.place_name} ${place.road_address_name || place.address_name}`,
+                address: place.road_address_name || place.address_name,
               }));
 
             setOptions(newOptions);
@@ -41,9 +42,9 @@ const PlaceField = () => {
     return () => clearTimeout(timer);
   }, [inputValue, city]);
 
-  const onSelect = (value) => {
+  const onSelect = (value, option) => {
     setInputValue(value);
-    setRecruitPost({ ...recruitPost, place: value });
+    setRecruitPost({ ...recruitPost, place: value, address: option.address });
   };
 
   const handleSearch = (value) => {
