@@ -8,7 +8,7 @@ const HeaderLogo = () => {
   return (
     <h1>
       <Link to={ROUTES.HOME}>
-        <SvgComponent src={MainLogo} width={170.55} height={38} />
+        <SvgComponent src={MainLogo} width={128} height={28.5} />
       </Link>
     </h1>
   );

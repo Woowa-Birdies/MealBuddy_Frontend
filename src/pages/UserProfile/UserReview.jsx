@@ -16,7 +16,7 @@ const UserReview = ({ type }) => {
     {
       id: 3,
       score: 77,
-      text: '🙂 매너 리뷰2',
+      text: '🙂 매너 리뷰3',
     },
   ];
   const badMannersData = [

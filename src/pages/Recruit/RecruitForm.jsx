@@ -2,6 +2,11 @@ import styled from 'styled-components';
 // import dayjs from 'dayjs';
 import Typography from '@components/ui/Typography/Typography';
 import SelectButton from '@components/ui/Button/SelectButton';
+import PlaceField from '@/pages/Recruit/PlaceField';
+import MeetAtField from '@/pages/Recruit/MeetAtField';
+import CloseAtField from '@/pages/Recruit/CloseAtField';
+import ParticipantTotalField from '@/pages/Recruit/ParticipantTotalField';
+import DetailField from '@/pages/Recruit/DetailField';
 
 const RecruitForm = () => {
   return (
@@ -16,16 +21,20 @@ const RecruitForm = () => {
         </ButtonList>
       </Field>
       <Field>
-        <Typography content="날짜와 시간" />
-        <input placeholder="날짜와 시간을 입력해주세요" />
+        <Typography content="냠냠장소" />
+        <PlaceField />
       </Field>
       <Field>
-        <Typography content="냠냠장소" />
-        <input placeholder="장소을 입력해주세요" />
+        <Typography content="모임 날짜와 시간" />
+        <MeetAtField />
+      </Field>
+      <Field>
+        <Typography content="모집 마감일" />
+        <CloseAtField />
       </Field>
       <Field>
         <Typography content="메이트 인원" />
-        <input placeholder="인원을 입력해주세요" />
+        <ParticipantTotalField />
       </Field>
       <Field>
         <Typography content="성별" />
@@ -45,12 +54,8 @@ const RecruitForm = () => {
         </ButtonList>
       </Field>
       <Field>
-        <Typography content="예상 비용" />
-        <input placeholder="예상 비용을 입력해주세요" />
-      </Field>
-      <Field>
         <Typography content="내용" />
-        <input placeholder="내용을 입력해주세요" />
+        <DetailField />
       </Field>
     </Form>
   );
@@ -61,14 +66,14 @@ export default RecruitForm;
 const Form = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 0 200px;
-  gap: 60px;
+  margin: 0 250px;
+  gap: 50px;
 `;
 
 const Field = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 21px;
 `;
 
 const ButtonList = styled.div`

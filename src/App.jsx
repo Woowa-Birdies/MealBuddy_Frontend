@@ -10,18 +10,23 @@ import LoadingModal from '@components/ui/Spin/LoadingModal';
 import Recruit from '@/pages/Recruit';
 import RecruitPost from '@/pages/RecruitPost';
 import EditProfile from '@/pages/ProfileEdit';
+import Review from '@/pages/Review';
 import Report from '@/pages/UserReport';
 import PageTitleUpdater from '@hooks/component/PageTitleUpdater';
 import ScrollToTop from '@hooks/component/ScrollToTop';
 import { validateKeys } from '@utils/CommonUtil';
 import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import UserVerification from '@/pages/UserVerification';
+import UserActivity from '@/pages/UserActivity';
+import Chat from '@/pages/Chat';
 
 const App = () => {
   useEffect(() => {
     console.log('현재 모드', SYSTEM_MODE);
     validateKeys();
   }, []);
+
   return (
     <BrowserRouter>
       <Base>
@@ -39,7 +44,11 @@ const App = () => {
           <Route path={ROUTES.RECRUIT} element={<Recruit />} />
           <Route path={ROUTES.RECRUITPOST} element={<RecruitPost />} />
           <Route path={ROUTES.EDITPROFILE} element={<EditProfile />} />
+          <Route path={ROUTES.REVIEW} element={<Review />} />
           <Route path={ROUTES.REPORT} element={<Report />} />
+          <Route path={ROUTES.VERIFICATION} element={<UserVerification />} />
+          <Route path={ROUTES.USERACTIVITY} element={<UserActivity />} />
+          <Route path={ROUTES.CHAT} element={<Chat />} />
         </Routes>
       </Base>
     </BrowserRouter>

@@ -28,7 +28,13 @@ Label.defaultProps = {
 Label.propTypes = {
   content: PropTypes.string.isRequired,
   size: PropTypes.oneOf(['small', 'medium', 'large', 'xl', 'xxl']),
-  color: PropTypes.oneOf(['contentPrimary', 'contentSecondary', 'contentTertiary', 'contentWhite']),
+  color: PropTypes.oneOf([
+    'primary',
+    'contentPrimary',
+    'contentSecondary',
+    'contentTertiary',
+    'contentWhite',
+  ]),
   type: PropTypes.oneOf(['default', 'link']),
   to: (props, propName, componentName) => {
     if (

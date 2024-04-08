@@ -25,14 +25,14 @@ const HeaderGlobalNav = styled.ul`
   display: flex;
   -webkit-box-pack: center;
   justify-content: center;
-  height: 88px;
+  height: 66px;
 `;
 
 const MenuList = styled.li`
   display: flex;
   -webkit-box-align: center;
   align-items: center;
-  gap: 52px;
+  gap: 39px;
 `;
 
 const MenuLink = styled(Link)``;

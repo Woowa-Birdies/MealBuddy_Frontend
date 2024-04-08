@@ -8,7 +8,7 @@ const LoginLogo = () => {
   return (
     <StyledDiv>
       <Link to={ROUTES.HOME}>
-        <SvgComponent src={MainLogo} width={309.69} height={69} />
+        <SvgComponent src={MainLogo} width={225.5} height={51.75} />
       </Link>
     </StyledDiv>
   );

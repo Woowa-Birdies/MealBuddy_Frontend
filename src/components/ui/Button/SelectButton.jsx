@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-const SelectButton = ({ title, type, onClick }) => {
+const SelectButton = ({ title, type, onClick, disabled }) => {
   const [isClicked, setIsClicked] = useState(false);
 
   const handleClick = () => {
@@ -13,7 +13,13 @@ const SelectButton = ({ title, type, onClick }) => {
   };
 
   return (
-    <StyledButton onClick={handleClick} isClicked={isClicked} type={type} title={title}>
+    <StyledButton
+      onClick={!disabled ? handleClick : undefined}
+      isClicked={isClicked}
+      type={type}
+      title={title}
+      disabled={disabled}
+    >
       {title}
     </StyledButton>
   );
@@ -27,28 +33,175 @@ SelectButton.defaultProps = {
 SelectButton.propTypes = {
   title: PropTypes.string.isRequired,
   onClick: PropTypes.func,
-  type: PropTypes.oneOf(['recruit', 'tag']),
+  type: PropTypes.oneOf(['recruit', 'tag', 'ghost', 'manner', 'request', 'response']),
 };
 
 export default SelectButton;
 
 const StyledButton = styled.button`
-  width: ${({ title }) => title.length * 10 + 60}px;
-  height: 40px;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 150%;
-  border-radius: 20px;
-  background: ${({ theme, isClicked, type }) =>
-    isClicked || type === 'tag' ? theme.color.secondary : theme.border.borderTransparent};
-  color: ${({ theme, isClicked, type }) =>
-    isClicked || type === 'tag' ? theme.color.contentWhite : theme.color.contentSub};
-  cursor: pointer;
+  opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
+  bottom: ${({ type }) => {
+    if (type === 'request' || type === 'response') {
+      return '0.5vw';
+    }
+    return 'auto';
+  }};
+  right: ${({ type }) => {
+    if (type === 'request' || type === 'response') {
+      return '0px';
+    }
+    return 'auto';
+  }};
+  position: ${({ type }) => {
+    if (type === 'request' || type === 'response') {
+      return 'absolute';
+    }
+    return 'static';
+  }};
+  padding: ${({ type }) => {
+    if (type === 'request' || type === 'response') {
+      return `0.42vw 1.04vw`;
+    }
+    return '0 15px';
+  }};
+  width: ${({ type }) => {
+    if (type === 'ghost') {
+      return `${819 * 0.75}px`;
+    }
+    if (type === 'manner') {
+      return `${376 * 0.75}px`;
+    }
+    return 'auto';
+  }};
+
+  height: ${({ type }) => {
+    if (type === 'ghost') {
+      return `${96 * 0.75}px`;
+    }
+    if (type === 'manner') {
+      return `${82 * 0.75}px`;
+    }
+    if (type === 'request' || type === 'response') {
+      return `auto`;
+    }
+    return '40px';
+  }};
+
+  font-size: ${({ type, theme }) => {
+    if (type === 'ghost') {
+      return `${theme.headings.medium.fontSize}`;
+    }
+    if (type === 'manner') {
+      return `${theme.headings.small.fontSize}`;
+    }
+    return '0.83vw';
+  }};
+
+  font-weight: ${({ type }) => {
+    if (type === 'ghost') {
+      return '700';
+    }
+    if (type === 'manner') {
+      return '400';
+    }
+    return '600';
+  }};
+
+  line-height: ${({ type }) => {
+    if (type === 'ghost') {
+      return '140%';
+    }
+    if (type === 'manner') {
+      return '160%';
+    }
+    return '150%';
+  }};
+
+  border: ${({ type }) => {
+    if (type === 'manner') {
+      return '1px solid #898989';
+    }
+    if (type === 'request') {
+      return '1px solid #898989';
+    }
+    return '20px';
+  }};
+
+  border-radius: ${({ type }) => {
+    if (type === 'ghost' || type === 'manner') {
+      return '10px';
+    }
+    if (type === 'request' || type === 'response') {
+      return '1.56vw';
+    }
+    return '20px';
+  }};
+
+  background: ${({ theme, isClicked, type }) => {
+    if (type === 'recruit') {
+      return isClicked ? theme.color.secondary : theme.border.borderTransparent;
+    }
+    if (type === 'ghost') {
+      return isClicked ? theme.color.contentPrimary : theme.color.secondary;
+    }
+    if (type === 'manner') {
+      return isClicked ? theme.color.darkgray : theme.color.lightgray;
+    }
+    if (type === 'request') {
+      return theme.color.contentWhite;
+    }
+    return theme.color.secondary;
+  }};
+
+  color: ${({ theme, isClicked, type }) => {
+    if (type === 'recruit') {
+      return isClicked ? theme.color.contentWhite : theme.border.content;
+    }
+    if (type === 'ghost') {
+      return theme.color.contentWhite;
+    }
+    if (type === 'manner') {
+      return isClicked ? theme.color.contentWhite : theme.color.content;
+    }
+    if (type === 'request') {
+      return theme.color.contentPrimary;
+    }
+    return theme.color.contentWhite;
+  }};
+  cursor: ${({ type, disabled }) => {
+    if (type === 'tag') {
+      return 'default';
+    }
+    return disabled ? 'not-allowed' : 'pointer';
+  }};
+
   &:hover {
-    background: ${({ theme, type }) =>
-      type === 'tag' ? theme.color.secondary : theme.color.secondary};
-    color: ${({ theme, type }) =>
-      type === 'tag' ? theme.color.contentWhite : theme.color.contentWhite};
+    background: ${({ theme, type }) => {
+      if (type === 'ghost') {
+        return theme.color.contentPrimary;
+      }
+      if (type === 'manner') {
+        return theme.color.darkgray;
+      }
+      if (type === 'response') {
+        return theme.color.contentWhite;
+      }
+      return theme.color.secondary;
+    }};
+    color: ${({ theme, type }) => {
+      if (type === 'response') {
+        return theme.color.contentPrimary;
+      }
+      return theme.color.contentWhite;
+    }};
+    border: ${({ type }) => {
+      if (type === 'request') {
+        return `1px solid transparent`;
+      }
+      if (type === 'response') {
+        return `1px solid #898989`;
+      }
+      return 'auto';
+    }};
   }
 `;

@@ -42,14 +42,14 @@ export default FooterNav;
 const StyledNav = styled.nav`
   display: flex;
   flex-wrap: wrap;
-  margin-top: 37px;
-  margin-bottom: 101px;
+  margin-top: 27.75px;
+  margin-bottom: 75.75px;
 `;
 
 const FooterNavItem = styled.ul`
   display: flex;
   flex-direction: column;
-  gap: 42px;
+  gap: 31.5px;
   -webkit-box-flex: 1;
   flex: 1;
 `;

@@ -17,8 +17,12 @@ export const PAGENAMES = Object.freeze({
   RECRUITPOST: '모집글 페이지',
   MYPAGE: '마이 페이지',
   USERPAGE: '유저 페이지',
+  REVIEW: '후기 페이지',
   REPORT: '신고하기',
   EDITPROFILE: '프로필 수정',
+  VERIFICATION: '휴대전화 인증',
+  USERACTIVITY: '냠 관리',
+  CHAT: '냠냠토크',
 });
 
 export const ROUTES = Object.freeze({
@@ -34,6 +38,10 @@ export const ROUTES = Object.freeze({
   RECRUITPOST: '/recruitpost',
   MYPAGE: '/mypage',
   USERPAGE: '/userpage',
+  REVIEW: '/review',
   REPORT: '/report',
   EDITPROFILE: '/editprofile',
+  VERIFICATION: '/verification',
+  USERACTIVITY: '/myactivity',
+  CHAT: '/chat',
 });

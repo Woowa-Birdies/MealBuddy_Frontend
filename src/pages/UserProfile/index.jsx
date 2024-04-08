@@ -32,7 +32,7 @@ UserProfile.propTypes = {
 
 const ProfileWrapper = styled.div`
   width: 100%;
-  padding: 0px 320px;
+  padding: 0px 16.71vw;
   display: flex;
   flex-direction: column;
   align-items: center;

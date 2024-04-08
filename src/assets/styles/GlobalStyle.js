@@ -59,8 +59,12 @@ const GlobalStyle = createGlobalStyle`
     overflow-y: auto;
   }
 
-  html, body {
+  html, body  {
     font-size: 12px;
+    font-family: ${({ theme }) => theme.fontFamily.default};
+  }
+
+  button, input{
     font-family: ${({ theme }) => theme.fontFamily.default};
   }
 
