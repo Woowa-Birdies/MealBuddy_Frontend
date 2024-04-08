@@ -20,7 +20,7 @@ export const PAGENAMES = Object.freeze({
   REVIEW: '후기 페이지',
   REPORT: '신고하기',
   EDITPROFILE: '프로필 수정',
-  VERIFICATION: '휴대전화 인증',
+  VERIFICATION: '추가 인증',
   USERACTIVITY: '냠 관리',
   CHAT: '냠냠토크',
 });
