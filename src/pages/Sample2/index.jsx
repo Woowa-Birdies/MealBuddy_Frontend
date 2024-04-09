@@ -22,19 +22,18 @@ const Sample2 = () => {
     nav(ROUTES.HOME);
   };
 
-  const handleAsk = async () => {
+  const handle11111 = async () => {
     try {
-      const postCreateDto = {
-        place: '카페 이름',
-        latitude: 37.5665,
-        longitude: 126.978,
-        address: '서울특별시 중구',
-        participantTotal: 5,
-        contents: '이번 주말 카페에서 모각코 어때요?',
-        meetAt: '2024-04-20T14:00:00',
-        closeAt: '2024-04-20T18:00:00',
-      };
-      const res = await sampleApi.postCreate(postCreateDto);
+      const res = await sampleApi.getByPostId(3);
+      console.log('res', res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handle2222 = async () => {
+    try {
+      const res = await sampleApi.getUserPostList(1, 1);
       console.log('res', res.data);
     } catch (error) {
       console.log(error);
@@ -52,8 +51,11 @@ const Sample2 = () => {
       <Button type="primary" onClick={handleLogout}>
         로그아웃
       </Button>
-      <Button type="primary" onClick={handleAsk}>
-        헬스체크
+      <Button type="primary" onClick={handle11111}>
+        1
+      </Button>
+      <Button type="primary" onClick={handle2222}>
+        2
       </Button>
     </div>
   );
