@@ -19,7 +19,7 @@ import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import UserVerification from '@/pages/UserVerification';
 import UserActivity from '@/pages/UserActivity';
-import ApplicantsList from '@/pages/UserActivity/ApplicantsCard';
+import ApplicantsList from '@/pages/UserActivity/ApplicantCard';
 
 const App = () => {
   useEffect(() => {
