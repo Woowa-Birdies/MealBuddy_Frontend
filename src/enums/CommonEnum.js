@@ -36,7 +36,7 @@ export const ROUTES = Object.freeze({
   BBB: '/bbb',
   CCC: '/ccc',
   RECRUIT: '/recruit',
-  RECRUITPOST: '/recruitpost',
+  RECRUITPOST: '/post/:postId',
   MYPAGE: '/mypage',
   USERPAGE: '/userpage',
   REVIEW: '/review',
