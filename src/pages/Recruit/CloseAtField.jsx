@@ -21,7 +21,7 @@ const CloseAtField = () => {
   const [selectedTime, setSelectedTime] = useState(dayjs());
 
   // 날짜 부분만 추출하여 meetAtDate 설정
-  const meetAtDate = recruitPost?.meetAt ? dayjs(recruitPost.meetAt.split(' ')[0]) : null;
+  const meetAtDate = recruitPost?.meetAt ? dayjs(recruitPost.meetAt) : null;
 
   const handleDateChange = (date) => {
     const combinedDateTime = dayjs(date).hour(selectedTime.hour()).minute(selectedTime.minute());
@@ -44,7 +44,7 @@ const CloseAtField = () => {
     // 오늘 날짜 이전은 선택 불가
     const isBeforeToday = current && current < dayjs().startOf('day');
     // meetAtDate가 설정되어 있으면, 해당 날짜 이후도 선택 불가
-    const isAfterMeetAt = meetAtDate && current > meetAtDate.startOf('day');
+    const isAfterMeetAt = meetAtDate && current >= meetAtDate.startOf('day');
 
     return isBeforeToday || isAfterMeetAt;
   };
