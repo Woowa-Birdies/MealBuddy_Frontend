@@ -22,9 +22,23 @@ const Sample2 = () => {
     nav(ROUTES.HOME);
   };
 
-  const handleHealthCheck = async () => {
-    const res = await sampleApi.getHealthCheck();
-    console.log('res', res);
+  const handleAsk = async () => {
+    try {
+      const postCreateDto = {
+        place: '카페 이름',
+        latitude: 37.5665,
+        longitude: 126.978,
+        address: '서울특별시 중구',
+        participantTotal: 5,
+        contents: '이번 주말 카페에서 모각코 어때요?',
+        meetAt: '2024-04-20T14:00:00',
+        closeAt: '2024-04-20T18:00:00',
+      };
+      const res = await sampleApi.postCreate(postCreateDto);
+      console.log('res', res.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -38,7 +52,7 @@ const Sample2 = () => {
       <Button type="primary" onClick={handleLogout}>
         로그아웃
       </Button>
-      <Button type="primary" onClick={handleHealthCheck}>
+      <Button type="primary" onClick={handleAsk}>
         헬스체크
       </Button>
     </div>

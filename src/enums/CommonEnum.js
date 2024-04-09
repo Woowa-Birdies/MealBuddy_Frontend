@@ -23,6 +23,7 @@ export const PAGENAMES = Object.freeze({
   VERIFICATION: '휴대전화 인증',
   USERACTIVITY: '냠 관리',
   APPLICANTSLIST: '신청자 내역',
+  CHAT: '냠냠토크',
 });
 
 export const ROUTES = Object.freeze({
@@ -44,4 +45,5 @@ export const ROUTES = Object.freeze({
   VERIFICATION: '/verification',
   USERACTIVITY: '/myactivity',
   APPLICANTSLIST: '/applicantslist',
+  CHAT: '/chat',
 });
