@@ -5,7 +5,7 @@ import useRecruitStore from '@store/useRecruitStore';
 const Map = () => {
   const mapContainer = useRef(null); // 지도를 담을 컨테이너 ref
   const { recruitPost } = useRecruitStore();
-  const placeName = recruitPost.place;
+  const placeAddress = recruitPost.address;
 
   useEffect(() => {
     if (window.kakao && window.kakao.maps) {
@@ -21,7 +21,7 @@ const Map = () => {
       const ps = new window.kakao.maps.services.Places();
 
       // 장소 검색을 실행
-      ps.keywordSearch(placeName, (data, status, _pagination) => {
+      ps.keywordSearch(placeAddress, (data, status, _pagination) => {
         if (status === window.kakao.maps.services.Status.OK) {
           const coords = new window.kakao.maps.LatLng(data[0].y, data[0].x);
 
@@ -37,7 +37,7 @@ const Map = () => {
         }
       });
     }
-  }, [placeName]);
+  }, [placeAddress]);
 
   return <Container ref={mapContainer} />;
 };
