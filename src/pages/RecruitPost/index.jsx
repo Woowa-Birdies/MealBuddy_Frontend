@@ -18,7 +18,7 @@ export default RecruitPost;
 const RecruitPostPage = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 0 200px;
+  margin: 100px 150px;
   padding: 30px;
   gap: 100px;
 `;
