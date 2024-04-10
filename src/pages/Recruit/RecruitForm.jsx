@@ -33,7 +33,7 @@ const RecruitForm = () => {
       <Field>
         <Typography content="냠냠유형" />
         <ButtonList>
-          {['식사', '간식', '커피', '술'].map((item) => (
+          {['식사', '카페', '술'].map((item) => (
             <SelectButton
               key={item}
               title={item}
