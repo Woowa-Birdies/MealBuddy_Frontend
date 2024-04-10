@@ -8,12 +8,22 @@ const timeFormat = 'A hh:mm';
 
 // localdatetime
 function formatToLocalDateTime(dateTime) {
-  const TIME_ZONE = 9 * 60 * 60 * 1000; // 9시간
-  const date = new Date(dateTime);
-  const localDateTime = new Date(date.getTime() + TIME_ZONE).toISOString();
+  // dayjs 객체를 ISO 8601 형식으로 변환
+  const isoDateTime = dayjs(dateTime).toISOString();
 
-  return localDateTime;
+  // ISO 문자열에서 밀리초('.000Z') 부분을 찾아 '.000000'으로 대체
+  const formattedDateTime = isoDateTime.replace('.000Z', '.000000');
+
+  return formattedDateTime;
 }
+
+// function formatToLocalDateTime(dateTime) {
+//   const TIME_ZONE = 9 * 60 * 60 * 1000; // 9시간
+//   const date = new Date(dateTime);
+//   const localDateTime = new Date(date.getTime() + TIME_ZONE).toISOString();
+
+//   return localDateTime;
+// }
 
 const MeetAtField = () => {
   const { recruitPost, setRecruitPost } = useRecruitStore();

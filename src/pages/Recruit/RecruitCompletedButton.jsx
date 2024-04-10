@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 import { Modal } from 'antd';
 import CompletedButton from '@components/ui/Button/CompletedButton';
-import { useNavigate } from 'react-router-dom';
-import { ROUTES } from '@enums/CommonEnum';
+// import { useNavigate } from 'react-router-dom';
+// import { ROUTES } from '@enums/CommonEnum';
 import useRecruitStore from '@store/useRecruitStore';
+import recruitApi from '@api/biz/recruitApi';
 
 const RecruitCompletedButton = () => {
-  const nav = useNavigate();
+  // const nav = useNavigate();
   const { recruitPost } = useRecruitStore();
 
   const showWarning = (message) => {
@@ -16,7 +17,7 @@ const RecruitCompletedButton = () => {
     });
   };
 
-  const handleClick = () => {
+  const handleClick = async () => {
     // 필수 필드 리스트
     const requiredFields = [
       { key: 'foodTypeTag', label: '식사 유형을' },
@@ -37,8 +38,15 @@ const RecruitCompletedButton = () => {
       return;
     }
 
-    console.log(recruitPost);
-    nav(ROUTES.RECRUITPOST);
+    // post 요청
+    try {
+      const response = await recruitApi.postRecruit(recruitPost);
+      // 확인용
+      console.log(response.data);
+      // nav(`/post/${response.postId}`);
+    } catch (error) {
+      console.error('Failed to create post:', error);
+    }
   };
 
   return (
