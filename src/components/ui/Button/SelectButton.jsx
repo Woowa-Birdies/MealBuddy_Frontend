@@ -65,7 +65,7 @@ const StyledButton = styled.button`
       return `${819 * 0.75}px`;
     }
     if (type === 'manner') {
-      return `${376 * 0.75}px`;
+      return '376px';
     }
     return 'auto';
   }};

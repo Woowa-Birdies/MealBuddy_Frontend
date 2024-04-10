@@ -1,13 +1,12 @@
 import styled from 'styled-components';
 import { Modal } from 'antd';
 import CompletedButton from '@components/ui/Button/CompletedButton';
-// import { useNavigate } from 'react-router-dom';
-// import { ROUTES } from '@enums/CommonEnum';
+import { useNavigate } from 'react-router-dom';
 import useRecruitStore from '@store/useRecruitStore';
 import recruitApi from '@api/biz/recruitApi';
 
 const RecruitCompletedButton = () => {
-  // const nav = useNavigate();
+  const nav = useNavigate();
   const { recruitPost } = useRecruitStore();
 
   const showWarning = (message) => {
@@ -42,8 +41,8 @@ const RecruitCompletedButton = () => {
     try {
       const response = await recruitApi.postRecruit(recruitPost);
       // 확인용
-      console.log(response.data);
-      // nav(`/post/${response.postId}`);
+      const postId = response.data;
+      nav(`/post/${postId}`);
     } catch (error) {
       console.error('Failed to create post:', error);
     }
