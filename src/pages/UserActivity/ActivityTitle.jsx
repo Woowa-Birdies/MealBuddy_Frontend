@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const ActivityTitle = () => {
   return (
     <TitleWrapper>
-      <Typography content="냠관리" size="large" />
+      <Typography content="모집 냠냠" size="large" />
     </TitleWrapper>
   );
 };

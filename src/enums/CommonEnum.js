@@ -21,7 +21,7 @@ export const PAGENAMES = Object.freeze({
   REPORT: '신고하기',
   EDITPROFILE: '프로필 수정',
   VERIFICATION: '추가 인증',
-  USERACTIVITY: '냠 관리',
+  USERACTIVITY: '모집 냠냠',
   CHAT: '냠냠토크',
 });
 

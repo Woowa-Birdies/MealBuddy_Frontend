@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-const ActivityButton = ({ title, onClick, color }) => {
+const UserActivityButton = ({ title, onClick, color }) => {
   return (
     <StyledButton $color={color} onClick={onClick}>
       {title}
@@ -9,12 +9,12 @@ const ActivityButton = ({ title, onClick, color }) => {
   );
 };
 
-ActivityButton.defaultProps = {
+UserActivityButton.defaultProps = {
   onClick: () => {},
   color: 'primary',
 };
 
-ActivityButton.propTypes = {
+UserActivityButton.propTypes = {
   title: PropTypes.string.isRequired,
   onClick: PropTypes.func,
   color: PropTypes.oneOf([
@@ -23,16 +23,17 @@ ActivityButton.propTypes = {
     'contentSecondary',
     'contentTertiary',
     'contentWhite',
+    'secondary',
   ]),
 };
 
-export default ActivityButton;
+export default UserActivityButton;
 
 const StyledButton = styled.button`
-  width: 17.0836vw;
+  width: 13.0836vw;
   height: 3.334vw;
   box-sizing: border-box;
-  padding: 0.834vw 6vw;
+  padding: 0.834vw 2vw;
   font-size: 1.1vw;
   font-style: normal;
   font-weight: 600;
