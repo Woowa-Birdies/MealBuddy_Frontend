@@ -1,12 +1,22 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { ROUTES } from '@enums/CommonEnum';
 import ProfileTitle from '@/pages/UserProfile/ProfileTitle';
 import UserInfo from '@/pages/UserProfile/UserInfo';
-import Paragraphy from '@components/ui/Paragraphy/Paragraphy';
 import UserHistory from '@/pages/UserProfile/UserHistory';
 import UserReview from '@/pages/UserProfile/UserReview';
+import useLoginStore from '@store/useLoginStore';
+import { useNavigate } from 'react-router-dom';
 
 const UserProfile = ({ type }) => {
+  const { setIsLogin } = useLoginStore();
+  const nav = useNavigate();
+
+  const handleLogout = () => {
+    setIsLogin(false);
+    nav(ROUTES.HOME);
+  };
+
   return (
     <ProfileWrapper>
       <ProfileInner>
@@ -16,9 +26,7 @@ const UserProfile = ({ type }) => {
         <UserReview type={type} />
       </ProfileInner>
       <ProfileBottom>
-        {type === 'mypage' ? (
-          <Paragraphy content="로그아웃" size="xl" color="contentSecondary" />
-        ) : null}
+        {type === 'mypage' ? <LogoutBtn onClick={handleLogout}>로그아웃</LogoutBtn> : null}
       </ProfileBottom>
     </ProfileWrapper>
   );
@@ -48,4 +56,11 @@ const ProfileInner = styled.div`
 const ProfileBottom = styled.div`
   align-self: flex-end;
   margin-bottom: 200px;
+`;
+
+const LogoutBtn = styled.button`
+  font-size: 1.481vw;
+  color: #6b6b6b;
+  cursor: pointer;
+  background-color: transparent;
 `;
