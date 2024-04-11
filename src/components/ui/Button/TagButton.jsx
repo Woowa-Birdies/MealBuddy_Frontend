@@ -15,21 +15,46 @@ TagButton.defaultProps = {
 
 TagButton.propTypes = {
   title: PropTypes.string.isRequired,
-  type: PropTypes.oneOf(['review', 'tag']),
+  type: PropTypes.oneOf(['review', 'tag', 'post']),
 };
 
 export default TagButton;
 
 const StyledButton = styled.button`
-  display: inline-block;
-  padding: 0.4167vw 0.8333vw;
-  font-size: 0.833vw;
+  width: ${({ type }) => {
+    if (type === 'post') {
+      return '26.04vw';
+    }
+    return 'auto';
+  }};
+  height: ${({ type }) => {
+    if (type === 'post') {
+      return '4.17vw';
+    }
+    return '40px';
+  }};
+  font-size: ${({ theme, type }) => {
+    if (type === 'tag') {
+      return theme.labels.medium.fontSize;
+    }
+    return theme.headings.medium.fontSize;
+  }};
+  padding: 0.42vw 1.04vw;
   font-style: normal;
-  font-weight: 600;
-  line-height: 150%;
-  border-radius: 20px;
-  background-color: ${({ theme, type }) =>
-    type === 'tag' ? theme.color.borderOpaque : theme.color.Gray200};
+  font-weight: 700;
+  line-height: 140%;
+  border-radius: ${({ type }) => {
+    if (type === 'tag') {
+      return '20px';
+    }
+    return '0.625vw';
+  }};
+  background-color: ${({ theme, type }) => {
+    if (type === 'post') {
+      return theme.color.contentPrimary;
+    }
+    return theme.color.Gray200;
+  }};
   color: ${({ theme, type }) =>
-    type === 'tag' ? theme.color.contentWhite : theme.color.contentSub};
+    type === 'tag' ? theme.color.contentPrimary : theme.color.contentWhite};
 `;
