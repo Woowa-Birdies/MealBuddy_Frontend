@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom'; // useParams 훅을 임포트
+import useRecruitStore from '@store/useRecruitStore';
 import styled from 'styled-components';
 import Map from '@/pages/RecruitPost/Map';
 import StatusButton from '@components/ui/Button/StatusButton';
@@ -9,37 +10,37 @@ import showPostApi from '@api/biz/showPostApi';
 import TagButton from '@components/ui/Button/TagButton';
 
 const Post = () => {
+  const { recruitPost, setRecruitPost } = useRecruitStore();
   const { postId } = useParams(); // 현재 경로에서 postId 파라미터를 추출
-  const [post, setPost] = useState({});
 
-  const aa = dayjs(post.meetAt).format('YYYY년 MM월 DD일 dddd A hh:mm');
+  const aa = dayjs(recruitPost.meetAt).format('YYYY년 MM월 DD일 dddd A hh:mm');
   useEffect(() => {
     const fetchPost = async () => {
       try {
         const res = await showPostApi.showPost({ postId });
-        setPost(res.data);
+        setRecruitPost(res.data);
       } catch (error) {
         console.error('Failed to fetch post:', error);
       }
     };
 
     fetchPost();
-  }, [postId]);
+  }, [postId, setRecruitPost]);
 
   return (
     <Container>
-      <StatusButton title={post.postStatus} />
-      <Typography content={post.place} size="large" />
+      <StatusButton title={recruitPost.postStatus} />
+      <Typography content={recruitPost.place} size="large" />
       <TagContainer>
-        <TagButton title={post.foodTypeTag} type="tag" />
-        <TagButton title={post.ageTag} type="tag" />
-        <TagButton title={post.genderTag} type="tag" />
+        <TagButton title={recruitPost.foodTypeTag} type="tag" />
+        <TagButton title={recruitPost.ageTag} type="tag" />
+        <TagButton title={recruitPost.genderTag} type="tag" />
       </TagContainer>
-      <Info>{aa}</Info>
-      <Info>{post.participantTotal}명 모집</Info>
-      <Info>{post.address}</Info>
+      <Info>🗓️ {aa}</Info>
+      <Info>👤 {recruitPost.participantTotal}명 모집</Info>
+      <Info>📍 {recruitPost.address}</Info>
       <Map />
-      <Contents>{post.contents}</Contents>
+      <Contents>{recruitPost.contents}</Contents>
     </Container>
   );
 };
