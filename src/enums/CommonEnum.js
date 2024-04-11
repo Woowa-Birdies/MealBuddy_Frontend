@@ -22,6 +22,7 @@ export const PAGENAMES = Object.freeze({
   EDITPROFILE: '프로필 수정',
   VERIFICATION: '추가 인증',
   USERACTIVITY: '모집 냠냠',
+  APPLICANTSLIST: '신청자 내역',
   CHAT: '냠냠토크',
 });
 
@@ -43,5 +44,6 @@ export const ROUTES = Object.freeze({
   EDITPROFILE: '/editprofile',
   VERIFICATION: '/verification',
   USERACTIVITY: '/myactivity',
+  APPLICANTSLIST: '/applicantslist',
   CHAT: '/chat',
 });
