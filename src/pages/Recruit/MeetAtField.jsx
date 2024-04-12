@@ -11,14 +11,17 @@ function formatToLocalDateTime(dateTime) {
   const TIME_ZONE = 9 * 60 * 60 * 1000; // 9시간
   const date = new Date(dateTime);
   const localDateTime = new Date(date.getTime() + TIME_ZONE).toISOString();
-
   return localDateTime;
 }
 
 const MeetAtField = () => {
   const { recruitPost, setRecruitPost } = useRecruitStore();
-  const [selectedDate, setSelectedDate] = useState(dayjs());
-  const [selectedTime, setSelectedTime] = useState(dayjs());
+  const [selectedDate, setSelectedDate] = useState(
+    recruitPost.meetAt ? dayjs(recruitPost.meetAt) : dayjs(),
+  );
+  const [selectedTime, setSelectedTime] = useState(
+    recruitPost.meetAt ? dayjs(recruitPost.meetAt) : dayjs(),
+  );
 
   const handleDateChange = (date) => {
     const combinedDateTime = dayjs(date).hour(selectedTime.hour()).minute(selectedTime.minute());
@@ -54,11 +57,18 @@ const MeetAtField = () => {
     <Space direction="horizontal" size={12}>
       <DatePicker
         format={dateFormat}
+        value={selectedDate}
         onChange={handleDateChange}
         disabledDate={disabledDate}
         // dateRender={dateRender}
       />
-      <TimePicker format={timeFormat} onChange={handleTimeChange} use12Hours minuteStep={5} />
+      <TimePicker
+        format={timeFormat}
+        value={selectedTime}
+        onChange={handleTimeChange}
+        use12Hours
+        minuteStep={5}
+      />
     </Space>
   );
 };

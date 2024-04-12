@@ -1,32 +1,38 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import useRecruitStore from '@store/useRecruitStore';
 import styled from 'styled-components';
 // import dayjs from 'dayjs';
 import Typography from '@components/ui/Typography/Typography';
 import SelectButton from '@components/ui/Button/SelectButton';
+import recruitApi from '@api/biz/recruitApi';
 import PlaceField from '@/pages/Recruit/PlaceField';
 import MeetAtField from '@/pages/Recruit/MeetAtField';
 import CloseAtField from '@/pages/Recruit/CloseAtField';
 import ParticipantTotalField from '@/pages/Recruit/ParticipantTotalField';
 import ContentsField from '@/pages/Recruit/ContentsField';
 
-const RecruitForm = () => {
+const RecruitForm = ({ postId }) => {
   const { setRecruitPost, recruitPost } = useRecruitStore();
-  const [selectedFoodType, setSelectedFoodType] = useState('');
-  const [selectedGender, setSelectedGender] = useState('');
-  const [selectedAge, setSelectedAge] = useState('');
 
   // 선택된 데이터를 전역 상태에 저장하는 함수
   const handleSelect = (field, value) => {
-    if (field === 'foodTypeTag') {
-      setSelectedFoodType(value);
-    } else if (field === 'genderTag') {
-      setSelectedGender(value);
-    } else if (field === 'ageTag') {
-      setSelectedAge(value);
-    }
     setRecruitPost({ ...recruitPost, [field]: value });
   };
+
+  useEffect(() => {
+    if (postId) {
+      const fetchPost = async () => {
+        try {
+          const res = await recruitApi.getPost({ postId });
+          setRecruitPost(res.data);
+        } catch (error) {
+          console.error('Failed to fetch post:', error);
+        }
+      };
+
+      fetchPost();
+    }
+  }, [postId, setRecruitPost]);
 
   return (
     <Form>
@@ -38,7 +44,7 @@ const RecruitForm = () => {
               key={item}
               title={item}
               onClick={() => handleSelect('foodTypeTag', item)}
-              selected={selectedFoodType === item}
+              selected={recruitPost.foodTypeTag === item}
             />
           ))}
         </ButtonList>
@@ -67,7 +73,7 @@ const RecruitForm = () => {
               key={item}
               title={item}
               onClick={() => handleSelect('genderTag', item)}
-              selected={selectedGender === item}
+              selected={recruitPost.genderTag === item}
             />
           ))}
         </ButtonList>
@@ -80,7 +86,7 @@ const RecruitForm = () => {
               key={item}
               title={item}
               onClick={() => handleSelect('ageTag', item)}
-              selected={selectedAge === item}
+              selected={recruitPost.ageTag === item}
             />
           ))}
         </ButtonList>
