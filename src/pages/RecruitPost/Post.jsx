@@ -18,11 +18,14 @@ const Post = () => {
   const now = 1;
 
   const handleEditClick = () => {
-    console.log(post);
+    // console.log(post);
     nav(`/recruit/${post.postId}`);
   };
 
-  const handleDeleteClick = () => {};
+  const handleDeleteClick = () => {
+    recruitApi.deleteRecruit(post.postId);
+    nav('/');
+  };
 
   useEffect(() => {
     const fetchPost = async () => {
