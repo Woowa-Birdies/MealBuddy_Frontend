@@ -8,9 +8,8 @@ import CompletedButton from '@components/ui/Button/CompletedButton';
 import TagButton from '@components/ui/Button/TagButton';
 
 const ButtonContainer = () => {
-  const { post } = usePost();
-  // now: 1 --> 호스트, now: 0 --> 게스트
   const now = 3;
+  const { post } = usePost();
   const writer = post.userId;
   const status = post.postStatus;
   const guestStatus = '';

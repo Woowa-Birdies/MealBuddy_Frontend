@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import RecruitTitle from '@/pages/Recruit/RecruitTitle';
 import RecruitForm from '@/pages/Recruit/RecruitForm';
@@ -6,6 +7,7 @@ import RecruitCompletedButton from '@/pages/Recruit/RecruitCompletedButton';
 import useRecruitStore, { initialRecruitPost } from '@store/useRecruitStore';
 
 const Recruit = () => {
+  const { postId } = useParams();
   const { setRecruitPost } = useRecruitStore();
 
   useEffect(() => {
@@ -16,8 +18,8 @@ const Recruit = () => {
   return (
     <RecruitPage>
       <RecruitTitle />
-      <RecruitForm />
-      <RecruitCompletedButton />
+      <RecruitForm postId={postId} />
+      <RecruitCompletedButton postId={postId} />
     </RecruitPage>
   );
 };

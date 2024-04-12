@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import useRecruitStore from '@store/useRecruitStore';
 import recruitApi from '@api/biz/recruitApi';
 
-const RecruitCompletedButton = () => {
+const RecruitCompletedButton = ({ postId }) => {
   const nav = useNavigate();
   const { recruitPost } = useRecruitStore();
 
@@ -40,18 +40,38 @@ const RecruitCompletedButton = () => {
 
     // post 요청
     try {
-      const response = await recruitApi.postRecruit(recruitPost);
+      let response;
+      if (postId) {
+        const updateData = {
+          postId,
+          place: recruitPost.place,
+          address: recruitPost.address,
+          participantTotal: recruitPost.participantTotal, // 예제 데이터에서 변경된 부분
+          contents: recruitPost.contents,
+          foodTypeTag: recruitPost.foodTypeTag,
+          ageTag: recruitPost.ageTag,
+          genderTag: recruitPost.genderTag,
+          meetAt: recruitPost.meetAt,
+          closeAt: recruitPost.closeAt,
+        };
+        // 수정
+        response = await recruitApi.updateRecruit(updateData);
+        nav(`/post/${postId}`);
+      } else {
+        // 등록
+        response = await recruitApi.postRecruit(recruitPost);
+        const id = response.data;
+        nav(`/post/${id}`);
+      }
       // 확인용
-      const postId = response.data;
-      nav(`/post/${postId}`);
     } catch (error) {
-      console.error('Failed to create post:', error);
+      console.error('Failed to update/create post:', error);
     }
   };
 
   return (
     <ButtonContainer>
-      <CompletedButton title="작성 완료" onClick={handleClick} />
+      <CompletedButton title={postId ? '수정 완료' : '작성 완료'} onClick={handleClick} />
     </ButtonContainer>
   );
 };

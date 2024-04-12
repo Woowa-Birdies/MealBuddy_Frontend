@@ -13,6 +13,10 @@ export const put = (url, data) => {
   return ApiClient.put(`${API_BASE_URL}${url}`, data);
 };
 
+export const patch = (url, data) => {
+  return ApiClient.patch(`${API_BASE_URL}${url}`, data);
+};
+
 export const del = (url, data) => {
   return ApiClient.delete(`${API_BASE_URL}${url}`, { data });
 };
