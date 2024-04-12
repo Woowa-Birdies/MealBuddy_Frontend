@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom'; // useParams 훅을 임포트
-import useRecruitStore from '@store/useRecruitStore';
+import usePostStore from '@store/usePostStore';
 import styled from 'styled-components';
 import Map from '@/pages/RecruitPost/Map';
 import StatusButton from '@components/ui/Button/StatusButton';
@@ -10,37 +10,39 @@ import showPostApi from '@api/biz/showPostApi';
 import TagButton from '@components/ui/Button/TagButton';
 
 const Post = () => {
-  const { recruitPost, setRecruitPost } = useRecruitStore();
+  const { post, setPost } = usePostStore();
   const { postId } = useParams(); // 현재 경로에서 postId 파라미터를 추출
 
-  const aa = dayjs(recruitPost.meetAt).format('YYYY년 MM월 DD일 dddd A hh:mm');
   useEffect(() => {
     const fetchPost = async () => {
       try {
         const res = await showPostApi.showPost({ postId });
-        setRecruitPost(res.data);
+        // console.log(res.data);    // 확인용
+        setPost(res.data);
       } catch (error) {
         console.error('Failed to fetch post:', error);
       }
     };
 
     fetchPost();
-  }, [postId, setRecruitPost]);
+  }, [postId, setPost]);
+
+  const meeting = dayjs(post.meetAt).format('YYYY년 MM월 DD일 dddd A hh:mm');
 
   return (
     <Container>
-      <StatusButton title={recruitPost.postStatus} />
-      <Typography content={recruitPost.place} size="large" />
+      <StatusButton title={post.postStatus} />
+      <Typography content={post.place} size="large" />
       <TagContainer>
-        <TagButton title={recruitPost.foodTypeTag} type="tag" />
-        <TagButton title={recruitPost.ageTag} type="tag" />
-        <TagButton title={recruitPost.genderTag} type="tag" />
+        <TagButton title={post.foodTypeTag} type="tag" />
+        <TagButton title={post.ageTag} type="tag" />
+        <TagButton title={post.genderTag} type="tag" />
       </TagContainer>
-      <Info>🗓️ {aa}</Info>
-      <Info>👤 {recruitPost.participantTotal}명 모집</Info>
-      <Info>📍 {recruitPost.address}</Info>
+      <Info>🗓️ {meeting}</Info>
+      <Info>👤 {post.participantTotal}명 모집</Info>
+      <Info>📍 {post.address}</Info>
       <Map />
-      <Contents>{recruitPost.contents}</Contents>
+      <Contents>{post.contents}</Contents>
     </Container>
   );
 };
