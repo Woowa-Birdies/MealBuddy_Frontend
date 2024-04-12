@@ -17,6 +17,14 @@ const Post = () => {
   const { postId } = useParams();
   const now = 1;
 
+  const handleCompletionClick = () => {
+    recruitApi.completionRecruit(post.postId);
+  };
+
+  const handleOngoingClick = () => {
+    recruitApi.ongoingRecruit(post.postId);
+  };
+
   const handleEditClick = () => {
     // console.log(post);
     nav(`/recruit/${post.postId}`);
@@ -69,6 +77,8 @@ const Post = () => {
         <EditSection>
           {/* <img src={EditIcon} alt="Edit" /> */}
           {/* {renderDropdown()} */}
+          <CompletionButton onClick={handleCompletionClick}>모집마감하기</CompletionButton>
+          <OngoingButton onClick={handleOngoingClick}>모집재개하기</OngoingButton>
           <EditButton onClick={handleEditClick}>수정하기</EditButton>
           <DeleteButton onClick={handleDeleteClick}>삭제하기</DeleteButton>
         </EditSection>
@@ -120,6 +130,14 @@ const EditSection = styled.div`
   align-self: flex-end;
 `;
 
+const CompletionButton = styled.button`
+  border: 1px solid #000000;
+  cursor: pointer;
+`;
+const OngoingButton = styled.button`
+  border: 1px solid #000000;
+  cursor: pointer;
+`;
 const EditButton = styled.button`
   border: 1px solid #000000;
   cursor: pointer;
