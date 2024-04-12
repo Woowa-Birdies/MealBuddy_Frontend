@@ -16,9 +16,19 @@ const deleteRecruit = async (postId) => {
   return del(`/post/${postId}`);
 };
 
+const completionRecruit = async (postId) => {
+  return patch(`/post/completion/${postId}`);
+};
+
+const ongoingRecruit = async (postId) => {
+  return patch(`/post/ongoing/${postId}`);
+};
+
 export default {
   postRecruit,
   getPost,
   updateRecruit,
   deleteRecruit,
+  completionRecruit,
+  ongoingRecruit,
 };
