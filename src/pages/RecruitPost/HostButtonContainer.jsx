@@ -9,7 +9,7 @@ const HostButtonContainer = () => {
   // const { recruitPost } = useRecruitStore();
   const { post } = usePostStore();
 
-  if (post.status === '모임 종료') {
+  if (post.postStatus === '모임 종료') {
     return <GoReviewButton title="후기 작성" />;
   }
   return (
