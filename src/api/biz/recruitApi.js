@@ -4,8 +4,8 @@ const postRecruit = async (postData) => {
   return post(`/post`, postData);
 };
 
-const getPost = async (params) => {
-  return get(`/post/${params.postId}`);
+const getPost = async (params, userId) => {
+  return get(`/post/${params.postId}?userId=${userId}`);
 };
 
 const updateRecruit = async (postData) => {
