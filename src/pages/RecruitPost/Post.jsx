@@ -15,7 +15,7 @@ const Post = () => {
   const nav = useNavigate();
   const { post, setPost } = usePostStore();
   const { postId } = useParams();
-  const now = 1;
+  const now = 2;
 
   const handleCompletionClick = () => {
     recruitApi.completionRecruit(post.postId);
@@ -36,9 +36,10 @@ const Post = () => {
   };
 
   useEffect(() => {
+    // console.log(post.askStatus);
     const fetchPost = async () => {
       try {
-        const res = await recruitApi.getPost({ postId });
+        const res = await recruitApi.getPost({ postId }, `${now}`);
         setPost(res.data);
       } catch (error) {
         console.error('Failed to fetch post:', error);
@@ -46,7 +47,7 @@ const Post = () => {
     };
 
     fetchPost();
-  }, [postId, setPost]);
+  }, [postId, setPost, post.askStatus]);
 
   const meeting = dayjs(post.meetAt).format('YYYY년 MM월 DD일 dddd A hh:mm');
 
@@ -73,6 +74,7 @@ const Post = () => {
 
   return (
     <Container>
+      {/* {console.log(post)} */}
       {now === post.userId && (
         <EditSection>
           {/* <img src={EditIcon} alt="Edit" /> */}
