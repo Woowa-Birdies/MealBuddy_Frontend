@@ -40,22 +40,15 @@ const RequestContent = ({ information }) => {
     return new Intl.DateTimeFormat('ko-KR', options).format(date);
   };
 
-  /* postStatus별 버튼 구성 변경 */
-  const renderButtons = (postStatus) => {
-    switch (postStatus) {
-      case '모집중':
+  /* askStatus별 버튼 구성 변경 */
+  const renderButtons = (askStatus) => {
+    switch (askStatus) {
+      case '대기':
+        return <Btn title="신청 취소하기" color="contentTertiary" />;
+      case '수락':
         return (
           <>
-            <Btn title="모집 마감하기" color="contentTertiary" />
-            <Btn title="신청자 보기" color="secondary" />
-            <Btn title="냠냠 토크방" color="primary" />
-          </>
-        );
-      case '모집 완료':
-        return (
-          <>
-            <Btn title="모집 재개하기" color="contentTertiary" />
-            <Btn title="신청자 보기" color="secondary" />
+            <Btn title="신청 취소하기" color="contentTertiary" />
             <Btn title="냠냠 토크방" color="primary" />
           </>
         );
@@ -66,6 +59,17 @@ const RequestContent = ({ information }) => {
             <Btn title="냠냠 토크방" color="primary" />
           </>
         );
+    }
+  };
+
+  const postStatusTag = (postStatus) => {
+    switch (postStatus) {
+      case '모집중':
+        return <TagButton title="모집중" type="status" color="primary" />;
+      case '모집 마감':
+        return <TagButton title="모집 마감" type="status" color="malachite" />;
+      default:
+        return <TagButton title="모집 종료" type="status" color="contentPrimary" />;
     }
   };
 
@@ -82,9 +86,12 @@ const RequestContent = ({ information }) => {
                 <Paragraphy content="동네" size="medium" color="contentTertiary" />
                 {item.postStatus === '모집중' && <TimeLimit closeAt={item.closeAt} />}
               </TopSection>
-              <Label content={item.place} size="xl" />
+              <MidSection>
+                <Label content={item.place} size="xl" />
+                {postStatusTag(item.postStatus)}
+              </MidSection>
               <TagSection>
-                <TagButton title={item.foodTypeTag} type="tag" />
+                <TagButton title={item.foodType} type="tag" />
                 <TagButton title={item.genderTag} type="tag" />
                 <TagButton title={item.ageTag} type="tag" />
               </TagSection>
@@ -98,7 +105,7 @@ const RequestContent = ({ information }) => {
               <InfoSection>
                 <Label content={item.address} size="large" />
               </InfoSection>
-              <BtnSection>{renderButtons(item.postStatus)}</BtnSection>
+              <BtnSection>{renderButtons(item.askStatus)}</BtnSection>
             </InnerBox>
           </ListItem>
         ))
@@ -185,4 +192,11 @@ const TopSection = styled.div`
   width: 100%;
   align-items: center;
   padding-top: 5px;
+`;
+
+const MidSection = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
 `;

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Tabs } from 'antd';
-import getAskList from '@api/biz/gatherApi';
+import askApi from '@api/biz/askApi';
 import styled from 'styled-components';
 import RequestTitle from '@/pages/UserRequestStatus/RequestTitle';
 import RequestContent from '@/pages/UserRequestStatus/RequestContent';
@@ -13,15 +13,15 @@ const MyTabs = () => {
     const loadData = async () => {
       try {
         const type = parseInt(activeKey, 10);
-        const response = await getAskList.getAskList({ userId: 2, type });
+        const response = await askApi.getmyAskList({ userId: 1, type });
 
         let data = [];
         if (type === 0) {
-          data = response.data.ongoing || [];
+          data = response.data.waitingOrRejected || [];
         } else if (type === 1) {
-          data = response.data.completion || [];
+          data = response.data.accepted || [];
         } else {
-          data = response.data.closed || [];
+          data = response.data.participated || [];
         }
         setInformation(data);
         console.log('response', data, 'tab', activeKey);
