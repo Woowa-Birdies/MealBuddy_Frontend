@@ -1,58 +1,111 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Label from '@components/ui/Label/Label';
-import Typography from '@components/ui/Typography/Typography';
+import ListexpandBtn from '@components/ui/Button/ListexpandBtn';
+import TimeLimit from '@components/ui/TimeLimit/TimeLimit';
 import Paragraphy from '@components/ui/Paragraphy/Paragraphy';
 import TagButton from '@components/ui/Button/TagButton';
-import Btn from '@/components/ui/Button/ActivityButton';
-// 입력 데이터 형식
-// 제목, (분류, 성별, 나이), (모임 날짜, 인원수), (장소, 주소)
-// "menuCategory": "한식", // 메뉴 종류
-// "address": "서울특별시 ~~", // 주소
-// "place": "동대문 엽기 떡볶이", // 식당 이름
-// "participantTotal": 4, // 모집 인원
-// "participantCount": 2, // 수락된 인원
-// "postStatus": "모집중", // 모집 상태
-// type : 0, 1, 2 (0: 모집중 / 1: 모집 완료 / 2: 모임 종료)
-// "requestStatus": "대기", // 신청 상태
-// "meetAt": "2050-01-01 pm 12:30", // 만나는 시간
-// "closeAt": "2050-01-01 pm 12:00", // 모집 마감 시간
-// "createAt": "2049-12-30 pm 12:00", // 글 작성 일시
+import Btn from '@components/ui/Button/UserActivityButton';
+
 const ActivityContent = ({ information }) => {
+  /* 3개씩 모집글 아이템 끊어보이기 */
+  const initialDisplayCount = 3;
+  const [displayedCount, setDisplayedCount] = useState(initialDisplayCount);
+
+  const handleToggleDisplay = () => {
+    if (displayedCount >= information.length) {
+      setDisplayedCount(initialDisplayCount);
+      window.scrollTo({
+        top: 0,
+      });
+    } else {
+      setDisplayedCount(displayedCount + 3);
+    }
+  };
+
+  const isExpandable = information.length > initialDisplayCount;
+  const isExpanded = displayedCount < information.length;
+
+  /* 날짜 변환 */
+  const formatDate = (dateString) => {
+    const options = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    };
+    const date = new Date(dateString);
+    return new Intl.DateTimeFormat('ko-KR', options).format(date);
+  };
+
+  /* postStatus별 버튼 구성 변경 */
+  const renderButtons = (postStatus) => {
+    switch (postStatus) {
+      case '모집중':
+        return (
+          <>
+            <Btn title="모집 마감하기" color="contentTertiary" />
+            <Btn title="신청자 보기" color="secondary" />
+            <Btn title="냠냠 토크방" color="primary" />
+          </>
+        );
+      case '모집 완료':
+        return (
+          <>
+            <Btn title="모집 재개하기" color="contentTertiary" />
+            <Btn title="신청자 보기" color="secondary" />
+            <Btn title="냠냠 토크방" color="primary" />
+          </>
+        );
+      default:
+        return (
+          <>
+            <Btn title="후기 작성하기" color="contentPrimary" />
+            <Btn title="냠냠 토크방" color="primary" />
+          </>
+        );
+    }
+  };
+
   return (
     <BoxWrapper>
-      {information.map((item) => (
-        <ListItem key={item.id}>
-          <Thumnail />
-          <InnerBox>
-            <TopSection>
-              <Paragraphy content="동네" size="medium" color="contentTertiary" />
-              <Typography content="남은 모집 시간 00 ~ 00" size="small" color="primary" />
-            </TopSection>
-            <Label content={item.title} size="xl" />
-            <TagSection>
-              <TagButton title={item.menuCategory} type="tag" />
-              <TagButton title={item.gender} type="tag" />
-              <TagButton title={item.age} type="tag" />
-            </TagSection>
-            <InfoSection>
-              <Label content={item.meetAt} size="large" />
-              <Label
-                content={`인원수 : ${item.participantCount} / ${item.participantTotal}`}
-                size="large"
-              />
-            </InfoSection>
-            <InfoSection>
-              <Label content={item.place} size="large" />
-              <Label content={item.address} size="large" />
-            </InfoSection>
-            <BtnSection>
-              <Btn title="수정하기" color="contentTertiary" />
-              <Btn title="냠냠 토크방" color="primary" />
-            </BtnSection>
-          </InnerBox>
-        </ListItem>
-      ))}
+      {information.length === 0 ? (
+        <Paragraphy content="등록된 글이 없습니다." size="large" color="contentTertiary" />
+      ) : (
+        information.slice(0, displayedCount).map((item) => (
+          <ListItem key={item.postId}>
+            <Thumnail />
+            <InnerBox>
+              <TopSection>
+                <Paragraphy content="동네" size="medium" color="contentTertiary" />
+                {item.postStatus === '모집중' && <TimeLimit closeAt={item.closeAt} />}
+              </TopSection>
+              <Label content={item.place} size="xl" />
+              <TagSection>
+                <TagButton title={item.foodTypeTag} type="tag" />
+                <TagButton title={item.genderTag} type="tag" />
+                <TagButton title={item.ageTag} type="tag" />
+              </TagSection>
+              <InfoSection>
+                <Label content={`모임 날짜 : ${formatDate(item.meetAt)}`} size="large" />
+                <Label
+                  content={`인원수 : ${item.participantCount} / ${item.participantTotal}`}
+                  size="large"
+                />
+              </InfoSection>
+              <InfoSection>
+                <Label content={item.address} size="large" />
+              </InfoSection>
+              <BtnSection>{renderButtons(item.postStatus)}</BtnSection>
+            </InnerBox>
+          </ListItem>
+        ))
+      )}
+      {isExpandable && (
+        <ListexpandBtn isExpanded={!isExpanded} toggleDisplay={handleToggleDisplay} />
+      )}
     </BoxWrapper>
   );
 };

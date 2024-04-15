@@ -1,92 +1,63 @@
+import { useState, useEffect } from 'react';
 import { Tabs } from 'antd';
-import { useLocation } from 'react-router-dom';
+import gatherApi from '@api/biz/gatherApi';
 import styled from 'styled-components';
 import ActivityTitle from '@/pages/UserActivity/ActivityTitle';
-import ActivityTab from '@/pages/UserActivity/ActivityTab';
+import ActivityContent from '@/pages/UserActivity/ActivityContent';
 
 const MyTabs = () => {
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const tab = searchParams.get('tab') || '1'; // URL에서 'tab' 쿼리 파라미터를 가져옴, 기본값은 '1' -> 추후 연결
-  const information = [
-    {
-      id: 0,
-      title: '제목',
-      menuCategory: '분식',
-      gender: '남녀무관',
-      age: '30대',
-      place: '동대문 엽기 떡볶이',
-      address: '서울특별시 ~~',
-      participantTotal: 4,
-      participantCount: 2,
-      postStatus: 0, // 모집중
-      meetAt: '2050-01-01 pm 12:30',
-      closeAt: '2050-01-01 pm 12:00',
-    },
-    {
-      id: 1,
-      title: '제목',
-      menuCategory: '분식',
-      gender: '남녀무관',
-      age: '30대',
-      place: '동대문 엽기 떡볶이',
-      address: '서울특별시 ~~',
-      participantTotal: 4,
-      participantCount: 2,
-      postStatus: 2, // 모임 종료
-      meetAt: '2050-01-01 pm 12:30',
-      closeAt: '2050-01-01 pm 12:00',
-    },
-    {
-      id: 2,
-      title: '제목',
-      menuCategory: '분식',
-      gender: '남녀무관',
-      age: '30대',
-      place: '동대문 엽기 떡볶이',
-      address: '서울특별시 ~~',
-      participantTotal: 4,
-      participantCount: 2,
-      postStatus: 0, // 모집중
-      meetAt: '2050-01-01 pm 12:30',
-      closeAt: '2050-01-01 pm 12:00',
-    },
-    {
-      id: 3,
-      title: '제목',
-      menuCategory: '분식',
-      gender: '남녀무관',
-      age: '30대',
-      place: '동대문 엽기 떡볶이',
-      address: '서울특별시 ~~',
-      participantTotal: 4,
-      participantCount: 2,
-      postStatus: 1, // 모집 완료
-      meetAt: '2050-01-01 pm 12:30',
-      closeAt: '2050-01-01 pm 12:00',
-    },
-  ];
+  const [information, setInformation] = useState([]);
+  const [activeKey, setActiveKey] = useState('0');
+
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const type = parseInt(activeKey, 10);
+        const response = await gatherApi.getUserPostList({ userId: 2, type });
+
+        let data = [];
+        if (type === 0) {
+          data = response.data.ongoing || [];
+        } else if (type === 1) {
+          data = response.data.completion || [];
+        } else {
+          data = response.data.closed || [];
+        }
+        setInformation(data);
+        console.log('response', data, 'tab', activeKey);
+      } catch (error) {
+        console.error('Failed to load data', error);
+      }
+    };
+
+    loadData();
+  }, [activeKey]);
+
+  const onTabChange = (key) => {
+    setActiveKey(key);
+  };
+
   const items = [
     {
       label: '모집중',
-      key: '1',
-      children: <ActivityTab information={information} />,
+      key: '0',
+      children: <ActivityContent information={information} />,
     },
     {
       label: '모집 완료',
-      key: '2',
-      children: <ActivityTab information={information} />,
+      key: '1',
+      children: <ActivityContent information={information} />,
     },
     {
-      label: '신청한 내역',
-      key: '3',
-      children: <ActivityTab information={information} />,
+      label: '종료된 모임',
+      key: '2',
+      children: <ActivityContent information={information} />,
     },
   ];
   return (
     <PageWrapper>
       <ActivityTitle />
-      <CustomTabs defaultActiveKey={tab} items={items} />
+      <CustomTabs defaultActiveKey="0" items={items} onTabClick={onTabChange} />
     </PageWrapper>
   );
 };

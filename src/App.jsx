@@ -19,6 +19,7 @@ import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import UserVerification from '@/pages/UserVerification';
 import UserActivity from '@/pages/UserActivity';
+import ApplicantsList from '@/pages/UserActivity/ApplicantCard';
 import Chat from '@/pages/Chat';
 
 const App = () => {
@@ -48,6 +49,7 @@ const App = () => {
           <Route path={ROUTES.REPORT} element={<Report />} />
           <Route path={ROUTES.VERIFICATION} element={<UserVerification />} />
           <Route path={ROUTES.USERACTIVITY} element={<UserActivity />} />
+          <Route path={ROUTES.APPLICANTSLIST} element={<ApplicantsList />} />
           <Route path={ROUTES.CHAT} element={<Chat />} />
         </Routes>
       </Base>

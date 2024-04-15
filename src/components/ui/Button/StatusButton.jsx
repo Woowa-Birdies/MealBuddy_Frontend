@@ -17,7 +17,7 @@ StatusButton.propTypes = {
 export default StatusButton;
 
 const StyledButton = styled.button`
-  width: 74px;
+  width: fit-content;
   height: 40px;
   display: inline-flex;
   padding: 8px 16px;

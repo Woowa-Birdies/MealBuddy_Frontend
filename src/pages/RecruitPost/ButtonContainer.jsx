@@ -1,16 +1,18 @@
+import React from 'react';
 import styled from 'styled-components';
-import EditButton from '@components/ui/Button/EditButton';
-import { useNavigate } from 'react-router-dom';
-import { ROUTES } from '@enums/CommonEnum';
+import usePostStore from '@store/usePostStore';
+import HostButtonContainer from '@/pages/RecruitPost/HostButtonContainer';
+import GuestButtonContainer from '@/pages/RecruitPost/GuestButtonContainer';
 
 const ButtonContainer = () => {
-  const nav = useNavigate();
-  const handleClick = () => {
-    nav(ROUTES.RECRUIT);
-  };
+  const now = 2;
+  const { post } = usePostStore();
+  const writer = post.userId;
+
+  // console.log(now, writer);     // 확인용
   return (
     <Container>
-      <EditButton title="수정" onClick={handleClick} />
+      {now === writer ? <HostButtonContainer /> : <GuestButtonContainer userId={now} />}
     </Container>
   );
 };
@@ -20,4 +22,5 @@ export default ButtonContainer;
 const Container = styled.div`
   display: flex;
   justify-content: center;
+  gap: 30px;
 `;
