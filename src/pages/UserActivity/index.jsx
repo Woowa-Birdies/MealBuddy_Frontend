@@ -24,7 +24,7 @@ const MyTabs = () => {
           data = response.data.closed || [];
         }
         setInformation(data);
-        console.log('response', data, 'tab', activeKey);
+        // console.log('response', data, 'tab', activeKey);
       } catch (error) {
         console.error('Failed to load data', error);
       }
