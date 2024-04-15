@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Label from '@components/ui/Label/Label';
@@ -9,6 +10,7 @@ import TagButton from '@components/ui/Button/TagButton';
 import Btn from '@components/ui/Button/UserActivityButton';
 
 const RequestContent = ({ information }) => {
+  const nav = useNavigate();
   /* 3개씩 모집글 아이템 끊어보이기 */
   const initialDisplayCount = 3;
   const [displayedCount, setDisplayedCount] = useState(initialDisplayCount);
@@ -62,6 +64,10 @@ const RequestContent = ({ information }) => {
     }
   };
 
+  const handleClick = (postId) => {
+    nav(`/post/${postId}`);
+  };
+
   const postStatusTag = (postStatus) => {
     switch (postStatus) {
       case '모집중':
@@ -79,7 +85,7 @@ const RequestContent = ({ information }) => {
         <Paragraphy content="등록된 글이 없습니다." size="large" color="contentTertiary" />
       ) : (
         information.slice(0, displayedCount).map((item) => (
-          <ListItem key={item.postId}>
+          <ListItem key={item.postId} onClick={() => handleClick(item.postId)}>
             <Thumnail />
             <InnerBox>
               <TopSection>
@@ -150,6 +156,7 @@ const ListItem = styled.div`
   display: flex;
   flex-direction: row;
   gap: 20px;
+  cursor: pointer;
 `;
 
 const TagSection = styled.div`
