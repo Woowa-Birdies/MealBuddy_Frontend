@@ -20,7 +20,7 @@ const GuestButtonContainer = ({ userId }) => {
       // console.log(askData);
 
       // 데이터 생성 요청
-      await askApi.postmyRequest(askData);
+      await askApi.ask(askData);
     } catch (error) {
       console.error('Error in processing:', error);
     }

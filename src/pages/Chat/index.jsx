@@ -1,15 +1,17 @@
+import ChatList from '@/pages/Chat/ChatList';
+import ChatRoom from '@/pages/Chat/ChatRoom';
 import Typography from '@components/ui/Typography/Typography';
 import styled from 'styled-components';
 
 const Chat = () => {
   return (
     <PageWrapper>
-      <ChatTitle>
+      <PageTitle>
         <Typography content="냠냠 토크" size="large" />
-      </ChatTitle>
+      </PageTitle>
       <ChatWrapper>
-        <ChatList>123</ChatList>
-        <ChatType>123</ChatType>
+        <ChatList />
+        <ChatRoom />
       </ChatWrapper>
     </PageWrapper>
   );
@@ -19,31 +21,17 @@ export default Chat;
 
 const PageWrapper = styled.div`
   width: 100%;
-  padding: 120px 120px 120px 120px;
+  padding: 90px 160px 160px 90px;
 `;
 
-const ChatTitle = styled.div`
+const PageTitle = styled.div`
   text-align: center;
 `;
 
 const ChatWrapper = styled.div`
   width: 100%;
-  margin-top: 80px;
-  height: 950px;
+  margin-top: 60px;
+  min-height: 950px;
   display: flex;
   flex-direction: row;
-`;
-
-const ChatList = styled.div`
-  flex: 0.3;
-  border: ${({ theme }) => theme.border.borderTransparent};
-  border-radius: 20px 0 0 20px;
-  height: 100%;
-`;
-
-const ChatType = styled.div`
-  flex: 0.7;
-  border: ${({ theme }) => theme.border.borderTransparent};
-  border-radius: 0 20px 20px 0;
-  height: 100%;
 `;
