@@ -30,7 +30,7 @@ SelectButton.defaultProps = {
 SelectButton.propTypes = {
   title: PropTypes.string.isRequired,
   onClick: PropTypes.func,
-  type: PropTypes.oneOf(['recruit', 'tag', 'ghost', 'manner', 'request', 'response']),
+  type: PropTypes.oneOf(['recruit', 'tag', 'ghost', 'manner', 'request', 'response', 'del']),
 };
 
 export default SelectButton;
@@ -134,7 +134,7 @@ const StyledButton = styled.button`
   }};
 
   background: ${({ theme, isClicked, selected, type }) => {
-    if (type === 'recruit') {
+    if (type === 'recruit' || type === 'del') {
       return selected ? theme.color.secondary : theme.border.borderTransparent;
     }
     if (type === 'ghost') {
@@ -159,7 +159,7 @@ const StyledButton = styled.button`
     if (type === 'manner') {
       return isClicked ? theme.color.contentWhite : theme.color.content;
     }
-    if (type === 'request') {
+    if (type === 'request' || type === 'del') {
       return theme.color.contentPrimary;
     }
     return theme.color.contentWhite;
@@ -181,6 +181,9 @@ const StyledButton = styled.button`
       }
       if (type === 'response') {
         return theme.color.contentWhite;
+      }
+      if (type === 'del') {
+        return theme.color.primary;
       }
       return theme.color.secondary;
     }};
