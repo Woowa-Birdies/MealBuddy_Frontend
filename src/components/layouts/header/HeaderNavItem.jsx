@@ -1,23 +1,23 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Dropdown, Typography } from 'antd';
 import styled from 'styled-components';
 import TitleTypography from '@components/ui/Typography/Typography';
 import useNavStore from '@store/useNavStore';
+import { ROUTES } from '@enums/CommonEnum';
 
 const HeaderNavItem = () => {
+  const nav = useNavigate();
   const { menus } = useNavStore();
   const [hoveredMenu, setHoveredMenu] = useState(null);
 
   const handleMenuClick = ({ key }) => {
     switch (key) {
       case 'ask':
-        console.log('신청');
-        // nav();
+        nav(ROUTES.USERREQUESTSTATUS);
         break;
       case 'recruit':
-        console.log('모집');
-        // nav();
+        nav(ROUTES.USERACTIVITY);
         break;
       default:
         break;
