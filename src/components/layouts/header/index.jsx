@@ -45,6 +45,7 @@ const StyledHeader = styled.header`
     -webkit-box-flex: 0;
     flex: none;
     height: 66px;
+    padding: 0 0 0 17vw;
 
     a {
       display: block;
@@ -62,5 +63,4 @@ const HeaderInner = styled.div`
   display: flex;
   align-items: flex-start;
   margin: 0 auto;
-  padding: 0 240.75px;
 `;

@@ -1,23 +1,24 @@
-import Typography from '@components/ui/Typography/Typography';
+import styled from 'styled-components';
+import FilterContainer from '@/pages/Home/FilterContainer';
+import Deadline from '@/pages/Home/Deadline';
+import List from '@/pages/Home/List';
 
 const Home = () => {
-  const generateKey = (prefix, index) => `${prefix}-${new Date().getTime()}-${index}`;
-
   return (
-    <div>
-      홈페이지
-      {/* 테스트용 */}
-      {Array.from({ length: 100 }).map((_, index) => (
-        <div
-          key={generateKey('typography', index)}
-          style={{ display: 'flex', flexDirection: 'column' }}
-        >
-          <Typography content="홈입니다홈입니다홈입니다홈입니다홈입니다홈입니다홈입니다" />
-        </div>
-      ))}
-      {/* 테스트용 */}
-    </div>
+    <Container>
+      <FilterContainer />
+      <Deadline />
+      <List />
+    </Container>
   );
 };
 
 export default Home;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 150px;
+  gap: 100px;
+`;

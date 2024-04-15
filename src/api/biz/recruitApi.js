@@ -8,6 +8,10 @@ const getPost = async (params, userId) => {
   return get(`/post/${params.postId}?userId=${userId}`);
 };
 
+const getEdit = async (params) => {
+  return get(`/post/${params.postId}`);
+};
+
 const updateRecruit = async (postData) => {
   return patch(`/post`, postData);
 };
@@ -27,6 +31,7 @@ const ongoingRecruit = async (postId) => {
 export default {
   postRecruit,
   getPost,
+  getEdit,
   updateRecruit,
   deleteRecruit,
   completionRecruit,

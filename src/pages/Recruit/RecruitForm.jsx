@@ -23,7 +23,7 @@ const RecruitForm = ({ postId }) => {
     if (postId) {
       const fetchPost = async () => {
         try {
-          const res = await recruitApi.getPost({ postId });
+          const res = await recruitApi.getEdit({ postId });
           setRecruitPost(res.data);
         } catch (error) {
           console.error('Failed to fetch post:', error);

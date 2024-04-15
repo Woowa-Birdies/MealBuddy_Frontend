@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { DatePicker, TimePicker, Space } from 'antd';
 import dayjs from 'dayjs';
 import useRecruitStore from '@store/useRecruitStore';
@@ -8,9 +8,8 @@ const timeFormat = 'A hh:mm';
 
 // localdatetime
 function formatToLocalDateTime(dateTime) {
-  const TIME_ZONE = 9 * 60 * 60 * 1000; // 9시간
   const date = new Date(dateTime);
-  const localDateTime = new Date(date.getTime() + TIME_ZONE).toISOString();
+  const localDateTime = new Date(date.getTime()).toISOString();
   return localDateTime;
 }
 
@@ -22,6 +21,13 @@ const MeetAtField = () => {
   const [selectedTime, setSelectedTime] = useState(
     recruitPost.meetAt ? dayjs(recruitPost.meetAt) : dayjs(),
   );
+
+  useEffect(() => {
+    if (recruitPost.meetAt) {
+      setSelectedDate(dayjs(recruitPost.meetAt));
+      setSelectedTime(dayjs(recruitPost.meetAt));
+    }
+  }, [recruitPost.meetAt]);
 
   const handleDateChange = (date) => {
     const combinedDateTime = dayjs(date).hour(selectedTime.hour()).minute(selectedTime.minute());
