@@ -1,7 +1,10 @@
-import { post, patch } from '@/api/common/apiUtils';
+import { get, post, patch } from '@/api/common/apiUtils';
 
-const ask = async (askData) => {
+const postmyRequest = async (askData) => {
   return post(`/ask`, askData);
+};
+const getmyAskList = async (params) => {
+  return get(`/ask/list/${params.userId}?type=${params.type}`);
 };
 
 const updateAskStatus = async (updateData) => {
@@ -9,6 +12,7 @@ const updateAskStatus = async (updateData) => {
 };
 
 export default {
-  ask,
+  postmyRequest,
+  getmyAskList,
   updateAskStatus,
 };
