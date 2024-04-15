@@ -2,7 +2,11 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 const StatusButton = ({ title, onClick }) => {
-  return <StyledButton onClick={onClick}>{title}</StyledButton>;
+  return (
+    <StyledButton title={title} onClick={onClick}>
+      {title}
+    </StyledButton>
+  );
 };
 
 StatusButton.defaultProps = {
@@ -23,18 +27,13 @@ const StyledButton = styled.button`
   padding: 8px 16px;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: center;P
   gap: 10px;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
   line-height: 150%;
   border-radius: 20px;
-  background: ${({ theme }) => theme.color.primary};
+  background: ${({ theme, title }) => (title === '모집중' ? theme.color.primary : 'black')};
   color: ${({ theme }) => theme.color.contentWhite};
-
-  // &:hover {
-  //   background: ${({ theme }) => theme.color.secondary};
-  //   color: ${({ theme }) => theme.color.contentWhite};
-  // }
 `;
