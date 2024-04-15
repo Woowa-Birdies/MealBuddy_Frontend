@@ -45,7 +45,7 @@ const Map = () => {
 export default Map;
 
 const Container = styled.div`
-  width: 756px;
+  width: 50vw;
   height: 426px;
   display: flex;
   flex-direction: column;
