@@ -12,8 +12,8 @@ const ContentsField = () => {
   return (
     <TextArea
       placeholder="모임 내용을 자세히 소개해주세요"
-      onChange={handleDetailChange} // onBlur에서 onChange로 변경
-      value={recruitPost.contents} // TextArea의 값을 recruitPost.contents로 설정
+      onChange={handleDetailChange}
+      value={recruitPost.contents}
       autoSize={{ minRows: 10 }}
     />
   );

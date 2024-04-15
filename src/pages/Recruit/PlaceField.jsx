@@ -4,23 +4,36 @@ import useRecruitStore from '@store/useRecruitStore';
 
 const PlaceField = () => {
   const { recruitPost, setRecruitPost } = useRecruitStore();
-  const [inputValue, setInputValue] = useState('');
   const [options, setOptions] = useState([]);
-  const city = '강릉';
+  // const city = '강릉';
 
   useEffect(() => {
     // 디바운싱을 위한 타이머 설정
     const timer = setTimeout(() => {
-      if (inputValue.trim()) {
+      if (recruitPost.place.trim()) {
         const ps = new window.kakao.maps.services.Places();
-        ps.keywordSearch(`${city} ${inputValue}`, (data, status) => {
+        // ps.keywordSearch(`${city} ${inputValue}`, (data, status) => {
+        ps.keywordSearch(`${recruitPost.place}`, (data, status) => {
           if (status === window.kakao.maps.services.Status.OK) {
             const newOptions = data
-              .filter(
-                (place) =>
-                  (place.category_group_code === 'FD6' || place.category_group_code === 'CE7') &&
-                  place.place_name.includes(inputValue),
-              )
+              .filter((place) => {
+                if (recruitPost.foodTypeTag === '') {
+                  return (
+                    (place.category_group_code === 'CE7' || place.category_group_code === 'FD6') &&
+                    place.place_name.includes(recruitPost.place)
+                  );
+                }
+                if (recruitPost.foodTypeTag === '카페') {
+                  return (
+                    place.category_group_code === 'CE7' &&
+                    place.place_name.includes(recruitPost.place)
+                  );
+                }
+                return (
+                  place.category_group_code === 'FD6' &&
+                  place.place_name.includes(recruitPost.place)
+                );
+              })
               .slice(0, 6)
               .map((place) => ({
                 value: place.place_name,
@@ -40,21 +53,23 @@ const PlaceField = () => {
 
     // 컴포넌트 언마운트 또는 inputValue 변경 시 타이머 클린업
     return () => clearTimeout(timer);
-  }, [inputValue, city]);
+  }, [recruitPost.place, recruitPost.foodTypeTag]);
+  // }, [inputValue, city, recruitPost.foodTypeTag]);
 
   const onSelect = (value, option) => {
-    setInputValue(value);
+    // recruitPost 상태 전체를 업데이트
     setRecruitPost({ ...recruitPost, place: value, address: option.address });
   };
 
   const handleSearch = (value) => {
-    setInputValue(value);
+    // 상태 업데이트를 위해 place 필드만 변경
+    setRecruitPost({ ...recruitPost, place: value });
   };
 
   return (
     <AutoComplete
       style={{ width: '100%' }}
-      value={inputValue}
+      value={recruitPost.place}
       options={options}
       onSelect={onSelect}
       onSearch={handleSearch}
