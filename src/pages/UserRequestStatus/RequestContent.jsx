@@ -1,14 +1,17 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Label from '@components/ui/Label/Label';
 import ListexpandBtn from '@components/ui/Button/ListexpandBtn';
 import TimeLimit from '@components/ui/TimeLimit/TimeLimit';
+import dayjs from 'dayjs';
 import Paragraphy from '@components/ui/Paragraphy/Paragraphy';
 import TagButton from '@components/ui/Button/TagButton';
 import Btn from '@components/ui/Button/UserActivityButton';
 
 const RequestContent = ({ information }) => {
+  const nav = useNavigate();
   /* 3개씩 모집글 아이템 끊어보이기 */
   const initialDisplayCount = 3;
   const [displayedCount, setDisplayedCount] = useState(initialDisplayCount);
@@ -29,37 +32,33 @@ const RequestContent = ({ information }) => {
 
   /* 날짜 변환 */
   const formatDate = (dateString) => {
-    const options = {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-    };
-    const date = new Date(dateString);
-    return new Intl.DateTimeFormat('ko-KR', options).format(date);
+    return dayjs(dateString).format('YYYY년 MM월 DD일 dddd A hh:mm');
   };
 
   /* askStatus별 버튼 구성 변경 */
-  const renderButtons = (askStatus) => {
+  const renderButtons = ({ askStatus, askId }) => {
     switch (askStatus) {
       case '대기':
-        return <Btn title="신청 취소하기" color="contentTertiary" />;
+        return <Btn title="신청 취소하기" action="cancel" propData={askId} />;
       case '수락':
         return (
           <>
-            <Btn title="신청 취소하기" color="contentTertiary" />
-            <Btn title="냠냠 토크방" color="primary" />
+            <Btn title="신청 취소하기" action="cancel" propData={askId} />
+            <Btn title="냠냠 토크방" action="chat" />
           </>
         );
       default:
         return (
           <>
-            <Btn title="후기 작성하기" color="contentPrimary" />
-            <Btn title="냠냠 토크방" color="primary" />
+            <Btn title="후기 작성하기" action="review" />
+            <Btn title="냠냠 토크방" action="chat" />
           </>
         );
     }
+  };
+
+  const handleClick = (postId) => {
+    nav(`/post/${postId}`);
   };
 
   const postStatusTag = (postStatus) => {
@@ -79,7 +78,7 @@ const RequestContent = ({ information }) => {
         <Paragraphy content="등록된 글이 없습니다." size="large" color="contentTertiary" />
       ) : (
         information.slice(0, displayedCount).map((item) => (
-          <ListItem key={item.postId}>
+          <ListItem key={item.postId} onClick={() => handleClick(item.postId)}>
             <Thumnail />
             <InnerBox>
               <TopSection>
@@ -105,7 +104,9 @@ const RequestContent = ({ information }) => {
               <InfoSection>
                 <Label content={item.address} size="large" />
               </InfoSection>
-              <BtnSection>{renderButtons(item.askStatus)}</BtnSection>
+              <BtnSection>
+                {renderButtons({ askStatus: item.askStatus, askId: item.askId })}
+              </BtnSection>
             </InnerBox>
           </ListItem>
         ))
@@ -122,7 +123,7 @@ export default RequestContent;
 RequestContent.propTypes = {
   information: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       title: PropTypes.string,
       menuCategory: PropTypes.string,
       gender: PropTypes.string,
@@ -131,7 +132,7 @@ RequestContent.propTypes = {
       address: PropTypes.string,
       participantTotal: PropTypes.number,
       participantCount: PropTypes.number,
-      postStatus: PropTypes.number,
+      postStatus: PropTypes.string,
       meetAt: PropTypes.string,
       closeAt: PropTypes.string,
     }),
@@ -150,6 +151,7 @@ const ListItem = styled.div`
   display: flex;
   flex-direction: row;
   gap: 20px;
+  cursor: pointer;
 `;
 
 const TagSection = styled.div`

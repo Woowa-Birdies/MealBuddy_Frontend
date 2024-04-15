@@ -1,4 +1,4 @@
-import { get, post, patch } from '@/api/common/apiUtils';
+import { get, post, patch, del } from '@/api/common/apiUtils';
 
 const postmyRequest = async (askData) => {
   return post(`/ask`, askData);
@@ -11,8 +11,13 @@ const updateAskStatus = async (updateData) => {
   return patch(`/ask`, updateData);
 };
 
+const deleteAsk = async (askId) => {
+  return del(`/ask/${askId}`);
+};
+
 export default {
   postmyRequest,
   getmyAskList,
   updateAskStatus,
+  deleteAsk,
 };

@@ -27,7 +27,7 @@ const StyledButton = styled.button`
   padding: 8px 16px;
   flex-direction: column;
   justify-content: center;
-  align-items: center;P
+  align-items: center;
   gap: 10px;
   font-size: 16px;
   font-style: normal;

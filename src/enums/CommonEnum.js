@@ -46,6 +46,6 @@ export const ROUTES = Object.freeze({
   VERIFICATION: '/verification',
   USERACTIVITY: '/myactivity',
   USERREQUESTSTATUS: '/myrequest',
-  APPLICANTSLIST: '/applicantslist',
+  APPLICANTSLIST: '/applicantslist/:postId',
   CHAT: '/chat',
 });
