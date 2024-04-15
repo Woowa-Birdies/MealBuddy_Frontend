@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { DatePicker, TimePicker, Space } from 'antd';
 import dayjs from 'dayjs';
 import useRecruitStore from '@store/useRecruitStore';
@@ -7,9 +7,8 @@ const dateFormat = 'YYYY년 MM월 DD일';
 const timeFormat = 'A hh:mm';
 
 function formatToLocalDateTime(dateTime) {
-  const TIME_ZONE = 9 * 60 * 60 * 1000; // 9시간
   const date = new Date(dateTime);
-  const localDateTime = new Date(date.getTime() + TIME_ZONE).toISOString();
+  const localDateTime = new Date(date.getTime()).toISOString();
   return localDateTime;
 }
 
@@ -21,6 +20,13 @@ const CloseAtField = () => {
   const [selectedTime, setSelectedTime] = useState(
     recruitPost.closeAt ? dayjs(recruitPost.closeAt) : dayjs(),
   );
+
+  useEffect(() => {
+    if (recruitPost.closeAt) {
+      setSelectedDate(dayjs(recruitPost.closeAt));
+      setSelectedTime(dayjs(recruitPost.closeAt));
+    }
+  }, [recruitPost.closeAt]);
 
   const handleDateChange = (date) => {
     if (date) {

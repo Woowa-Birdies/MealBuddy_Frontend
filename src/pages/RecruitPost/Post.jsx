@@ -16,7 +16,7 @@ const Post = () => {
   const nav = useNavigate();
   const { post, setPost } = usePostStore();
   const { postId } = useParams();
-  const now = 3;
+  const now = 1;
 
   const editMenuItems = () => {
     switch (post.postStatus) {
