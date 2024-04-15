@@ -35,12 +35,12 @@ const HeaderGlobal = styled.nav`
   -webkit-box-align: start;
   align-items: flex-start;
   -webkit-box-pack: center;
-  justify-content: center;
+  justify-content: flex-end;
   -webkit-box-flex: 1;
   flex: 1;
   align-items: center;
   gap: 80px;
-  padding-left: 200px;
+  padding: 0 16.6vw 0 0;
 
   strong {
     font-weight: 400;

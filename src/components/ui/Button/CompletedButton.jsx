@@ -1,30 +1,46 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-const CompletedButton = ({ title, onClick }) => {
-  return <StyledButton onClick={onClick}>{title}</StyledButton>;
+const CompletedButton = ({ title, onClick, type }) => {
+  return (
+    <StyledButton onClick={onClick} type={type}>
+      {title}
+    </StyledButton>
+  );
 };
 
 CompletedButton.defaultProps = {
   onClick: () => {},
+  type: 'submit',
 };
 
 CompletedButton.propTypes = {
   title: PropTypes.string.isRequired,
   onClick: PropTypes.func,
+  type: PropTypes.string,
 };
 
 export default CompletedButton;
 
 const StyledButton = styled.button`
-  width: 26.04vw;
+  width: ${({ type }) => {
+    if (type === 'join') {
+      return '16vw';
+    }
+    return '26.04vw';
+  }};
   height: 4.17vw;
   font-size: ${({ theme }) => theme.headings.medium.fontSize};
   font-style: normal;
   font-weight: 700;
   line-height: 140%;
-  border-radius: 0.625vw;
-  background: ${({ theme }) => theme.color.primary};
+  border-radius: 20px;
+  background: ${({ theme, type }) => {
+    if (type === 'join') {
+      return '#9CDB9E';
+    }
+    return theme.color.primary;
+  }};
   color: ${({ theme }) => theme.color.contentWhite};
   cursor: pointer;
 

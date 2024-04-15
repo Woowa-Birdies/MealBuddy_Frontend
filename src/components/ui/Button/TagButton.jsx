@@ -37,7 +37,7 @@ const StyledButton = styled.button`
     if (type === 'status') {
       return 'fit-content';
     }
-    return 'auto';
+    return 'fit-content';
   }};
   height: ${({ type }) => {
     if (type === 'post') {
@@ -66,7 +66,7 @@ const StyledButton = styled.button`
 
   font-style: normal;
   font-weight: ${({ type }) => {
-    if (type === 'status') {
+    if (type === 'status' || type === 'tag') {
       return '400';
     }
     return '700';
