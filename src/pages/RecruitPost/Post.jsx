@@ -107,7 +107,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 22px;
-  margin: 0 250px;
 `;
 
 const TagContainer = styled.div`
@@ -118,7 +117,7 @@ const TagContainer = styled.div`
 const Info = styled.div``;
 
 const Contents = styled.div`
-  width: 756px;
+  width: 50vw;
   display: flex;
   flex-direction: column;
   padding: 50px;
