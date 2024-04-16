@@ -20,7 +20,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import UserVerification from '@/pages/UserVerification';
 import UserActivity from '@/pages/UserActivity';
 import UserRequest from '@/pages/UserRequestStatus';
-import ApplicantsList from '@/pages/UserActivity/ApplicantCard';
+import ApplicantsList from '@/pages/ApplicantList';
 import Chat from '@/pages/Chat';
 
 const App = () => {
