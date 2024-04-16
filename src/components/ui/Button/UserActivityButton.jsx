@@ -4,21 +4,25 @@ import recruitApi from '@api/biz/recruitApi';
 import askApi from '@api/biz/askApi';
 import chatApi from '@api/biz/chatApi';
 import { useNavigate } from 'react-router-dom';
-import gatherApi from '@api/biz/gatherApi';
+// import gatherApi from '@api/biz/gatherApi';
+import useConfirmModal from '@hooks/component/modal/useConfirmModal';
 
 const UserActivityButton = ({ title, action, propData }) => {
   const nav = useNavigate();
+  const showConfirm = useConfirmModal();
   // close : 모집 마감하기 / ongoing : 모집 재개하기 /review : 후기 작성하기 / chat : 냠냠 토크방 / request : 신청자 보기 / cancel : 신청 취소하기
   const handleClick = async (event) => {
     event.stopPropagation(); // 이벤트 버블링 방지
 
     if (action === 'close') {
       // postId
+      await showConfirm('모집을 마감하시겠습니까?');
       await recruitApi.completionRecruit(propData);
       window.location.reload();
     }
     if (action === 'ongoing') {
       // postId
+      await showConfirm('모집을 재개하시겠습니까?');
       await recruitApi.ongoingRecruit(propData);
       window.location.reload();
     }
@@ -27,16 +31,16 @@ const UserActivityButton = ({ title, action, propData }) => {
       window.location.reload();
     }
     if (action === 'chat') {
+      await showConfirm('채팅방에 입장하시겠습니까?');
       await chatApi.joinChat(propData);
       console.log('채팅방 입장', propData);
       nav(0);
     }
     if (action === 'request') {
-      await gatherApi.getAskList(propData); // postId
-      console.log('신청자 보기');
-      window.location.reload();
+      nav(`/applicantslist/${propData}`);
     }
     if (action === 'cancel') {
+      await showConfirm('신청을 취소하시겠습니까?');
       await askApi.deleteAsk(propData); // askId
       console.log('신청 취소하기');
       window.location.reload();

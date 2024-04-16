@@ -42,7 +42,7 @@ const ActivityContent = ({ information }) => {
         return (
           <>
             <Btn title="모집 마감하기" action="close" propData={postId} />
-            <Btn title="신청자 보기" action="request" />
+            <Btn title="신청자 보기" action="request" propData={postId} />
             <Btn title="냠냠 토크방" action="chat" />
           </>
         );
@@ -50,7 +50,7 @@ const ActivityContent = ({ information }) => {
         return (
           <>
             <Btn title="모집 재개하기" action="action" propData={postId} />
-            <Btn title="신청자 보기" action="request" />
+            <Btn title="신청자 보기" action="request" propData={postId} />
             <Btn title="냠냠 토크방" action="chat" />
           </>
         );
