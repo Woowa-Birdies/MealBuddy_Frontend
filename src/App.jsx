@@ -22,6 +22,7 @@ import UserActivity from '@/pages/UserActivity';
 import UserRequest from '@/pages/UserRequestStatus';
 import ApplicantsList from '@/pages/ApplicantList';
 import Chat from '@/pages/Chat';
+import ModalConfirmNegative from '@components/ui/Modal/ModalConfirmNegative';
 
 const App = () => {
   useEffect(() => {
@@ -33,6 +34,7 @@ const App = () => {
     <BrowserRouter>
       <Base>
         <LoadingModal />
+        <ModalConfirmNegative />
         <ScrollToTop />
         <PageTitleUpdater />
         <Routes>

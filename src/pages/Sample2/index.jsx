@@ -1,13 +1,14 @@
-import sampleApi from '@api/biz/sampleApi';
 import { ROUTES } from '@enums/CommonEnum';
-import useConfirm from '@hooks/component/useConfirm';
 import useLoadingStore from '@store/useLoadingStore';
 import useLoginStore from '@store/useLoginStore';
 import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import useConfirmModal from '@hooks/component/modal/useConfirmModal';
+import handleError from '@utils/ErrorHandler';
 
 const Sample2 = () => {
-  const setLoading = useLoadingStore((state) => state.setLoading);
+  const showConfirm = useConfirmModal();
+  const { setLoading } = useLoadingStore();
   const { setIsLogin } = useLoginStore();
   const nav = useNavigate();
 
@@ -18,20 +19,14 @@ const Sample2 = () => {
     }, 1000 * 2);
   };
 
-  const handleLogout = useConfirm({
-    content: '로그아웃 하시겠습니까?',
-    onOk: () => {
+  const handleLogout = async () => {
+    try {
+      await showConfirm('로그아웃 하시겠습니까?');
+      nav(ROUTES.HOME);
       setIsLogin(false);
       nav(ROUTES.HOME);
-    },
-  });
-
-  const handle11111 = async () => {
-    try {
-      const res = await sampleApi.getByPostId(3);
-      console.log('res', res.data);
     } catch (error) {
-      console.log(error);
+      handleError(error);
     }
   };
 
@@ -45,9 +40,6 @@ const Sample2 = () => {
       </Button>
       <Button type="primary" onClick={handleLogout}>
         로그아웃
-      </Button>
-      <Button type="primary" onClick={handle11111}>
-        1
       </Button>
     </div>
   );
