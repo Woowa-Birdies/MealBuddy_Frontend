@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Modal, Button, Radio } from 'antd';
+import { Modal, Button } from 'antd';
 import Paragraphy from '@components/ui/Paragraphy/Paragraphy';
 import filter from '@assets/images/svg/filter.svg';
 import PostCard from '@/pages/Home/PostCard';
@@ -11,10 +11,10 @@ const List = () => {
   const [isModal, setIsModal] = useState(false);
   const [posts, setPosts] = useState({ ongoing: [] });
 
-  const [dateTypes, setDateTypes] = useState(null);
-  const [foodTypes, setFoodTypes] = useState(null);
-  const [ages, setAges] = useState(null);
-  const [genders, setGenders] = useState(null);
+  const [dateTypes, setDateTypes] = useState('');
+  const [foodTypes, setFoodTypes] = useState('');
+  const [ages, setAges] = useState('');
+  const [genders, setGenders] = useState('');
 
   const showModal = () => {
     setIsModal(true);
@@ -40,14 +40,27 @@ const List = () => {
   };
 
   const handleReset = () => {
-    setDateTypes(null);
-    setFoodTypes(null);
-    setAges(null);
-    setGenders(null);
+    setDateTypes('');
+    setFoodTypes('');
+    setAges('');
+    setGenders('');
+  };
+
+  const toggleSelection = (value, current, setter) => {
+    const currentValues = current ? current.split(',').filter((v) => v) : [];
+    const index = currentValues.indexOf(value);
+    if (index === -1) {
+      // 값이 배열에 없으면 추가
+      setter(current ? `${current},${value}` : value);
+    } else {
+      // 값이 배열에 있으면 제거
+      setter(currentValues.filter((item) => item !== value).join(','));
+    }
   };
 
   return (
     <Container>
+      {console.log(posts)}
       <FilterContainer>
         <FilterClick onClick={showModal}>
           <FilterIcon src={filter} />
@@ -70,48 +83,81 @@ const List = () => {
         onCancel={() => setIsModal(false)}
         footer={
           <FooterContainer>
-            <StyledButton key="reset" onClick={handleReset}>
+            <FooterButton key="reset" onClick={handleReset}>
               선택 초기화
-            </StyledButton>
-            <StyledButton key="submit" type="primary" onClick={handleOk}>
+            </FooterButton>
+            <FooterButton key="submit" type="primary" onClick={handleOk}>
               적용하기
-            </StyledButton>
+            </FooterButton>
           </FooterContainer>
         }
       >
         <FilterOptions>
           <OptionGroup>
             <OptionTitle>날짜</OptionTitle>
-            <StyledRadioGroup value={dateTypes} onChange={(e) => setDateTypes(e.target.value)}>
-              <Radio.Button value="0">오늘</Radio.Button>
-              <Radio.Button value="1">내일</Radio.Button>
-              <Radio.Button value="2">이번 주말</Radio.Button>
-            </StyledRadioGroup>
+            {[
+              { label: '오늘', value: '0' },
+              { label: '내일', value: '1' },
+              { label: '이번 주말', value: '2' },
+            ].map((option) => (
+              <StyledButton
+                key={option.value}
+                onClick={() => toggleSelection(option.value, dateTypes, setDateTypes)}
+                selected={dateTypes.split(',').includes(option.value)}
+              >
+                {option.label}
+              </StyledButton>
+            ))}
           </OptionGroup>
           <OptionGroup>
             <OptionTitle>냠냠 유형</OptionTitle>
-            <StyledRadioGroup value={foodTypes} onChange={(e) => setFoodTypes(e.target.value)}>
-              <Radio.Button value="MEAL">식사</Radio.Button>
-              <Radio.Button value="CAFE">카페</Radio.Button>
-              <Radio.Button value="ALCOHOL">술</Radio.Button>
-            </StyledRadioGroup>
+            {[
+              { label: '식사', value: 'MEAL' },
+              { label: '카페', value: 'CAFE' },
+              { label: '술', value: 'ALCOHOL' },
+            ].map((option) => (
+              <StyledButton
+                key={option.value}
+                onClick={() => toggleSelection(option.value, foodTypes, setFoodTypes)}
+                selected={foodTypes.split(',').includes(option.value)}
+              >
+                {option.label}
+              </StyledButton>
+            ))}
           </OptionGroup>
           <OptionGroup>
             <OptionTitle>연령대</OptionTitle>
-            <StyledRadioGroup value={ages} onChange={(e) => setAges(e.target.value)}>
-              <Radio.Button value="AGE20S">20대</Radio.Button>
-              <Radio.Button value="AGE30S">30대</Radio.Button>
-              <Radio.Button value="AGE40S">40대</Radio.Button>
-              <Radio.Button value="AGE50S">50대</Radio.Button>
-            </StyledRadioGroup>
+            {[
+              { label: '20대', value: 'AGE20S' },
+              { label: '30대', value: 'AGE30S' },
+              { label: '40대', value: 'AGE40S' },
+              { label: '50대', value: 'AGE50S' },
+              { label: '제한없음', value: 'NOLIMIT' },
+            ].map((option) => (
+              <StyledButton
+                key={option.value}
+                onClick={() => toggleSelection(option.value, ages, setAges)}
+                selected={ages.split(',').includes(option.value)}
+              >
+                {option.label}
+              </StyledButton>
+            ))}
           </OptionGroup>
           <OptionGroup>
             <OptionTitle>성별</OptionTitle>
-            <StyledRadioGroup value={genders} onChange={(e) => setGenders(e.target.value)}>
-              <Radio.Button value="MALE">남자만</Radio.Button>
-              <Radio.Button value="FEMALE">여자만</Radio.Button>
-              <Radio.Button value="ANYONE">남녀무관</Radio.Button>
-            </StyledRadioGroup>
+            {[
+              { label: '남자만', value: 'MALE' },
+              { label: '여자만', value: 'FEMALE' },
+              { label: '남녀무관', value: 'ANYONE' },
+            ].map((option) => (
+              <StyledButton
+                key={option.value}
+                onClick={() => toggleSelection(option.value, genders, setGenders)}
+                selected={genders.split(',').includes(option.value)}
+              >
+                {option.label}
+              </StyledButton>
+            ))}
           </OptionGroup>
         </FilterOptions>
       </Modal>
@@ -134,6 +180,14 @@ const FilterContainer = styled.div`
   gap: 5px;
 `;
 
+const FilterClick = styled.div`
+  display: flex;
+  gap: 3px;
+  cursor: pointer;
+`;
+
+const FilterIcon = styled.img``;
+
 const PostsGrid = styled.div`
   display: flex;
   justify-content: flex-start;
@@ -149,14 +203,6 @@ const Message = styled.div`
   margin-left: 28.33vw;
 `;
 
-const FilterClick = styled.div`
-  display: flex;
-  gap: 3px;
-  cursor: pointer;
-`;
-
-const FilterIcon = styled.img``;
-
 const FooterContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -164,7 +210,7 @@ const FooterContainer = styled.div`
   padding: 10px;
 `;
 
-const StyledButton = styled(Button)`
+const FooterButton = styled(Button)`
   width: 25vw;
   height: 40px;
   font-size: 14px;
@@ -182,25 +228,20 @@ const OptionGroup = styled.div`
   padding: 10px;
 `;
 
-const StyledRadioGroup = styled(Radio.Group)`
-  display: flex;
+const StyledButton = styled(Button)`
+  width: calc(20% - 15px);
+  height: 40px;
+  text-align: center;
+  margin-right: 15px;
+  border-radius: 30px;
+  padding: 5px 15px;
+  font-size: 14px;
+  border-radius: 30px;
+  color: ${(props) => (props.selected ? '#FF544A' : 'rgba(0, 0, 0, 0.85)')};
+  border-color: ${(props) => (props.selected ? '#FF544A' : '#d9d9d9')};
 
-  .ant-radio-button-wrapper {
-    &:not(:first-child)::before {
-      content: none;
-    }
-    width: calc(25% - 15px);
-    height: 40px;
-    text-align: center;
-    margin-right: 15px;
-    border-radius: 30px;
-    padding: 5px 15px;
-    font-size: 14px;
-  }
-
-  .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
-    border-color: #ff544a;
-    border-width: 2px;
+  &:hover {
+    border-color: ${(props) => (props.selected ? '#40a9ff' : '#d9d9d9')};
   }
 `;
 
