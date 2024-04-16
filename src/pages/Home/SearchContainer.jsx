@@ -5,7 +5,7 @@ import Typography from '@components/ui/Typography/Typography';
 
 const { Search } = Input;
 
-const FilterContainer = () => {
+const SearchContainer = () => {
   return (
     <Container>
       <Main>
@@ -27,7 +27,7 @@ const FilterContainer = () => {
   );
 };
 
-export default FilterContainer;
+export default SearchContainer;
 
 const Container = styled.div`
   display: flex;

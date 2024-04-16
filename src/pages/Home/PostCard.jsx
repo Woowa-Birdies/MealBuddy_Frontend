@@ -1,29 +1,41 @@
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import Paragraphy from '@components/ui/Paragraphy/Paragraphy';
 import TagButton from '@components/ui/Button/TagButton';
 import CompletedButton from '@components/ui/Button/CompletedButton';
 import pariticipant from '@assets/images/svg/participant.svg';
 import clock from '@assets/images/svg/clock.svg';
+import dayjs from 'dayjs';
 
-const PostCard = () => {
+const PostCard = ({ post }) => {
+  const nav = useNavigate();
+
+  const handleJoin = () => {
+    nav(`post/${post.postId}`);
+  };
+
   return (
     <Container>
       <Img />
       <Info>
-        <TagButton title="모임종류" type="tag" />
-        <Paragraphy content="식당이름입니다" size="xl" />
+        <TagButton title={post.foodTypeTag} type="tag" />
+        <Paragraphy content={post.place} size="xl" />
         <About>
-          <Icon src={pariticipant} />
-          <Participant />
-          <Icon src={clock} />
-          <MeetAt />
+          <Div>
+            <Icon src={pariticipant} />
+            <Text>{`/ ${post.participantTotal}`}</Text>
+          </Div>
+          <Div>
+            <Icon src={clock} />
+            <Text>{dayjs(post.meetAt).format('A hh:mm')}</Text>
+          </Div>
         </About>
         <Tag>
-          <Paragraphy content="#남자만" size="large" />
-          <Paragraphy content="#20대" size="large" />
+          {post.genderTag && <Paragraphy content={`#${post.genderTag}`} size="large" />}
+          {post.ageTag && <Paragraphy content={`#${post.ageTag}`} size="large" />}
         </Tag>
       </Info>
-      <CompletedButton title="참여하기" type="join" />
+      <CompletedButton title="참여하기" type="join" onClick={handleJoin} />
     </Container>
   );
 };
@@ -37,6 +49,7 @@ const Container = styled.div`
   height: 569px;
   backgroud: #d9d9d9;
   gap: 16px;
+  margin-bottom: 10vh;
 `;
 
 const Img = styled.div`
@@ -53,15 +66,25 @@ const Info = styled.div`
   gap: 12px;
 `;
 
-const Icon = styled.img``;
+const Icon = styled.img`
+  margin-right: 5px;
+`;
 
 const About = styled.div`
   display: flex;
-  gap: 10px;
+  gap: 40px;
 `;
 
-const Participant = styled.div``;
-const MeetAt = styled.div``;
+const Div = styled.div`
+  display: flex;
+`;
+
+const Text = styled.div`
+  display: flex;
+  font-size: 1.111vw;
+  font-weight: 400;
+  line-height: 1.777vw;
+`;
 
 const Tag = styled.div`
   display: flex;
