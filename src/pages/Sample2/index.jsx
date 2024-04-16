@@ -1,5 +1,6 @@
 import sampleApi from '@api/biz/sampleApi';
 import { ROUTES } from '@enums/CommonEnum';
+import useConfirm from '@hooks/component/useConfirm';
 import useLoadingStore from '@store/useLoadingStore';
 import useLoginStore from '@store/useLoginStore';
 import { Button } from 'antd';
@@ -17,23 +18,17 @@ const Sample2 = () => {
     }, 1000 * 2);
   };
 
-  const handleLogout = () => {
-    setIsLogin(false);
-    nav(ROUTES.HOME);
-  };
+  const handleLogout = useConfirm({
+    content: '로그아웃 하시겠습니까?',
+    onOk: () => {
+      setIsLogin(false);
+      nav(ROUTES.HOME);
+    },
+  });
 
   const handle11111 = async () => {
     try {
       const res = await sampleApi.getByPostId(3);
-      console.log('res', res.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handle2222 = async () => {
-    try {
-      const res = await sampleApi.getUserPostList(1, 1);
       console.log('res', res.data);
     } catch (error) {
       console.log(error);
@@ -53,9 +48,6 @@ const Sample2 = () => {
       </Button>
       <Button type="primary" onClick={handle11111}>
         1
-      </Button>
-      <Button type="primary" onClick={handle2222}>
-        2
       </Button>
     </div>
   );
