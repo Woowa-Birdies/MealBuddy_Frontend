@@ -44,6 +44,7 @@ const StyledModal = styled(Modal)`
     opacity: 0;
   }
 `;
+
 const StyledDiv = styled.div`
   text-align: center;
   top: 141px;
