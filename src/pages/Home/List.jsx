@@ -4,9 +4,12 @@ import { Modal, Button, Radio } from 'antd';
 import Paragraphy from '@components/ui/Paragraphy/Paragraphy';
 import filter from '@assets/images/svg/filter.svg';
 import PostCard from '@/pages/Home/PostCard';
+import homeApi from '@api/biz/homeApi';
+import Typography from '@components/ui/Typography/Typography';
 
 const List = () => {
   const [isModal, setIsModal] = useState(false);
+  const [posts, setPosts] = useState({ ongoing: [] });
 
   const [dateTypes, setDateTypes] = useState(null);
   const [foodTypes, setFoodTypes] = useState(null);
@@ -17,9 +20,23 @@ const List = () => {
     setIsModal(true);
   };
 
+  const fetchList = async () => {
+    try {
+      const res = await homeApi.getFilter({ dateTypes, foodTypes, ages, genders });
+      setPosts(res.data);
+    } catch (error) {
+      console.error('Failed to fetch post list:', error);
+    }
+  };
+
+  // 마운트 시에 실행
+  useState(() => {
+    fetchList();
+  }, []);
+
   const handleOk = () => {
+    fetchList();
     setIsModal(false);
-    console.log('적용', { dateTypes, foodTypes, ages, genders });
   };
 
   const handleReset = () => {
@@ -31,11 +48,21 @@ const List = () => {
 
   return (
     <Container>
-      <FilterContainer onClick={showModal}>
-        <FilterIcon src={filter} />
-        <Paragraphy content="필터" size="large" />
+      <FilterContainer>
+        <FilterClick onClick={showModal}>
+          <FilterIcon src={filter} />
+          <Paragraphy content="필터" size="large" />
+        </FilterClick>
       </FilterContainer>
-      <PostCard />
+      <PostsGrid>
+        {posts.ongoing ? (
+          posts.ongoing.map((post) => <PostCard key={post.postId} post={post} />)
+        ) : (
+          <Message>
+            <Typography content="관련 모집글이 없습니다." />
+          </Message>
+        )}
+      </PostsGrid>
       <Modal
         title="필터"
         open={isModal}
@@ -56,34 +83,34 @@ const List = () => {
           <OptionGroup>
             <OptionTitle>날짜</OptionTitle>
             <StyledRadioGroup value={dateTypes} onChange={(e) => setDateTypes(e.target.value)}>
-              <Radio.Button value={0}>오늘</Radio.Button>
-              <Radio.Button value={1}>내일</Radio.Button>
-              <Radio.Button value={2}>이번 주말</Radio.Button>
+              <Radio.Button value="0">오늘</Radio.Button>
+              <Radio.Button value="1">내일</Radio.Button>
+              <Radio.Button value="2">이번 주말</Radio.Button>
             </StyledRadioGroup>
           </OptionGroup>
           <OptionGroup>
             <OptionTitle>냠냠 유형</OptionTitle>
             <StyledRadioGroup value={foodTypes} onChange={(e) => setFoodTypes(e.target.value)}>
-              <Radio.Button value="meal">식사</Radio.Button>
-              <Radio.Button value="cafe">카페</Radio.Button>
-              <Radio.Button value="alcohol">술</Radio.Button>
+              <Radio.Button value="MEAL">식사</Radio.Button>
+              <Radio.Button value="CAFE">카페</Radio.Button>
+              <Radio.Button value="ALCOHOL">술</Radio.Button>
             </StyledRadioGroup>
           </OptionGroup>
           <OptionGroup>
             <OptionTitle>연령대</OptionTitle>
             <StyledRadioGroup value={ages} onChange={(e) => setAges(e.target.value)}>
-              <Radio.Button value="age20s">20대</Radio.Button>
-              <Radio.Button value="age30s">30대</Radio.Button>
-              <Radio.Button value="age40s">40대</Radio.Button>
-              <Radio.Button value="age50s">50대</Radio.Button>
+              <Radio.Button value="AGE20S">20대</Radio.Button>
+              <Radio.Button value="AGE30S">30대</Radio.Button>
+              <Radio.Button value="AGE40S">40대</Radio.Button>
+              <Radio.Button value="AGE50S">50대</Radio.Button>
             </StyledRadioGroup>
           </OptionGroup>
           <OptionGroup>
             <OptionTitle>성별</OptionTitle>
             <StyledRadioGroup value={genders} onChange={(e) => setGenders(e.target.value)}>
-              <Radio.Button value="male">남자만</Radio.Button>
-              <Radio.Button value="female">여자만</Radio.Button>
-              <Radio.Button value="anyone">남녀무관</Radio.Button>
+              <Radio.Button value="MALE">남자만</Radio.Button>
+              <Radio.Button value="FEMALE">여자만</Radio.Button>
+              <Radio.Button value="ANYONE">남녀무관</Radio.Button>
             </StyledRadioGroup>
           </OptionGroup>
         </FilterOptions>
@@ -105,6 +132,26 @@ const FilterContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   gap: 5px;
+`;
+
+const PostsGrid = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-left: 1rem;
+`;
+
+const Message = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 100px 0 200px 0;
+  margin-left: 28.33vw;
+`;
+
+const FilterClick = styled.div`
+  display: flex;
+  gap: 3px;
   cursor: pointer;
 `;
 
