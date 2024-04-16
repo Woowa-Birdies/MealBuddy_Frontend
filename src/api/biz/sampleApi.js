@@ -12,8 +12,18 @@ const postCreate = async (postCreateDto) => {
   return post(`/post`, postCreateDto);
 };
 
+const getByPostId = async (postId) => {
+  return get(`/postId/${postId}`);
+};
+
+const getUserPostList = async (userId, type) => {
+  return get(`/gather/list/${userId}`, { params: { type } });
+};
+
 export default {
   getHealthCheck,
   postAsk,
   postCreate,
+  getUserPostList,
+  getByPostId,
 };

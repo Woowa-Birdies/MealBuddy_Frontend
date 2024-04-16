@@ -5,47 +5,46 @@ import NaverLogo from '@assets/images/svg/naver.svg?react';
 import GoogleLogo from '@assets/images/svg/google.svg?react';
 import SvgComponent from '@components/ui/Logo/SvgComponent';
 import PropTypes from 'prop-types';
-import useLoginStore from '@store/useLoginStore';
-import { useNavigate } from 'react-router-dom';
-import { ROUTES } from '@enums/CommonEnum';
+import { API_BASE_URL } from '@constants/Constants';
 
-const LoginButtonContainer = ({ type }) => {
-  const { setIsLogin } = useLoginStore();
-  const nav = useNavigate();
-
-  const handleLogin = () => {
-    setIsLogin(true);
-    nav(ROUTES.HOME);
-  };
-
-  return (
-    <ButtonContainer>
-      <LoginButton
-        type="kakao"
-        title={type === 'login' ? '카카오 로그인' : '카카오로 회원가입'}
-        icon={<SvgComponent src={KakaoLogo} width={36} height={33.6} />}
-        onClick={handleLogin}
-      />
-      <LoginButton
-        type="naver"
-        title={type === 'login' ? '네이버 로그인' : '네이버로 회원가입'}
-        icon={<SvgComponent src={NaverLogo} width={28} height={28} />}
-        style={{ border: '1px solid' }}
-        onClick={handleLogin}
-      />
-      <LoginButton
-        type="google"
-        title={type === 'login' ? '구글 로그인' : '구글로 회원가입'}
-        icon={<SvgComponent src={GoogleLogo} width={32} height={32} />}
-        onClick={handleLogin}
-      />
-    </ButtonContainer>
-  );
+const logos = {
+  kakao: KakaoLogo,
+  naver: NaverLogo,
+  google: GoogleLogo,
 };
 
-export default LoginButtonContainer;
+const OAuthContainer = ({ type }) => {
+  const handleLogin = (provider) => {
+    window.location.href = `${API_BASE_URL}/oauth2/authorization/${provider}`;
+  };
 
-LoginButtonContainer.propTypes = {
+  const createButton = (provider) => (
+    <LoginButton
+      key={provider}
+      type={provider}
+      title={
+        type === 'login'
+          ? `${provider.toUpperCase()} 로그인`
+          : `${provider.toUpperCase()}로 회원가입`
+      }
+      icon={
+        <SvgComponent
+          src={logos[provider]}
+          width={provider === 'naver' ? 28 : 32}
+          height={provider === 'naver' ? 28 : 32}
+        />
+      }
+      onClick={() => handleLogin(provider)}
+      style={provider === 'naver' ? { border: '1px solid' } : undefined}
+    />
+  );
+
+  return <ButtonContainer>{['kakao', 'naver', 'google'].map(createButton)}</ButtonContainer>;
+};
+
+export default OAuthContainer;
+
+OAuthContainer.propTypes = {
   type: PropTypes.oneOf(['login', 'signup']).isRequired,
 };
 

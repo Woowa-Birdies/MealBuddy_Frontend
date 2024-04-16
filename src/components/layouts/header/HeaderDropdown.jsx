@@ -57,8 +57,8 @@ const HeaderDropdown = () => {
         <DropdownTrigger>
           <SvgComponent
             src={isAlarmHovering || alarmDropdownOpen ? AlarmIconHover : AlarmIcon}
-            width={24}
-            height={24.72}
+            width={18}
+            height={18.72}
           />
         </DropdownTrigger>
       </Dropdown>
@@ -85,8 +85,8 @@ const HeaderDropdown = () => {
         <DropdownTrigger>
           <SvgComponent
             src={isUserHovering || userDropdownOpen ? UserIconHover : UserIcon}
-            width={24}
-            height={30}
+            width={18}
+            height={22.5}
           />
         </DropdownTrigger>
       </Dropdown>
