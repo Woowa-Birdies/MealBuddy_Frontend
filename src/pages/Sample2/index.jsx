@@ -22,7 +22,6 @@ const Sample2 = () => {
   const handleLogout = async () => {
     try {
       await showConfirm('로그아웃 하시겠습니까?');
-      nav(ROUTES.HOME);
       setIsLogin(false);
       nav(ROUTES.HOME);
     } catch (error) {
