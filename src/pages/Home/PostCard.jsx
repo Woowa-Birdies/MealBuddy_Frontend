@@ -1,29 +1,77 @@
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import Paragraphy from '@components/ui/Paragraphy/Paragraphy';
 import TagButton from '@components/ui/Button/TagButton';
 import CompletedButton from '@components/ui/Button/CompletedButton';
 import pariticipant from '@assets/images/svg/participant.svg';
 import clock from '@assets/images/svg/clock.svg';
+import dayjs from 'dayjs';
 
-const PostCard = () => {
+const PostCard = ({ post, type }) => {
+  const nav = useNavigate();
+  console.log(type);
+
+  const handleJoin = () => {
+    nav(`post/${post.postId}`);
+  };
+
   return (
-    <Container>
-      <Img />
+    <Container type={type}>
+      <Img type={type} />
       <Info>
-        <TagButton title="모임종류" type="tag" />
-        <Paragraphy content="식당이름입니다" size="xl" />
-        <About>
-          <Icon src={pariticipant} />
-          <Participant />
-          <Icon src={clock} />
-          <MeetAt />
+        <TagButton title={post.foodTypeTag} type="tag" />
+        <Paragraphy content={post.place} size="xl" />
+        {/* <About>
+          <Div>
+            <Icon src={pariticipant} />
+            <Text>{`${post.participantCount} / ${post.participantTotal}`}</Text>
+          </Div>
+          <Div>
+            <Icon src={clock} />
+            <Text>{dayjs(post.meetAt).format('A hh:mm')}</Text>
+          </Div>
         </About>
         <Tag>
-          <Paragraphy content="#남자만" size="large" />
-          <Paragraphy content="#20대" size="large" />
-        </Tag>
+          {post.genderTag && <Paragraphy content={`#${post.genderTag}`} size="large" />}
+          {post.ageTag && <Paragraphy content={`#${post.ageTag}`} size="large" />}
+        </Tag> */}
+        {type === 'list' ? (
+          <>
+            <About>
+              <Div>
+                <Icon src={pariticipant} />
+                <Text>{`${post.participantCount} / ${post.participantTotal}`}</Text>
+              </Div>
+              <Div>
+                <Icon src={clock} />
+                <Text>{dayjs(post.meetAt).format('A hh:mm')}</Text>
+              </Div>
+            </About>
+            <Tag>
+              {post.genderTag && <Paragraphy content={`#${post.genderTag}`} size="large" />}
+              {post.ageTag && <Paragraphy content={`#${post.ageTag}`} size="large" />}
+            </Tag>
+          </>
+        ) : (
+          <About>
+            <Div>
+              <Icon src={pariticipant} />
+              <Text>{`${post.participantCount} / ${post.participantTotal}`}</Text>
+            </Div>
+            <Div>
+              <Icon src={clock} />
+              <Text>{dayjs(post.meetAt).format('A hh:mm')}</Text>
+            </Div>
+            <Tag>
+              {post.genderTag && <Paragraphy content={`#${post.genderTag}`} size="large" />}
+              {post.ageTag && <Paragraphy content={`#${post.ageTag}`} size="large" />}
+            </Tag>
+          </About>
+        )}
       </Info>
-      <CompletedButton title="참여하기" type="join" />
+      {type === 'list' && (
+        <CompletedButton title="참여하기" type={`join${type}`} onClick={handleJoin} />
+      )}
     </Container>
   );
 };
@@ -33,15 +81,16 @@ export default PostCard;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: 15.88wv;
+  width: ${(props) => (props.type === 'list' ? '15.88vw' : '21.17vw')};
   height: 569px;
-  backgroud: #d9d9d9;
+  // background: #d9d9d9;
   gap: 16px;
+  margin-bottom: 1vh;
 `;
 
 const Img = styled.div`
   display: flex;
-  width: 15.89vw;
+  width: ${(props) => (props.type === 'list' ? '15.88vw' : '21.17vw')};
   height: 14.58vw;
   border-radius: 20px;
   background: #d9d9d9;
@@ -53,15 +102,25 @@ const Info = styled.div`
   gap: 12px;
 `;
 
-const Icon = styled.img``;
+const Icon = styled.img`
+  margin-right: 5px;
+`;
 
 const About = styled.div`
   display: flex;
-  gap: 10px;
+  gap: 20px;
 `;
 
-const Participant = styled.div``;
-const MeetAt = styled.div``;
+const Div = styled.div`
+  display: flex;
+`;
+
+const Text = styled.div`
+  display: flex;
+  font-size: 1.111vw;
+  font-weight: 400;
+  line-height: 1.777vw;
+`;
 
 const Tag = styled.div`
   display: flex;
