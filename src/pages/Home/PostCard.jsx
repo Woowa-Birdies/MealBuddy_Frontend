@@ -9,7 +9,7 @@ import dayjs from 'dayjs';
 
 const PostCard = ({ post, type }) => {
   const nav = useNavigate();
-  console.log(type);
+  // console.log(type);
 
   const handleJoin = () => {
     nav(`post/${post.postId}`);
@@ -82,10 +82,9 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: ${(props) => (props.type === 'list' ? '15.88vw' : '21.17vw')};
-  height: 569px;
-  // background: #d9d9d9;
+  height: ${(props) => (props.type === 'list' ? '569px' : null)};
   gap: 16px;
-  margin-bottom: 1vh;
+  margin-bottom: ${(props) => (props.type === 'list' ? '10vh' : null)};
 `;
 
 const Img = styled.div`
@@ -108,7 +107,7 @@ const Icon = styled.img`
 
 const About = styled.div`
   display: flex;
-  gap: 20px;
+  gap: 10px;
 `;
 
 const Div = styled.div`

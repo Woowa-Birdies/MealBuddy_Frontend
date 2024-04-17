@@ -6,11 +6,12 @@ import List from '@/pages/Home/List';
 
 const Home = () => {
   const [posts, setPosts] = useState({ ongoing: [] });
+  const [searching, setSearching] = useState(false);
 
   return (
     <Container>
-      <SearchContainer posts={posts} setPosts={setPosts} />
-      <Deadline />
+      <SearchContainer posts={posts} setPosts={setPosts} setSearching={setSearching} />
+      {searching === false && <Deadline searching={searching} />}
       <List posts={posts} setPosts={setPosts} />
     </Container>
   );
