@@ -7,6 +7,16 @@ import pariticipant from '@assets/images/svg/participant.svg';
 import clock from '@assets/images/svg/clock.svg';
 import dayjs from 'dayjs';
 
+export const shortenWords = (str, length = 10) => {
+  let result = '';
+  if (str.length > length) {
+    result = `${str.substr(0, length - 2)}...`;
+  } else {
+    result = str;
+  }
+  return result;
+};
+
 const PostCard = ({ post, type }) => {
   const nav = useNavigate();
   // console.log(type);
@@ -20,7 +30,7 @@ const PostCard = ({ post, type }) => {
       <Img type={type} />
       <Info>
         <TagButton title={post.foodTypeTag} type="tag" />
-        <Paragraphy content={post.place} size="xl" />
+        <Paragraphy content={shortenWords(post.place)} size="xl" />
         {/* <About>
           <Div>
             <Icon src={pariticipant} />
