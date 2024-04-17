@@ -16,6 +16,11 @@ const getFilter = async ({ dateTypes, foodTypes, ages, genders }) => {
   return get(query);
 };
 
+const searchKeyword = async (keyword) => {
+  return get(`/post/search?keyword=${keyword.value}`);
+};
+
 export default {
   getFilter,
+  searchKeyword,
 };

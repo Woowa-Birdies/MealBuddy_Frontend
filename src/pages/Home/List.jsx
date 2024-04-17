@@ -7,9 +7,8 @@ import PostCard from '@/pages/Home/PostCard';
 import homeApi from '@api/biz/homeApi';
 import Typography from '@components/ui/Typography/Typography';
 
-const List = () => {
+const List = ({ posts, setPosts }) => {
   const [isModal, setIsModal] = useState(false);
-  const [posts, setPosts] = useState({ ongoing: [] });
 
   const [dateTypes, setDateTypes] = useState('');
   const [foodTypes, setFoodTypes] = useState('');
