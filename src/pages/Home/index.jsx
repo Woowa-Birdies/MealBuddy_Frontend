@@ -1,17 +1,14 @@
-import { useState } from 'react';
 import styled from 'styled-components';
-import SearchContainer from '@/pages/Home/SearchContainer';
+import FilterContainer from '@/pages/Home/FilterContainer';
 import Deadline from '@/pages/Home/Deadline';
 import List from '@/pages/Home/List';
 
 const Home = () => {
-  const [posts, setPosts] = useState({ ongoing: [] });
-
   return (
     <Container>
-      <SearchContainer posts={posts} setPosts={setPosts} />
+      <FilterContainer />
       <Deadline />
-      <List posts={posts} setPosts={setPosts} />
+      <List />
     </Container>
   );
 };
