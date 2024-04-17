@@ -7,23 +7,24 @@ import pariticipant from '@assets/images/svg/participant.svg';
 import clock from '@assets/images/svg/clock.svg';
 import dayjs from 'dayjs';
 
-const PostCard = ({ post }) => {
+const PostCard = ({ post, type }) => {
   const nav = useNavigate();
+  console.log(type);
 
   const handleJoin = () => {
     nav(`post/${post.postId}`);
   };
 
   return (
-    <Container>
-      <Img />
+    <Container type={type}>
+      <Img type={type} />
       <Info>
         <TagButton title={post.foodTypeTag} type="tag" />
         <Paragraphy content={post.place} size="xl" />
-        <About>
+        {/* <About>
           <Div>
             <Icon src={pariticipant} />
-            <Text>{`/ ${post.participantTotal}`}</Text>
+            <Text>{`${post.participantCount} / ${post.participantTotal}`}</Text>
           </Div>
           <Div>
             <Icon src={clock} />
@@ -33,9 +34,44 @@ const PostCard = ({ post }) => {
         <Tag>
           {post.genderTag && <Paragraphy content={`#${post.genderTag}`} size="large" />}
           {post.ageTag && <Paragraphy content={`#${post.ageTag}`} size="large" />}
-        </Tag>
+        </Tag> */}
+        {type === 'list' ? (
+          <>
+            <About>
+              <Div>
+                <Icon src={pariticipant} />
+                <Text>{`${post.participantCount} / ${post.participantTotal}`}</Text>
+              </Div>
+              <Div>
+                <Icon src={clock} />
+                <Text>{dayjs(post.meetAt).format('A hh:mm')}</Text>
+              </Div>
+            </About>
+            <Tag>
+              {post.genderTag && <Paragraphy content={`#${post.genderTag}`} size="large" />}
+              {post.ageTag && <Paragraphy content={`#${post.ageTag}`} size="large" />}
+            </Tag>
+          </>
+        ) : (
+          <About>
+            <Div>
+              <Icon src={pariticipant} />
+              <Text>{`${post.participantCount} / ${post.participantTotal}`}</Text>
+            </Div>
+            <Div>
+              <Icon src={clock} />
+              <Text>{dayjs(post.meetAt).format('A hh:mm')}</Text>
+            </Div>
+            <Tag>
+              {post.genderTag && <Paragraphy content={`#${post.genderTag}`} size="large" />}
+              {post.ageTag && <Paragraphy content={`#${post.ageTag}`} size="large" />}
+            </Tag>
+          </About>
+        )}
       </Info>
-      <CompletedButton title="참여하기" type="join" onClick={handleJoin} />
+      {type === 'list' && (
+        <CompletedButton title="참여하기" type={`join${type}`} onClick={handleJoin} />
+      )}
     </Container>
   );
 };
@@ -45,16 +81,16 @@ export default PostCard;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: 15.88wv;
+  width: ${(props) => (props.type === 'list' ? '15.88vw' : '21.17vw')};
   height: 569px;
-  backgroud: #d9d9d9;
+  // background: #d9d9d9;
   gap: 16px;
-  margin-bottom: 10vh;
+  margin-bottom: 1vh;
 `;
 
 const Img = styled.div`
   display: flex;
-  width: 15.89vw;
+  width: ${(props) => (props.type === 'list' ? '15.88vw' : '21.17vw')};
   height: 14.58vw;
   border-radius: 20px;
   background: #d9d9d9;
@@ -72,7 +108,7 @@ const Icon = styled.img`
 
 const About = styled.div`
   display: flex;
-  gap: 40px;
+  gap: 20px;
 `;
 
 const Div = styled.div`
