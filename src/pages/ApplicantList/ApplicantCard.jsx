@@ -20,16 +20,20 @@ const ApplicantCard = ({ information }) => {
                 <User>
                   <Typography content={item.userId} size="large" />
                   <TagContainer>
-                    <TagButton title="20대" />
+                    <TagButton title={`${item.age}대`} />
                     <TagButton title="도봉구" />
                   </TagContainer>
                 </User>
               </ProfileContainer>
-              <Intro>안녕하세요.</Intro>
+              {item.introduce ? <Intro>{item.introduce}</Intro> : <Intro>안녕하세요.</Intro>}
             </ApplicantContainer>
             <ButtonContainer>
-              <AcceptButton title="거절하기" color="contentPrimary" />
-              <AcceptButton title="수락하기" />
+              {item.askStatus === '대기' && (
+                <>
+                  <AcceptButton title="거절하기" action="거절" />
+                  <AcceptButton title="수락하기" action="수락" />
+                </>
+              )}
             </ButtonContainer>
           </Container>
         ))
@@ -46,7 +50,7 @@ ApplicantCard.propTypes = {
       userId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       askStatus: PropTypes.string,
       gender: PropTypes.string,
-      age: PropTypes.string,
+      age: PropTypes.number,
       introduce: PropTypes.string,
     }),
   ).isRequired,

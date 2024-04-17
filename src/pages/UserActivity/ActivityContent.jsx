@@ -46,10 +46,10 @@ const ActivityContent = ({ information }) => {
             <Btn title="냠냠 토크방" action="chat" />
           </>
         );
-      case '모집 완료':
+      case '모집 마감':
         return (
           <>
-            <Btn title="모집 재개하기" action="action" propData={postId} />
+            <Btn title="모집 재개하기" action="ongoing" propData={postId} />
             <Btn title="신청자 보기" action="request" propData={postId} />
             <Btn title="냠냠 토크방" action="chat" />
           </>

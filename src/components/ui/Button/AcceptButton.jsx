@@ -1,32 +1,36 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import askApi from '@api/biz/askApi';
 
-const ActivityButton = ({ title, onClick, color }) => {
+const AcceptButton = ({ title, action, propData }) => {
+  const handleClick = async (event) => {
+    event.stopPropagation(); // 이벤트 버블링 방지
+    if (action === '수락') {
+      // postId
+      await askApi.updateAskStatus(propData);
+      console.log('수락 완료');
+      window.location.reload();
+    }
+    if (action === '거절') {
+      // postId
+      await askApi.updateAskStatus(propData);
+      console.log('거절 완료');
+      window.location.reload();
+    }
+  };
   return (
-    <StyledButton $color={color} onClick={onClick}>
+    <StyledButton onClick={handleClick} action={action}>
       {title}
     </StyledButton>
   );
 };
 
-ActivityButton.defaultProps = {
-  onClick: () => {},
-  color: 'primary',
-};
-
-ActivityButton.propTypes = {
+AcceptButton.propTypes = {
   title: PropTypes.string.isRequired,
-  onClick: PropTypes.func,
-  color: PropTypes.oneOf([
-    'primary',
-    'contentPrimary',
-    'contentSecondary',
-    'contentTertiary',
-    'contentWhite',
-  ]),
+  action: PropTypes.string.isRequired,
 };
 
-export default ActivityButton;
+export default AcceptButton;
 
 const StyledButton = styled.button`
   display: flex;
