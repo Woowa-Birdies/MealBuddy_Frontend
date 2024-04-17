@@ -1,18 +1,42 @@
-// import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
+import recruitApi from '@api/biz/recruitApi';
 import Label from '@components/ui/Label/Label';
 import TimeLimit from '@components/ui/TimeLimit/TimeLimit';
 import dayjs from 'dayjs';
 import Paragraphy from '@components/ui/Paragraphy/Paragraphy';
 import TagButton from '@components/ui/Button/TagButton';
 
-const ActivityContent = ({ postData }) => {
+const ActivityContent = () => {
+  const { postId } = useParams();
+  const now = 1;
+  const [postDetails, setPostDetails] = useState({
+    foodTypeTag: '',
+    place: '',
+    genderTag: '',
+    ageTag: '',
+    meetAt: '',
+    participantCount: 0,
+    participantTotal: 0,
+    address: '',
+  });
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const postDetailsResponse = await recruitApi.getPost({ postId }, `${now}`); // 주의: getPost 함수의 인터페이스에 맞춰 호출
+        setPostDetails(postDetailsResponse.data);
+      } catch (error) {
+        console.error('Failed to load data', error);
+      }
+    };
+
+    loadData();
+  }, [postId]);
   /* 날짜 변환 */
   const formatDate = (dateString) => {
     return dayjs(dateString).format('YYYY년 MM월 DD일 dddd A hh:mm');
   };
-  console.log(postData, typeof postData);
   return (
     <BoxWrapper>
       <ListItem>
@@ -20,23 +44,23 @@ const ActivityContent = ({ postData }) => {
         <InnerBox>
           <TopSection>
             <Paragraphy content="동네" size="medium" color="contentTertiary" />
-            {postData.postStatus === '모집중' && <TimeLimit closeAt={postData.closeAt} />}
+            {postDetails.postStatus === '모집중' && <TimeLimit closeAt={postDetails.closeAt} />}
           </TopSection>
-          <Label content={postData.place} size="xl" />
+          <Label content={postDetails.place} size="xl" />
           <TagSection>
-            <TagButton title={postData.foodTypeTag} type="tag" />
-            <TagButton title={postData.genderTag} type="tag" />
-            <TagButton title={postData.ageTag} type="tag" />
+            <TagButton title={postDetails.foodTypeTag} type="tag" />
+            <TagButton title={postDetails.genderTag} type="tag" />
+            <TagButton title={postDetails.ageTag} type="tag" />
           </TagSection>
           <InfoSection>
-            <Label content={`모임 날짜 : ${formatDate(postData.meetAt)}`} size="large" />
+            <Label content={`모임 날짜 : ${formatDate(postDetails.meetAt)}`} size="large" />
             <Label
-              content={`인원수 : ${postData.participantCount} / ${postData.participantTotal}`}
+              content={`인원수 : ${postDetails.participantCount} / ${postDetails.participantTotal}`}
               size="large"
             />
           </InfoSection>
           <InfoSection>
-            <Label content={postData.address} size="large" />
+            <Label content={postDetails.address} size="large" />
           </InfoSection>
         </InnerBox>
       </ListItem>
@@ -45,23 +69,6 @@ const ActivityContent = ({ postData }) => {
 };
 
 export default ActivityContent;
-
-ActivityContent.propTypes = {
-  postData: PropTypes.shape({
-    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    title: PropTypes.string,
-    menuCategory: PropTypes.string,
-    gender: PropTypes.string,
-    age: PropTypes.string,
-    place: PropTypes.string,
-    address: PropTypes.string,
-    participantTotal: PropTypes.number,
-    participantCount: PropTypes.number,
-    postStatus: PropTypes.string,
-    meetAt: PropTypes.string,
-    closeAt: PropTypes.string,
-  }).isRequired,
-};
 
 const BoxWrapper = styled.div`
   width: 100%;
@@ -102,7 +109,8 @@ const InnerBox = styled.div`
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 0.83vw;
+  justify-content: flex-start;
 `;
 
 const TopSection = styled.div`

@@ -3,29 +3,23 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Tabs } from 'antd';
 import gatherApi from '@api/biz/gatherApi';
-import recruitApi from '@api/biz/recruitApi';
 import ApplicantCard from '@/pages/ApplicantList/ApplicantCard';
 import ApplicantTitle from '@/pages/ApplicantList/ApplicantTitle';
 import ApplicantContent from '@/pages/ApplicantList/ApplicantContent';
 
 const Applicantlist = () => {
-  const now = 1;
   const { postId } = useParams();
   const [information, setInformation] = useState([]);
-  const [postDetails, setPostDetails] = useState({});
   const [activeKey, setActiveKey] = useState('0');
 
   useEffect(() => {
     const loadData = async () => {
       try {
         const type = parseInt(activeKey, 10);
+
         const askListResponse = await gatherApi.getAskList({ postId, type });
         setInformation(askListResponse.data.result);
         // console.log('response', data, 'tab', activeKey);
-
-        const postDetailsResponse = await recruitApi.getPost({ postId }, `${now}`); // 주의: getPost 함수의 인터페이스에 맞춰 호출
-        setPostDetails(postDetailsResponse.data);
-        console.log('response', postDetailsResponse.data, typeof postDetailsResponse.data);
       } catch (error) {
         console.error('Failed to load data', error);
       }
@@ -58,14 +52,14 @@ const Applicantlist = () => {
   return (
     <PageWrapper>
       <ApplicantTitle />
-      <ApplicantContent postData={postDetails} />
+      <ApplicantContent />
       <CustomTabs defaultActiveKey="0" items={items} onTabClick={onTabChange} />
     </PageWrapper>
   );
 };
 export default Applicantlist;
 const PageWrapper = styled.div`
-  padding: 0px 16.71vw;
+  padding: 0px 16.67vw;
   margin-bottom: 12.24vw;
 `;
 const CustomTabs = styled(Tabs)`
