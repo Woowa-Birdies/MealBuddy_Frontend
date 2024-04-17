@@ -59,7 +59,7 @@ const List = ({ posts, setPosts }) => {
 
   return (
     <Container>
-      {console.log(posts)}
+      {/* {console.log(posts)} */}
       <FilterContainer>
         <FilterClick onClick={showModal}>
           <FilterIcon src={filter} />
@@ -68,7 +68,7 @@ const List = ({ posts, setPosts }) => {
       </FilterContainer>
       <PostsGrid>
         {posts.ongoing ? (
-          posts.ongoing.map((post) => <PostCard key={post.postId} post={post} />)
+          posts.ongoing.map((post) => <PostCard key={post.postId} post={post} type="list" />)
         ) : (
           <Message>
             <Typography content="관련 모집글이 없습니다." />

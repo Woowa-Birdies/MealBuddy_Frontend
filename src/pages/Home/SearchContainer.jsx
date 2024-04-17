@@ -20,7 +20,7 @@ const SearchContainer = ({ setPosts }) => {
   return (
     <Container>
       <Main>
-        <Typography content="혼자 밥먹기가 아쉬울 때, 냠메이트와 냠냠해요." size="xl" />
+        <Typography content="혼자 밥먹기가 아쉬울 때, 냠메이트와 함께해요." size="xl" />
         <Space direction="vertical">
           <Search
             placeholder="가고싶은 식당을 검색해보세요"
