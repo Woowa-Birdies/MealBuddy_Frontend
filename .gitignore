@@ -24,6 +24,8 @@ dist-ssr
 build/*
 localhost.pem
 localhost-key.pem
+localhost+2.pem
+localhost+2-key.pem
 vite.config.json
 
 #kakakokey
