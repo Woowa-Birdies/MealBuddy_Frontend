@@ -38,7 +38,7 @@ const RequestContent = ({ information }) => {
   /* askStatus별 버튼 구성 변경 */
   const renderButtons = ({ askStatus, askId }) => {
     switch (askStatus) {
-      case '대기':
+      case '대기' || '거절':
         return <Btn title="신청 취소하기" action="cancel" propData={askId} />;
       case '수락':
         return (
