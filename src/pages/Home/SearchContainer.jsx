@@ -6,12 +6,19 @@ import homeApi from '@api/biz/homeApi';
 
 const { Search } = Input;
 
-const SearchContainer = ({ setPosts }) => {
+const SearchContainer = ({ setPosts, setSearching }) => {
   const onSearch = async (value, _e) => {
+    if (value === '' || value === ' ') {
+      // setSearching(false);
+      window.location.reload();
+      return;
+    }
+
     try {
       const res = await homeApi.searchKeyword({ value });
       // console.log(res.data);
       setPosts(res.data);
+      setSearching(true);
     } catch (error) {
       console.log('Failed to search');
     }

@@ -7,9 +7,9 @@ const Participants = () => {
     <Container>
       <Typography content="참여한 냠냠메이트" size="large" />
       <UserList>
-        <ReviewUser />
-        <ReviewUser />
-        <ReviewUser />
+        <ReviewUser type="participants" />
+        <ReviewUser type="participants" />
+        <ReviewUser type="participants" />
       </UserList>
     </Container>
   );

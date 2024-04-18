@@ -7,9 +7,19 @@ import pariticipant from '@assets/images/svg/participant.svg';
 import clock from '@assets/images/svg/clock.svg';
 import dayjs from 'dayjs';
 
+export const shortenWords = (str, length = 10) => {
+  let result = '';
+  if (str.length > length) {
+    result = `${str.substr(0, length - 2)}...`;
+  } else {
+    result = str;
+  }
+  return result;
+};
+
 const PostCard = ({ post, type }) => {
   const nav = useNavigate();
-  console.log(type);
+  // console.log(type);
 
   const handleJoin = () => {
     nav(`post/${post.postId}`);
@@ -20,7 +30,7 @@ const PostCard = ({ post, type }) => {
       <Img type={type} />
       <Info>
         <TagButton title={post.foodTypeTag} type="tag" />
-        <Paragraphy content={post.place} size="xl" />
+        <Paragraphy content={shortenWords(post.place)} size="xl" />
         {/* <About>
           <Div>
             <Icon src={pariticipant} />
@@ -82,10 +92,9 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: ${(props) => (props.type === 'list' ? '15.88vw' : '21.17vw')};
-  height: 569px;
-  // background: #d9d9d9;
+  height: ${(props) => (props.type === 'list' ? '569px' : null)};
   gap: 16px;
-  margin-bottom: 1vh;
+  margin-bottom: ${(props) => (props.type === 'list' ? '10vh' : null)};
 `;
 
 const Img = styled.div`
@@ -108,7 +117,7 @@ const Icon = styled.img`
 
 const About = styled.div`
   display: flex;
-  gap: 20px;
+  gap: 10px;
 `;
 
 const Div = styled.div`
