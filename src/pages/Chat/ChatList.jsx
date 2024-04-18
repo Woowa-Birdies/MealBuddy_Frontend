@@ -25,7 +25,7 @@ const Wrapper = styled.div`
 `;
 
 const ChatListTitle = styled.div`
-  height: 60px;
+  height: 100px;
   display: flex;
   align-items: center;
 `;

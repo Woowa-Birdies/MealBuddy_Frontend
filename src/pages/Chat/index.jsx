@@ -20,8 +20,8 @@ const Chat = () => {
 export default Chat;
 
 const PageWrapper = styled.div`
-  width: 100%;
-  padding: 90px 160px 160px 90px;
+  padding: 160px;
+  margin: 0 160px;
 `;
 
 const PageTitle = styled.div`

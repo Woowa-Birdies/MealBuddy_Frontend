@@ -14,8 +14,8 @@ const HostButtonContainer = () => {
   }
   return (
     <>
-      <ApplicantListButton title="신청자 보기" propData={post.postId} />
-      <YumTalkButton title="냠냠 토크 입장하기" />
+      <ApplicantListButton title="신청자 보기" postId={post.postId} />
+      <YumTalkButton title="냠냠 토크 입장하기" postId={post.postId} />
     </>
   );
 };

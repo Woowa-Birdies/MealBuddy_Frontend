@@ -1,36 +1,42 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import { Avatar } from 'antd';
 import Label from '@components/ui/Label/Label';
 import Paragraphy from '@components/ui/Paragraphy/Paragraphy';
+import chatApi from '@api/biz/chatApi';
 
 const ChatListItem = () => {
+  const [chatList, setChatList] = useState({});
+
+  const fetchList = async () => {
+    try {
+      const res = await chatApi.chatList();
+      setChatList(res);
+      console.log(res);
+    } catch (error) {
+      console.error('Failed to fetch chat list:', error);
+    }
+  };
+
+  useState(() => {
+    fetchList();
+  }, []);
+
   return (
-    <ItemWrapper>
-      <ChatListBox>
-        <Avatar size={51} icon={<>1</>} />
-        <ChatRoomInfo>
-          <Label content="모임 제목" size="large" />
-          <Paragraphy content="최근 채팅 내용을 보여줍니다. . . ." size="medium" />
-        </ChatRoomInfo>
-        <Paragraphy content="7" size="small" color="primary" />
-      </ChatListBox>
-      <ChatListBox>
-        <Avatar size={51} icon={<>1</>} />
-        <ChatRoomInfo>
-          <Label content="모임 제목" size="large" />
-          <Paragraphy content="최근 채팅 내용을 보여줍니다. . . ." size="medium" />
-        </ChatRoomInfo>
-        <Paragraphy content="7" size="small" />
-      </ChatListBox>
-      <ChatListBox>
-        <Avatar size={51} icon={<>1</>} />
-        <ChatRoomInfo>
-          <Label content="모임 제목" size="large" />
-          <Paragraphy content="최근 채팅 내용을 보여줍니다. . . ." size="medium" />
-        </ChatRoomInfo>
-        <Paragraphy content="7" size="small" />
-      </ChatListBox>
-    </ItemWrapper>
+    <>
+      {chatList.map((chatRoom) => (
+        <ItemWrapper key={chatRoom.roomId}>
+          <ChatListBox>
+            <Avatar size={51} icon={<>1</>} />
+            <ChatRoomInfo>
+              <Label content={chatRoom.roomName} size="large" />
+              <Paragraphy content="최근 채팅 내용을 보여줍니다. . . ." size="medium" />
+            </ChatRoomInfo>
+            <Paragraphy content="7" size="small" color="primary" />
+          </ChatListBox>
+        </ItemWrapper>
+      ))}
+    </>
   );
 };
 
@@ -39,7 +45,7 @@ export default ChatListItem;
 const ItemWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
   margin-bottom: 20px;
 `;
 
