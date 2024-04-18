@@ -1,21 +1,19 @@
-import React from 'react';
-// import useRecruitStore from '@store/useRecruitStore';
 import usePostStore from '@store/usePostStore';
 import ApplicantListButton from '@components/ui/Button/ApplicantListButton';
 import YumTalkButton from '@components/ui/Button/YumTalkButton';
 import GoReviewButton from '@components/ui/Button/GoReviewButton';
 
 const HostButtonContainer = () => {
-  // const { recruitPost } = useRecruitStore();
   const { post } = usePostStore();
+  const { postId } = post;
 
   if (post.postStatus === '모임 종료') {
     return <GoReviewButton title="후기 작성" />;
   }
   return (
     <>
-      <ApplicantListButton title="신청자 보기" postId={post.postId} />
-      <YumTalkButton title="냠냠 토크 입장하기" postId={post.postId} />
+      <ApplicantListButton title="신청자 보기" postId={postId} />
+      <YumTalkButton title="냠냠 토크 입장하기" postId={postId} />
     </>
   );
 };
