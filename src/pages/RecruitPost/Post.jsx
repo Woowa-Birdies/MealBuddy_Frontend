@@ -11,6 +11,7 @@ import recruitApi from '@api/biz/recruitApi';
 import TagButton from '@components/ui/Button/TagButton';
 import settingIcon from '@assets/images/svg/setting.svg';
 import SelectButton from '@components/ui/Button/SelectButton';
+import TimeLimit from '@components/ui/TimeLimit/TimeLimit';
 
 const Post = () => {
   const nav = useNavigate();
@@ -83,7 +84,10 @@ const Post = () => {
     <Container>
       {/* {console.log(post)} */}
       <StatusContainer>
-        <StatusButton title={post.postStatus} />
+        <PostStatus>
+          <StatusButton title={post.postStatus} />
+          <TimeLimit closeAt={post.closeAt} />
+        </PostStatus>
         {now === post.userId && (
           <EditSection>
             {post.postStatus !== '모임 종료' ? (
@@ -128,6 +132,12 @@ const Container = styled.div`
 const StatusContainer = styled.div`
   display: flex;
   justify-content: space-between;
+`;
+
+const PostStatus = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 20px;
 `;
 
 const Setting = styled.img``;
