@@ -2,16 +2,19 @@ import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import Label from '@components/ui/Label/Label';
 import Paragraphy from '@components/ui/Paragraphy/Paragraphy';
+import useStore from '@/store/useVerificationStore';
 // import Typography from '@components/ui/Typography/Typography';
 
 const IdentificationField = () => {
+  const setUserData = useStore((state) => state.setUserData);
   const [firstPart, setFirstPart] = useState('');
   const [secondPart, setSecondPart] = useState('');
   const [isCompleted, setIsCompleted] = useState(false);
 
   useEffect(() => {
     setIsCompleted(firstPart.length === 6 && secondPart.length === 1);
-  }, [firstPart, secondPart]);
+    setUserData('registerNumber', `${firstPart}-${secondPart}`);
+  }, [firstPart, secondPart, setUserData]);
 
   return (
     <BoxWrapper>
