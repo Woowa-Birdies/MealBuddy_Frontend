@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-const SelectButton = ({ title, type, onClick, selected }) => {
+const SelectButton = ({ title, type, onClick, selected, disabled }) => {
   const [isClicked, setIsClicked] = useState(false);
   const handleClick = () => {
     setIsClicked(!isClicked);
@@ -11,11 +11,12 @@ const SelectButton = ({ title, type, onClick, selected }) => {
 
   return (
     <StyledButton
-      onClick={handleClick}
+      onClick={!disabled ? handleClick : undefined}
       isClicked={isClicked}
       type={type}
       title={title}
       selected={selected}
+      disabled={disabled}
     >
       {title}
     </StyledButton>
@@ -36,6 +37,7 @@ SelectButton.propTypes = {
 export default SelectButton;
 
 const StyledButton = styled.button`
+  opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
   bottom: ${({ type }) => {
     if (type === 'request' || type === 'response') {
       return '0.5vw';
@@ -164,11 +166,11 @@ const StyledButton = styled.button`
     }
     return theme.color.contentWhite;
   }};
-  cursor: ${({ type }) => {
+  cursor: ${({ type, disabled }) => {
     if (type === 'tag') {
       return 'default';
     }
-    return 'pointer';
+    return disabled ? 'not-allowed' : 'pointer';
   }};
 
   &:hover {
