@@ -16,6 +16,7 @@ const ChatList = () => {
 export default ChatList;
 
 const Wrapper = styled.div`
+  height: 40vw;
   flex: 0.3;
   border: ${({ theme }) => theme.border.borderTransparent};
   border-radius: 20px 0 0 20px;

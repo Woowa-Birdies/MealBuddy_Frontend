@@ -20,8 +20,7 @@ const Chat = () => {
 export default Chat;
 
 const PageWrapper = styled.div`
-  padding: 160px;
-  margin: 0 160px;
+  padding: 80px 240px;
 `;
 
 const PageTitle = styled.div`
@@ -31,7 +30,7 @@ const PageTitle = styled.div`
 const ChatWrapper = styled.div`
   width: 100%;
   margin-top: 60px;
-  min-height: 950px;
+  // min-height: 950px;
   display: flex;
   flex-direction: row;
 `;

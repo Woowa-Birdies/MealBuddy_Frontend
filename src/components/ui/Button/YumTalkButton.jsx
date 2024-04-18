@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import chatApi from '@api/biz/chatApi';
 
-// const ApplicantListButton = ({ title, type, postId }) => {
 const YumTalkButton = ({ title, type, postId }) => {
   const nav = useNavigate();
 
   const handleClick = async () => {
     nav('/chat');
-    await chatApi.joinChat(postId);
+    const res = await chatApi.joinChat(postId);
+    console.log(res);
   };
   return (
     <StyledButton onClick={handleClick} type={type} title={title}>
