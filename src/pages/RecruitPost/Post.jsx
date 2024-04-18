@@ -37,25 +37,30 @@ const Post = () => {
     }
   };
 
+  const handleDeleteClick = () => {
+    recruitApi.deleteRecruit(post.postId);
+    nav('/');
+  };
+
   const handleMenuClick = ({ key }) => {
     switch (key) {
       case 'close':
         recruitApi.completionRecruit(post.postId);
+        window.location.reload();
         break;
       case 'recruit':
         recruitApi.ongoingRecruit(post.postId);
+        window.location.reload();
         break;
       case 'edit':
-        console.log('수정');
         nav(`/recruit/${post.postId}`);
+        break;
+      case 'delete':
+        handleDeleteClick();
         break;
       default:
         break;
     }
-  };
-  const handleDeleteClick = () => {
-    recruitApi.deleteRecruit(post.postId);
-    nav('/');
   };
 
   useEffect(() => {
@@ -92,7 +97,6 @@ const Post = () => {
                 <Setting src={settingIcon} alt="Settings" />
               </Dropdown>
             ) : (
-              // <DelButton onClick={handleDeleteClick}>삭제하기</DelButton>
               <SelectButton title="삭제하기" type="del" onClick={handleDeleteClick} />
             )}
           </EditSection>

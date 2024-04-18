@@ -4,7 +4,7 @@ import SampleImg from '@/assets/images/png/profileimg.png';
 import ReviewStatusButton from '@components/ui/Button/ReviewStatusButton';
 import useReviewStore from '@/store/useReviewStore';
 
-const ReviewUser = () => {
+const ReviewUser = ({ type }) => {
   const setShowReviewForm = useReviewStore((state) => state.setShowReviewForm);
 
   const handleReviewButtonClick = () => {
@@ -21,7 +21,9 @@ const ReviewUser = () => {
           </ProfileContainer>
           <Typography content="HOST" />
         </UserContainer>
-        <ReviewStatusButton title="리뷰작성" onClick={handleReviewButtonClick} />
+        {type === 'participants' && (
+          <ReviewStatusButton title="리뷰작성" onClick={handleReviewButtonClick} />
+        )}
       </ReviewUserContainer>
       <Separator />
     </Container>
@@ -44,7 +46,7 @@ const ReviewUserContainer = styled.div`
 `;
 
 const UserContainer = styled.div`
-  width: 70%;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;

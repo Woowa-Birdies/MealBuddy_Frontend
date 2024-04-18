@@ -24,6 +24,8 @@ const GuestButtonContainer = ({ userId }) => {
     } catch (error) {
       console.error('Error in processing:', error);
     }
+
+    window.location.reload();
   };
 
   switch (post.postStatus) {

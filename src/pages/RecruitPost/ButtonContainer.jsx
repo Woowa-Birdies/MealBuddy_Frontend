@@ -5,7 +5,7 @@ import HostButtonContainer from '@/pages/RecruitPost/HostButtonContainer';
 import GuestButtonContainer from '@/pages/RecruitPost/GuestButtonContainer';
 
 const ButtonContainer = () => {
-  const now = 3;
+  const now = 1;
   const { post } = usePostStore();
   const writer = post.userId;
 

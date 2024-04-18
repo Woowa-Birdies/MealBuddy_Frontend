@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 const CompletedButton = ({ title, onClick, type }) => {
-  console.log(type);
+  // console.log(type);
   return (
     <StyledButton onClick={onClick} type={type}>
       {title}
