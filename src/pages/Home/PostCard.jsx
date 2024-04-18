@@ -6,6 +6,7 @@ import CompletedButton from '@components/ui/Button/CompletedButton';
 import pariticipant from '@assets/images/svg/participant.svg';
 import clock from '@assets/images/svg/clock.svg';
 import dayjs from 'dayjs';
+import TimeLimit from '@components/ui/TimeLimit/TimeLimit';
 
 export const shortenWords = (str, length = 10) => {
   let result = '';
@@ -25,11 +26,20 @@ const PostCard = ({ post, type }) => {
     nav(`post/${post.postId}`);
   };
 
+  const handleClick = () => {
+    if (type === 'deadline') {
+      handleJoin();
+    }
+  };
+
   return (
-    <Container type={type}>
+    <Container type={type} onClick={handleClick}>
       <Img type={type} />
-      <Info>
-        <TagButton title={post.foodTypeTag} type="tag" />
+      <InfoContainer>
+        <Info>
+          <TagButton title={post.foodTypeTag} type="tag" />
+          {type === 'deadline' && <TimeLimit closeAt={post.closeAt} />}
+        </Info>
         <Paragraphy content={shortenWords(post.place)} size="xl" />
         {/* <About>
           <Div>
@@ -78,7 +88,7 @@ const PostCard = ({ post, type }) => {
             </Tag>
           </About>
         )}
-      </Info>
+      </InfoContainer>
       {type === 'list' && (
         <CompletedButton title="참여하기" type={`join${type}`} onClick={handleJoin} />
       )}
@@ -105,10 +115,17 @@ const Img = styled.div`
   background: #d9d9d9;
 `;
 
-const Info = styled.div`
+const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
+`;
+
+const Info = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
 `;
 
 const Icon = styled.img`

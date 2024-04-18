@@ -25,7 +25,7 @@ const Deadline = () => {
 
   const fetchList = async () => {
     try {
-      const res = await homeApi.deadline('7');
+      const res = await homeApi.deadline('2');
       setPosts(res.data);
     } catch (error) {
       console.error('Failed to fetch post list:', error);

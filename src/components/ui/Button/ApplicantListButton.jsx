@@ -3,12 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 // const ApplicantListButton = ({ title, type, postId }) => {
-const ApplicantListButton = ({ title, type }) => {
+const ApplicantListButton = ({ title, type, propData }) => {
   const nav = useNavigate();
 
   const handleClick = () => {
-    nav('/applicantslist');
+    nav(`/applicantslist/${propData}`);
   };
+
   return (
     <StyledButton onClick={handleClick} type={type} title={title}>
       {title}
