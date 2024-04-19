@@ -16,9 +16,14 @@ const kick = async (roomId, targetUserId) => {
   return del(`/room/kick/${roomId}/${targetUserId}`);
 };
 
+const exit = async (roomId) => {
+  return del(`/room/quit/${roomId}`);
+};
+
 export default {
   chatList,
   joinChat,
   messages,
   kick,
+  exit,
 };

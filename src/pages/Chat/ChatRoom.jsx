@@ -5,11 +5,14 @@ import { Popover, Button } from 'antd';
 import MenuIcon from '@assets/images/svg/menu.svg?react';
 import SvgComponent from '@components/ui/Logo/SvgComponent';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import useChatStore from '@store/useChatStore';
 import ChatWindow from '@/pages/Chat/ChatWindow';
 import chatApi from '@api/biz/chatApi';
+import exit from '@assets/images/svg/exit.svg';
 
 const ChatRoom = () => {
+  const nav = useNavigate();
   const [open, setOpen] = useState(false);
   const { room } = useChatStore();
   const { joinUsers } = room;
@@ -27,6 +30,16 @@ const ChatRoom = () => {
     }
   };
 
+  const handleExitClick = async () => {
+    try {
+      const res = await chatApi.exit({ roomId: room.roomId });
+      console.log('success to exit: ', res);
+      nav('/chat');
+    } catch (error) {
+      console.log('Failed to exit: ', error);
+    }
+  };
+
   const renderUsers = () => (
     <>
       {joinUsers.map((user) => (
@@ -36,6 +49,7 @@ const ChatRoom = () => {
           <StyledButton onClick={() => handleExportUsers(user.userId)}>내보내기</StyledButton>
         </JoinUserContainer>
       ))}
+      <Exit src={exit} onClick={handleExitClick} />
     </>
   );
 
@@ -61,6 +75,7 @@ const ChatRoom = () => {
           <CustomPopHover
             content={<>{renderUsers()}</>}
             title="대화 참여자"
+            footer="ㅁ"
             trigger="click"
             open={open}
             onOpenChange={handleOpenChange}
@@ -108,24 +123,34 @@ const ChatRoomTitle = styled.div`
 `;
 
 const CustomPopHover = styled(Popover)`
-  width: 10vw;
   position: absolute;
-  transform: translate(90%, -50%);
+  transform: translateY(-50%);
   top: 50%;
   right: 20px;
+`;
+
+const Exit = styled.img`
+  width: 1vw;
+  height: 1vw;
+  cursor: pointer;
 `;
 
 const JoinUserContainer = styled.div`
   height: 3vw;
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  gap: 3vw;
+  justify-content: space-between;
 `;
 
 const StyledButton = styled(Button)`
+  height: 1.8vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: #ffd234 !important;
   border: none !important;
+  font-size: 12px;
+  border-radius: 10px;
 
   &:hover {
     background: #000 !important;
