@@ -24,7 +24,7 @@ jobs:
           node-version: 18.x
 
       - name: Install dependencies
-        run: npm install --immutable
+        run: pnpm install --immutable
 
       - name: Run build
         run: pnpm run build:prod
