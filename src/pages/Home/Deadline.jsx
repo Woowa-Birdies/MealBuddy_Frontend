@@ -37,7 +37,10 @@ const Deadline = () => {
     fetchList();
   }, []);
 
-  const currentData = posts.ongoing.slice(currentPage * pageSize, (currentPage + 1) * pageSize);
+  const currentData =
+    posts.resultCount > 0
+      ? posts.ongoing.slice(currentPage * pageSize, (currentPage + 1) * pageSize)
+      : [];
 
   return (
     <Container>
@@ -46,14 +49,13 @@ const Deadline = () => {
         <Button onClick={prevPage} disabled={currentPage === 0}>
           ◀
         </Button>
-        <Button onClick={nextPage} disabled={(currentPage + 1) * pageSize >= posts.ongoing.length}>
+        <Button onClick={nextPage} disabled={(currentPage + 1) * pageSize >= posts.resultCount}>
           ▶
         </Button>
       </Nav>
       <PostGrid>
-        {currentData.map((post) => (
-          <PostCard key={post.postId} post={post} type="deadline" />
-        ))}
+        {currentData &&
+          currentData.map((post) => <PostCard key={post.postId} post={post} type="deadline" />)}
       </PostGrid>
     </Container>
   );
