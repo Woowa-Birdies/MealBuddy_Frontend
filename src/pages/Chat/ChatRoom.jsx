@@ -1,20 +1,43 @@
 import Label from '@components/ui/Label/Label';
 import Paragraphy from '@components/ui/Paragraphy/Paragraphy';
 import styled from 'styled-components';
-import { Popover } from 'antd';
+import { Popover, Button } from 'antd';
 import MenuIcon from '@assets/images/svg/menu.svg?react';
 import SvgComponent from '@components/ui/Logo/SvgComponent';
 import { useState } from 'react';
 import useChatStore from '@store/useChatStore';
 import ChatWindow from '@/pages/Chat/ChatWindow';
+import chatApi from '@api/biz/chatApi';
 
 const ChatRoom = () => {
   const [open, setOpen] = useState(false);
   const { room } = useChatStore();
+  const { joinUsers } = room;
 
   const handleOpenChange = (newOpen) => {
     setOpen(newOpen);
   };
+
+  const handleExportUsers = async (targetUserId) => {
+    try {
+      const res = await chatApi.kick({ roomId: room.roomId, targetUserId });
+      console.log('success to kick: ', res);
+    } catch (error) {
+      console.log('Failed to kick: ', error);
+    }
+  };
+
+  const renderUsers = () => (
+    <>
+      {joinUsers.map((user) => (
+        <JoinUserContainer key={user.userId}>
+          <p>사용자 {user.userId}</p>
+          {/* 각 사용자별로 내보내기 버튼을 추가 */}
+          <StyledButton onClick={() => handleExportUsers(user.userId)}>내보내기</StyledButton>
+        </JoinUserContainer>
+      ))}
+    </>
+  );
 
   return (
     <Wrapper>
@@ -33,18 +56,21 @@ const ChatRoom = () => {
             />
           ) : null}
         </ChatRoomTitle>
-        <CustomPopHover
-          // content={{ joinUsers }}
-          title="대화 참여자"
-          trigger="click"
-          open={open}
-          onOpenChange={handleOpenChange}
-          placement="rightTop"
-        >
-          <MenuButton>
-            <SvgComponent src={MenuIcon} width={15} height={20} />
-          </MenuButton>
-        </CustomPopHover>
+
+        {room.roomId > 0 ? (
+          <CustomPopHover
+            content={<>{renderUsers()}</>}
+            title="대화 참여자"
+            trigger="click"
+            open={open}
+            onOpenChange={handleOpenChange}
+            placement="rightTop"
+          >
+            <MenuButton>
+              <SvgComponent src={MenuIcon} width={15} height={20} />
+            </MenuButton>
+          </CustomPopHover>
+        ) : null}
       </ChatRoomTop>
       {room.roomId > 0 && <ChatWindow />}
     </Wrapper>
@@ -82,10 +108,34 @@ const ChatRoomTitle = styled.div`
 `;
 
 const CustomPopHover = styled(Popover)`
+  width: 10vw;
   position: absolute;
-  transform: translateY(-50%);
+  transform: translate(90%, -50%);
   top: 50%;
   right: 20px;
+`;
+
+const JoinUserContainer = styled.div`
+  height: 3vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 3vw;
+`;
+
+const StyledButton = styled(Button)`
+  background: #ffd234 !important;
+  border: none !important;
+
+  &:hover {
+    background: #000 !important;
+    color: #fff !important;
+  }
+
+  &:active {
+    transform: none !important; // 트랜스폼 효과 제거
+    box-shadow: none !important; // 박스 쉐도우 효과 제거
+  }
 `;
 
 const MenuButton = styled.div`
