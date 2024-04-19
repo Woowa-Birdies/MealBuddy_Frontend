@@ -37,7 +37,7 @@ const RecruitForm = ({ postId }) => {
   return (
     <Form>
       <Field>
-        <Typography content="냠냠유형" />
+        <Typography content="냠냠 유형" />
         <ButtonList>
           {['식사', '카페', '술'].map((item) => (
             <SelectButton
@@ -50,7 +50,7 @@ const RecruitForm = ({ postId }) => {
         </ButtonList>
       </Field>
       <Field>
-        <Typography content="냠냠장소" />
+        <Typography content="냠냠 장소" />
         <PlaceField />
       </Field>
       <Field>

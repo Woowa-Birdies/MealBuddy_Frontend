@@ -11,6 +11,7 @@ import recruitApi from '@api/biz/recruitApi';
 import TagButton from '@components/ui/Button/TagButton';
 import settingIcon from '@assets/images/svg/setting.svg';
 import SelectButton from '@components/ui/Button/SelectButton';
+import TimeLimit from '@components/ui/TimeLimit/TimeLimit';
 
 const Post = () => {
   const nav = useNavigate();
@@ -37,25 +38,30 @@ const Post = () => {
     }
   };
 
+  const handleDeleteClick = () => {
+    recruitApi.deleteRecruit(post.postId);
+    nav('/');
+  };
+
   const handleMenuClick = ({ key }) => {
     switch (key) {
       case 'close':
         recruitApi.completionRecruit(post.postId);
+        window.location.reload();
         break;
       case 'recruit':
         recruitApi.ongoingRecruit(post.postId);
+        window.location.reload();
         break;
       case 'edit':
-        console.log('수정');
         nav(`/recruit/${post.postId}`);
+        break;
+      case 'delete':
+        handleDeleteClick();
         break;
       default:
         break;
     }
-  };
-  const handleDeleteClick = () => {
-    recruitApi.deleteRecruit(post.postId);
-    nav('/');
   };
 
   useEffect(() => {
@@ -78,7 +84,10 @@ const Post = () => {
     <Container>
       {/* {console.log(post)} */}
       <StatusContainer>
-        <StatusButton title={post.postStatus} />
+        <PostStatus>
+          <StatusButton title={post.postStatus} />
+          <TimeLimit closeAt={post.closeAt} />
+        </PostStatus>
         {now === post.userId && (
           <EditSection>
             {post.postStatus !== '모임 종료' ? (
@@ -92,7 +101,6 @@ const Post = () => {
                 <Setting src={settingIcon} alt="Settings" />
               </Dropdown>
             ) : (
-              // <DelButton onClick={handleDeleteClick}>삭제하기</DelButton>
               <SelectButton title="삭제하기" type="del" onClick={handleDeleteClick} />
             )}
           </EditSection>
@@ -124,6 +132,12 @@ const Container = styled.div`
 const StatusContainer = styled.div`
   display: flex;
   justify-content: space-between;
+`;
+
+const PostStatus = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 20px;
 `;
 
 const Setting = styled.img``;
