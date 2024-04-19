@@ -3,10 +3,25 @@ import styled from 'styled-components';
 import { Avatar } from 'antd';
 import Label from '@components/ui/Label/Label';
 import Paragraphy from '@components/ui/Paragraphy/Paragraphy';
-// import chatApi from '@api/biz/chatApi';
+import useChatStore from '@store/useChatStore';
+import chatApi from '@api/biz/chatApi';
+import dayjs from 'dayjs';
 
 const ChatListItem = () => {
+  const { room, setRoom } = useChatStore();
   const [chatList, setChatList] = useState([]);
+  const currentTime = dayjs().toISOString();
+
+  const joinChatRoom = async (roomId, roomName) => {
+    // 서버에서 채팅방 정보를 요청
+    const roomData = {
+      roomId,
+      lastReadAt: currentTime,
+    };
+    const res = await chatApi.chatRoomInfo(roomData);
+    console.log(res);
+    setRoom({ ...room, roomId, roomName, joinUsers: res.joinUsers });
+  };
 
   const fetchList = async () => {
     try {
@@ -16,46 +31,6 @@ const ChatListItem = () => {
 
       // 임의로 채팅목록 저장
       setChatList([
-        {
-          roomId: 4,
-          roomName: '서울역 맛집 탐방',
-        },
-        {
-          roomId: 5,
-          roomName: '서울역 맛집 탐방2',
-        },
-        {
-          roomId: 4,
-          roomName: '서울역 맛집 탐방',
-        },
-        {
-          roomId: 5,
-          roomName: '서울역 맛집 탐방2',
-        },
-        {
-          roomId: 4,
-          roomName: '서울역 맛집 탐방',
-        },
-        {
-          roomId: 5,
-          roomName: '서울역 맛집 탐방2',
-        },
-        {
-          roomId: 4,
-          roomName: '서울역 맛집 탐방',
-        },
-        {
-          roomId: 5,
-          roomName: '서울역 맛집 탐방2',
-        },
-        {
-          roomId: 4,
-          roomName: '서울역 맛집 탐방',
-        },
-        {
-          roomId: 5,
-          roomName: '서울역 맛집 탐방2',
-        },
         {
           roomId: 4,
           roomName: '서울역 맛집 탐방',
@@ -77,14 +52,17 @@ const ChatListItem = () => {
   return (
     <ChatListContainer>
       {chatList.map((chatRoom) => (
-        <ItemWrapper key={chatRoom.roomId}>
+        <ItemWrapper
+          key={chatRoom.roomId}
+          onClick={() => joinChatRoom(chatRoom.roomId, chatRoom.roomName)}
+        >
           <ChatListBox>
-            <Avatar size={51} icon={<>1</>} />
+            <Avatar size="5vw" />
             <ChatRoomInfo>
               <Label content={chatRoom.roomName} size="large" />
-              <Paragraphy content="최근 채팅 내용을 보여줍니다. . . ." size="medium" />
+              <Paragraphy content="최근 채팅 내용을 보여줍니다..." size="medium" />
             </ChatRoomInfo>
-            <Paragraphy content="7" size="small" color="primary" />
+            {/* <Paragraphy content="7" size="small" color="primary" /> */}
           </ChatListBox>
         </ItemWrapper>
       ))}

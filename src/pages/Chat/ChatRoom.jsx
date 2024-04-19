@@ -20,11 +20,21 @@ const ChatRoom = () => {
     <Wrapper>
       <ChatRoomTop>
         <ChatRoomTitle>
-          <Label content={room.roomName} size="large" />
-          <Paragraphy content={room.joinUsers.length} size="medium" color="contentSecondary" />
+          {room.roomId > 0 ? (
+            <Label content={room.roomName} size="large" />
+          ) : (
+            <Label content="채팅" size="large" />
+          )}
+          {room.roomId > 0 && room.joinUsers ? (
+            <Paragraphy
+              content={room.joinUsers.length.toString()}
+              size="medium"
+              color="contentSecondary"
+            />
+          ) : null}
         </ChatRoomTitle>
         <CustomPopHover
-          content={<>123</>}
+          // content={{ joinUsers }}
           title="대화 참여자"
           trigger="click"
           open={open}
@@ -36,7 +46,7 @@ const ChatRoom = () => {
           </MenuButton>
         </CustomPopHover>
       </ChatRoomTop>
-      <ChatWindow />
+      {room.roomId > 0 && <ChatWindow />}
     </Wrapper>
   );
 };

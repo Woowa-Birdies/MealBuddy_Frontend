@@ -14,8 +14,8 @@ export default defineConfig(({ mode }) => {
       ? {
           // 개발 환경에서만 HTTPS 설정 적용
           https: {
-            key: fs.readFileSync(path.resolve(__dirname, './certs/localhost+2-key.pem')),
-            cert: fs.readFileSync(path.resolve(__dirname, './certs/localhost+2.pem')),
+            key: fs.readFileSync(path.resolve(__dirname, './certs/localhost-key.pem')),
+            cert: fs.readFileSync(path.resolve(__dirname, './certs/localhost.pem')),
           },
         }
       : {},

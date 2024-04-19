@@ -6,9 +6,6 @@ import dayjs from 'dayjs';
 import MyMessage from '@/pages/Chat/MyMessage';
 import YourMessage from '@/pages/Chat/YourMessage';
 import ChatInput from '@/pages/Chat/ChatInput';
-// import { API_BASE_URL } from '@constants/Constants';
-
-// const socket = new WebSocket(`ws://${API_BASE_URL}`);
 
 const ChatWindow = () => {
   const now = 2;
