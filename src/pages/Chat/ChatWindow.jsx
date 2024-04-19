@@ -42,42 +42,42 @@ const ChatWindow = () => {
             '안녕하세요.QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ',
           sender: 3, // userId
           roomId: 4,
-          createdAt: '2019-12-20T11:20:33.333Z',
+          createdAt: '2019-12-21T11:20:33.333Z',
         },
         {
           messageId: '0032010',
           message: '안녕하세요.',
           sender: 2, // userId
           roomId: 4,
-          createdAt: '2019-12-20T11:20:33.333Z',
+          createdAt: '2019-12-21T11:20:33.333Z',
         },
         {
           messageId: '0032010',
           message: '메시지 입니다.',
           sender: 2, // userId
           roomId: 4,
-          createdAt: '2019-12-20T11:20:33.333Z',
+          createdAt: '2019-12-21T11:20:33.333Z',
         },
         {
           messageId: '0032010',
           message: '반갑습니다.',
           sender: 2, // userId
           roomId: 4,
-          createdAt: '2019-12-20T11:20:33.333Z',
+          createdAt: '2019-12-25T11:20:33.333Z',
         },
         {
           messageId: '0032010',
           message: '안녕하세요.',
           sender: 3, // userId
           roomId: 4,
-          createdAt: '2019-12-20T11:20:33.333Z',
+          createdAt: '2019-12-25T11:20:33.333Z',
         },
         {
           messageId: '0032010',
           message: '안녕하세요.',
           sender: 3, // userId
           roomId: 4,
-          createdAt: '2019-12-20T11:20:33.333Z',
+          createdAt: '2019-12-29T11:20:33.333Z',
         },
         // 여기에 추가 메시지가 이어질 수 있습니다.
       ],
@@ -85,6 +85,7 @@ const ChatWindow = () => {
 
     // fetchMessages();
   }, []);
+
   const fetchMessages = async () => {
     try {
       // const res = await chatApi.messages({
@@ -105,14 +106,23 @@ const ChatWindow = () => {
     fetchMessages();
   }, []);
 
+  const shouldDisplayDate = (index) => {
+    if (index === 0) return true;
+    const currentDate = dayjs(messages.content[index].createdAt).format('YYYY-MM-DD');
+    const previousDate = dayjs(messages.content[index - 1].createdAt).format('YYYY-MM-DD');
+    return currentDate !== previousDate;
+  };
+
   return (
     <>
       <ChatWindowContainer>
-        {messages.content.map((messageObject) => (
+        {messages.content.map((messageObject, index) => (
           <>
-            <DateContainer>
-              <Date>{dayjs(messageObject.createdAt).format('YYYY년 MM월 DD일')}</Date>
-            </DateContainer>
+            {shouldDisplayDate(index) && (
+              <DateContainer>
+                <Date>{dayjs(messageObject.createdAt).format('YYYY년 MM월 DD일')}</Date>
+              </DateContainer>
+            )}
             {now === messageObject.sender ? (
               <MyMessageContainer>
                 <MyMessage time={messageObject.createdAt} message={messageObject.message} />

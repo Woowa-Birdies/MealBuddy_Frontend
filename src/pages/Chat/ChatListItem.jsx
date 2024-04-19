@@ -4,23 +4,38 @@ import { Avatar } from 'antd';
 import Label from '@components/ui/Label/Label';
 import Paragraphy from '@components/ui/Paragraphy/Paragraphy';
 import useChatStore from '@store/useChatStore';
-import chatApi from '@api/biz/chatApi';
-import dayjs from 'dayjs';
+// import chatApi from '@api/biz/chatApi';
+// import dayjs from 'dayjs';
 
 const ChatListItem = () => {
   const { room, setRoom } = useChatStore();
   const [chatList, setChatList] = useState([]);
-  const currentTime = dayjs().toISOString();
+  // const currentTime = dayjs().toISOString();
 
   const joinChatRoom = async (roomId, roomName) => {
     // 서버에서 채팅방 정보를 요청
-    const roomData = {
+    // const roomData = {
+    //   roomId,
+    //   lastReadAt: currentTime,
+    // };
+    // const res = await chatApi.chatRoomInfo(roomData);
+    // console.log(res);
+    // setRoom({ ...room, roomId, roomName, joinUsers: res.joinUsers });
+    setRoom({
+      ...room,
       roomId,
-      lastReadAt: currentTime,
-    };
-    const res = await chatApi.chatRoomInfo(roomData);
-    console.log(res);
-    setRoom({ ...room, roomId, roomName, joinUsers: res.joinUsers });
+      roomName,
+      joinUsers: [
+        {
+          userId: 4,
+          lastReadAt: '2019-11-20T11:20:40Z', // 해당 시간 기반으로 안읽은 메시지 처리
+        },
+        {
+          userId: 5,
+          lastReadAt: '2019-11-20T11:30:80Z',
+        },
+      ],
+    });
   };
 
   const fetchList = async () => {
