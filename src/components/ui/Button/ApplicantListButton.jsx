@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import usePostStore from '@store/usePostStore';
 
-// const ApplicantListButton = ({ title, type, postId }) => {
-const ApplicantListButton = ({ title, type, propData }) => {
+const ApplicantListButton = ({ title, type }) => {
   const nav = useNavigate();
+  const { post } = usePostStore();
 
   const handleClick = () => {
-    nav(`/applicantslist/${propData}`);
+    nav(`/applicantslist/${post.postId}`);
   };
 
   return (
