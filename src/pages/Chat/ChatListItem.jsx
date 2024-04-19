@@ -1,26 +1,66 @@
-import { useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { Avatar } from 'antd';
 import Label from '@components/ui/Label/Label';
 import Paragraphy from '@components/ui/Paragraphy/Paragraphy';
 import useChatStore from '@store/useChatStore';
-// import chatApi from '@api/biz/chatApi';
-// import dayjs from 'dayjs';
+import dayjs from 'dayjs';
+import { Client } from '@stomp/stompjs';
+import SockJS from 'sockjs-client';
 
 const ChatListItem = () => {
   const { room, setRoom } = useChatStore();
+  const client = useRef(null);
   const [chatList, setChatList] = useState([]);
-  // const currentTime = dayjs().toISOString();
+  const currentTime = dayjs().toISOString();
+  // const [authToken, setAuthToken] = useState('your-auth-token'); // 인증 토큰
+
+  useEffect(() => {
+    client.current = new Client({
+      webSocketFactory: () => new SockJS('https://api.woowabirdieside.com/'),
+      reconnectDelay: 5000,
+      // connectHeaders: {
+      //   Authorization: `Bearer ${authToken}`, // 헤더에 토큰 추가
+      // },
+      debug: (str) => {
+        console.log('STOMP Debug:', str);
+      },
+    });
+
+    client.current.onConnect = () => {
+      console.log('Connected to the server.');
+
+      client.current.subscribe(`/sub/chat/status/${room.roomId}`, (message) => {
+        console.log('Received:', message.body);
+        // 서버로부터 받은 데이터를 상태에 반영
+        // setRoom(JSON.parse(message.body));
+      });
+    };
+
+    client.current.activate();
+
+    return () => {
+      client.current.deactivate();
+    };
+  }, [room.roomId]);
+  // }, [room.roomId, authToken]);
 
   const joinChatRoom = async (roomId, roomName) => {
     // 서버에서 채팅방 정보를 요청
-    // const roomData = {
-    //   roomId,
-    //   lastReadAt: currentTime,
-    // };
-    // const res = await chatApi.chatRoomInfo(roomData);
-    // console.log(res);
-    // setRoom({ ...room, roomId, roomName, joinUsers: res.joinUsers });
+    const roomData = {
+      roomId,
+      lastReadAt: currentTime,
+    };
+    // 서버로 데이터 보내기
+    if (client.current) {
+      client.current.send({
+        destination: `/sub/chat/status/${roomId}`,
+
+        body: JSON.stringify(roomData),
+      });
+      console.log('Sent room data to the server:', roomData);
+    }
+
     setRoom({
       ...room,
       roomId,
@@ -40,10 +80,6 @@ const ChatListItem = () => {
 
   const fetchList = async () => {
     try {
-      // const res = await chatApi.chatList();
-      // setChatList(res);
-      // console.log(res);
-
       // 임의로 채팅목록 저장
       setChatList([
         {
