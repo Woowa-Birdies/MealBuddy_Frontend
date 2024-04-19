@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-const SelectButton = ({ title, type, onClick, selected }) => {
+const SelectButton = ({ title, type, onClick, selected, disabled }) => {
   const [isClicked, setIsClicked] = useState(false);
+
   const handleClick = () => {
     setIsClicked(!isClicked);
     onClick(title);
@@ -11,11 +12,12 @@ const SelectButton = ({ title, type, onClick, selected }) => {
 
   return (
     <StyledButton
-      onClick={handleClick}
+      onClick={!disabled ? handleClick : undefined}
       isClicked={isClicked}
       type={type}
       title={title}
       selected={selected}
+      disabled={disabled}
     >
       {title}
     </StyledButton>
@@ -30,12 +32,13 @@ SelectButton.defaultProps = {
 SelectButton.propTypes = {
   title: PropTypes.string.isRequired,
   onClick: PropTypes.func,
-  type: PropTypes.oneOf(['recruit', 'tag', 'ghost', 'manner', 'request', 'response', 'del']),
+  type: PropTypes.oneOf(['recruit', 'tag', 'ghost', 'request', 'response', 'del']),
 };
 
 export default SelectButton;
 
 const StyledButton = styled.button`
+  opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
   bottom: ${({ type }) => {
     if (type === 'request' || type === 'response') {
       return '0.5vw';
@@ -64,18 +67,12 @@ const StyledButton = styled.button`
     if (type === 'ghost') {
       return `${819 * 0.75}px`;
     }
-    if (type === 'manner') {
-      return '376px';
-    }
     return 'auto';
   }};
 
   height: ${({ type }) => {
     if (type === 'ghost') {
       return `${96 * 0.75}px`;
-    }
-    if (type === 'manner') {
-      return `${82 * 0.75}px`;
     }
     if (type === 'request' || type === 'response') {
       return `auto`;
@@ -87,36 +84,13 @@ const StyledButton = styled.button`
     if (type === 'ghost') {
       return `${theme.headings.medium.fontSize}`;
     }
-    if (type === 'manner') {
-      return `${theme.headings.small.fontSize}`;
-    }
     return '0.83vw';
   }};
 
-  font-weight: ${({ type }) => {
-    if (type === 'ghost') {
-      return '700';
-    }
-    if (type === 'manner') {
-      return '400';
-    }
-    return '600';
-  }};
-
-  line-height: ${({ type }) => {
-    if (type === 'ghost') {
-      return '140%';
-    }
-    if (type === 'manner') {
-      return '160%';
-    }
-    return '150%';
-  }};
+  font-weight: '600';
+  line-height: '150%';
 
   border: ${({ type }) => {
-    if (type === 'manner') {
-      return '1px solid #898989';
-    }
     if (type === 'request') {
       return '1px solid #898989';
     }
@@ -124,9 +98,6 @@ const StyledButton = styled.button`
   }};
 
   border-radius: ${({ type }) => {
-    if (type === 'ghost' || type === 'manner') {
-      return '10px';
-    }
     if (type === 'request' || type === 'response') {
       return '1.56vw';
     }
@@ -140,47 +111,35 @@ const StyledButton = styled.button`
     if (type === 'ghost') {
       return isClicked ? theme.color.contentPrimary : theme.color.secondary;
     }
-    if (type === 'manner') {
-      return isClicked ? theme.color.darkgray : theme.color.lightgray;
-    }
     if (type === 'request') {
       return theme.color.contentWhite;
     }
     return theme.color.secondary;
   }};
 
-  color: ${({ theme, isClicked, selected, type }) => {
+  color: ${({ theme, selected, type }) => {
     if (type === 'recruit') {
       return selected ? theme.color.contentWhite : theme.border.content;
-    }
-    if (type === 'ghost') {
-      return theme.color.contentWhite;
-    }
-    if (type === 'manner') {
-      return isClicked ? theme.color.contentWhite : theme.color.content;
     }
     if (type === 'request' || type === 'del') {
       return theme.color.contentPrimary;
     }
     return theme.color.contentWhite;
   }};
-  cursor: ${({ type }) => {
+  cursor: ${({ type, disabled }) => {
     if (type === 'tag') {
       return 'default';
     }
-    return 'pointer';
+    return disabled ? 'not-allowed' : 'pointer';
   }};
 
   &:hover {
-    background: ${({ theme, type }) => {
-      if (type === 'ghost') {
-        return theme.color.contentPrimary;
-      }
-      if (type === 'manner') {
-        return theme.color.darkgray;
-      }
+    background: ${({ theme, isClicked, type }) => {
       if (type === 'response') {
         return theme.color.contentWhite;
+      }
+      if (type === 'ghost') {
+        return isClicked ? theme.color.secondary : theme.color.contentPrimary;
       }
       if (type === 'del') {
         return theme.color.primary;

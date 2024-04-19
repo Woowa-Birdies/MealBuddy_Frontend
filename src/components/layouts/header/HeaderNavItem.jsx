@@ -34,6 +34,12 @@ const HeaderNavItem = () => {
             to={menu.title !== '냠관리' ? menu.path : undefined}
             onMouseEnter={() => (menu.title === '냠관리' ? setHoveredMenu(menu.title) : null)}
             onMouseLeave={() => setHoveredMenu(null)}
+            onClick={
+              menu.title === '냠메이트 모집하기'
+                ? // eslint-disable-next-line no-return-assign
+                  () => (window.location.href = menu.path)
+                : undefined
+            }
           >
             {menu.title === '냠관리' && hoveredMenu === menu.title ? (
               <Dropdown

@@ -24,6 +24,8 @@ const GuestButtonContainer = ({ userId }) => {
     } catch (error) {
       console.error('Error in processing:', error);
     }
+
+    window.location.reload();
   };
 
   switch (post.postStatus) {
@@ -35,7 +37,7 @@ const GuestButtonContainer = ({ userId }) => {
       );
     case '모집 마감':
       if (post.askStatus === '참여' || post.askStatus === '수락') {
-        return <YumTalkButton title="냠냠 토크 입장하기" type="post" />;
+        return <YumTalkButton title="냠냠 토크 입장하기" type="post" postId={post.postId} />;
       }
       if (post.askStatus === '대기') {
         return <TagButton title="신청 완료" type="post" />;
@@ -46,7 +48,7 @@ const GuestButtonContainer = ({ userId }) => {
       return null;
     case '모집중':
       if (post.askStatus === '참여' || post.askStatus === '수락') {
-        return <YumTalkButton title="냠냠 토크 입장하기" type="post" />;
+        return <YumTalkButton title="냠냠 토크 입장하기" type="post" postId={post.postId} />;
       }
       if (post.askStatus === '대기') {
         return <TagButton title="신청 완료" type="post" />;

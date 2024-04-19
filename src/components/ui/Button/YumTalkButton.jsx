@@ -1,13 +1,15 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import chatApi from '@api/biz/chatApi';
 
-// const ApplicantListButton = ({ title, type, postId }) => {
-const ApplicantListButton = ({ title, type }) => {
+const YumTalkButton = ({ title, type, postId }) => {
   const nav = useNavigate();
 
-  const handleClick = () => {
+  const handleClick = async () => {
     nav('/chat');
+    const res = await chatApi.joinChat(postId);
+    console.log(res);
   };
   return (
     <StyledButton onClick={handleClick} type={type} title={title}>
@@ -16,18 +18,18 @@ const ApplicantListButton = ({ title, type }) => {
   );
 };
 
-ApplicantListButton.defaultProps = {
+YumTalkButton.defaultProps = {
   type: 'post',
   // onClick: () => {},
 };
 
-ApplicantListButton.propTypes = {
+YumTalkButton.propTypes = {
   title: PropTypes.string.isRequired,
   type: PropTypes.oneOf(['post', 'mypage']),
   // onClick: PropTypes.func,
 };
 
-export default ApplicantListButton;
+export default YumTalkButton;
 
 const StyledButton = styled.button`
   width: ${({ type }) => {

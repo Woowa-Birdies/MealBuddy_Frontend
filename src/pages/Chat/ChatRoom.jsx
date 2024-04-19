@@ -5,9 +5,12 @@ import { Popover } from 'antd';
 import MenuIcon from '@assets/images/svg/menu.svg?react';
 import SvgComponent from '@components/ui/Logo/SvgComponent';
 import { useState } from 'react';
+import useChatStore from '@store/useChatStore';
+import ChatWindow from '@/pages/Chat/ChatWindow';
 
 const ChatRoom = () => {
   const [open, setOpen] = useState(false);
+  const { room } = useChatStore();
 
   const handleOpenChange = (newOpen) => {
     setOpen(newOpen);
@@ -17,12 +20,12 @@ const ChatRoom = () => {
     <Wrapper>
       <ChatRoomTop>
         <ChatRoomTitle>
-          <Label content="모임제목" size="large" />
-          <Paragraphy content="7" size="medium" color="contentSecondary" />
+          <Label content={room.roomName} size="large" />
+          <Paragraphy content={room.joinUsers.length} size="medium" color="contentSecondary" />
         </ChatRoomTitle>
         <CustomPopHover
           content={<>123</>}
-          title="Title"
+          title="대화 참여자"
           trigger="click"
           open={open}
           onOpenChange={handleOpenChange}
@@ -33,6 +36,7 @@ const ChatRoom = () => {
           </MenuButton>
         </CustomPopHover>
       </ChatRoomTop>
+      <ChatWindow />
     </Wrapper>
   );
 };
@@ -40,6 +44,7 @@ const ChatRoom = () => {
 export default ChatRoom;
 
 const Wrapper = styled.div`
+  height: 40vw;
   flex: 0.7;
   border: ${({ theme }) => theme.border.borderTransparent};
   border-left: none;
@@ -62,6 +67,7 @@ const ChatRoomTitle = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  padding: 24px;
   gap: 16px;
 `;
 
