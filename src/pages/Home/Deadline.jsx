@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PostCard from '@/pages/Home/PostCard';
 import homeApi from '@api/biz/homeApi';
 import Typography from '@components/ui/Typography/Typography';
+import handleError from '@utils/ErrorHandler';
 
 const Deadline = () => {
   const [posts, setPosts] = useState({ ongoing: [] });
@@ -28,7 +29,7 @@ const Deadline = () => {
       const res = await homeApi.deadline('2');
       setPosts(res.data);
     } catch (error) {
-      console.error('Failed to fetch post list:', error);
+      handleError(error);
     }
   };
 

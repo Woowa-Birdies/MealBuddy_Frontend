@@ -1,21 +1,13 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { ROUTES } from '@enums/CommonEnum';
 import ProfileTitle from '@/pages/UserProfile/ProfileTitle';
 import UserInfo from '@/pages/UserProfile/UserInfo';
 import UserHistory from '@/pages/UserProfile/UserHistory';
 import UserReview from '@/pages/UserProfile/UserReview';
-import useLoginStore from '@store/useLoginStore';
-import { useNavigate } from 'react-router-dom';
+import useLogout from '@hooks/useLogout';
 
 const UserProfile = ({ type }) => {
-  const { setIsLogin } = useLoginStore();
-  const nav = useNavigate();
-
-  const handleLogout = () => {
-    setIsLogin(false);
-    nav(ROUTES.HOME);
-  };
+  const handleLogout = useLogout();
 
   return (
     <ProfileWrapper>

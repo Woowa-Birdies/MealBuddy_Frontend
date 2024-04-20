@@ -1,8 +1,11 @@
 import Footer from '@components/layouts/footer';
 import Header from '@components/layouts/header';
 import styled from 'styled-components';
+import useAuthentication from '@hooks/useAuthentication';
 
 const Base = ({ children }) => {
+  useAuthentication();
+
   return (
     <>
       <Header />

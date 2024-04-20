@@ -7,12 +7,12 @@ import SvgComponent from '@components/ui/Logo/SvgComponent';
 import { Dropdown } from 'antd';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useLoginStore from '@store/useLoginStore';
 import styled from 'styled-components';
+import useLogout from '@hooks/useLogout';
 
 const HeaderDropdown = () => {
   const nav = useNavigate();
-  const { setIsLogin } = useLoginStore();
+  const handleLogout = useLogout();
 
   const [isUserHovering, setIsUserHovering] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
@@ -37,8 +37,7 @@ const HeaderDropdown = () => {
         nav(ROUTES.MYPAGE);
         break;
       case 'logout':
-        setIsLogin(false);
-        nav(ROUTES.HOME);
+        handleLogout();
         break;
       default:
         break;

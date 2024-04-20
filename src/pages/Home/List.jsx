@@ -6,6 +6,7 @@ import filter from '@assets/images/svg/filter.svg';
 import PostCard from '@/pages/Home/PostCard';
 import homeApi from '@api/biz/homeApi';
 import Typography from '@components/ui/Typography/Typography';
+import handleError from '@utils/ErrorHandler';
 
 const List = ({ posts, setPosts }) => {
   const [isModal, setIsModal] = useState(false);
@@ -24,7 +25,7 @@ const List = ({ posts, setPosts }) => {
       const res = await homeApi.getFilter({ dateTypes, foodTypes, ages, genders });
       setPosts(res.data);
     } catch (error) {
-      console.error('Failed to fetch post list:', error);
+      handleError(error);
     }
   };
 

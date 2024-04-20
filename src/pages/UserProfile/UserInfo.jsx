@@ -5,14 +5,17 @@ import styled from 'styled-components';
 import ProfileButton from '@components/ui/Button/ProfileButton';
 import SampleImg from '@/assets/images/png/profileimg.png';
 import Label from '@components/ui/Label/Label';
+import useUserInfoStore from '@store/useUserInfoStore';
 
 const UserInfo = ({ type }) => {
+  const { userProfile } = useUserInfoStore();
+
   return (
     <InfoWrapper>
       <InfoTop>
         <TopInner>
           <ProfileImg src={SampleImg} />
-          <Typography content="USER 1" size="xl" />
+          <Typography content={userProfile.userId.toString()} size="xl" />
           <Paragraphy content="#유저 개인 코드" size="large" color="contentTertiary" />
         </TopInner>
         <ProfileButton
@@ -23,7 +26,7 @@ const UserInfo = ({ type }) => {
         />
       </InfoTop>
       <InfoBottom>
-        <Label content="자기소개를 입력하세요." size="xl" />
+        <Label content={userProfile.introduce || '자기소개를 입력하세요.'} size="xl" />
       </InfoBottom>
     </InfoWrapper>
   );
