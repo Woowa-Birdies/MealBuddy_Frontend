@@ -19,6 +19,7 @@ const Base = ({ children }) => {
       nav(ROUTES.LOGIN);
     } else {
       if (SYSTEM_MODE !== 'production' && !TOKEN_DEV) {
+        console.log('로그인 후 token.js에 token을 넣어주세요');
         nav(ROUTES.LOGIN);
       }
       setIsLogin(true);
