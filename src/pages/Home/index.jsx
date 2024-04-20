@@ -1,12 +1,28 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import SearchContainer from '@/pages/Home/SearchContainer';
 import Deadline from '@/pages/Home/Deadline';
 import List from '@/pages/Home/List';
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
   const [posts, setPosts] = useState({ ongoing: [] });
   const [searching, setSearching] = useState(false);
+  const nav = useNavigate();
+
+  useEffect(() => {
+    // 쿠키 확인
+    const accessCookie = Cookies.get('_Secure-access');
+    const refreshCookie = Cookies.get('Secure-refresh');
+
+    if (accessCookie && refreshCookie) {
+      console.log('__Secure-access 쿠키가 있습니다:', accessCookie);
+      console.log('__Secure-refresh 쿠키가 있습니다:', refreshCookie);
+    } else {
+      console.log('필요한 쿠키가 존재하지 않습니다.');
+    }
+  }, [nav]);
 
   return (
     <Container>
