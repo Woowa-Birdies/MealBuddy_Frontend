@@ -13,8 +13,8 @@ const Home = () => {
 
   useEffect(() => {
     // 쿠키 확인
-    const accessCookie = Cookies.get('_Secure-access');
-    const refreshCookie = Cookies.get('Secure-refresh');
+    const accessCookie = Cookies.get('__Secure-access');
+    const refreshCookie = Cookies.get('__Secure-refresh');
 
     if (accessCookie && refreshCookie) {
       console.log('__Secure-access 쿠키가 있습니다:', accessCookie);
