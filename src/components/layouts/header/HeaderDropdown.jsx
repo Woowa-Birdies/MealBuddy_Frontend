@@ -9,9 +9,13 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useLoginStore from '@store/useLoginStore';
 import styled from 'styled-components';
+import handleError from '@utils/ErrorHandler';
+import useConfirmModal from '@hooks/component/modal/useConfirmModal';
 
 const HeaderDropdown = () => {
   const nav = useNavigate();
+  const showConfirm = useConfirmModal();
+
   const { setIsLogin } = useLoginStore();
 
   const [isUserHovering, setIsUserHovering] = useState(false);
@@ -30,6 +34,16 @@ const HeaderDropdown = () => {
     },
   ];
 
+  const handleLogout = async () => {
+    try {
+      await showConfirm('로그아웃 하시겠습니까?');
+      setIsLogin(false);
+      nav(ROUTES.LOGIN);
+    } catch (error) {
+      handleError(error);
+    }
+  };
+
   // 드롭다운 메뉴 클릭 이벤트
   const handleMenuClick = ({ key }) => {
     switch (key) {
@@ -37,8 +51,7 @@ const HeaderDropdown = () => {
         nav(ROUTES.MYPAGE);
         break;
       case 'logout':
-        setIsLogin(false);
-        nav(ROUTES.HOME);
+        handleLogout();
         break;
       default:
         break;

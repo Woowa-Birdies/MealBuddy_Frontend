@@ -1,6 +1,8 @@
 import { TOKEN_DEV } from '@/token';
 import { SYSTEM_MODE } from '@constants/Constants';
 import useLoadingStore from '@store/useLoadingStore';
+import useLoginStore from '@store/useLoginStore';
+import useModalWarningStore from '@store/useModalWarningStore';
 import Cookies from 'js-cookie';
 
 const interceptorsOf = (axiosInstance) => {
@@ -32,9 +34,12 @@ const interceptorsOf = (axiosInstance) => {
     },
     (error) => {
       useLoadingStore.getState().setLoading(false);
-
       if (error.response && error.response.status === 401) {
         // console.log('error');
+      } else if (error.code === 'ERR_NETWORK') {
+        useModalWarningStore.getState().setContent('먼저 로그인해주세요.');
+        useModalWarningStore.getState().setIsWarningOpen(true);
+        useLoginStore.getState().setIsLogin(false);
       } else {
         // console.error('Error response:', error);
       }

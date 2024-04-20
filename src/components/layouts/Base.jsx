@@ -2,7 +2,6 @@ import Footer from '@components/layouts/footer';
 import Header from '@components/layouts/header';
 import { useEffect } from 'react';
 import styled from 'styled-components';
-import { ROUTES } from '@enums/CommonEnum';
 import { useNavigate } from 'react-router-dom';
 import useCookie from '@hooks/useCookie';
 import { SYSTEM_MODE } from '@constants/Constants';
@@ -11,16 +10,26 @@ import { TOKEN_DEV } from '@/token';
 
 const Base = ({ children }) => {
   const nav = useNavigate();
+
+  // 쿠키에 access token 값
   const accessCookie = useCookie('__Secure-access');
   const { setIsLogin } = useLoginStore();
 
   useEffect(() => {
-    if (SYSTEM_MODE === 'production' && !accessCookie) {
-      nav(ROUTES.LOGIN);
+    console.log('SYSTEM_MODE', SYSTEM_MODE);
+    if (SYSTEM_MODE === 'production') {
+      if (!accessCookie) {
+        // nav(ROUTES.LOGIN); //로그인창으로 튕겨낼지말지?
+        setIsLogin(false);
+        return;
+      }
+      setIsLogin(true);
     } else {
-      if (SYSTEM_MODE !== 'production' && !TOKEN_DEV) {
+      if (!TOKEN_DEV) {
         console.log('로그인 후 token.js에 token을 넣어주세요');
-        nav(ROUTES.LOGIN);
+        // nav(ROUTES.LOGIN); //로그인창으로 튕겨낼지말지?
+        setIsLogin(false);
+        return;
       }
       setIsLogin(true);
     }

@@ -1,2 +1,3 @@
 /* eslint-disable import/prefer-default-export */
-export const TOKEN_DEV = '';
+export const TOKEN_DEV =
+  'eyJhbGciOiJIUzI1NiJ9.eyJjYXRlZ29yeSI6Il9fU2VjdXJlLWFjY2VzcyIsInVzZXJJZCI6NjcsInJvbGUiOiJST0xFX1VTRVIiLCJpYXQiOjE3MTM1ODM5NjAsImV4cCI6MTcxMzU4NTc2MH0.2L27QZ2obfD9GGiwqlaF_1vsoAlI1c424vc8QzXdF1Q';

@@ -24,6 +24,7 @@ export const PAGENAMES = Object.freeze({
   USERREQUESTSTATUS: '신청 냠냠',
   APPLICANTSLIST: '신청자 내역',
   CHAT: '냠냠토크',
+  LOGOUT: '로그아웃',
 });
 
 export const ROUTES = Object.freeze({
@@ -46,4 +47,5 @@ export const ROUTES = Object.freeze({
   USERREQUESTSTATUS: '/myrequest',
   APPLICANTSLIST: '/applicantslist/:postId',
   CHAT: '/chat',
+  LOGOUT: '/logout',
 });

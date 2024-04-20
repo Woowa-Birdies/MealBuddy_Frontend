@@ -1,5 +1,4 @@
 import Base from '@/components/layouts/Base';
-import { SYSTEM_MODE } from '@/constants/Constants';
 import { ROUTES } from '@/enums/CommonEnum';
 import Home from '@/pages/Home';
 import LoginSignup from '@/pages/LoginSignup';
@@ -23,10 +22,11 @@ import UserRequest from '@/pages/UserRequestStatus';
 import ApplicantsList from '@/pages/ApplicantList';
 import Chat from '@/pages/Chat';
 import ModalConfirmNegative from '@components/ui/Modal/ModalConfirmNegative';
+import Logout from '@/pages/Logout';
+import ModalWarning from '@components/ui/Modal/ModalWarning';
 
 const App = () => {
   useEffect(() => {
-    console.log('현재 모드', SYSTEM_MODE);
     validateKeys();
   }, []);
 
@@ -35,6 +35,7 @@ const App = () => {
       <Base>
         <LoadingModal />
         <ModalConfirmNegative />
+        <ModalWarning />
         <ScrollToTop />
         <PageTitleUpdater />
         <Routes>
@@ -55,6 +56,7 @@ const App = () => {
           <Route path={ROUTES.USERREQUESTSTATUS} element={<UserRequest />} />
           <Route path={ROUTES.APPLICANTSLIST} element={<ApplicantsList />} />
           <Route path={ROUTES.CHAT} element={<Chat />} />
+          <Route path={ROUTES.LOGOUT} element={<Logout />} />
         </Routes>
       </Base>
     </BrowserRouter>

@@ -1,38 +1,25 @@
 import { Button } from 'antd';
 import AlertIcon from '@assets/images/svg/alert-octagon.svg?react';
 import SvgComponent from '@components/ui/Logo/SvgComponent';
-import useModalConfirmStore from '@store/useModalConfirmStore';
-import {
-  CancelButton,
-  ConfirmContent,
-  FooterWrapper,
-  StyledModal,
-} from '@components/ui/Modal/ModalStyle';
+import useModalWarningStore from '@store/useModalWarningStore';
+import { ConfirmContent, FooterWrapper, StyledModal } from '@components/ui/Modal/ModalStyle';
 
-const ModalConfirmNegative = () => {
-  const { content, isConfirmOpen, setIsConfirmOpen, onOk, onCancel } = useModalConfirmStore();
+const ModalWarning = () => {
+  const { content, isWarningOpen, setIsWarningOpen, onOk } = useModalWarningStore();
 
   const handleOk = () => {
     onOk();
-    setIsConfirmOpen(false);
-  };
-
-  const handleCancel = () => {
-    onCancel();
-    setIsConfirmOpen(false);
+    setIsWarningOpen(false);
   };
 
   return (
     <StyledModal
-      open={isConfirmOpen}
+      open={isWarningOpen}
       width={337.5}
       closable={false}
       centered
       footer={
         <FooterWrapper>
-          <CancelButton onClick={handleCancel}>
-            <span>아니오</span>
-          </CancelButton>
           <Button type="primary" onClick={handleOk}>
             <span>예</span>
           </Button>
@@ -47,4 +34,4 @@ const ModalConfirmNegative = () => {
   );
 };
 
-export default ModalConfirmNegative;
+export default ModalWarning;
