@@ -1,19 +1,18 @@
 import { Button, Result } from 'antd';
 import { useEffect, useRef, useState } from 'react';
-import bgimg from '@assets/images/jpg/login-background.jpg';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '@enums/CommonEnum';
 import styled from 'styled-components';
-import { TOKEN_DEV } from '@/token';
 import { SYSTEM_MODE } from '@constants/Constants';
-import useCookie from '@hooks/useCookie';
+import Cookies from 'js-cookie';
+import { TOKEN_DEV } from '@/token';
 
 const Logout = () => {
   const nav = useNavigate();
-  const accessCookie = useCookie('__Secure-access');
+  const accessCookie = Cookies.get('__Secure-access');
 
   // 시간조절 5초 = 5
-  const [counter, setCounter] = useState(5);
+  const [counter, setCounter] = useState(600);
   const timerId = useRef(null);
 
   useEffect(() => {
@@ -44,8 +43,8 @@ const Logout = () => {
   }, [accessCookie, nav]);
 
   return (
-    <LoginWrap img={bgimg}>
-      <LoginInner>
+    <LogoutWrap>
+      <LogoutInner>
         <LogoutForm>
           <Result
             status="success"
@@ -58,29 +57,29 @@ const Logout = () => {
             ]}
           />
         </LogoutForm>
-      </LoginInner>
-    </LoginWrap>
+      </LogoutInner>
+    </LogoutWrap>
   );
 };
 export default Logout;
 
-const LoginWrap = styled.div`
+const LogoutWrap = styled.div`
   position: fixed;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-image: url(${(props) => props.img});
-`;
-
-const LoginInner = styled.div`
-  margin: auto;
-  position: fixed;
-  top: 50%;
+  top: 0;
   left: 0;
   right: 0;
-  transform: translateY(-50%);
+  bottom: 0;
+  background: rgba(255, 255, 255);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+`;
+
+const LogoutInner = styled.div`
   text-align: center;
 `;
+
 const LogoutForm = styled.div`
   width: 57rem;
   margin: auto;

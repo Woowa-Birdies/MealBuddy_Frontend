@@ -1,5 +1,5 @@
 import { Button } from 'antd';
-import AlertIcon from '@assets/images/svg/alert-octagon.svg?react';
+import AlertIcon from '@assets/images/svg/alert-warning.svg?react';
 import SvgComponent from '@components/ui/Logo/SvgComponent';
 import useModalWarningStore from '@store/useModalWarningStore';
 import { ConfirmContent, FooterWrapper, StyledModal } from '@components/ui/Modal/ModalStyle';

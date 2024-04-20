@@ -11,6 +11,8 @@ import useLoginStore from '@store/useLoginStore';
 import styled from 'styled-components';
 import handleError from '@utils/ErrorHandler';
 import useConfirmModal from '@hooks/component/modal/useConfirmModal';
+import Cookies from 'js-cookie';
+import loginApi from '@api/biz/loginApi';
 
 const HeaderDropdown = () => {
   const nav = useNavigate();
@@ -37,8 +39,10 @@ const HeaderDropdown = () => {
   const handleLogout = async () => {
     try {
       await showConfirm('로그아웃 하시겠습니까?');
+      await loginApi.postLogout();
+      Cookies.remove('__Secure-access');
+      nav(ROUTES.LOGOUT);
       setIsLogin(false);
-      nav(ROUTES.LOGIN);
     } catch (error) {
       handleError(error);
     }
