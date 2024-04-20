@@ -1,5 +1,5 @@
 import Base from '@/components/layouts/Base';
-import { ROUTES } from '@/enums/CommonEnum';
+import { ENVMODE, ROUTES } from '@/enums/CommonEnum';
 import Home from '@/pages/Home';
 import LoginSignup from '@/pages/LoginSignup';
 import Sample1 from '@/pages/Sample1';
@@ -24,10 +24,14 @@ import Chat from '@/pages/Chat';
 import ModalConfirmNegative from '@components/ui/Modal/ModalConfirmNegative';
 import Logout from '@/pages/Logout';
 import ModalWarning from '@components/ui/Modal/ModalWarning';
+import { SYSTEM_MODE } from '@constants/Constants';
 
 const App = () => {
   useEffect(() => {
-    validateKeys();
+    if (SYSTEM_MODE !== ENVMODE.PROD) {
+      console.log('현재 모드', SYSTEM_MODE);
+      validateKeys();
+    }
   }, []);
 
   return (

@@ -1,4 +1,4 @@
-import { ROUTES } from '@enums/CommonEnum';
+import { ENVMODE, ROUTES } from '@enums/CommonEnum';
 import UserIcon from '@assets/images/svg/user.svg?react';
 import UserIconHover from '@assets/images/svg/userHover.svg?react';
 import AlarmIcon from '@assets/images/svg/alarm.svg?react';
@@ -7,18 +7,17 @@ import SvgComponent from '@components/ui/Logo/SvgComponent';
 import { Dropdown } from 'antd';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useLoginStore from '@store/useLoginStore';
 import styled from 'styled-components';
 import handleError from '@utils/ErrorHandler';
 import useConfirmModal from '@hooks/component/modal/useConfirmModal';
 import Cookies from 'js-cookie';
 import loginApi from '@api/biz/loginApi';
+import { DOMAIN_URL, SYSTEM_MODE } from '@constants/Constants';
+import { clearTokenDev } from '@/token';
 
 const HeaderDropdown = () => {
   const nav = useNavigate();
   const showConfirm = useConfirmModal();
-
-  const { setIsLogin } = useLoginStore();
 
   const [isUserHovering, setIsUserHovering] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
@@ -39,10 +38,13 @@ const HeaderDropdown = () => {
   const handleLogout = async () => {
     try {
       await showConfirm('로그아웃 하시겠습니까?');
-      await loginApi.postLogout();
-      Cookies.remove('__Secure-access');
+      if (SYSTEM_MODE === ENVMODE.PROD) {
+        await loginApi.postLogout();
+        Cookies.remove('__Secure-access', { path: '/', domain: DOMAIN_URL });
+      } else {
+        clearTokenDev(); // 토큰 제거
+      }
       nav(ROUTES.LOGOUT);
-      setIsLogin(false);
     } catch (error) {
       handleError(error);
     }
