@@ -4,7 +4,15 @@ const interceptorsOf = (axiosInstance) => {
   axiosInstance.interceptors.request.use(
     (config) => {
       useLoadingStore.getState().setLoading(true);
-      return config;
+      const newConfig = {
+        ...config,
+        headers: {
+          ...config.headers,
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJjYXRlZ29yeSI6Il9fU2VjdXJlLWFjY2VzcyIsInVzZXJJZCI6NTEsInJvbGUiOiJST0xFX1VTRVIiLCJpYXQiOjE3MTM1Nzk4NzYsImV4cCI6MTcxMzU4MTY3Nn0.vSuCu47WDDzj_xrhFCaelnLh-HISclmXogbt0JL-Uc8`,
+        },
+      };
+
+      return newConfig;
     },
     (error) => {
       useLoadingStore.getState().setLoading(false);
@@ -20,11 +28,10 @@ const interceptorsOf = (axiosInstance) => {
     (error) => {
       useLoadingStore.getState().setLoading(false);
 
-      // 에러 로직 추후 잡기
       if (error.response && error.response.status === 401) {
-        console.log('error');
+        // console.log('error');
       } else {
-        console.error('Error response:', error);
+        // console.error('Error response:', error);
       }
 
       return Promise.reject(error);
