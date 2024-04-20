@@ -7,6 +7,7 @@ import pariticipant from '@assets/images/svg/participant.svg';
 import clock from '@assets/images/svg/clock.svg';
 import dayjs from 'dayjs';
 import TimeLimit from '@components/ui/TimeLimit/TimeLimit';
+import Thumnail from '@components/ui/Thumnail/ThumnailImage';
 
 export const shortenWords = (str, length = 10) => {
   let result = '';
@@ -34,7 +35,7 @@ const PostCard = ({ post, type }) => {
 
   return (
     <Container type={type} onClick={handleClick}>
-      <Img type={type} />
+      <Thumnail content={post.foodTypeTag} type={type} />
       <InfoContainer>
         <Info>
           <TagButton title={post.foodTypeTag} type="tag" />
@@ -105,14 +106,6 @@ const Container = styled.div`
   height: ${(props) => (props.type === 'list' ? '569px' : null)};
   gap: 16px;
   margin-bottom: ${(props) => (props.type === 'list' ? '10vh' : null)};
-`;
-
-const Img = styled.div`
-  display: flex;
-  width: ${(props) => (props.type === 'list' ? '15.88vw' : '21.17vw')};
-  height: 14.58vw;
-  border-radius: 20px;
-  background: #d9d9d9;
 `;
 
 const InfoContainer = styled.div`

@@ -3,7 +3,7 @@ import Typography from '@components/ui/Typography/Typography';
 import Paragraphy from '@components/ui/Paragraphy/Paragraphy';
 import styled from 'styled-components';
 import ProfileButton from '@components/ui/Button/ProfileButton';
-import SampleImg from '@/assets/images/png/profileimg.png';
+import defaultImg from '@/assets/images/svg/DefaultProfile.svg';
 import Label from '@components/ui/Label/Label';
 import useUserInfoStore from '@store/useUserInfoStore';
 
@@ -14,9 +14,13 @@ const UserInfo = ({ type }) => {
     <InfoWrapper>
       <InfoTop>
         <TopInner>
-          <ProfileImg src={SampleImg} />
-          <Typography content={userProfile.userId.toString()} size="xl" />
-          <Paragraphy content="#유저 개인 코드" size="large" color="contentTertiary" />
+          <ProfileImg src={defaultImg} />
+          <Typography content={userProfile.nickname || '냠메이트'} size="xl" />
+          <Paragraphy
+            content={`#user${userProfile.userId.toString()}`}
+            size="large"
+            color="contentTertiary"
+          />
         </TopInner>
         <ProfileButton
           type="link"
@@ -59,4 +63,5 @@ const ProfileImg = styled.img`
   object-fit: cover;
   object-position: center;
   margin-right: 28.56px;
+  filter: drop-shadow(0px 4px 9px rgba(0, 0, 0, 0.25));
 `;

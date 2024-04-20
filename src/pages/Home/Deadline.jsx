@@ -71,7 +71,8 @@ const Container = styled.div`
 const PostGrid = styled.div`
   display: flex;
   gap: 1rem;
-  margin-left: 1rem;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
 const Nav = styled.div`

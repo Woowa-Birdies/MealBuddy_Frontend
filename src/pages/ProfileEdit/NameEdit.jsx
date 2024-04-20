@@ -11,7 +11,7 @@ const NameEdit = () => {
 
   const { register, setValue, watch } = useForm({
     defaultValues: {
-      nickname: userProfile.nickname || '홍길동',
+      nickname: userProfile.nickname || '냠메이트',
     },
   });
 
@@ -19,7 +19,7 @@ const NameEdit = () => {
   const nickname = watch('nickname');
 
   useEffect(() => {
-    setValue('nickname', userProfile.nickname || '홍길동', { shouldValidate: true });
+    setValue('nickname', userProfile.nickname || '냠메이트', { shouldValidate: true });
   }, [userProfile.nickname, setValue]);
 
   const handleFocus = () => setIsFocused(true);

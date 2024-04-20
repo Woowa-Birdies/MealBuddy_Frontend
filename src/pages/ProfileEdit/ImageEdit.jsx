@@ -41,6 +41,7 @@ const ProfileImage = styled.img`
   object-fit: cover;
   object-position: center;
   position: static;
+  filter: drop-shadow(0px 4px 9px rgba(0, 0, 0, 0.25));
 `;
 
 const UploadButton = styled.label`
