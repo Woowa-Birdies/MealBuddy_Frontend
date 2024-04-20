@@ -1,16 +1,17 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-// import { ROUTES } from '@enums/CommonEnum';
+import usePostStore from '@store/usePostStore';
 
-// const GoReviewButton = ({ title, type, postId }) => {
 const GoReviewButton = ({ title, type }) => {
   const nav = useNavigate();
+  const { post } = usePostStore();
+  const { postId } = post;
 
   const handleClick = () => {
-    nav('/review');
-    // nav(`/review/${postId}`);
+    nav(`/review/${postId}`);
   };
+
   return (
     <StyledButton onClick={handleClick} type={type} title={title}>
       {title}
