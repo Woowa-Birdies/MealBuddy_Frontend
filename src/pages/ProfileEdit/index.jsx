@@ -6,7 +6,6 @@ import ImageEdit from '@/pages/ProfileEdit/ImageEdit';
 // import axios from 'axios';
 import NameEdit from '@/pages/ProfileEdit/NameEdit';
 import IntroEdit from '@/pages/ProfileEdit/IntroEdit';
-import LocationEdit from '@/pages/ProfileEdit/LocationEdit';
 import defaultImg from '@/assets/images/svg/DefaultProfile.svg';
 import SaveBtn from '@/components/ui/Button/CompletedButton';
 // import PropTypes from 'prop-types';
@@ -64,7 +63,6 @@ const ProfileEdit = () => {
         <NameEdit />
       </InfoBox>
       <IntroEdit />
-      <LocationEdit title="활동 지역 설정" />
       <SaveBtn title="수정 완료" onClick={handleSaveProfile} />
     </EditWrapper>
   );
