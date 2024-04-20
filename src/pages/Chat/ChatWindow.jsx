@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 // import chatApi from '@api/biz/chatApi';
-// import useChatStore from '@store/useChatStore';
+import useChatStore from '@store/useChatStore';
 import dayjs from 'dayjs';
 import MyMessage from '@/pages/Chat/MyMessage';
 import YourMessage from '@/pages/Chat/YourMessage';
@@ -9,6 +9,7 @@ import ChatInput from '@/pages/Chat/ChatInput';
 
 const ChatWindow = () => {
   const now = 2;
+  const { chat } = useChatStore();
   const [messages, setMessages] = useState({ content: [] });
   const [sendMessages, setSendMessages] = useState({ content: [] });
 
@@ -19,72 +20,74 @@ const ChatWindow = () => {
 
   useEffect(() => {
     // 임의로 채팅목록 저장
-    setMessages({
-      content: [
-        {
-          messageId: '0032010',
-          message: '메시지 입니다.',
-          sender: 1, // userId
-          roomId: 4,
-          createdAt: '2019-12-20T11:20:33.333Z',
-        },
-        {
-          messageId: '0032010',
-          message:
-            '반갑습니다.QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ',
-          sender: 2, // userId
-          roomId: 4,
-          createdAt: '2019-12-20T11:20:33.333Z',
-        },
-        {
-          messageId: '0032010',
-          message:
-            '안녕하세요.QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ',
-          sender: 3, // userId
-          roomId: 4,
-          createdAt: '2019-12-21T11:20:33.333Z',
-        },
-        {
-          messageId: '0032010',
-          message: '안녕하세요.',
-          sender: 2, // userId
-          roomId: 4,
-          createdAt: '2019-12-21T11:20:33.333Z',
-        },
-        {
-          messageId: '0032010',
-          message: '메시지 입니다.',
-          sender: 2, // userId
-          roomId: 4,
-          createdAt: '2019-12-21T11:20:33.333Z',
-        },
-        {
-          messageId: '0032010',
-          message: '반갑습니다.',
-          sender: 2, // userId
-          roomId: 4,
-          createdAt: '2019-12-25T11:20:33.333Z',
-        },
-        {
-          messageId: '0032010',
-          message: '안녕하세요.',
-          sender: 3, // userId
-          roomId: 4,
-          createdAt: '2019-12-25T11:20:33.333Z',
-        },
-        {
-          messageId: '0032010',
-          message: '안녕하세요.',
-          sender: 3, // userId
-          roomId: 4,
-          createdAt: '2019-12-29T11:20:33.333Z',
-        },
-        // 여기에 추가 메시지가 이어질 수 있습니다.
-      ],
-    });
+    // setMessages({
+    //   content: [
+    //     {
+    //       messageId: '0032010',
+    //       message: '메시지 입니다.',
+    //       sender: 1, // userId
+    //       roomId: 4,
+    //       createdAt: '2019-12-20T11:20:33.333Z',
+    //     },
+    //     {
+    //       messageId: '0032010',
+    //       message:
+    //         '반갑습니다.QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ',
+    //       sender: 2, // userId
+    //       roomId: 4,
+    //       createdAt: '2019-12-20T11:20:33.333Z',
+    //     },
+    //     {
+    //       messageId: '0032010',
+    //       message:
+    //         '안녕하세요.QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ',
+    //       sender: 3, // userId
+    //       roomId: 4,
+    //       createdAt: '2019-12-21T11:20:33.333Z',
+    //     },
+    //     {
+    //       messageId: '0032010',
+    //       message: '안녕하세요.',
+    //       sender: 2, // userId
+    //       roomId: 4,
+    //       createdAt: '2019-12-21T11:20:33.333Z',
+    //     },
+    //     {
+    //       messageId: '0032010',
+    //       message: '메시지 입니다.',
+    //       sender: 2, // userId
+    //       roomId: 4,
+    //       createdAt: '2019-12-21T11:20:33.333Z',
+    //     },
+    //     {
+    //       messageId: '0032010',
+    //       message: '반갑습니다.',
+    //       sender: 2, // userId
+    //       roomId: 4,
+    //       createdAt: '2019-12-25T11:20:33.333Z',
+    //     },
+    //     {
+    //       messageId: '0032010',
+    //       message: '안녕하세요.',
+    //       sender: 3, // userId
+    //       roomId: 4,
+    //       createdAt: '2019-12-25T11:20:33.333Z',
+    //     },
+    //     {
+    //       messageId: '0032010',
+    //       message: '안녕하세요.',
+    //       sender: 3, // userId
+    //       roomId: 4,
+    //       createdAt: '2019-12-29T11:20:33.333Z',
+    //     },
+    //     // 여기에 추가 메시지가 이어질 수 있습니다.
+    //   ],
+    // });
+    console.log('aaaaaaaaaaaa', chat);
+    setMessages(chat);
 
     // fetchMessages();
-  }, []);
+  }, [chat]);
 
   const fetchMessages = async () => {
     try {

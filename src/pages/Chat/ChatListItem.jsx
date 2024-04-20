@@ -11,7 +11,7 @@ import dayjs from 'dayjs';
 // import SockJS from 'sockjs-client';
 
 const ChatListItem = () => {
-  const { room, setRoom } = useChatStore();
+  const { room, setRoom, setChat } = useChatStore();
   const client = useRef(null);
   const [chatList, setChatList] = useState([]);
   const currentTime = dayjs().toISOString();
@@ -51,8 +51,20 @@ const ChatListItem = () => {
     // 서버에서 채팅방 정보를 요청
     const roomData = {
       roomId,
-      lastReadAt: currentTime,
+      entryAt: currentTime,
+      page: 1,
+      offset: 100,
     };
+
+    // 과거 채팅 내역 불러오기
+    try {
+      const res = await chatApi.messages(roomData);
+      // console.log('채팅: ', res.data);
+      setChat(res.data);
+    } catch (error) {
+      console.log('Failed to fetch chat: ', error);
+    }
+
     // 서버로 데이터 보내기
     if (client.current) {
       client.current.send({
