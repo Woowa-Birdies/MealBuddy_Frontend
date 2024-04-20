@@ -12,12 +12,12 @@ const messages = async (roomData) => {
   return post('/chat', roomData);
 };
 
-const kick = async (roomId, targetUserId) => {
-  return del(`/room/kick/${roomId}/${targetUserId}`);
+const kick = async (params) => {
+  return del(`/room/kick/${params.roomId}/${params.targetUserId}`);
 };
 
 const exit = async (roomId) => {
-  return del(`/room/quit/${roomId}`);
+  return del(`/room/quit/${roomId.roomId}`);
 };
 
 export default {
