@@ -5,14 +5,12 @@ import { Popover, Button } from 'antd';
 import MenuIcon from '@assets/images/svg/menu.svg?react';
 import SvgComponent from '@components/ui/Logo/SvgComponent';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import useChatStore from '@store/useChatStore';
 import ChatWindow from '@/pages/Chat/ChatWindow';
 import chatApi from '@api/biz/chatApi';
 import exit from '@assets/images/svg/exit.svg';
 
 const ChatRoom = () => {
-  const nav = useNavigate();
   const [open, setOpen] = useState(false);
   const { room } = useChatStore();
   const { joinUsers } = room;
@@ -32,9 +30,9 @@ const ChatRoom = () => {
 
   const handleExitClick = async () => {
     try {
+      window.location.reload();
       const res = await chatApi.exit({ roomId: room.roomId });
       console.log('success to exit: ', res);
-      nav('/chat');
     } catch (error) {
       console.log('Failed to exit: ', error);
     }
