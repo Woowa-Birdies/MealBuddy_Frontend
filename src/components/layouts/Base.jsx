@@ -5,16 +5,26 @@ import styled from 'styled-components';
 import { ROUTES } from '@enums/CommonEnum';
 import { useNavigate } from 'react-router-dom';
 import useCookie from '@hooks/useCookie';
+import { SYSTEM_MODE } from '@constants/Constants';
+import useLoginStore from '@store/useLoginStore';
+import { TOKEN_DEV } from '@/token';
 
 const Base = ({ children }) => {
   const nav = useNavigate();
   const accessCookie = useCookie('__Secure-access');
+  const { setIsLogin } = useLoginStore();
 
   useEffect(() => {
-    if (!accessCookie) {
+    if (SYSTEM_MODE === 'production' && !accessCookie) {
       nav(ROUTES.LOGIN);
+    } else {
+      if (SYSTEM_MODE !== 'production' && !TOKEN_DEV) {
+        console.log('asdf');
+        nav(ROUTES.LOGIN);
+      }
+      setIsLogin(true);
     }
-  }, [accessCookie, nav]);
+  }, [accessCookie, nav, setIsLogin]);
 
   return (
     <>

@@ -1,3 +1,5 @@
+import { TOKEN_DEV } from '@/token';
+import { SYSTEM_MODE } from '@constants/Constants';
 import useLoadingStore from '@store/useLoadingStore';
 import Cookies from 'js-cookie';
 
@@ -10,7 +12,8 @@ const interceptorsOf = (axiosInstance) => {
         ...config,
         headers: {
           ...config.headers,
-          Authorization: `Bearer ${accessCookie}`,
+          Authorization:
+            SYSTEM_MODE === 'production' ? `Bearer ${accessCookie}` : `Bearer ${TOKEN_DEV}`,
         },
       };
 

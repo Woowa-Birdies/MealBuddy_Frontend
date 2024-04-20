@@ -28,3 +28,5 @@ vite.config.js
 
 #kakakokey
 index.html
+
+token.js
