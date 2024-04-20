@@ -7,6 +7,7 @@ import TimeLimit from '@components/ui/TimeLimit/TimeLimit';
 import dayjs from 'dayjs';
 import Paragraphy from '@components/ui/Paragraphy/Paragraphy';
 import TagButton from '@components/ui/Button/TagButton';
+import Thumnail from '@components/ui/Thumnail/ThumnailImage';
 
 const ActivityContent = () => {
   const { postId } = useParams();
@@ -40,7 +41,7 @@ const ActivityContent = () => {
   return (
     <BoxWrapper>
       <ListItem>
-        <Thumnail />
+        <Thumnail content={postDetails.foodTypeTag} />
         <InnerBox>
           <TopSection>
             <Paragraphy content="동네" size="medium" color="contentTertiary" />
@@ -97,12 +98,6 @@ const InfoSection = styled.div`
   display: flex;
   flex-direction: row;
   gap: 14px;
-`;
-
-const Thumnail = styled.div`
-  width: 16.15vw;
-  height: 16.15vw;
-  background-color: gray;
 `;
 
 const InnerBox = styled.div`

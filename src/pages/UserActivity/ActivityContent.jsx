@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Label from '@components/ui/Label/Label';
+import Thumnail from '@components/ui/Thumnail/ThumnailImage';
 import { useNavigate } from 'react-router-dom';
 import ListexpandBtn from '@components/ui/Button/ListexpandBtn';
 import TimeLimit from '@components/ui/TimeLimit/TimeLimit';
@@ -75,7 +76,7 @@ const ActivityContent = ({ information }) => {
       ) : (
         information.slice(0, displayedCount).map((item) => (
           <ListItem key={item.postId} onClick={() => handleClick(item.postId)}>
-            <Thumnail />
+            <Thumnail content={item.foodTypeTag} />
             <InnerBox>
               <TopSection>
                 <Paragraphy content="동네" size="medium" color="contentTertiary" />
@@ -167,12 +168,6 @@ const BtnSection = styled.div`
   margin-top: 0.9375vw;
   gap: 18px;
 `;
-const Thumnail = styled.div`
-  width: 16.15vw;
-  height: 16.15vw;
-  background-color: gray;
-`;
-
 const InnerBox = styled.div`
   flex-grow: 1;
   display: flex;

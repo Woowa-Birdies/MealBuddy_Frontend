@@ -31,6 +31,7 @@ const IntroBoxWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  margin-bottom: 8.23vw;
 `;
 const InputWrapper = styled.div`
   position: static;
