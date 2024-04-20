@@ -2,8 +2,6 @@ import Base from '@/components/layouts/Base';
 import { ENVMODE, ROUTES } from '@/enums/CommonEnum';
 import Home from '@/pages/Home';
 import LoginSignup from '@/pages/LoginSignup';
-import Sample1 from '@/pages/Sample1';
-import Sample2 from '@/pages/Sample2';
 import UserProfile from '@/pages/UserProfile';
 import LoadingModal from '@components/ui/Spin/LoadingModal';
 import Recruit from '@/pages/Recruit';
@@ -46,8 +44,6 @@ const App = () => {
           <Route path={ROUTES.HOME} element={<Home />} />
           <Route path={ROUTES.LOGIN} element={<LoginSignup type="login" />} />
           <Route path={ROUTES.SIGNUP} element={<LoginSignup type="signup" />} />
-          <Route path={ROUTES.SAMPLE1} element={<Sample1 />} />
-          <Route path={ROUTES.SAMPLE2} element={<Sample2 />} />
           <Route path={ROUTES.MYPAGE} element={<UserProfile type="mypage" />} />
           <Route path={ROUTES.USERPAGE} element={<UserProfile type="userpage" />} />
           <Route path={ROUTES.RECRUIT} element={<Recruit />} />

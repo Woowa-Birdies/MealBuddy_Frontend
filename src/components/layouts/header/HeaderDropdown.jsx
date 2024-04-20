@@ -1,4 +1,4 @@
-import { ENVMODE, ROUTES } from '@enums/CommonEnum';
+import { ROUTES } from '@enums/CommonEnum';
 import UserIcon from '@assets/images/svg/user.svg?react';
 import UserIconHover from '@assets/images/svg/userHover.svg?react';
 import AlarmIcon from '@assets/images/svg/alarm.svg?react';
@@ -8,16 +8,11 @@ import { Dropdown } from 'antd';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import handleError from '@utils/ErrorHandler';
-import useConfirmModal from '@hooks/component/modal/useConfirmModal';
-import Cookies from 'js-cookie';
-import loginApi from '@api/biz/loginApi';
-import { DOMAIN_URL, SYSTEM_MODE } from '@constants/Constants';
-import { clearTokenDev } from '@/token';
+import useLogout from '@hooks/useLogout';
 
 const HeaderDropdown = () => {
   const nav = useNavigate();
-  const showConfirm = useConfirmModal();
+  const handleLogout = useLogout();
 
   const [isUserHovering, setIsUserHovering] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
@@ -34,21 +29,6 @@ const HeaderDropdown = () => {
       key: 'alarm2',
     },
   ];
-
-  const handleLogout = async () => {
-    try {
-      await showConfirm('로그아웃 하시겠습니까?');
-      if (SYSTEM_MODE === ENVMODE.PROD) {
-        await loginApi.postLogout();
-        Cookies.remove('__Secure-access', { path: '/', domain: DOMAIN_URL });
-      } else {
-        clearTokenDev(); // 토큰 제거
-      }
-      nav(ROUTES.LOGOUT);
-    } catch (error) {
-      handleError(error);
-    }
-  };
 
   // 드롭다운 메뉴 클릭 이벤트
   const handleMenuClick = ({ key }) => {
