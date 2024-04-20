@@ -19,7 +19,6 @@ const Base = ({ children }) => {
       nav(ROUTES.LOGIN);
     } else {
       if (SYSTEM_MODE !== 'production' && !TOKEN_DEV) {
-        console.log('asdf');
         nav(ROUTES.LOGIN);
       }
       setIsLogin(true);
