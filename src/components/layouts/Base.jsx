@@ -17,7 +17,7 @@ const Base = ({ children }) => {
 
   useEffect(() => {
     console.log('SYSTEM_MODE', SYSTEM_MODE);
-    if (SYSTEM_MODE === 'production') {
+    if (SYSTEM_MODE === 'prod') {
       if (!accessCookie) {
         // nav(ROUTES.LOGIN); //로그인창으로 튕겨낼지말지?
         setIsLogin(false);

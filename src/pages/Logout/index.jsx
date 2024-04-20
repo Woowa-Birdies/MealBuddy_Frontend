@@ -34,7 +34,7 @@ const Logout = () => {
   }, [nav]);
 
   useEffect(() => {
-    if (SYSTEM_MODE === 'production') {
+    if (SYSTEM_MODE === 'prod') {
       if (accessCookie) {
         nav(ROUTES.HOME);
       }

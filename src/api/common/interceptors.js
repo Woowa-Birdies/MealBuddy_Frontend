@@ -14,8 +14,7 @@ const interceptorsOf = (axiosInstance) => {
         ...config,
         headers: {
           ...config.headers,
-          Authorization:
-            SYSTEM_MODE === 'production' ? `Bearer ${accessCookie}` : `Bearer ${TOKEN_DEV}`,
+          Authorization: SYSTEM_MODE === 'prod' ? `Bearer ${accessCookie}` : `Bearer ${TOKEN_DEV}`,
         },
       };
 
@@ -37,7 +36,7 @@ const interceptorsOf = (axiosInstance) => {
       if (error.response && error.response.status === 401) {
         // console.log('error');
       } else if (error.code === 'ERR_NETWORK') {
-        useModalWarningStore.getState().setContent('먼저 로그인해주세요.');
+        useModalWarningStore.getState().setContent('먼저 s로그인해주세요.');
         useModalWarningStore.getState().setIsWarningOpen(true);
         useLoginStore.getState().setIsLogin(false);
       } else {
