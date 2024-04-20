@@ -1,11 +1,11 @@
-import { useState, useRef } from 'react';
-// import { useEffect, useState, useRef } from 'react';
+// import { useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { Avatar } from 'antd';
 import Label from '@components/ui/Label/Label';
 import Paragraphy from '@components/ui/Paragraphy/Paragraphy';
 import useChatStore from '@store/useChatStore';
-// import chatApi from '@api/biz/chatApi';
+import chatApi from '@api/biz/chatApi';
 import dayjs from 'dayjs';
 // import { Client } from '@stomp/stompjs';
 // import SockJS from 'sockjs-client';
@@ -82,45 +82,50 @@ const ChatListItem = () => {
 
   const fetchList = async () => {
     try {
-      // const res = chatApi.chatList();
+      const res = await chatApi.chatList();
       // console.log(res.data);
+      setChatList(res.data);
       // 임의로 채팅목록 저장
-      setChatList([
-        {
-          roomId: 4,
-          roomName: '서울역 맛집 탐방',
-        },
-        {
-          roomId: 5,
-          roomName: '서울역 맛집 탐방2',
-        },
-      ]);
+      // setChatList([
+      //   {
+      //     roomId: 4,
+      //     roomName: '서울역 맛집 탐방',
+      //   },
+      //   {
+      //     roomId: 5,
+      //     roomName: '서울역 맛집 탐방2',
+      //   },
+      // ]);
     } catch (error) {
       console.error('Failed to fetch chat list:', error);
     }
   };
 
-  useState(() => {
+  useEffect(() => {
     fetchList();
   }, []);
 
   return (
     <ChatListContainer>
-      {chatList.map((chatRoom) => (
-        <ItemWrapper
-          key={chatRoom.roomId}
-          onClick={() => joinChatRoom(chatRoom.roomId, chatRoom.roomName)}
-        >
-          <ChatListBox>
-            <Avatar size="5vw" />
-            <ChatRoomInfo>
-              <Label content={chatRoom.roomName} size="large" />
-              <Paragraphy content="최근 채팅 내용을 보여줍니다..." size="medium" />
-            </ChatRoomInfo>
-            {/* <Paragraphy content="7" size="small" color="primary" /> */}
-          </ChatListBox>
-        </ItemWrapper>
-      ))}
+      {chatList.length > 0 ? (
+        chatList.map((chatRoom) => (
+          <ItemWrapper
+            key={chatRoom.roomId}
+            onClick={() => joinChatRoom(chatRoom.roomId, chatRoom.roomName)}
+          >
+            <ChatListBox>
+              <Avatar size="5vw" />
+              <ChatRoomInfo>
+                <Label content={chatRoom.roomName} size="large" />
+                <Paragraphy content="최근 채팅 내용을 보여줍니다..." size="medium" />
+              </ChatRoomInfo>
+              {/* <Paragraphy content="7" size="small" color="primary" /> */}
+            </ChatListBox>
+          </ItemWrapper>
+        ))
+      ) : (
+        <Paragraphy content="채팅방이 존재하지 않습니다." size="medium" />
+      )}
     </ChatListContainer>
   );
 };
