@@ -30,7 +30,7 @@ const SearchContainer = ({ setPosts, setSearching }) => {
         <Typography content="혼자 밥먹기가 아쉬울 때, 냠메이트와 함께해요." size="xl" />
         <Space direction="vertical">
           <Search
-            placeholder="가고싶은 식당을 검색해보세요"
+            placeholder="모임을 원하는 지역이나 식당을 검색해보세요"
             allowClear
             enterButton="검색"
             size="large"
