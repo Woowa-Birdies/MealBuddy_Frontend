@@ -38,7 +38,7 @@ export const ROUTES = Object.freeze({
   RECRUITPOST: '/post/:postId',
   MYPAGE: '/mypage',
   USERPAGE: '/userpage',
-  REVIEW: '/review',
+  REVIEW: '/review/:postId',
   REPORT: '/report',
   EDITPROFILE: '/editprofile',
   VERIFICATION: '/verification',

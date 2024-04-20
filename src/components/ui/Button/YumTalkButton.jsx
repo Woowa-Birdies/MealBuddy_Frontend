@@ -2,13 +2,15 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import chatApi from '@api/biz/chatApi';
+import usePostStore from '@store/usePostStore';
 
-const YumTalkButton = ({ title, type, postId }) => {
+const YumTalkButton = ({ title, type }) => {
   const nav = useNavigate();
+  const { post } = usePostStore();
 
   const handleClick = async () => {
     nav('/chat');
-    const res = await chatApi.joinChat(postId);
+    const res = await chatApi.joinChat(post.postId);
     console.log(res);
   };
   return (
