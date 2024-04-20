@@ -3,12 +3,17 @@ import Header from '@components/layouts/header';
 import { useEffect } from 'react';
 import styled from 'styled-components';
 import Cookies from 'js-cookie';
+import { ROUTES } from '@enums/CommonEnum';
+import { useNavigate } from 'react-router-dom';
 
 const Base = ({ children }) => {
+  const nav = useNavigate();
+
   useEffect(() => {
     // 쿠키 확인
     const accessCookie = Cookies.get('__Secure-access');
     const refreshCookie = Cookies.get('__Secure-refresh');
+    console.log('documnet', document.cookie);
 
     console.log('accessCookie', accessCookie);
     console.log('refreshCookie', refreshCookie);
@@ -18,8 +23,9 @@ const Base = ({ children }) => {
       console.log('__Secure-refresh 쿠키가 있습니다:', refreshCookie);
     } else {
       console.log('필요한 쿠키가 존재하지 않습니다.');
+      nav(ROUTES.LOGIN);
     }
-  }, []);
+  }, [nav]);
 
   return (
     <>
