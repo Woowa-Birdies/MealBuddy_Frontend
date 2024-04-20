@@ -1,19 +1,26 @@
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Label from '@components/ui/Label/Label';
 import Paragraphy from '@components/ui/Paragraphy/Paragraphy';
 import deleteIcon from '@/assets/images/svg/CloseBtn.svg';
+import useUserInfoStore from '@store/useUserInfoStore';
 
 const NameEdit = () => {
+  const { userProfile } = useUserInfoStore();
+
   const { register, setValue, watch } = useForm({
     defaultValues: {
-      nickname: 'USER1', // 기본값 설정
+      nickname: userProfile.nickname || '홍길동',
     },
   });
 
   const [isFocused, setIsFocused] = useState(false);
   const nickname = watch('nickname');
+
+  useEffect(() => {
+    setValue('nickname', userProfile.nickname || '홍길동', { shouldValidate: true });
+  }, [userProfile.nickname, setValue]);
 
   const handleFocus = () => setIsFocused(true);
   const handleBlur = () => setIsFocused(false);
@@ -21,6 +28,7 @@ const NameEdit = () => {
   const handleDelete = () => {
     setValue('nickname', '', { shouldValidate: true });
   };
+
   return (
     <NameBoxWrapper>
       <Label content="닉네임" size="large" />

@@ -2,7 +2,7 @@ import { create } from 'zustand';
 
 const defaultUserInfo = {
   userId: 0,
-  nickName: '',
+  nickname: '',
   introduce: '',
 };
 

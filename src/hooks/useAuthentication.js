@@ -6,8 +6,8 @@ import { getTokenDev } from '@/token';
 import useLoginStore from '@store/useLoginStore';
 import { ENVMODE } from '@enums/CommonEnum';
 import handleError from '@utils/ErrorHandler';
-import userInfoApi from '@api/biz/userInfoApi';
 import useUserInfoStore from '@store/useUserInfoStore';
+import userInfoApi from '@api/biz/userInfoApi';
 
 const useAuthentication = () => {
   const nav = useNavigate();
