@@ -115,7 +115,7 @@ const Post = () => {
       <Info>🗓️ {meeting}</Info>
       <Info>👤 {post.participantTotal}명 모집</Info>
       <Info>📍 {post.address}</Info>
-      <Map />
+      <Map place={post.place} />
       <Contents>{post.contents}</Contents>
     </Container>
   );
