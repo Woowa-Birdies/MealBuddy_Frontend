@@ -1,14 +1,16 @@
 import useLoadingStore from '@store/useLoadingStore';
+import Cookies from 'js-cookie';
 
 const interceptorsOf = (axiosInstance) => {
   axiosInstance.interceptors.request.use(
     (config) => {
       useLoadingStore.getState().setLoading(true);
+      const accessCookie = Cookies.get('__Secure-access');
       const newConfig = {
         ...config,
         headers: {
           ...config.headers,
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJjYXRlZ29yeSI6Il9fU2VjdXJlLWFjY2VzcyIsInVzZXJJZCI6NTEsInJvbGUiOiJST0xFX1VTRVIiLCJpYXQiOjE3MTM1Nzk4NzYsImV4cCI6MTcxMzU4MTY3Nn0.vSuCu47WDDzj_xrhFCaelnLh-HISclmXogbt0JL-Uc8`,
+          Authorization: `Bearer ${accessCookie}`,
         },
       };
 
