@@ -3,16 +3,24 @@ import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import chatApi from '@api/biz/chatApi';
 import usePostStore from '@store/usePostStore';
+import useChatStore from '@store/useChatStore';
 
 const YumTalkButton = ({ title, type }) => {
   const nav = useNavigate();
   const { post } = usePostStore();
+  const { room, setRoom } = useChatStore();
 
   const handleClick = async () => {
+    const res = await chatApi.joinChat({ postId: post.postId });
+    console.log(res.data);
+    setRoom({
+      ...room,
+      roomId: res.data.roomId,
+      roomName: res.data.roomName,
+    });
     nav('/chat');
-    const res = await chatApi.joinChat(post.postId);
-    console.log(res);
   };
+
   return (
     <StyledButton onClick={handleClick} type={type} title={title}>
       {title}
