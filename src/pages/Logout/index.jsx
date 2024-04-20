@@ -12,7 +12,7 @@ const Logout = () => {
   const accessCookie = Cookies.get('__Secure-access');
 
   // 시간조절 5초 = 5
-  const [counter, setCounter] = useState(600);
+  const [counter, setCounter] = useState(5);
   const timerId = useRef(null);
 
   useEffect(() => {
@@ -51,7 +51,7 @@ const Logout = () => {
             title="정상적으로 로그아웃되었습니다"
             subTitle={<>{counter}초 후에 로그인 화면으로 이동합니다</>}
             extra={[
-              <Button type="link" key="goLogin" onClick={() => nav('/login')}>
+              <Button type="link" key="goLogin" onClick={() => nav(ROUTES.LOGIN)}>
                 로그인 화면으로 가기
               </Button>,
             ]}

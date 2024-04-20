@@ -5,7 +5,9 @@ import NaverLogo from '@assets/images/svg/naver.svg?react';
 import GoogleLogo from '@assets/images/svg/google.svg?react';
 import SvgComponent from '@components/ui/Logo/SvgComponent';
 import PropTypes from 'prop-types';
-import { API_BASE_URL } from '@constants/Constants';
+import { API_BASE_URL, SYSTEM_MODE } from '@constants/Constants';
+import { ENVMODE } from '@enums/CommonEnum';
+import { TOKEN_DEV, setTokenDev } from '@/token';
 
 const logos = {
   kakao: KakaoLogo,
@@ -16,6 +18,11 @@ const logos = {
 const OAuthContainer = ({ type }) => {
   const handleLogin = (provider) => {
     window.location.href = `${API_BASE_URL}/oauth2/authorization/${provider}`;
+
+    // 개발환경에서는 쿠키적용이안되기 때문에 로그인한것처럼 TOKEN_DEV를 로컬스토리지에 set해준다.
+    if (SYSTEM_MODE !== ENVMODE.PROD) {
+      setTokenDev(TOKEN_DEV);
+    }
   };
 
   const createButton = (provider) => (
