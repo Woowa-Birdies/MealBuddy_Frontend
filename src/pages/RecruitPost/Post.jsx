@@ -14,13 +14,14 @@ import SelectButton from '@components/ui/Button/SelectButton';
 import TimeLimit from '@components/ui/TimeLimit/TimeLimit';
 import useConfirmModal from '@hooks/component/modal/useConfirmModal';
 import userInfoApi from '@api/biz/userInfoApi';
+import useUserInfoStore from '@store/useUserInfoStore';
 
 const Post = () => {
   const nav = useNavigate();
   const showConfirm = useConfirmModal();
   const { post, setPost, setUserInfo } = usePostStore();
   const { postId } = useParams();
-  const now = 1;
+  const { userId } = useUserInfoStore();
 
   const editMenuItems = () => {
     switch (post.postStatus) {
@@ -73,7 +74,7 @@ const Post = () => {
     // console.log(post.askStatus);
     const fetchPost = async () => {
       try {
-        const res = await recruitApi.getPost({ postId }, `${now}`);
+        const res = await recruitApi.getPost({ postId }, `${userId}`);
         await setPost(res.data);
         const response = await userInfoApi.getProfile(res.data.userId);
         await setUserInfo(response.data);
@@ -83,7 +84,7 @@ const Post = () => {
     };
 
     fetchPost();
-  }, [postId, setPost, post.askStatus, setUserInfo]);
+  }, [postId, setPost, post.askStatus, setUserInfo, userId]);
 
   const meeting = dayjs(post.meetAt).format('YYYY년 MM월 DD일 dddd A hh:mm');
 
@@ -95,7 +96,7 @@ const Post = () => {
           <StatusButton title={post.postStatus} />
           <TimeLimit closeAt={post.closeAt} />
         </PostStatus>
-        {now === post.userId && (
+        {userId === post.userId && (
           <EditSection>
             {post.postStatus !== '모임 종료' ? (
               <Dropdown
