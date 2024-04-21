@@ -37,7 +37,7 @@ const RequestContent = ({ information }) => {
   };
 
   /* askStatus별 버튼 구성 변경 */
-  const renderButtons = ({ askStatus, askId, postId }) => {
+  const renderButtons = ({ askStatus, askId, postId, postStatus }) => {
     switch (askStatus) {
       case '대기' || '거절':
         return <Btn title="신청 취소하기" action="cancel" propData={askId} />;
@@ -51,7 +51,12 @@ const RequestContent = ({ information }) => {
       default:
         return (
           <>
-            <Btn title="후기 작성하기" action="review" propData={postId} />
+            {postStatus === '모집중' || postStatus === '모집 마감' ? (
+              <Btn title="후기 작성하기" action="review" propData={postId} disabled="disabled" />
+            ) : (
+              <Btn title="후기 작성하기" action="review" propData={postId} />
+            )}
+
             <Btn title="냠냠 토크방" action="chat" />
           </>
         );
@@ -110,6 +115,7 @@ const RequestContent = ({ information }) => {
                   askStatus: item.askStatus,
                   askId: item.askId,
                   postId: item.postId,
+                  postStatus: item.postStatus,
                 })}
               </BtnSection>
             </InnerBox>
