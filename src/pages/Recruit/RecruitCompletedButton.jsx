@@ -65,7 +65,14 @@ const RecruitCompletedButton = ({ postId }) => {
       }
       // 확인용
     } catch (error) {
-      console.error('Failed to update/create post:', error);
+      if (error.response && error.response.data && error.response.data.message) {
+        Modal.warning({
+          content: error.response.data.message,
+          style: { top: '35vh' },
+        });
+      } else {
+        console.error('Error:', error.message);
+      }
     }
   };
 

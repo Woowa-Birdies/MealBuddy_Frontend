@@ -12,10 +12,13 @@ import TagButton from '@components/ui/Button/TagButton';
 import settingIcon from '@assets/images/svg/setting.svg';
 import SelectButton from '@components/ui/Button/SelectButton';
 import TimeLimit from '@components/ui/TimeLimit/TimeLimit';
+import useConfirmModal from '@hooks/component/modal/useConfirmModal';
+import userInfoApi from '@api/biz/userInfoApi';
 
 const Post = () => {
   const nav = useNavigate();
-  const { post, setPost } = usePostStore();
+  const showConfirm = useConfirmModal();
+  const { post, setPost, setUserInfo } = usePostStore();
   const { postId } = useParams();
   const now = 1;
 
@@ -43,21 +46,23 @@ const Post = () => {
     nav('/');
   };
 
-  const handleMenuClick = ({ key }) => {
+  const handleMenuClick = async ({ key }) => {
     switch (key) {
       case 'close':
-        recruitApi.completionRecruit(post.postId);
+        await showConfirm('모집을 마감하시겠습니까?');
+        await recruitApi.completionRecruit(post.postId);
         window.location.reload();
         break;
       case 'recruit':
-        recruitApi.ongoingRecruit(post.postId);
+        await showConfirm('모집을 재개하시겠습니까?');
+        await recruitApi.ongoingRecruit(post.postId);
         window.location.reload();
         break;
       case 'edit':
         nav(`/recruit/${post.postId}`);
         break;
       case 'delete':
-        handleDeleteClick();
+        await handleDeleteClick();
         break;
       default:
         break;
@@ -69,14 +74,16 @@ const Post = () => {
     const fetchPost = async () => {
       try {
         const res = await recruitApi.getPost({ postId }, `${now}`);
-        setPost(res.data);
+        await setPost(res.data);
+        const response = await userInfoApi.getProfile(res.data.userId);
+        await setUserInfo(response.data);
       } catch (error) {
         console.error('Failed to fetch post:', error);
       }
     };
 
     fetchPost();
-  }, [postId, setPost, post.askStatus]);
+  }, [postId, setPost, post.askStatus, setUserInfo]);
 
   const meeting = dayjs(post.meetAt).format('YYYY년 MM월 DD일 dddd A hh:mm');
 
@@ -115,7 +122,7 @@ const Post = () => {
       <Info>🗓️ {meeting}</Info>
       <Info>👤 {post.participantTotal}명 모집</Info>
       <Info>📍 {post.address}</Info>
-      <Map />
+      <Map place={post.place} />
       <Contents>{post.contents}</Contents>
     </Container>
   );

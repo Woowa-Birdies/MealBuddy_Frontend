@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import useRecruitStore from '@store/useRecruitStore';
+// import useRecruitStore from '@store/useRecruitStore';
 
-const Map = () => {
+const Map = ({ place }) => {
   const mapContainer = useRef(null); // 지도를 담을 컨테이너 ref
-  const { recruitPost } = useRecruitStore();
-  const placeAddress = recruitPost.address;
+  // const { recruitPost } = useRecruitStore();
+  const placeAddress = place;
 
   useEffect(() => {
     if (window.kakao && window.kakao.maps) {

@@ -4,6 +4,7 @@ import Label from '@components/ui/Label/Label';
 import CheckBtn from '@components/ui/Button/SelectButton';
 import emailApi from '@api/biz/verificationApi';
 import useStore from '@/store/useVerificationStore';
+import useUserInfoStore from '@store/useUserInfoStore';
 // import Typography from '@components/ui/Typography/Typography';
 
 const NameField = () => {
@@ -11,6 +12,7 @@ const NameField = () => {
   const [errorMesage, setErrorMesage] = useState('');
   const [nickname, setNickname] = useState('');
   const [checkStatus, setCheckStatus] = useState(false);
+  const { userProfile } = useUserInfoStore();
 
   const handleNicknameInput = (event) => {
     setNickname(event.target.value);
@@ -23,6 +25,7 @@ const NameField = () => {
       if (response.status === 200) {
         setCheckStatus(true);
         setUserData('nickname', nickname);
+        setUserData('userId', userProfile.userId);
         setErrorMesage(`사용 가능한 닉네임입니다.`);
       } else if (response.status === 400) {
         setCheckStatus(false);

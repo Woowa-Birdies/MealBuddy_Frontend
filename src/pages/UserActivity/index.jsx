@@ -13,7 +13,7 @@ const MyTabs = () => {
     const loadData = async () => {
       try {
         const type = parseInt(activeKey, 10);
-        const response = await gatherApi.getUserPostList({ userId: 2, type });
+        const response = await gatherApi.getUserPostList({ userId: 1, type });
 
         let data = [];
         if (type === 0) {
