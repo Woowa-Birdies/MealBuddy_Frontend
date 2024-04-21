@@ -1,27 +1,27 @@
 import { get, post, del } from '@/api/common/apiUtils';
 
-const chatList = async () => {
+const roomList = async () => {
   return get('/room');
 };
 
 const joinChat = async (postId) => {
-  return post(`/room/join`, postId);
+  return post(`/room/join`, postId.postId);
 };
 
 const messages = async (roomData) => {
   return post('/chat', roomData);
 };
 
-const kick = async (roomId, targetUserId) => {
-  return del(`/room/kick/${roomId}/${targetUserId}`);
+const kick = async (params) => {
+  return del(`/room/kick/${params.roomId}/${params.targetUserId}`);
 };
 
 const exit = async (roomId) => {
-  return del(`/room/quit/${roomId}`);
+  return del(`/room/quit/${roomId.roomId}`);
 };
 
 export default {
-  chatList,
+  roomList,
   joinChat,
   messages,
   kick,
