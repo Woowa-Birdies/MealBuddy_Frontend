@@ -58,7 +58,7 @@ const ActivityContent = ({ information }) => {
       default:
         return (
           <>
-            <Btn title="후기 작성하기" action="review" />
+            <Btn title="후기 작성하기" action="review" propData={postId} />
             <Btn title="냠냠 토크방" action="chat" />
           </>
         );

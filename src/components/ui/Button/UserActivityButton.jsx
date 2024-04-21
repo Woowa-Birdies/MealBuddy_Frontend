@@ -28,6 +28,7 @@ const UserActivityButton = ({ title, action, propData }) => {
     }
     if (action === 'review') {
       console.log('후기 작성하기');
+      nav(`/review/${propData}`);
       window.location.reload();
     }
     if (action === 'chat') {
