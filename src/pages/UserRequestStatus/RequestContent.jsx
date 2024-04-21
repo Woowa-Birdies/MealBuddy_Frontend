@@ -37,7 +37,7 @@ const RequestContent = ({ information }) => {
   };
 
   /* askStatus별 버튼 구성 변경 */
-  const renderButtons = ({ askStatus, askId }) => {
+  const renderButtons = ({ askStatus, askId, postId }) => {
     switch (askStatus) {
       case '대기' || '거절':
         return <Btn title="신청 취소하기" action="cancel" propData={askId} />;
@@ -51,7 +51,7 @@ const RequestContent = ({ information }) => {
       default:
         return (
           <>
-            <Btn title="후기 작성하기" action="review" />
+            <Btn title="후기 작성하기" action="review" propData={postId} />
             <Btn title="냠냠 토크방" action="chat" />
           </>
         );
@@ -106,7 +106,11 @@ const RequestContent = ({ information }) => {
                 <Label content={item.address} size="large" />
               </InfoSection>
               <BtnSection>
-                {renderButtons({ askStatus: item.askStatus, askId: item.askId })}
+                {renderButtons({
+                  askStatus: item.askStatus,
+                  askId: item.askId,
+                  postId: item.postId,
+                })}
               </BtnSection>
             </InnerBox>
           </ListItem>
