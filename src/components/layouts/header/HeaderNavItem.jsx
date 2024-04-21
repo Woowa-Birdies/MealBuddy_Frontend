@@ -1,15 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Dropdown, Typography } from 'antd';
 import styled from 'styled-components';
 import TitleTypography from '@components/ui/Typography/Typography';
 import useNavStore from '@store/useNavStore';
+import useUserInfoStore from '@store/useUserInfoStore';
 import { ROUTES } from '@enums/CommonEnum';
 
 const HeaderNavItem = () => {
   const nav = useNavigate();
   const { menus } = useNavStore();
   const [hoveredMenu, setHoveredMenu] = useState(null);
+  const { userId } = useUserInfoStore();
+  // console.log(userId);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      if (userId === 0) {
+        nav(ROUTES.LOGIN);
+      }
+    }, 500);
+
+    return () => clearTimeout(timeoutId);
+  }, [userId, nav]);
 
   const handleMenuClick = ({ key }) => {
     switch (key) {
@@ -46,11 +59,11 @@ const HeaderNavItem = () => {
                 menu={{
                   items: [
                     {
-                      label: <span style={{ fontSize: '14px' }}>신청 냠냠</span>,
+                      label: <span style={{ fontSize: '14px' }}>냠냠신청</span>,
                       key: 'ask',
                     },
                     {
-                      label: <span style={{ fontSize: '14px' }}>모집 냠냠</span>,
+                      label: <span style={{ fontSize: '14px' }}>냠냠모집</span>,
                       key: 'recruit',
                     },
                   ],
