@@ -1,10 +1,8 @@
 import { create } from 'zustand';
 
-const now = 2;
-
 const useVerificationStore = create((set) => ({
   userData: {
-    userId: now,
+    userId: 0,
     nickname: '',
     verificationHash: '',
     registerNumber: '',
