@@ -20,7 +20,7 @@ const Logout = () => {
       setCounter((c) => {
         if (c > 0) return c - 1;
         window.clearInterval(timerId.current);
-        nav(ROUTES.LOGIN);
+        window.location.href = ROUTES.LOGIN;
         return 0;
       });
     }, 1000);
