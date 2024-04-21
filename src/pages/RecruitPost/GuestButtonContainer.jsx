@@ -3,10 +3,11 @@ import askApi from '@api/biz/askApi';
 import CompletedButton from '@components/ui/Button/CompletedButton';
 import TagButton from '@components/ui/Button/TagButton';
 import Btn from '@components/ui/Button/UserActivityButton';
+import useUserInfoStore from '@store/useUserInfoStore';
 
-const GuestButtonContainer = ({ userId }) => {
-  // userId = 2
+const GuestButtonContainer = () => {
   const { post } = usePostStore();
+  const { userId } = useUserInfoStore();
   const { postId } = post;
 
   const handleAskButtonClick = async () => {
