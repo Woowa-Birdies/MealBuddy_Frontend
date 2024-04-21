@@ -4,14 +4,14 @@ import usePostStore from '@store/usePostStore';
 import SampleImg from '@/assets/images/png/profileimg.png';
 
 const UserContainer = () => {
-  const { post } = usePostStore();
+  const { userInfo } = usePostStore();
 
   return (
     <Container>
       <ProfileImg src={SampleImg} />
       <ProfileContainer>
-        <Typography content={post.nickname} size="xl" />
-        {post.userId}
+        <Typography content={userInfo.nickname} size="xl" />
+        {userInfo.introduce}
       </ProfileContainer>
     </Container>
   );

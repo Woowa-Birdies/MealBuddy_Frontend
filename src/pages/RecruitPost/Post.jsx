@@ -13,11 +13,12 @@ import settingIcon from '@assets/images/svg/setting.svg';
 import SelectButton from '@components/ui/Button/SelectButton';
 import TimeLimit from '@components/ui/TimeLimit/TimeLimit';
 import useConfirmModal from '@hooks/component/modal/useConfirmModal';
+import userInfoApi from '@api/biz/userInfoApi';
 
 const Post = () => {
   const nav = useNavigate();
   const showConfirm = useConfirmModal();
-  const { post, setPost } = usePostStore();
+  const { post, setPost, setUserInfo } = usePostStore();
   const { postId } = useParams();
   const now = 1;
 
@@ -73,14 +74,16 @@ const Post = () => {
     const fetchPost = async () => {
       try {
         const res = await recruitApi.getPost({ postId }, `${now}`);
-        setPost(res.data);
+        await setPost(res.data);
+        const response = await userInfoApi.getProfile(res.data.userId);
+        await setUserInfo(response.data);
       } catch (error) {
         console.error('Failed to fetch post:', error);
       }
     };
 
     fetchPost();
-  }, [postId, setPost, post.askStatus]);
+  }, [postId, setPost, post.askStatus, setUserInfo]);
 
   const meeting = dayjs(post.meetAt).format('YYYY년 MM월 DD일 dddd A hh:mm');
 
