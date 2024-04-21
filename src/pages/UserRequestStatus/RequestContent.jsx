@@ -101,14 +101,14 @@ const RequestContent = ({ information }) => {
                 <TagButton title={item.ageTag} type="tag" />
               </TagSection>
               <InfoSection>
-                <Label content={`모임 날짜 : ${formatDate(item.meetAt)}`} size="large" />
+                <Label content={`📅 모임 날짜 : ${formatDate(item.meetAt)}`} size="large" />
                 <Label
-                  content={`인원수 : ${item.participantCount} / ${item.participantTotal}`}
+                  content={`👥 인원수 : ${item.participantCount} / ${item.participantTotal}`}
                   size="large"
                 />
               </InfoSection>
               <InfoSection>
-                <Label content={item.address} size="large" />
+                <Label content={`📌 ${item.address}`} size="large" />
               </InfoSection>
               <BtnSection>
                 {renderButtons({
