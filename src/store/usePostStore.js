@@ -20,7 +20,9 @@ const initialPost = {
 
 const usePostStore = create((set) => ({
   post: initialPost,
+  userInfo: {},
   setPost: (postData) => set({ post: postData }),
+  setUserInfo: (value) => set({ userInfo: value }),
 }));
 
 export default usePostStore;

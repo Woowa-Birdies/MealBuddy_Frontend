@@ -3,13 +3,19 @@ import PropTypes from 'prop-types';
 import recruitApi from '@api/biz/recruitApi';
 import askApi from '@api/biz/askApi';
 import chatApi from '@api/biz/chatApi';
+import reviewApi from '@api/biz/reviewApi';
 import { useNavigate } from 'react-router-dom';
 // import gatherApi from '@api/biz/gatherApi';
 import useConfirmModal from '@hooks/component/modal/useConfirmModal';
+import useChatStore from '@store/useChatStore';
+import useReviewStore from '@store/useReviewStore';
 
-const UserActivityButton = ({ title, action, propData }) => {
+const UserActivityButton = ({ title, action, propData, type }) => {
   const nav = useNavigate();
   const showConfirm = useConfirmModal();
+  const { room, setRoom } = useChatStore();
+  const { setParticipants } = useReviewStore();
+
   // close : 모집 마감하기 / ongoing : 모집 재개하기 /review : 후기 작성하기 / chat : 냠냠 토크방 / request : 신청자 보기 / cancel : 신청 취소하기
   const handleClick = async (event) => {
     event.stopPropagation(); // 이벤트 버블링 방지
@@ -28,13 +34,21 @@ const UserActivityButton = ({ title, action, propData }) => {
     }
     if (action === 'review') {
       console.log('후기 작성하기');
-      window.location.reload();
+      const res = await reviewApi.participantsInfo({ postId: propData });
+      await setParticipants(res.data);
+      nav(`/review/${propData}`);
     }
     if (action === 'chat') {
       await showConfirm('채팅방에 입장하시겠습니까?');
-      await chatApi.joinChat(propData);
+      const res = await chatApi.joinChat({ postId: propData });
+      await setRoom({
+        ...room,
+        roomId: res.data.roomId,
+        roomName: res.data.roomName,
+      });
+      await console.log(res.data);
       console.log('채팅방 입장', propData);
-      nav(0);
+      nav('/chat');
     }
     if (action === 'request') {
       nav(`/applicantslist/${propData}`);
@@ -46,8 +60,9 @@ const UserActivityButton = ({ title, action, propData }) => {
       window.location.reload();
     }
   };
+
   return (
-    <StyledButton onClick={handleClick} action={action}>
+    <StyledButton onClick={handleClick} action={action} type={type}>
       {title}
     </StyledButton>
   );
@@ -61,8 +76,18 @@ UserActivityButton.propTypes = {
 export default UserActivityButton;
 
 const StyledButton = styled.button`
-  width: 13.0836vw;
-  height: 3.334vw;
+  width: ${({ type }) => {
+    if (type === 'post') {
+      return '23.04vw';
+    }
+    return '13.0836vw';
+  }};
+  height: ${({ type }) => {
+    if (type === 'post') {
+      return '4.17vw';
+    }
+    return '3.334vw';
+  }};
   box-sizing: border-box;
   padding: 0.834vw 2vw;
   font-size: 1.1vw;
