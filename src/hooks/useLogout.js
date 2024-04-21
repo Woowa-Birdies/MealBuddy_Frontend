@@ -6,10 +6,12 @@ import { SYSTEM_MODE, DOMAIN_URL } from '@constants/Constants';
 import Cookies from 'js-cookie';
 import loginApi from '@api/biz/loginApi';
 import { clearTokenDev } from '@/token';
+import useLoginStore from '@store/useLoginStore';
 
 const useLogout = () => {
   const nav = useNavigate();
   const showConfirm = useConfirmModal();
+  const { setIsLogin } = useLoginStore();
 
   const handleLogout = async () => {
     try {
@@ -22,6 +24,7 @@ const useLogout = () => {
       } else {
         clearTokenDev();
       }
+      setIsLogin(false);
       nav(ROUTES.LOGOUT);
     } catch (error) {
       handleError(error);
