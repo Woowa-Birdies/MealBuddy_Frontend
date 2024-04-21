@@ -1,42 +1,68 @@
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import usePostStore from '@store/usePostStore';
 import Label from '@components/ui/Label/Label';
+import recruitApi from '@api/biz/recruitApi';
 import Paragraphy from '@components/ui/Paragraphy/Paragraphy';
 import TagButton from '@components/ui/Button/TagButton';
 import dayjs from 'dayjs';
 import TimeLimit from '@components/ui/TimeLimit/TimeLimit';
+import Thumnail from '@components/ui/Thumnail/ThumnailImage';
 
 const formatDate = (dateString) => {
   return dayjs(dateString).format('YYYY년 MM월 DD일 dddd A hh:mm');
 };
 
 const History = () => {
-  const { post } = usePostStore();
+  const { postId } = useParams();
+  const now = 1;
+  const [postDetails, setPostDetails] = useState({
+    foodTypeTag: '',
+    place: '',
+    genderTag: '',
+    ageTag: '',
+    meetAt: '',
+    participantCount: 0,
+    participantTotal: 0,
+    address: '',
+  });
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const postDetailsResponse = await recruitApi.getPost({ postId }, `${now}`); // 주의: getPost 함수의 인터페이스에 맞춰 호출
+        setPostDetails(postDetailsResponse.data);
+      } catch (error) {
+        console.error('Failed to load data', error);
+      }
+    };
+
+    loadData();
+  }, [postId]);
 
   return (
     <BoxWrapper>
       <ListItem>
-        <Thumnail />
+        <Thumnail content={postDetails.foodTypeTag} />
         <InnerBox>
           <TopSection>
             <Paragraphy content="동네" size="medium" color="contentTertiary" />
-            {post.postStatus === '모집중' && <TimeLimit closeAt={post.closeAt} />}
+            {postDetails.postStatus === '모집중' && <TimeLimit closeAt={postDetails.closeAt} />}
           </TopSection>
-          <Label content={post.place} size="xl" />
+          <Label content={postDetails.place} size="xl" />
           <TagSection>
-            <TagButton title={post.foodTypeTag} type="tag" />
-            <TagButton title={post.genderTag} type="tag" />
-            <TagButton title={post.ageTag} type="tag" />
+            <TagButton title={postDetails.foodTypeTag} type="tag" />
+            <TagButton title={postDetails.genderTag} type="tag" />
+            <TagButton title={postDetails.ageTag} type="tag" />
           </TagSection>
           <InfoSection>
-            <Label content={`모임 날짜 : ${formatDate(post.meetAt)}`} size="large" />
+            <Label content={`📅 모임 날짜 : ${formatDate(postDetails.meetAt)}`} size="large" />
             <Label
-              content={`인원수 : ${post.participantCount} / ${post.participantTotal}`}
+              content={`👥 인원수 : ${postDetails.participantCount} / ${postDetails.participantTotal}`}
               size="large"
             />
           </InfoSection>
           <InfoSection>
-            <Label content={post.address} size="large" />
+            <Label content={`📌 ${postDetails.address}`} size="large" />
           </InfoSection>
         </InnerBox>
       </ListItem>
@@ -72,12 +98,6 @@ const InfoSection = styled.div`
   display: flex;
   flex-direction: row;
   gap: 14px;
-`;
-
-const Thumnail = styled.div`
-  width: 16.15vw;
-  height: 16.15vw;
-  background-color: gray;
 `;
 
 const InnerBox = styled.div`

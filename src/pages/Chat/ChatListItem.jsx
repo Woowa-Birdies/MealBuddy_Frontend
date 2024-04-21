@@ -1,17 +1,17 @@
-import { useState, useRef } from 'react';
-// import { useEffect, useState, useRef } from 'react';
+// import { useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { Avatar } from 'antd';
 import Label from '@components/ui/Label/Label';
 import Paragraphy from '@components/ui/Paragraphy/Paragraphy';
 import useChatStore from '@store/useChatStore';
-// import chatApi from '@api/biz/chatApi';
+import chatApi from '@api/biz/chatApi';
 import dayjs from 'dayjs';
 // import { Client } from '@stomp/stompjs';
 // import SockJS from 'sockjs-client';
 
 const ChatListItem = () => {
-  const { room, setRoom } = useChatStore();
+  const { room, setRoom, setChat } = useChatStore();
   const client = useRef(null);
   const [chatList, setChatList] = useState([]);
   const currentTime = dayjs().toISOString();
@@ -51,13 +51,24 @@ const ChatListItem = () => {
     // 서버에서 채팅방 정보를 요청
     const roomData = {
       roomId,
-      lastReadAt: currentTime,
+      entryAt: currentTime,
+      page: 1,
+      offset: 100,
     };
+
+    // 과거 채팅 내역 불러오기
+    try {
+      const res = await chatApi.messages(roomData);
+      // console.log('채팅: ', res.data);
+      setChat(res.data);
+    } catch (error) {
+      console.log('Failed to fetch chat: ', error);
+    }
+
     // 서버로 데이터 보내기
     if (client.current) {
       client.current.send({
         destination: `/sub/chat/status/${roomId}`,
-
         body: JSON.stringify(roomData),
       });
       console.log('Sent room data to the server:', roomData);
@@ -82,8 +93,9 @@ const ChatListItem = () => {
 
   const fetchList = async () => {
     try {
-      // const res = chatApi.chatList();
-      // console.log(res.data);
+      const res = await chatApi.roomList();
+      console.log(res.data);
+      // setChatList(res.data);
       // 임의로 채팅목록 저장
       setChatList([
         {
@@ -100,27 +112,31 @@ const ChatListItem = () => {
     }
   };
 
-  useState(() => {
+  useEffect(() => {
     fetchList();
   }, []);
 
   return (
     <ChatListContainer>
-      {chatList.map((chatRoom) => (
-        <ItemWrapper
-          key={chatRoom.roomId}
-          onClick={() => joinChatRoom(chatRoom.roomId, chatRoom.roomName)}
-        >
-          <ChatListBox>
-            <Avatar size="5vw" />
-            <ChatRoomInfo>
-              <Label content={chatRoom.roomName} size="large" />
-              <Paragraphy content="최근 채팅 내용을 보여줍니다..." size="medium" />
-            </ChatRoomInfo>
-            {/* <Paragraphy content="7" size="small" color="primary" /> */}
-          </ChatListBox>
-        </ItemWrapper>
-      ))}
+      {chatList.length > 0 ? (
+        chatList.map((chatRoom) => (
+          <ItemWrapper
+            key={chatRoom.roomId}
+            onClick={() => joinChatRoom(chatRoom.roomId, chatRoom.roomName)}
+          >
+            <ChatListBox>
+              <Avatar size="5vw" />
+              <ChatRoomInfo>
+                <Label content={chatRoom.roomName} size="large" />
+                <Paragraphy content="최근 채팅 내용을 보여줍니다..." size="medium" />
+              </ChatRoomInfo>
+              {/* <Paragraphy content="7" size="small" color="primary" /> */}
+            </ChatListBox>
+          </ItemWrapper>
+        ))
+      ) : (
+        <Paragraphy content="채팅방이 존재하지 않습니다." size="medium" />
+      )}
     </ChatListContainer>
   );
 };

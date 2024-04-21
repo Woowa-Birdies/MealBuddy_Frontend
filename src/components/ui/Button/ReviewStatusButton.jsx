@@ -17,7 +17,7 @@ ReviewStatusButton.propTypes = {
 export default ReviewStatusButton;
 
 const StyledButton = styled.button`
-  width: 88px;
+  width: 110px;
   height: 40px;
   display: flex;
   padding: 8px 16px;
