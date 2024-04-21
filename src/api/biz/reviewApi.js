@@ -1,7 +1,7 @@
 import { get, post } from '@/api/common/apiUtils';
 
 const participantsInfo = async (postId) => {
-  return get(`/api/review/userInfo/${postId.postId}`);
+  return get(`/api/review/userInfo/${postId}`);
 };
 
 const reviewSave = async (reviewData) => {
