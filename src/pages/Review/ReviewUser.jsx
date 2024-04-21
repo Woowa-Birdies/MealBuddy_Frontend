@@ -4,11 +4,13 @@ import SampleImg from '@/assets/images/png/profileimg.png';
 import ReviewStatusButton from '@components/ui/Button/ReviewStatusButton';
 import useReviewStore from '@/store/useReviewStore';
 
-const ReviewUser = ({ type }) => {
+const ReviewUser = ({ type, participant }) => {
   const setShowReviewForm = useReviewStore((state) => state.setShowReviewForm);
+  const { setSelectedParticipant } = useReviewStore();
 
   const handleReviewButtonClick = () => {
     setShowReviewForm(true);
+    setSelectedParticipant(participant);
   };
 
   return (
@@ -17,12 +19,12 @@ const ReviewUser = ({ type }) => {
         <UserContainer>
           <ProfileContainer>
             <ProfileImg src={SampleImg} />
-            <Typography content="USER 1" />
+            <Typography content={participant.nickname} />
           </ProfileContainer>
-          <Typography content="HOST" />
+          <Typography content={participant.position} />
         </UserContainer>
         {type === 'participants' && (
-          <ReviewStatusButton title="리뷰작성" onClick={handleReviewButtonClick} />
+          <ReviewStatusButton title="리뷰 작성" onClick={handleReviewButtonClick} />
         )}
       </ReviewUserContainer>
       <Separator />

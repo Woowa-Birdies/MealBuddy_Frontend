@@ -3,18 +3,18 @@ import PropTypes from 'prop-types';
 import recruitApi from '@api/biz/recruitApi';
 import askApi from '@api/biz/askApi';
 import chatApi from '@api/biz/chatApi';
-import reviewApi from '@api/biz/reviewApi';
+// import reviewApi from '@api/biz/reviewApi';
 import { useNavigate } from 'react-router-dom';
 // import gatherApi from '@api/biz/gatherApi';
 import useConfirmModal from '@hooks/component/modal/useConfirmModal';
 import useChatStore from '@store/useChatStore';
-import useReviewStore from '@store/useReviewStore';
+// import useReviewStore from '@store/useReviewStore';
 
 const UserActivityButton = ({ title, action, propData, type }) => {
   const nav = useNavigate();
   const showConfirm = useConfirmModal();
   const { room, setRoom } = useChatStore();
-  const { setParticipants } = useReviewStore();
+  // const { setParticipants } = useReviewStore();
 
   // close : 모집 마감하기 / ongoing : 모집 재개하기 /review : 후기 작성하기 / chat : 냠냠 토크방 / request : 신청자 보기 / cancel : 신청 취소하기
   const handleClick = async (event) => {
@@ -34,8 +34,8 @@ const UserActivityButton = ({ title, action, propData, type }) => {
     }
     if (action === 'review') {
       console.log('후기 작성하기');
-      const res = await reviewApi.participantsInfo({ postId: propData });
-      await setParticipants(res.data);
+      // const res = await reviewApi.participantsInfo({ postId: propData });
+      // // await setParticipants(res.data);
       nav(`/review/${propData}`);
     }
     if (action === 'chat') {
