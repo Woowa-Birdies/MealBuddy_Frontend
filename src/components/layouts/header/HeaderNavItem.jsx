@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Dropdown, Typography } from 'antd';
 import styled from 'styled-components';
@@ -12,17 +12,6 @@ const HeaderNavItem = () => {
   const { menus } = useNavStore();
   const [hoveredMenu, setHoveredMenu] = useState(null);
   const { userId } = useUserInfoStore();
-  // console.log(userId);
-
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      if (userId === 0) {
-        nav(ROUTES.LOGIN);
-      }
-    }, 500);
-
-    return () => clearTimeout(timeoutId);
-  }, [userId, nav]);
 
   const handleMenuClick = ({ key }) => {
     switch (key) {
@@ -37,6 +26,17 @@ const HeaderNavItem = () => {
     }
   };
 
+  const handleLinkClick = (title) => {
+    if (title === '냠메이트 모집하기' || title === '냠냠토크' || title === '냠관리') {
+      setTimeout(() => {
+        console.log(userId);
+        if (userId === 0) {
+          nav(ROUTES.LOGIN);
+        }
+      }, 500);
+    }
+  };
+
   return (
     <HeaderGlobalNav>
       <MenuList>
@@ -47,12 +47,7 @@ const HeaderNavItem = () => {
             to={menu.title !== '냠관리' ? menu.path : undefined}
             onMouseEnter={() => (menu.title === '냠관리' ? setHoveredMenu(menu.title) : null)}
             onMouseLeave={() => setHoveredMenu(null)}
-            onClick={
-              menu.title === '냠메이트 모집하기'
-                ? // eslint-disable-next-line no-return-assign
-                  () => (window.location.href = menu.path)
-                : undefined
-            }
+            onClick={() => handleLinkClick(menu.title)}
           >
             {menu.title === '냠관리' && hoveredMenu === menu.title ? (
               <Dropdown
