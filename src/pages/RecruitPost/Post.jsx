@@ -12,9 +12,11 @@ import TagButton from '@components/ui/Button/TagButton';
 import settingIcon from '@assets/images/svg/setting.svg';
 import SelectButton from '@components/ui/Button/SelectButton';
 import TimeLimit from '@components/ui/TimeLimit/TimeLimit';
+import useConfirmModal from '@hooks/component/modal/useConfirmModal';
 
 const Post = () => {
   const nav = useNavigate();
+  const showConfirm = useConfirmModal();
   const { post, setPost } = usePostStore();
   const { postId } = useParams();
   const now = 1;
@@ -43,21 +45,23 @@ const Post = () => {
     nav('/');
   };
 
-  const handleMenuClick = ({ key }) => {
+  const handleMenuClick = async ({ key }) => {
     switch (key) {
       case 'close':
-        recruitApi.completionRecruit(post.postId);
+        await showConfirm('모집을 마감하시겠습니까?');
+        await recruitApi.completionRecruit(post.postId);
         window.location.reload();
         break;
       case 'recruit':
-        recruitApi.ongoingRecruit(post.postId);
+        await showConfirm('모집을 재개하시겠습니까?');
+        await recruitApi.ongoingRecruit(post.postId);
         window.location.reload();
         break;
       case 'edit':
         nav(`/recruit/${post.postId}`);
         break;
       case 'delete':
-        handleDeleteClick();
+        await handleDeleteClick();
         break;
       default:
         break;
