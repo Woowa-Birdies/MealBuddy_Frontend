@@ -8,6 +8,7 @@ import TagButton from '@components/ui/Button/TagButton';
 import dayjs from 'dayjs';
 import TimeLimit from '@components/ui/TimeLimit/TimeLimit';
 import Thumnail from '@components/ui/Thumnail/ThumnailImage';
+import useUserInfoStore from '@store/useUserInfoStore';
 
 const formatDate = (dateString) => {
   return dayjs(dateString).format('YYYY년 MM월 DD일 dddd A hh:mm');
@@ -15,7 +16,7 @@ const formatDate = (dateString) => {
 
 const History = () => {
   const { postId } = useParams();
-  const now = 1;
+  const { userId } = useUserInfoStore();
   const [postDetails, setPostDetails] = useState({
     foodTypeTag: '',
     place: '',
@@ -29,7 +30,7 @@ const History = () => {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const postDetailsResponse = await recruitApi.getPost({ postId }, `${now}`); // 주의: getPost 함수의 인터페이스에 맞춰 호출
+        const postDetailsResponse = await recruitApi.getPost({ postId }, `${userId}`); // 주의: getPost 함수의 인터페이스에 맞춰 호출
         setPostDetails(postDetailsResponse.data);
       } catch (error) {
         console.error('Failed to load data', error);
@@ -37,7 +38,7 @@ const History = () => {
     };
 
     loadData();
-  }, [postId]);
+  }, [postId, userId]);
 
   return (
     <BoxWrapper>

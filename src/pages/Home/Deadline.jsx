@@ -72,7 +72,7 @@ const PostGrid = styled.div`
   display: flex;
   gap: 1rem;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
 `;
 
 const Nav = styled.div`
