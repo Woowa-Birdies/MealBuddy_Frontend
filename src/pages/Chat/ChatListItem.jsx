@@ -69,7 +69,6 @@ const ChatListItem = () => {
     if (client.current) {
       client.current.send({
         destination: `/sub/chat/status/${roomId}`,
-
         body: JSON.stringify(roomData),
       });
       console.log('Sent room data to the server:', roomData);
@@ -94,7 +93,7 @@ const ChatListItem = () => {
 
   const fetchList = async () => {
     try {
-      const res = await chatApi.chatList();
+      const res = await chatApi.roomList();
       console.log(res.data);
       // setChatList(res.data);
       // 임의로 채팅목록 저장

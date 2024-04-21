@@ -41,13 +41,14 @@ const UserActivityButton = ({ title, action, propData, type }) => {
     if (action === 'chat') {
       await showConfirm('채팅방에 입장하시겠습니까?');
       const res = await chatApi.joinChat({ postId: propData });
-      setRoom({
+      await setRoom({
         ...room,
         roomId: res.data.roomId,
         roomName: res.data.roomName,
       });
+      await console.log(res.data);
       console.log('채팅방 입장', propData);
-      nav(0);
+      nav('/chat');
     }
     if (action === 'request') {
       nav(`/applicantslist/${propData}`);
