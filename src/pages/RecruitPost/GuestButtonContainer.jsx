@@ -29,7 +29,7 @@ const GuestButtonContainer = ({ userId }) => {
   switch (post.postStatus) {
     case '모임 종료':
       return post.askStatus === '참여' ? (
-        <Btn title="후기 작성하기" action="review" type="post" />
+        <Btn title="후기 작성하기" action="review" propData={post.postId} type="post" />
       ) : (
         <TagButton title="모임 종료" type="post" />
       );

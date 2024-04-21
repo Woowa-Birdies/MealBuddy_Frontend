@@ -11,9 +11,11 @@ const useReviewStore = create((set) => ({
     reply: null,
   },
   showReviewForm: false,
+  participants: [],
   setReviewData: (updateFunction) =>
     set((state) => ({ reviewData: updateFunction(state.reviewData) })),
   setShowReviewForm: (value) => set({ showReviewForm: value }),
+  setParticipants: (value) => set({ participants: value }),
 }));
 
 export default useReviewStore;
