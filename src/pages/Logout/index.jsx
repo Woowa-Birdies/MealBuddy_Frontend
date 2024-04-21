@@ -51,7 +51,12 @@ const Logout = () => {
             title="정상적으로 로그아웃되었습니다"
             subTitle={<>{counter}초 후에 로그인 화면으로 이동합니다</>}
             extra={[
-              <Button type="link" key="goLogin" onClick={() => nav(ROUTES.LOGIN)}>
+              <Button
+                type="link"
+                key="goLogin"
+                // eslint-disable-next-line
+                onClick={() => (window.location.href = ROUTES.LOGIN)}
+              >
                 로그인 화면으로 가기
               </Button>,
             ]}
