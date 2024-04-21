@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import useConfirmModal from '@hooks/component/modal/useConfirmModal';
 import useChatStore from '@store/useChatStore';
 
-const UserActivityButton = ({ title, action, propData, type }) => {
+const UserActivityButton = ({ title, action, propData, type, disabled }) => {
   const nav = useNavigate();
   const showConfirm = useConfirmModal();
   const { room, setRoom } = useChatStore();
@@ -58,7 +58,7 @@ const UserActivityButton = ({ title, action, propData, type }) => {
   };
 
   return (
-    <StyledButton onClick={handleClick} action={action} type={type}>
+    <StyledButton onClick={handleClick} action={action} type={type} disabled={disabled}>
       {title}
     </StyledButton>
   );
@@ -72,6 +72,8 @@ UserActivityButton.propTypes = {
 export default UserActivityButton;
 
 const StyledButton = styled.button`
+  opacity: ${({ disabled }) => (disabled ? 0.3 : 1)};
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')} !important;
   width: ${({ type }) => {
     if (type === 'post') {
       return '23.04vw';

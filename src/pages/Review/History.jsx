@@ -55,14 +55,14 @@ const History = () => {
             <TagButton title={postDetails.ageTag} type="tag" />
           </TagSection>
           <InfoSection>
-            <Label content={`모임 날짜 : ${formatDate(postDetails.meetAt)}`} size="large" />
+            <Label content={`📅 모임 날짜 : ${formatDate(postDetails.meetAt)}`} size="large" />
             <Label
-              content={`인원수 : ${postDetails.participantCount} / ${postDetails.participantTotal}`}
+              content={`👥 인원수 : ${postDetails.participantCount} / ${postDetails.participantTotal}`}
               size="large"
             />
           </InfoSection>
           <InfoSection>
-            <Label content={postDetails.address} size="large" />
+            <Label content={`📌 ${postDetails.address}`} size="large" />
           </InfoSection>
         </InnerBox>
       </ListItem>
