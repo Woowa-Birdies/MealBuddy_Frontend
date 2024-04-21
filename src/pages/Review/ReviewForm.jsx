@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import { Button } from 'antd';
 import SelectButton from '@components/ui/Button/SelectButton';
@@ -9,7 +10,21 @@ import reviewApi from '@api/biz/reviewApi';
 
 const ReviewForm = () => {
   const setShowReviewForm = useReviewStore((state) => state.setShowReviewForm);
-  const { reviewData, setReviewData } = useReviewStore();
+  const { selectedParticipant, reviewData, setReviewData } = useReviewStore();
+
+  // 여기 체크해봐야 함
+  useEffect(() => {
+    setReviewData({
+      postId: 0,
+      userId: 0,
+      participation: true,
+      punctuality: null,
+      sociability: null,
+      manner: null,
+      reply: null,
+    });
+    // eslint-disable-next-line
+  }, []);
 
   const idToReviewDataKey = {
     0: 'punctuality',
@@ -45,7 +60,7 @@ const ReviewForm = () => {
 
   return (
     <Container>
-      <ReviewUser />
+      <ReviewUser participant={selectedParticipant} />
       <SelectButton
         type="ghost"
         title="참여하지 않은 메이트라면 이곳을 클릭해주세요"
