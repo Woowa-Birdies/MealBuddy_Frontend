@@ -95,19 +95,19 @@ const ChatListItem = () => {
   const fetchList = async () => {
     try {
       const res = await chatApi.chatList();
-      // console.log(res.data);
-      setChatList(res.data);
+      console.log(res.data);
+      // setChatList(res.data);
       // 임의로 채팅목록 저장
-      // setChatList([
-      //   {
-      //     roomId: 4,
-      //     roomName: '서울역 맛집 탐방',
-      //   },
-      //   {
-      //     roomId: 5,
-      //     roomName: '서울역 맛집 탐방2',
-      //   },
-      // ]);
+      setChatList([
+        {
+          roomId: 4,
+          roomName: '서울역 맛집 탐방',
+        },
+        {
+          roomId: 5,
+          roomName: '서울역 맛집 탐방2',
+        },
+      ]);
     } catch (error) {
       console.error('Failed to fetch chat list:', error);
     }

@@ -83,7 +83,7 @@ const ChatWindow = () => {
     //     // 여기에 추가 메시지가 이어질 수 있습니다.
     //   ],
     // });
-    console.log('aaaaaaaaaaaa', chat);
+    // console.log(chat);
     setMessages(chat);
 
     // fetchMessages();
