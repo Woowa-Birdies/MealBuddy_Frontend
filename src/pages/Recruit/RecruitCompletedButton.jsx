@@ -3,11 +3,13 @@ import { Modal } from 'antd';
 import CompletedButton from '@components/ui/Button/CompletedButton';
 import { useNavigate } from 'react-router-dom';
 import useRecruitStore from '@store/useRecruitStore';
+import useUserInfoStore from '@store/useUserInfoStore';
 import recruitApi from '@api/biz/recruitApi';
 
 const RecruitCompletedButton = ({ postId }) => {
   const nav = useNavigate();
-  const { recruitPost } = useRecruitStore();
+  const { recruitPost, setRecruitPost } = useRecruitStore();
+  const { userId } = useUserInfoStore();
 
   const showWarning = (message) => {
     Modal.warning({
@@ -17,6 +19,7 @@ const RecruitCompletedButton = ({ postId }) => {
   };
 
   const handleClick = async () => {
+    setRecruitPost({ ...recruitPost, userId });
     console.log('확인', recruitPost);
     // 필수 필드 리스트
     const requiredFields = [
