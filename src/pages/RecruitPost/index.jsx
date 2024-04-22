@@ -19,5 +19,5 @@ const RecruitPostPage = styled.div`
   display: flex;
   flex-direction: column;
   margin: 100px 25vw;
-  gap: 10vh;
+  gap: 2.5vw;
 `;
