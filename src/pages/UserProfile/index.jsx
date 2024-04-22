@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import ProfileTitle from '@/pages/UserProfile/ProfileTitle';
 import UserInfo from '@/pages/UserProfile/UserInfo';
-import UserHistory from '@/pages/UserProfile/UserHistory';
+// import UserHistory from '@/pages/UserProfile/UserHistory';
 import UserReview from '@/pages/UserProfile/UserReview';
 import useLogout from '@hooks/useLogout';
 
@@ -14,7 +14,7 @@ const UserProfile = ({ type }) => {
       <ProfileInner>
         <ProfileTitle type={type} />
         <UserInfo type={type} />
-        <UserHistory type={type} />
+        {/* <UserHistory type={type} /> */}
         <UserReview type={type} />
       </ProfileInner>
       <ProfileBottom>

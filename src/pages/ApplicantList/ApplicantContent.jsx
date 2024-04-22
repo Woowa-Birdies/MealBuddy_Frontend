@@ -8,10 +8,12 @@ import dayjs from 'dayjs';
 import Paragraphy from '@components/ui/Paragraphy/Paragraphy';
 import TagButton from '@components/ui/Button/TagButton';
 import Thumnail from '@components/ui/Thumnail/ThumnailImage';
+import useUserInfoStore from '@store/useUserInfoStore';
 
 const ActivityContent = () => {
+  const { userProfile } = useUserInfoStore();
   const { postId } = useParams();
-  const now = 1;
+  const now = userProfile.userId;
   const [postDetails, setPostDetails] = useState({
     foodTypeTag: '',
     place: '',
@@ -33,7 +35,7 @@ const ActivityContent = () => {
     };
 
     loadData();
-  }, [postId]);
+  }, [postId, now]);
   /* 날짜 변환 */
   const formatDate = (dateString) => {
     return dayjs(dateString).format('YYYY년 MM월 DD일 dddd A hh:mm');
