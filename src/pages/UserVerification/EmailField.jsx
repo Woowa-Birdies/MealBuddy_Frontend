@@ -4,9 +4,11 @@ import Label from '@components/ui/Label/Label';
 import emailApi from '@api/biz/verificationApi';
 import CheckBtn from '@components/ui/Button/SelectButton';
 import useStore from '@/store/useVerificationStore';
+import useUserInfoStore from '@store/useUserInfoStore';
 
 const EmailField = () => {
-  const now = 2;
+  const { userProfile } = useUserInfoStore();
+  const now = userProfile.userId;
   const setUserData = useStore((state) => state.setUserData);
   const [emailSendError, setEmailSendError] = useState('');
   const [tokenSendError, setTokenSendError] = useState('');

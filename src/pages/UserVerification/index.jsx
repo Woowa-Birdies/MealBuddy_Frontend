@@ -56,6 +56,7 @@ const UserVerification = () => {
 
     try {
       await verificationApi.postVerification(userData);
+      openNotificationWithIcon('success');
       nav(ROUTES.HOME);
     } catch (error) {
       openNotificationWithIcon('error');
