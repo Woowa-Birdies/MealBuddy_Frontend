@@ -11,6 +11,7 @@ const MyTabs = () => {
   const { userProfile } = useUserInfoStore();
   const [activeKey, setActiveKey] = useState('0');
   const now = userProfile.userId;
+  console.log('now', now);
 
   useEffect(() => {
     const loadData = async () => {
@@ -27,7 +28,7 @@ const MyTabs = () => {
           data = response.data.closed || [];
         }
         setInformation(data);
-        // console.log('response', data, 'tab', activeKey);
+        console.log('response', data, 'tab', activeKey);
       } catch (error) {
         console.error('Failed to load data', error);
       }
