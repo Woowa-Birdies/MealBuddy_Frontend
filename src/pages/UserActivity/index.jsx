@@ -4,16 +4,19 @@ import gatherApi from '@api/biz/gatherApi';
 import styled from 'styled-components';
 import ActivityTitle from '@/pages/UserActivity/ActivityTitle';
 import ActivityContent from '@/pages/UserActivity/ActivityContent';
+import useUserInfoStore from '@store/useUserInfoStore';
 
 const MyTabs = () => {
   const [information, setInformation] = useState([]);
+  const { userProfile } = useUserInfoStore();
   const [activeKey, setActiveKey] = useState('0');
+  const now = userProfile.userId;
 
   useEffect(() => {
     const loadData = async () => {
       try {
         const type = parseInt(activeKey, 10);
-        const response = await gatherApi.getUserPostList({ userId: 1, type });
+        const response = await gatherApi.getUserPostList({ userId: now, type });
 
         let data = [];
         if (type === 0) {
@@ -31,7 +34,7 @@ const MyTabs = () => {
     };
 
     loadData();
-  }, [activeKey]);
+  }, [activeKey, now]);
 
   const onTabChange = (key) => {
     setActiveKey(key);
