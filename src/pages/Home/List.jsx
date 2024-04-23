@@ -189,7 +189,7 @@ const FilterIcon = styled.img``;
 
 const PostsGrid = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-wrap: wrap;
   gap: 1rem;
 `;

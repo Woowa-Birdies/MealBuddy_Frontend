@@ -18,7 +18,7 @@ const RecruitCompletedButton = () => {
   };
 
   const handleClick = async () => {
-    console.log('포스팅', recruitPost);
+    // console.log('포스팅', recruitPost);
     // 필수 필드 리스트
     const requiredFields = [
       { key: 'foodTypeTag', label: '식사 유형을' },
