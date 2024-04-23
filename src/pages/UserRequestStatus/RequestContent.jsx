@@ -45,7 +45,7 @@ const RequestContent = ({ information }) => {
         return (
           <>
             <Btn title="신청 취소하기" action="cancel" propData={askId} />
-            <Btn title="냠냠 토크방" action="chat" />
+            <Btn title="냠냠 토크방" action="chat" propData={postId} />
           </>
         );
       default:
@@ -57,7 +57,7 @@ const RequestContent = ({ information }) => {
               <Btn title="후기 작성하기" action="review" propData={postId} />
             )}
 
-            <Btn title="냠냠 토크방" action="chat" />
+            <Btn title="냠냠 토크방" action="chat" propData={postId} />
           </>
         );
     }

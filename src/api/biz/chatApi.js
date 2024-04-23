@@ -5,7 +5,7 @@ const roomList = async () => {
 };
 
 const joinChat = async (postId) => {
-  return post(`/room/join`, postId.postId);
+  return post(`/room/join`, postId);
 };
 
 const messages = async (roomData) => {
