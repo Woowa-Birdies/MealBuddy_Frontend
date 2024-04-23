@@ -44,7 +44,7 @@ const ActivityContent = ({ information }) => {
           <>
             <Btn title="모집 마감하기" action="close" propData={postId} />
             <Btn title="신청자 보기" action="request" propData={postId} />
-            <Btn title="냠냠 토크방" action="chat" />
+            <Btn title="냠냠 토크방" action="chat" propData={postId} />
           </>
         );
       case '모집 마감':
@@ -52,14 +52,14 @@ const ActivityContent = ({ information }) => {
           <>
             <Btn title="모집 재개하기" action="ongoing" propData={postId} />
             <Btn title="신청자 보기" action="request" propData={postId} />
-            <Btn title="냠냠 토크방" action="chat" />
+            <Btn title="냠냠 토크방" action="chat" propData={postId} />
           </>
         );
       default:
         return (
           <>
             <Btn title="후기 작성하기" action="review" propData={postId} />
-            <Btn title="냠냠 토크방" action="chat" />
+            <Btn title="냠냠 토크방" action="chat" propData={postId} />
           </>
         );
     }

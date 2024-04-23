@@ -36,6 +36,7 @@ const UserActivityButton = ({ title, action, propData, type, disabled }) => {
     }
     if (action === 'chat') {
       await showConfirm('채팅방에 입장하시겠습니까?');
+      console.log('postId: ', propData);
       const res = await chatApi.joinChat({ postId: propData });
       await setRoom({
         ...room,
