@@ -26,6 +26,10 @@ const MeetAtField = () => {
     if (recruitPost.meetAt) {
       setSelectedDate(dayjs(recruitPost.meetAt));
       setSelectedTime(dayjs(recruitPost.meetAt));
+    } else {
+      const now = dayjs();
+      setSelectedDate(now);
+      setSelectedTime(now);
     }
   }, [recruitPost.meetAt]);
 

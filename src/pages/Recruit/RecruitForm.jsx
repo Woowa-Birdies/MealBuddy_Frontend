@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import useRecruitStore from '@store/useRecruitStore';
+import useRecruitStore, { initialRecruitPost } from '@store/useRecruitStore';
 import styled from 'styled-components';
 // import dayjs from 'dayjs';
 import Typography from '@components/ui/Typography/Typography';
@@ -10,11 +10,14 @@ import MeetAtField from '@/pages/Recruit/MeetAtField';
 import CloseAtField from '@/pages/Recruit/CloseAtField';
 import ParticipantTotalField from '@/pages/Recruit/ParticipantTotalField';
 import ContentsField from '@/pages/Recruit/ContentsField';
+import useUserInfoStore from '@store/useUserInfoStore';
+import { useParams } from 'react-router-dom';
 
-const RecruitForm = ({ postId }) => {
+const RecruitForm = () => {
   const { setRecruitPost, recruitPost } = useRecruitStore();
+  const { postId } = useParams();
+  const { userId } = useUserInfoStore();
 
-  // 선택된 데이터를 전역 상태에 저장하는 함수
   const handleSelect = (field, value) => {
     setRecruitPost({ ...recruitPost, [field]: value });
   };
@@ -24,15 +27,20 @@ const RecruitForm = ({ postId }) => {
       const fetchPost = async () => {
         try {
           const res = await recruitApi.getEdit({ postId });
-          setRecruitPost(res.data);
+          const updatedRecruitPost = { ...res.data, userId };
+          setRecruitPost(updatedRecruitPost);
         } catch (error) {
           console.error('Failed to fetch post:', error);
         }
       };
 
       fetchPost();
+    } else {
+      const updatedRecruitPost = { ...initialRecruitPost, userId };
+      setRecruitPost(updatedRecruitPost);
     }
-  }, [postId, setRecruitPost]);
+    // eslint-disable-next-line
+  }, [postId, userId, setRecruitPost]);
 
   return (
     <Form>

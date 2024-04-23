@@ -29,7 +29,7 @@ const HeaderNavItem = () => {
   const handleLinkClick = (title) => {
     if (title === '냠메이트 모집하기' || title === '냠냠토크' || title === '냠관리') {
       setTimeout(() => {
-        console.log(userId);
+        // console.log(userId);
         if (userId === 0) {
           nav(ROUTES.LOGIN);
         }
