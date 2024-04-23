@@ -1,15 +1,14 @@
 import styled from 'styled-components';
 import { Modal } from 'antd';
 import CompletedButton from '@components/ui/Button/CompletedButton';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import useRecruitStore from '@store/useRecruitStore';
 import recruitApi from '@api/biz/recruitApi';
-import useUserInfoStore from '@store/useUserInfoStore';
 
-const RecruitCompletedButton = ({ postId }) => {
+const RecruitCompletedButton = () => {
   const nav = useNavigate();
-  const { recruitPost, setRecruitPost } = useRecruitStore();
-  const { userId } = useUserInfoStore();
+  const { recruitPost } = useRecruitStore();
+  const { postId } = useParams();
 
   const showWarning = (message) => {
     Modal.warning({
@@ -19,9 +18,7 @@ const RecruitCompletedButton = ({ postId }) => {
   };
 
   const handleClick = async () => {
-    const updatedRecruitPost = { ...recruitPost, userId };
-    await setRecruitPost(updatedRecruitPost);
-    await console.log('확인', recruitPost);
+    // console.log('포스팅', recruitPost);
     // 필수 필드 리스트
     const requiredFields = [
       { key: 'foodTypeTag', label: '식사 유형을' },

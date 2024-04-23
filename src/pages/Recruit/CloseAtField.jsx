@@ -25,6 +25,10 @@ const CloseAtField = () => {
     if (recruitPost.closeAt) {
       setSelectedDate(dayjs(recruitPost.closeAt));
       setSelectedTime(dayjs(recruitPost.closeAt));
+    } else {
+      const now = dayjs();
+      setSelectedDate(now);
+      setSelectedTime(now);
     }
   }, [recruitPost.closeAt]);
 

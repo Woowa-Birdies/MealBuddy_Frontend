@@ -10,7 +10,12 @@ const ButtonContainer = () => {
   const { userId } = useUserInfoStore();
   const writer = post.userId;
 
-  // console.log(now, writer);     // 확인용
+  // console.log(userId, writer); // 확인용
+
+  if (userId === 0 || writer === 0) {
+    return null;
+  }
+
   return (
     <Container>{userId === writer ? <HostButtonContainer /> : <GuestButtonContainer />}</Container>
   );

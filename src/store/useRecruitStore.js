@@ -2,7 +2,7 @@ import { create } from 'zustand';
 
 // 초기 상태를
 const initialRecruitPost = {
-  userId: 1,
+  userId: 0,
   place: '',
   address: '',
   participantTotal: 1,
