@@ -6,9 +6,10 @@ import dayjs from 'dayjs';
 import MyMessage from '@/pages/Chat/MyMessage';
 import YourMessage from '@/pages/Chat/YourMessage';
 import ChatInput from '@/pages/Chat/ChatInput';
+import useUserInfoStore from '@store/useUserInfoStore';
 
 const ChatWindow = () => {
-  const now = 2;
+  const { userId } = useUserInfoStore();
   const { chat } = useChatStore();
   const [messages, setMessages] = useState({ content: [] });
   const [sendMessages, setSendMessages] = useState({ content: [] });
@@ -126,7 +127,7 @@ const ChatWindow = () => {
                 <Date>{dayjs(messageObject.createdAt).format('YYYY년 MM월 DD일')}</Date>
               </DateContainer>
             )}
-            {now === messageObject.sender ? (
+            {userId === messageObject.sender ? (
               <MyMessageContainer>
                 <MyMessage time={messageObject.createdAt} message={messageObject.message} />
               </MyMessageContainer>
