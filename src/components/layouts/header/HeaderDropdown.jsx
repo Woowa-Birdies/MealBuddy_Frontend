@@ -9,10 +9,12 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import useLogout from '@hooks/useLogout';
+import useUserInfoStore from '@store/useUserInfoStore';
 
 const HeaderDropdown = () => {
   const nav = useNavigate();
   const handleLogout = useLogout();
+  const { userProfile } = useUserInfoStore();
 
   const [isUserHovering, setIsUserHovering] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
@@ -34,7 +36,8 @@ const HeaderDropdown = () => {
   const handleMenuClick = ({ key }) => {
     switch (key) {
       case 'myPage':
-        nav(ROUTES.MYPAGE);
+        console.log('마이페이지로 이동', userProfile.userId);
+        nav(ROUTES.MYPAGE, { state: userProfile.userId });
         break;
       case 'logout':
         handleLogout();
