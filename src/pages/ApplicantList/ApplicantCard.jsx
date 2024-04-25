@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { ROUTES } from '@enums/CommonEnum';
 import PropTypes from 'prop-types';
 import AcceptButton from '@components/ui/Button/AcceptButton';
 import SampleImg from '@/assets/images/png/profileimg.png';
@@ -8,14 +9,18 @@ import TagButton from '@components/ui/Button/TagButton';
 import Paragraphy from '@components/ui/Paragraphy/Paragraphy';
 
 const ApplicantCard = ({ information }) => {
+  const nav = useNavigate();
   const { postId } = useParams();
+  const handleClick = (userId) => {
+    nav(ROUTES.USERPAGE, { state: userId });
+  };
   return (
     <BoxWrapper>
       {information.length === 0 ? (
         <Paragraphy content="텅..." size="large" color="contentTertiary" />
       ) : (
         information.map((item) => (
-          <ApplicantContainer key={item.userId}>
+          <ApplicantContainer key={item.userId} onClick={() => handleClick(item.userId)}>
             <ProfileContainer>
               <ProfileImg src={SampleImg} />
               <User>

@@ -1,10 +1,8 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Label from '@components/ui/Label/Label';
 import Thumnail from '@components/ui/Thumnail/ThumnailImage';
 import { useNavigate } from 'react-router-dom';
-import ListexpandBtn from '@components/ui/Button/ListexpandBtn';
 import TimeLimit from '@components/ui/TimeLimit/TimeLimit';
 import dayjs from 'dayjs';
 import Paragraphy from '@components/ui/Paragraphy/Paragraphy';
@@ -13,23 +11,6 @@ import Btn from '@components/ui/Button/UserActivityButton';
 
 const ActivityContent = ({ information }) => {
   const nav = useNavigate();
-  /* 3개씩 모집글 아이템 끊어보이기 */
-  const initialDisplayCount = 3;
-  const [displayedCount, setDisplayedCount] = useState(initialDisplayCount);
-
-  const handleToggleDisplay = () => {
-    if (displayedCount >= information.length) {
-      setDisplayedCount(initialDisplayCount);
-      window.scrollTo({
-        top: 0,
-      });
-    } else {
-      setDisplayedCount(displayedCount + 3);
-    }
-  };
-
-  const isExpandable = information.length > initialDisplayCount;
-  const isExpanded = displayedCount < information.length;
 
   /* 날짜 변환 */
   const formatDate = (dateString) => {
@@ -74,7 +55,7 @@ const ActivityContent = ({ information }) => {
       {information.length === 0 ? (
         <Paragraphy content="등록된 글이 없습니다." size="large" color="contentTertiary" />
       ) : (
-        information.slice(0, displayedCount).map((item) => (
+        information.map((item) => (
           <ListItem key={item.postId} onClick={() => handleClick(item.postId)}>
             <Thumnail content={item.foodTypeTag} />
             <InnerBox>
@@ -104,9 +85,6 @@ const ActivityContent = ({ information }) => {
             </InnerBox>
           </ListItem>
         ))
-      )}
-      {isExpandable && (
-        <ListexpandBtn isExpanded={!isExpanded} toggleDisplay={handleToggleDisplay} />
       )}
     </BoxWrapper>
   );

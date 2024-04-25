@@ -54,11 +54,11 @@ const HeaderNavItem = () => {
                 menu={{
                   items: [
                     {
-                      label: <span style={{ fontSize: '14px' }}>냠냠신청</span>,
+                      label: <span style={{ fontSize: '14px' }}>신청냠냠</span>,
                       key: 'ask',
                     },
                     {
-                      label: <span style={{ fontSize: '14px' }}>냠냠모집</span>,
+                      label: <span style={{ fontSize: '14px' }}>모집냠냠</span>,
                       key: 'recruit',
                     },
                   ],

@@ -4,7 +4,7 @@ const postmyRequest = async (askData) => {
   return post(`/ask`, askData);
 };
 const getmyAskList = async (params) => {
-  return get(`/ask/list/${params.userId}?type=${params.type}`);
+  return get(`/ask/list/${params.userId}?type=${params.type}&page=${params.page}`);
 };
 
 const updateAskStatus = async (updateData) => {
