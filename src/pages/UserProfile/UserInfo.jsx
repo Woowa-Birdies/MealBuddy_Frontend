@@ -5,19 +5,16 @@ import styled from 'styled-components';
 import ProfileButton from '@components/ui/Button/ProfileButton';
 import defaultImg from '@/assets/images/svg/DefaultProfile.svg';
 import Label from '@components/ui/Label/Label';
-import useUserInfoStore from '@store/useUserInfoStore';
 
-const UserInfo = ({ type }) => {
-  const { userProfile } = useUserInfoStore();
-
+const UserInfo = ({ type, propData }) => {
   return (
     <InfoWrapper>
       <InfoTop>
         <TopInner>
           <ProfileImg src={defaultImg} />
-          <Typography content={userProfile.nickname || '냠메이트'} size="xl" />
+          <Typography content={propData.nickname || '냠메이트'} size="xl" />
           <Paragraphy
-            content={`#user${userProfile.userId.toString()}`}
+            content={`#user${propData.userId}` || '#undefined'}
             size="large"
             color="contentTertiary"
           />
@@ -30,7 +27,14 @@ const UserInfo = ({ type }) => {
         />
       </InfoTop>
       <InfoBottom>
-        <Label content={userProfile.introduce || '자기소개를 입력하세요.'} size="xl" />
+        <Label
+          content={
+            type === 'mypage'
+              ? propData.introduce || '자기소개를 입력하세요.'
+              : propData.introduce || null
+          }
+          size="xl"
+        />
       </InfoBottom>
     </InfoWrapper>
   );

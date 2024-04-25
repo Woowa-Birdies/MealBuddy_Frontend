@@ -1,29 +1,22 @@
 import Typography from '@components/ui/Typography/Typography';
 import Paragraphy from '@components/ui/Paragraphy/Paragraphy';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 
 const HistoryBox = ({ title, items }) => {
   return (
     <BoxWrapper>
       <Typography content={title} size="large" />
       <ItemList>
-        {items.map((item) => (
-          <Paragraphy key={item.id} content={item.text} size="large" />
-        ))}
+        {items.length === 0 ? (
+          <Paragraphy content={`${title}이 없습니다`} size="large" />
+        ) : (
+          items.map((item) => (
+            <Paragraphy key={item.index} content={`- ${item.contents}`} size="large" />
+          ))
+        )}
       </ItemList>
     </BoxWrapper>
   );
-};
-
-HistoryBox.propTypes = {
-  title: PropTypes.string.isRequired,
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-      text: PropTypes.string,
-    }),
-  ).isRequired,
 };
 
 export default HistoryBox;
