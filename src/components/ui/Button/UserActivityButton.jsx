@@ -44,15 +44,19 @@ const UserActivityButton = ({ title, action, propData, type, disabled }) => {
           roomId: res.data.roomId,
           roomName: res.data.roomName,
         });
+        nav('/chat');
       } catch (error) {
-        if (error.response.data.code === 'RoomEx008') {
+        if (error.response.data.code === 'RoomEx008' || error.response.data.code === 'RoomEx009') {
           console.log('이미 존재하는 채팅방', propData);
           const res = await chatApi.roomList();
-          await setRoom({
-            ...room,
-            roomId: res.data.roomId,
-            roomName: res.data.roomName,
-          });
+          const matchingRoom = res.data.find((r) => r.postId === propData);
+          if (matchingRoom) {
+            await setRoom({
+              ...room,
+              roomId: matchingRoom.roomId,
+              roomName: matchingRoom.roomName,
+            });
+          }
           nav('/chat');
         } else {
           console.error('Error joining chat:', error);

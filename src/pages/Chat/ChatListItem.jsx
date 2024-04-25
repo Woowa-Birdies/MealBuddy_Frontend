@@ -7,46 +7,61 @@ import Paragraphy from '@components/ui/Paragraphy/Paragraphy';
 import useChatStore from '@store/useChatStore';
 import chatApi from '@api/biz/chatApi';
 import dayjs from 'dayjs';
-// import { Client } from '@stomp/stompjs';
+import { Client } from '@stomp/stompjs';
+import { TOKEN_DEV } from '@/token';
 // import SockJS from 'sockjs-client';
 
 const ChatListItem = () => {
-  const { roomList, setRoomList, room, setRoom, setChat } = useChatStore();
   const client = useRef(null);
+  const { roomList, setRoomList, room, setRoom, setChat } = useChatStore();
   const currentTime = dayjs().toISOString();
-  // const [authToken, setAuthToken] = useState('your-auth-token'); // 인증 토큰
-
-  // useEffect(() => {
-  //   client.current = new Client({
-  //     webSocketFactory: () => new SockJS('https://api.woowabirdieside.com/'),
-  //     reconnectDelay: 5000,
-  //     // connectHeaders: {
-  //     //   Authorization: `Bearer ${authToken}`, // 헤더에 토큰 추가
-  //     // },
-  //     debug: (str) => {
-  //       console.log('STOMP Debug:', str);
-  //     },
-  //   });
-
-  //   client.current.onConnect = () => {
-  //     console.log('Connected to the server.');
-
-  //     client.current.subscribe(`/sub/chat/status/${room.roomId}`, (message) => {
-  //       console.log('Received:', message.body);
-  //       // 서버로부터 받은 데이터를 상태에 반영
-  //       // setRoom(JSON.parse(message.body));
-  //     });
-  //   };
-
-  //   client.current.activate();
-
-  //   return () => {
-  //     client.current.deactivate();
-  //   };
-  // }, [room.roomId]);
-  // // }, [room.roomId, authToken]);
 
   const joinChatRoom = async (roomId, roomName) => {
+    // console.log(roomId);
+    if (client.current) {
+      client.current.deactivate();
+    }
+
+    const sendingData = {
+      roomId,
+      lastReadAt: currentTime,
+    };
+
+    client.current = new Client({
+      brokerURL: 'wss://api.woowabirdieside.com/ws',
+      connectHeaders: {
+        Authorization: `Bearer ${TOKEN_DEV}`,
+      },
+    });
+
+    client.current.onConnect = () => {
+      console.log(`${roomId}번 채팅방에 연결되었습니다.`);
+
+      client.current.subscribe(
+        `/sub/chat/status/${roomId}`,
+        (recieve) => {
+          try {
+            const parsedMessage = JSON.parse(recieve.body);
+            console.log(parsedMessage);
+            setRoom({ ...room, parsedMessage });
+          } catch (error) {
+            console.error('오류가 발생했습니다:', error);
+          }
+        },
+        { Authorization: `Bearer ${TOKEN_DEV}` },
+      );
+
+      client.current.publish({
+        destination: `/pub/chat/status/${roomId}`,
+        headers: { Authorization: `Bearer ${TOKEN_DEV}` },
+        body: JSON.stringify(sendingData),
+      });
+    };
+
+    console.log('웹소켓 연결 성공');
+
+    client.current.activate();
+
     // 서버에서 채팅방 정보를 요청
     const roomData = {
       roomId,
@@ -62,15 +77,6 @@ const ChatListItem = () => {
       setChat(res.data);
     } catch (error) {
       console.log('Failed to fetch chat: ', error);
-    }
-
-    // 서버로 데이터 보내기
-    if (client.current) {
-      client.current.send({
-        destination: `/sub/chat/status/${roomId}`,
-        body: JSON.stringify(roomData),
-      });
-      console.log('Sent room data to the server:', roomData);
     }
 
     setRoom({
@@ -100,13 +106,22 @@ const ChatListItem = () => {
   };
 
   useEffect(() => {
+    return () => {
+      // 클라이언트 연결 해제
+      if (client.current) {
+        client.current.deactivate();
+        console.log('웹소켓 연결이 종료되었습니다.');
+      }
+    };
+  }, []);
+
+  useEffect(() => {
     fetchList();
     // eslint-disable-next-line
   }, []);
 
   return (
     <ChatListContainer>
-      {console.log('소속 채팅방: ', roomList)}
       {console.log('현재 채팅방: ', room)}
       {roomList.length > 0 ? (
         roomList.map((chatRoom) => (
