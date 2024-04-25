@@ -1,5 +1,5 @@
 // import { useState, useRef } from 'react';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { Avatar } from 'antd';
 import Label from '@components/ui/Label/Label';
@@ -11,9 +11,8 @@ import dayjs from 'dayjs';
 // import SockJS from 'sockjs-client';
 
 const ChatListItem = () => {
-  const { room, setRoom, setChat } = useChatStore();
+  const { roomList, setRoomList, room, setRoom, setChat } = useChatStore();
   const client = useRef(null);
-  const [chatList, setChatList] = useState([]);
   const currentTime = dayjs().toISOString();
   // const [authToken, setAuthToken] = useState('your-auth-token'); // 인증 토큰
 
@@ -94,19 +93,7 @@ const ChatListItem = () => {
   const fetchList = async () => {
     try {
       const res = await chatApi.roomList();
-      console.log(res.data);
-      // setChatList(res.data);
-      // 임의로 채팅목록 저장
-      setChatList([
-        {
-          roomId: 4,
-          roomName: '서울역 맛집 탐방',
-        },
-        {
-          roomId: 5,
-          roomName: '서울역 맛집 탐방2',
-        },
-      ]);
+      setRoomList(res.data);
     } catch (error) {
       console.error('Failed to fetch chat list:', error);
     }
@@ -114,23 +101,26 @@ const ChatListItem = () => {
 
   useEffect(() => {
     fetchList();
+    // eslint-disable-next-line
   }, []);
 
   return (
     <ChatListContainer>
-      {chatList.length > 0 ? (
-        chatList.map((chatRoom) => (
+      {console.log('소속 채팅방: ', roomList)}
+      {console.log('현재 채팅방: ', room)}
+      {roomList.length > 0 ? (
+        roomList.map((chatRoom) => (
           <ItemWrapper
             key={chatRoom.roomId}
             onClick={() => joinChatRoom(chatRoom.roomId, chatRoom.roomName)}
           >
             <ChatListBox>
-              <Avatar size="5vw" />
+              <Avatar size="5vw" style={{ marginRight: '5px' }} />
               <ChatRoomInfo>
-                <Label content={chatRoom.roomName} size="large" />
+                <Label content={chatRoom.roomName.split(' ').slice(0, -1).join(' ')} size="large" />
                 <Paragraphy content="최근 채팅 내용을 보여줍니다..." size="medium" />
               </ChatRoomInfo>
-              {/* <Paragraphy content="7" size="small" color="primary" /> */}
+              <Paragraphy content={chatRoom.userCount} size="small" color="primary" />
             </ChatListBox>
           </ItemWrapper>
         ))
