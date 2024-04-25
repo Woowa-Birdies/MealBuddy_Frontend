@@ -17,7 +17,7 @@ const ChatListItem = () => {
   const currentTime = dayjs().toISOString();
 
   const joinChatRoom = async (roomId, roomName) => {
-    console.log(roomId);
+    // console.log(roomId);
     if (client.current) {
       client.current.deactivate();
     }
@@ -26,33 +26,37 @@ const ChatListItem = () => {
       roomId,
       lastReadAt: currentTime,
     };
-    console.log(sendingData);
 
     client.current = new Client({
       brokerURL: 'wss://api.woowabirdieside.com/ws',
       connectHeaders: {
         Authorization: `Bearer ${TOKEN_DEV}`,
       },
-      skipContentLengthHeader: true,
-
-      onConnect: () => {
-        console.log(`${roomId}번 채팅방에 연결되었습니다.`);
-
-        client.current.subscribe(`/sub/chat/status/${roomId}`, (message) => {
-          const messageData = JSON.parse(message.body);
-          console.log(`Receive:`, messageData);
-          // setChat(messageData);
-        });
-
-        client.current.send({
-          destination: `/pub/chat/status/${roomId}`,
-          body: sendingData,
-        });
-      },
-      onStompError: (error) => {
-        console.error('STOMP Error:', error);
-      },
     });
+
+    client.current.onConnect = () => {
+      console.log(`${roomId}번 채팅방에 연결되었습니다.`);
+
+      client.current.subscribe(
+        `/sub/chat/status/${roomId}`,
+        (recieve) => {
+          try {
+            const parsedMessage = JSON.parse(recieve.body);
+            console.log(parsedMessage);
+            setRoom({ ...room, parsedMessage });
+          } catch (error) {
+            console.error('오류가 발생했습니다:', error);
+          }
+        },
+        { Authorization: `Bearer ${TOKEN_DEV}` },
+      );
+
+      client.current.publish({
+        destination: `/pub/chat/status/${roomId}`,
+        headers: { Authorization: `Bearer ${TOKEN_DEV}` },
+        body: JSON.stringify(sendingData),
+      });
+    };
 
     console.log('웹소켓 연결 성공');
 
