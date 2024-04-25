@@ -120,24 +120,26 @@ const ChatWindow = () => {
   return (
     <>
       <ChatWindowContainer>
-        {messages.content.map((messageObject, index) => (
-          <>
-            {shouldDisplayDate(index) && (
-              <DateContainer>
-                <Date>{dayjs(messageObject.createdAt).format('YYYY년 MM월 DD일')}</Date>
-              </DateContainer>
-            )}
-            {userId === messageObject.sender ? (
-              <MyMessageContainer>
-                <MyMessage time={messageObject.createdAt} message={messageObject.message} />
-              </MyMessageContainer>
-            ) : (
-              <YourMessageContainer>
-                <YourMessage time={messageObject.createdAt} message={messageObject.message} />
-              </YourMessageContainer>
-            )}
-          </>
-        ))}
+        {messages.content && messages.content.length > 0
+          ? messages.content.map((messageObject, index) => (
+              <>
+                {shouldDisplayDate(index) && (
+                  <DateContainer>
+                    <Date>{dayjs(messageObject.createdAt).format('YYYY년 MM월 DD일')}</Date>
+                  </DateContainer>
+                )}
+                {userId === messageObject.sender ? (
+                  <MyMessageContainer>
+                    <MyMessage time={messageObject.createdAt} message={messageObject.message} />
+                  </MyMessageContainer>
+                ) : (
+                  <YourMessageContainer>
+                    <YourMessage time={messageObject.createdAt} message={messageObject.message} />
+                  </YourMessageContainer>
+                )}
+              </>
+            ))
+          : null}
       </ChatWindowContainer>
       <ChatInput onSend={handleSendMessage} />
     </>
