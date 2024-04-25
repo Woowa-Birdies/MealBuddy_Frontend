@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import recruitApi from '@api/biz/recruitApi';
 import askApi from '@api/biz/askApi';
 import chatApi from '@api/biz/chatApi';
-
 import { useNavigate } from 'react-router-dom';
 // import gatherApi from '@api/biz/gatherApi';
 import useConfirmModal from '@hooks/component/modal/useConfirmModal';
@@ -35,17 +34,30 @@ const UserActivityButton = ({ title, action, propData, type, disabled }) => {
       nav(`/review/${propData}`);
     }
     if (action === 'chat') {
+      // console.log('postId: ', propData);
       await showConfirm('채팅방에 입장하시겠습니까?');
-      console.log('postId: ', propData);
-      const res = await chatApi.joinChat({ postId: propData });
-      await setRoom({
-        ...room,
-        roomId: res.data.roomId,
-        roomName: res.data.roomName,
-      });
-      await console.log(res.data);
-      console.log('채팅방 입장', propData);
-      nav('/chat');
+      try {
+        const res = await chatApi.joinChat({ postId: propData });
+        // console.log('room data: ', res.data);
+        await setRoom({
+          ...room,
+          roomId: res.data.roomId,
+          roomName: res.data.roomName,
+        });
+      } catch (error) {
+        if (error.response.data.code === 'RoomEx008') {
+          console.log('이미 존재하는 채팅방', propData);
+          const res = await chatApi.roomList();
+          await setRoom({
+            ...room,
+            roomId: res.data.roomId,
+            roomName: res.data.roomName,
+          });
+          nav('/chat');
+        } else {
+          console.error('Error joining chat:', error);
+        }
+      }
     }
     if (action === 'request') {
       nav(`/applicantslist/${propData}`);
