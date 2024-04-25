@@ -1,42 +1,13 @@
 import styled from 'styled-components';
 import HistoryBox from '@/pages/UserProfile/HistoryBox';
 
-const UserHistory = ({ type }) => {
-  const appliedHistory = [
-    {
-      id: 0,
-      text: '참여 모임 제목1',
-    },
-    {
-      id: 1,
-      text: '참여 모임 제목2',
-    },
-    {
-      id: 2,
-      text: '참여 모임 제목3',
-    },
-  ];
-  const postedHistory = [
-    {
-      id: 0,
-      text: '작성 모임 제목1',
-    },
-    {
-      id: 1,
-      text: '작성 모임 제목2',
-    },
-    {
-      id: 2,
-      text: '작성 모임 제목3',
-    },
-  ];
-
+const UserHistory = ({ type, propData }) => {
   return (
     <HistoryWrapper>
-      <HistoryBox title="최근 참여한 모임" items={appliedHistory} />
+      <HistoryBox title="최근 참여한 모임" items={propData.participationInfos || []} />
       <HistoryBox
-        title={type === 'mypage' ? '내가 모집한 냠냠' : 'OOO님이 모집한 냠냠'}
-        items={postedHistory}
+        title={type === 'mypage' ? '내가 모집한 냠냠' : `${propData.nickname}님이 모집한 냠냠`}
+        items={propData.recruitmentInfos || []}
       />
     </HistoryWrapper>
   );
