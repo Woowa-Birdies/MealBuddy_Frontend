@@ -4,14 +4,12 @@ import { Dropdown, Typography } from 'antd';
 import styled from 'styled-components';
 import TitleTypography from '@components/ui/Typography/Typography';
 import useNavStore from '@store/useNavStore';
-import useUserInfoStore from '@store/useUserInfoStore';
 import { ROUTES } from '@enums/CommonEnum';
 
 const HeaderNavItem = () => {
   const nav = useNavigate();
   const { menus } = useNavStore();
   const [hoveredMenu, setHoveredMenu] = useState(null);
-  const { userId } = useUserInfoStore();
 
   const handleMenuClick = ({ key }) => {
     switch (key) {
@@ -26,17 +24,6 @@ const HeaderNavItem = () => {
     }
   };
 
-  const handleLinkClick = (title) => {
-    if (title === '냠메이트 모집하기' || title === '냠냠토크' || title === '냠관리') {
-      setTimeout(() => {
-        // console.log(userId);
-        if (userId === 0) {
-          nav(ROUTES.LOGIN);
-        }
-      }, 500);
-    }
-  };
-
   return (
     <HeaderGlobalNav>
       <MenuList>
@@ -47,7 +34,6 @@ const HeaderNavItem = () => {
             to={menu.title !== '냠관리' ? menu.path : undefined}
             onMouseEnter={() => (menu.title === '냠관리' ? setHoveredMenu(menu.title) : null)}
             onMouseLeave={() => setHoveredMenu(null)}
-            onClick={() => handleLinkClick(menu.title)}
           >
             {menu.title === '냠관리' && hoveredMenu === menu.title ? (
               <Dropdown
