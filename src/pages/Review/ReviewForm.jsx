@@ -14,7 +14,8 @@ const ReviewForm = () => {
 
   // 여기 체크해봐야 함
   useEffect(() => {
-    setReviewData({
+    setReviewData((prev) => ({
+      ...prev,
       postId: 0,
       userId: 0,
       participation: true,
@@ -22,7 +23,7 @@ const ReviewForm = () => {
       sociability: null,
       manner: null,
       reply: null,
-    });
+    }));
     // eslint-disable-next-line
   }, []);
 

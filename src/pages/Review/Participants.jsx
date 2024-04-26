@@ -5,14 +5,16 @@ import useReviewStore from '@store/useReviewStore';
 
 const Participants = () => {
   const { participants } = useReviewStore();
-
+  console.log(participants);
   return (
     <Container>
       <Typography content="참여한 냠냠메이트" size="large" />
       <UserList>
-        {participants.map((participant) => (
-          <ReviewUser key={participant.id} type="participants" participant={participant} />
-        ))}
+        {participants.length > 0
+          ? participants.map((participant) => (
+              <ReviewUser key={participant.id} type="participants" participant={participant} />
+            ))
+          : null}
       </UserList>
     </Container>
   );
