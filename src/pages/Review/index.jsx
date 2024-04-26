@@ -30,7 +30,7 @@ const Review = () => {
       <ReviewTitle />
       <History />
       <Separator />
-      {showReviewForm ? <ReviewForm /> : <Participants />}
+      {showReviewForm ? <ReviewForm postId={postId} /> : <Participants />}
     </ReviewPage>
   );
 };
