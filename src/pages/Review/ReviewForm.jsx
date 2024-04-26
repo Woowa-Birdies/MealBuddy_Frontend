@@ -8,16 +8,17 @@ import useReviewStore from '@/store/useReviewStore';
 import ReviewUser from '@/pages/Review/ReviewUser';
 import reviewApi from '@api/biz/reviewApi';
 
-const ReviewForm = () => {
+const ReviewForm = ({ postId }) => {
   const setShowReviewForm = useReviewStore((state) => state.setShowReviewForm);
   const { selectedParticipant, reviewData, setReviewData } = useReviewStore();
+  const id = parseInt(postId, 10);
 
   // 여기 체크해봐야 함
   useEffect(() => {
     setReviewData((prev) => ({
       ...prev,
-      postId: 0,
-      userId: 0,
+      postId: id,
+      userId: selectedParticipant.userId,
       participation: true,
       punctuality: null,
       sociability: null,
@@ -52,6 +53,7 @@ const ReviewForm = () => {
   const handleReviewButtonClick = async () => {
     try {
       const res = await reviewApi.reviewSave(reviewData);
+      console.log(reviewData);
       console.log(res);
     } catch (error) {
       console.error('Failed to save review:', error);

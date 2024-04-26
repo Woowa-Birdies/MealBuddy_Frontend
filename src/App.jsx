@@ -102,15 +102,23 @@ const App = () => {
 export default App;
 
 const ProtectedRoute = ({ children }) => {
-  const { userId } = useUserInfoStore();
+  const { userId, setUserId } = useUserInfoStore();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (userId === 0) {
-      console.log(userId);
+    // 로컬 스토리지에서 userId 확인
+    const storedUserId = localStorage.getItem('userId');
+    if (storedUserId) {
+      setUserId(parseInt(storedUserId, 10));
+    } else {
       navigate(ROUTES.LOGIN);
     }
-  }, [userId, navigate]);
+  }, [navigate, setUserId]);
+
+  useEffect(() => {
+    // 현재 userId를 로컬 스토리지에 저장
+    localStorage.setItem('userId', userId);
+  }, [userId]);
 
   return userId !== 0 ? children : null;
 };
