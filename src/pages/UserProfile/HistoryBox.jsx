@@ -10,8 +10,12 @@ const HistoryBox = ({ title, items }) => {
         {items.length === 0 ? (
           <Paragraphy content={`${title}이 없습니다`} size="large" />
         ) : (
-          items.map((item) => (
-            <Paragraphy key={item.index} content={`- ${item.contents}`} size="large" />
+          items.map((item, index) => (
+            <Paragraphy
+              key={item.index}
+              content={item.contents !== null ? `- ${item.contents}` : `- ${title} ${index + 1}`}
+              size="large"
+            />
           ))
         )}
       </ItemList>
