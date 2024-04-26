@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { ROUTES } from '@enums/CommonEnum';
 import PropTypes from 'prop-types';
 import AcceptButton from '@components/ui/Button/AcceptButton';
-import SampleImg from '@/assets/images/png/profileimg.png';
+import SampleImg from '@/assets/images/svg/DefaultProfile.svg';
 import Typography from '@components/ui/Typography/Typography';
 import TagButton from '@components/ui/Button/TagButton';
 import Paragraphy from '@components/ui/Paragraphy/Paragraphy';
@@ -110,6 +110,7 @@ const ProfileImg = styled.img`
   object-fit: cover;
   object-position: center;
   margin-right: 28.56px;
+  filter: drop-shadow(0px 4px 9px rgba(0, 0, 0, 0.25));
 `;
 
 const User = styled.div`
