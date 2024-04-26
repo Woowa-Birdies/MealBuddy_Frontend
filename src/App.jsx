@@ -108,9 +108,7 @@ const ProtectedRoute = ({ children }) => {
   useEffect(() => {
     // 로컬 스토리지에서 userId 확인
     const storedUserId = localStorage.getItem('userId');
-    if (storedUserId) {
-      setUserId(parseInt(storedUserId, 10));
-    } else {
+    if (!storedUserId) {
       navigate(ROUTES.LOGIN);
     }
   }, [navigate, setUserId]);
