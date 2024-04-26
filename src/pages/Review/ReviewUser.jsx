@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Typography from '@components/ui/Typography/Typography';
-import SampleImg from '@/assets/images/png/profileimg.png';
+import SampleImg from '@/assets/images/svg/DefaultProfile.svg';
 import ReviewStatusButton from '@components/ui/Button/ReviewStatusButton';
 import useReviewStore from '@/store/useReviewStore';
 
@@ -68,6 +68,7 @@ const ProfileImg = styled.img`
   object-fit: cover;
   object-position: center;
   margin-right: 28.56px;
+  filter: drop-shadow(0px 4px 9px rgba(0, 0, 0, 0.25));
 `;
 
 const Separator = styled.div`

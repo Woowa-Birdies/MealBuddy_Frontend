@@ -16,7 +16,7 @@ const Review = () => {
     const fetchParticipants = async () => {
       try {
         const res = await reviewApi.participantsInfo(postId);
-        setParticipants(res.data);
+        await setParticipants(res.data);
       } catch (error) {
         console.error('Failed to fetch participants:', error);
       }
